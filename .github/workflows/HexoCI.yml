@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - name: Checkout source
-        uses: actions/checkout@v1
+        uses: actions/checkout@main
         with:
           ref: hexo
       - name: Use Node.js ${{ matrix.node_version }}
