@@ -11,7 +11,7 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@main
         with:
-          ref: origin
+          ref: main
       - name: Use Node.js ${{ matrix.node_version }}
         uses: actions/setup-node@v1
         with:
