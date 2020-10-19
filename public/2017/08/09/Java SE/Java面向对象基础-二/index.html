@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>java面向对象基础(二) | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="面向对象" />
+  
+  
+  
+  
+  <meta name="description" content="1.构造器： 构造函数在一个类没有写任何的构造函数的时候，系统会生成一个默认的空参数构造函数，这个构造函数的修饰符就是类的修饰符，当我们定义了一个构造函数，默认的构造函数就不存在了而不会出现重载 构造函数是没有返回值的，他没有返回值不是指他就是void，因为void指的是函数的返回值为void类型，他是有返回值的。而没有返回值则是说明根本不用写，这两个有很大区别。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java面向对象基础(二)">
+<meta property="og:url" content="http://lwenxu.coding.me/2017/08/09/Java%20SE/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80-%E4%BA%8C/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="1.构造器： 构造函数在一个类没有写任何的构造函数的时候，系统会生成一个默认的空参数构造函数，这个构造函数的修饰符就是类的修饰符，当我们定义了一个构造函数，默认的构造函数就不存在了而不会出现重载 构造函数是没有返回值的，他没有返回值不是指他就是void，因为void指的是函数的返回值为void类型，他是有返回值的。而没有返回值则是说明根本不用写，这两个有很大区别。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-08-09T03:14:38.000Z">
+<meta property="article:modified_time" content="2018-12-19T12:36:42.000Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="面向对象">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="昨夜凛雨" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">About</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Java SE/Java面向对象基础-二" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Java面向对象基础(二)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/08/09/Java%20SE/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80-%E4%BA%8C/" class="article-date">
+	  <time datetime="2017-08-09T03:14:38.000Z" itemprop="datePublished">2017-08-09</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Java/">-Java</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-构造器："><a href="#1-构造器：" class="headerlink" title="1.构造器："></a>1.构造器：</h3><ol>
+<li>构造函数在一个类没有写任何的构造函数的时候，系统会生成一个默认的空参数构造函数，这个构造函数的修饰符就是类的修饰符，当我们定义了一个构造函数，默认的构造函数就不存在了而不会出现重载</li>
+<li>构造函数是没有返回值的，他没有返回值不是指他就是void，因为void指的是函数的返回值为void类型，他是有返回值的。而没有返回值则是说明根本不用写，这两个有很大区别。<a id="more"></a></li>
+<li>没有return语句</li>
+<li>函数的名字只能和类名完全一样</li>
+<li>构造函数是可以用私用的，但是当所有的构造函数的修饰符都是私有的话对象就无法创建了，其实在看 Java 文档的时候我们也会发现有些类的构造器真的就是私有的，这也就代表了我们没办法使用 new 关键字调用这个类的构造函数，因为他的构造函数对我们来说是透明的，而且既然他自己定义了构造函数那么默认构造函数也不会生成，哪怕他是私有的。再仔细我们会发现他必然会提供一个静态方法让我们获取这个类的实例，类似于单例模式的样子，对外提供一个接口。</li>
+<li>对象一建立构造函数就会被调用</li>
+<li>构造函数的作用主要就是给对象做初始化</li>
+<li>在类中有一种特殊的代码块叫做构造代码块，和一般的代码一样，只是在要执行的代码上添加一个花括号就行。<br>&nbsp;&nbsp;&nbsp;&nbsp;这个构造代码块也是在每次构造对象的时候执行，看起来和构造函数非常类似，但是注意他和构造函数是有很大区别的<br>&nbsp;&nbsp;&nbsp;&nbsp;首先按照执行顺序来说，构造代码块要是中先于构造函数执行。<br>&nbsp;&nbsp;&nbsp;&nbsp;另外对于功能来说构造代码块是针对类的所有对象，而构造函数则是针对类的不同对象。因为构造函数是可以重载的而代码块则是无脑执行。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PersonDemo</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;this is construct code block !&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    PersonDemo()&#123;</span><br><span class="line">        <span class="keyword">this</span>.name=<span class="string">&quot;zhangsan&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    PersonDemo(String name)&#123;</span><br><span class="line">        <span class="keyword">this</span>.name=name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;name :&quot;</span>+<span class="keyword">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="2-Final-关键字："><a href="#2-Final-关键字：" class="headerlink" title="2. Final 关键字："></a>2. Final 关键字：</h3><ol>
+<li>final可以修饰类，函数，变量</li>
+<li>被final修饰的类无法再次进行继承，也就是为了避免功能被覆盖，保护封装性</li>
+<li>被final修饰的方法无法被复写</li>
+<li>被final修饰的变量只能赋值一次，就是一个常量</li>
+</ol>
+<h3 id="3-内部类："><a href="#3-内部类：" class="headerlink" title="3. 内部类："></a>3. 内部类：</h3><ol>
+<li>内部类就是在一个类中定义了另外一个类</li>
+<li>内部类可以直接访问外部类中的成员和方法，包括私有的成员与方法   其原因在于内部类存在一个指向外部类的引用<br> ：就叫做    外部类类名.this</li>
+<li>内部类是可以私有的 在私有了以后在别处无法直接创建内部类的对象 只能通过外部类来访问</li>
+<li>内部类可以是静态static的，也可用public，default，protected和private修饰。（而外部顶级类即类名和文件名相同的只能使用public和default）。</li>
+<li>内部类是一个编译时的概念，一旦编译成功，就会成为完全不同的两类。对于一个名为outer的外部类和其内部定义的名为inner的内部类。编译完成后出现outer.class和outer$inner.class两类。所以内部类的成员变量/方法名可以和外部类的相同。</li>
+<li>内部类分为以下几种：  <ol>
+<li>成员内部类：因为成员内部类需要先创建了外部类，才能创建它自己的  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Outer</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> x;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Outer</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.x = x;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Inner</span></span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>&#123;</span><br><span class="line">            System.out.println(x);</span><br><span class="line">            System.out.println(Outer.<span class="keyword">this</span>.x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getInner</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Inner in=<span class="keyword">new</span> Inner();</span><br><span class="line">        in.method();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>局部内部类：就可以在函数作用域类创建内部类</li>
+<li>嵌套内部类<br> 嵌套内部类，就是修饰为static的内部类。声明为static的内部类，不需要内部类对象和外部类对象之间的联系，就是说我们可以直接引用outer.inner，即不需要创建外部类，也不需要创建内部类。</li>
+<li>匿名内部类<br>有时候我为了免去给内部类命名，便倾向于使用匿名内部类，因为它没有名字。例如：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">new</span> Thread() &#123;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;.start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="4-抽象类与抽象方法："><a href="#4-抽象类与抽象方法：" class="headerlink" title="4. 抽象类与抽象方法："></a>4. 抽象类与抽象方法：</h3><ol>
+<li>抽象方法就是没有方法体</li>
+<li>有抽象方法的类必须声明为抽象类</li>
+<li>抽象类没有办法实例化</li>
+<li>当子类继承了抽象类，必须把抽象类的所有抽象方法都重写了才能实例化，否则他还是抽象类。</li>
+</ol>
+<h3 id="5-接口："><a href="#5-接口：" class="headerlink" title="5.接口："></a>5.接口：</h3><ol>
+<li>当一个类中的方法都是抽象方法的时候可以把抽象类修改成接口</li>
+<li>接口中一般只能定义抽象方法和静态常量，当然如果不写这些修饰符的话java会自动给加上</li>
+<li>接口可以被类多实现，也就是说一个类可以实现多个接口  也就是前面所说的多实现</li>
+<li>java中的接口是可以多继承的，也就是说如果说java支持多继承的话那么一定给加上限定条件，就是他只在接口中可以</li>
+</ol>
+<h3 id="6-Static-关键字："><a href="#6-Static-关键字：" class="headerlink" title="6. Static 关键字："></a>6. Static 关键字：</h3><ol>
+<li>静态static可以修饰方法，修饰属性<br>当成员被static修饰的时候，这个成员就相当于被类的所有对象共享了，所有对象都可以访问修改</li>
+<li>静态成员并不是存放在堆栈中的而是存放在一块特殊的内存叫做『方法区』或者『数据区』，『共享区』等，并且这个地方分的很细，对象的方法也是存放在这个地方</li>
+<li>静态成员在调用的时候不仅仅是使用对象来调用还可以使用类名调用，因为静态成员就是属于类的而不是单单属于某个对象</li>
+<li>静态成员的生命周期是与类的生命周期相同</li>
+<li>静态成员是先于对象加载入内存，也就是静态属性先存在然后才有的对象</li>
+</ol>
+<h4 id="1-实例变量和类变量的区别："><a href="#1-实例变量和类变量的区别：" class="headerlink" title="1.实例变量和类变量的区别："></a>1.实例变量和类变量的区别：</h4><ol>
+<li>存储位置：<br> 类变量存放在方法区中，而实例变量存放在堆内存中</li>
+<li>生命周期：<br> 类变量的生命周期是和类一样，但是实例变量的生命周期则是与实例相同</li>
+</ol>
+<h4 id="2-使用static的注意事项："><a href="#2-使用static的注意事项：" class="headerlink" title="2.使用static的注意事项："></a>2.使用static的注意事项：</h4><ol>
+<li>静态方法只能访问静态成员和静态方法。（静态的是独立于对象的，而非静态的则是依赖于对象存在的。另外静态的是先于对象载入内存）</li>
+<li>非静态方法即可以访问静态也可以访问非静态成员和方法</li>
+<li>静态方法中不可以出现this，super因为静态成员先于对象存在</li>
+</ol>
+<h4 id="3-那什么时候使用static："><a href="#3-那什么时候使用static：" class="headerlink" title="3.那什么时候使用static："></a>3.那什么时候使用static：</h4><ol>
+<li>对于静态方法就是当这个方法中不存在关于对象的成员的时候就把该方法修改成静态的</li>
+<li>对于变量则当该变量需要共享的时候就要把属性变成static</li>
+</ol>
+<h4 id="4-主函数为什么是静态的？"><a href="#4-主函数为什么是静态的？" class="headerlink" title="4.主函数为什么是静态的？"></a>4.主函数为什么是静态的？</h4><p>主函数是一个特殊的函数，作为程序的入口，可被jvm调用<br>public：代表访问权限是最大的<br>static：代表主函数是独立于类存在的，并且该函数是在类的加载的时候被加载<br>void：不用呗jvm返回一个参数<br>String[] args :jvm需要的参数    </p>
+<p>注意这个main函数除了args是可以改的以外其他都不可改，不然不可以被jvm识别<br>同时main是可以被重载的，但是只有仅仅满足以上格式的才能被jvm执行，<br>string[] 这个参数其实就是命令行传的参数</p>
+<h4 id="4-静态代码块"><a href="#4-静态代码块" class="headerlink" title="4.静态代码块"></a>4.静态代码块</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//静态代码块</span></span><br><span class="line"> <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="comment">//static code block</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>他是随着类的加载而加载，并且仅仅执行一次，因为类进入内存以后再次new对象的时候类不会再次加载</li>
+<li>他可以先于main函数执行</li>
+<li>它的作用是给类初始化</li>
+<li>但是注意当用一个类定义一个变量的时候不加载类<h3 id="7-编译小问题"><a href="#7-编译小问题" class="headerlink" title="7.编译小问题"></a>7.编译小问题</h3>在java编译的时候如果在某个类中调用了其他的类，那么jvm则会在当前目录或者指定目录（classpath）寻找该类的class文件（编译过后的），没找到则找java文件<br>都没找到肯定报错<br>在堆内存中的变量都是有初始值的，而在站内存中的变量在不初始化的情况下是无法参与运算的，对内存中可以</li>
+</ol>
+<h3 id="8-单例设计模式"><a href="#8-单例设计模式" class="headerlink" title="8.单例设计模式"></a>8.单例设计模式</h3><p>单例设计模式一般来说就有两种方式，一个是懒汉式，一个是饿汉式。其中懒汉式使用的类的延时加载，但是会出现安全问题，需要使用同步代码块包裹返回的对象，并且做双重判断才可以。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> learn;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 单例模式的第一种实现方式，也是最常用的一种叫做饿汉式</span></span><br><span class="line"><span class="comment"> * 他是先初始化对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SingleHunger</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SingleHunger s=<span class="keyword">new</span> SingleHunger(<span class="string">&quot;lwen&quot;</span>,<span class="number">19</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingleHunger</span><span class="params">(String name,<span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name=name;</span><br><span class="line">        <span class="keyword">this</span>.age=age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingleHunger <span class="title">getSingle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 这个又成为懒汉式也叫做对象的延时加载，他则使用的比较少，因为在进行new新对象的时候可能会有两个线程同时进入临界区导致对相爱那个不唯一</span></span><br><span class="line"><span class="comment"> * 多一需要做同步操作，但是同步的时候又会消耗时间，下面的方式要稍微好一点一般只做了一次同步操作，还有一种解决方案就是直接在class后面添加同步关键字</span></span><br><span class="line"><span class="comment"> * 每次都要判断非常耗时</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SingleLazy</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SingleLazy s=<span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 使用private限定词是为了防止外部的方法直接调用本类中的构造方法生成新的对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> name</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> age</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingleLazy</span><span class="params">(String name,<span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age=age;</span><br><span class="line">        <span class="keyword">this</span>.name=name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingleLazy <span class="title">getSingle</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        同步机制加双重判断，防止意外情况发生</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">if</span> (s==<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (SingleLazy.class)&#123;</span><br><span class="line">                <span class="keyword">if</span> (s==<span class="keyword">null</span>) &#123;</span><br><span class="line">                    s = <span class="keyword">new</span> SingleLazy(<span class="string">&quot;lwen&quot;</span>, <span class="number">19</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleModel</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        SingleHunger s1=SingleHunger.getSingle();</span><br><span class="line">        s1.setAge(<span class="number">20</span>);</span><br><span class="line">        s1.setName(<span class="string">&quot;lwenxu&quot;</span>);</span><br><span class="line">        SingleHunger s2=SingleHunger.getSingle();</span><br><span class="line">        System.out.println(s2.getName());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="9-模板设计模式"><a href="#9-模板设计模式" class="headerlink" title="9.模板设计模式"></a>9.模板设计模式</h3><p>模板设计模式,就是在一段确定的方法中调用了一些不确定的方法。那么就把这些不确定的方法定义成抽象的方法，并且把这些不确定的方法的接口给暴露出去</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">codeTime</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">final</span> <span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getTime</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">long</span> start=System.currentTimeMillis();</span><br><span class="line">        runCode();</span><br><span class="line">        <span class="keyword">long</span> end=System.currentTimeMillis();</span><br><span class="line">        <span class="keyword">return</span> end-start;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">runCode</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ACodeTime</span> <span class="keyword">extends</span> <span class="title">codeTime</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">runCode</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">1000</span>;i++)&#123;</span><br><span class="line">            System.out.println(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Template</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ACodeTime time=<span class="keyword">new</span> ACodeTime();</span><br><span class="line">        System.out.println(<span class="string">&quot;time is :&quot;</span>+time.getTime());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/WeChanQR.png',
+  alipayImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/AliPayQR.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2017/08/09/Java SE/Java面向对象基础-二/" target="_blank" title="Java面向对象基础(二)">http://lwenxu.coding.me/2017/08/09/Java SE/Java面向对象基础-二/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/09/Java%20SE/Java%E4%B9%8BStringBuffer/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java之StringBuffer
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/09/Java%20SE/ConcurrentHashMap/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ConcurrentHashMap</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9E%84%E9%80%A0%E5%99%A8%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">1.构造器：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Final-%E5%85%B3%E9%94%AE%E5%AD%97%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">2. Final 关键字：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%86%85%E9%83%A8%E7%B1%BB%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">3. 内部类：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E4%B8%8E%E6%8A%BD%E8%B1%A1%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">4. 抽象类与抽象方法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%8E%A5%E5%8F%A3%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">5.接口：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Static-%E5%85%B3%E9%94%AE%E5%AD%97%EF%BC%9A"><span class="nav-number">6.</span> <span class="nav-text">6. Static 关键字：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%AE%9E%E4%BE%8B%E5%8F%98%E9%87%8F%E5%92%8C%E7%B1%BB%E5%8F%98%E9%87%8F%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9A"><span class="nav-number">6.1.</span> <span class="nav-text">1.实例变量和类变量的区别：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8static%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%EF%BC%9A"><span class="nav-number">6.2.</span> <span class="nav-text">2.使用static的注意事项：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E9%82%A3%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BD%BF%E7%94%A8static%EF%BC%9A"><span class="nav-number">6.3.</span> <span class="nav-text">3.那什么时候使用static：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E4%B8%BB%E5%87%BD%E6%95%B0%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E9%9D%99%E6%80%81%E7%9A%84%EF%BC%9F"><span class="nav-number">6.4.</span> <span class="nav-text">4.主函数为什么是静态的？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="nav-number">6.5.</span> <span class="nav-text">4.静态代码块</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E7%BC%96%E8%AF%91%E5%B0%8F%E9%97%AE%E9%A2%98"><span class="nav-number">7.</span> <span class="nav-text">7.编译小问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E5%8D%95%E4%BE%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">8.</span> <span class="nav-text">8.单例设计模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-%E6%A8%A1%E6%9D%BF%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">9.</span> <span class="nav-text">9.模板设计模式</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2020 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

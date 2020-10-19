@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>java面向对象基础 | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="面向对象" />
+  
+  
+  
+  
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;面向对象一直是一种很流行的思想，他的精髓也就在于他的三大特性：封装，继承和多态。本文就在这三个方面简单的谈一谈Java的面向对象基础。 1.封装：&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;封装顾名思义，就是将一些对象的属性和方法隐藏于本类之中，其他的类无法访问本类的这些被封装的属性和方法。也就是这些方法和属性仅仅是为了本类服务的。除">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java面向对象基础">
+<meta property="og:url" content="http://lwenxu.coding.me/2017/08/09/Java%20SE/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;面向对象一直是一种很流行的思想，他的精髓也就在于他的三大特性：封装，继承和多态。本文就在这三个方面简单的谈一谈Java的面向对象基础。 1.封装：&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;封装顾名思义，就是将一些对象的属性和方法隐藏于本类之中，其他的类无法访问本类的这些被封装的属性和方法。也就是这些方法和属性仅仅是为了本类服务的。除">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-08-09T02:27:50.000Z">
+<meta property="article:modified_time" content="2018-12-19T12:36:42.000Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="面向对象">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="昨夜凛雨" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">About</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Java SE/Java面向对象基础" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Java面向对象基础
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/08/09/Java%20SE/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/" class="article-date">
+	  <time datetime="2017-08-09T02:27:50.000Z" itemprop="datePublished">2017-08-09</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Java/">-Java</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;面向对象一直是一种很流行的思想，他的精髓也就在于他的三大特性：封装，继承和多态。本文就在这三个方面简单的谈一谈Java的面向对象基础。</p>
+<h3 id="1-封装："><a href="#1-封装：" class="headerlink" title="1.封装："></a>1.封装：</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;封装顾名思义，就是将一些对象的属性和方法隐藏于本类之中，其他的类无法访问本类的这些被封装的属性和方法。也就是这些方法和属性仅仅是为了本类服务的。<br>除了为本类服务之外封装还可以只暴露自己想给别人提供的服务，而对于一些特殊的底层的服务不希望别人能看到，或者调用。  </p>
+<a id="more"></a>
+<p>总的来说封装有以下作用或者好处：  </p>
+<ol>
+<li>为本类提供服务  </li>
+<li>对外暴露部分接口</li>
+<li>屏蔽类底层的实现细节</li>
+<li>防止别人破坏类内部的核心结构，例如直接继承，然后覆盖核心方法，或者装饰者模式，造成违背作则意愿的修改。</li>
+</ol>
+<h3 id="2-继承："><a href="#2-继承：" class="headerlink" title="2.继承："></a>2.继承：</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;继承这个名词也很形象，就是子类去获得父类的共有的或者保护的属性以及方法，然后再次基础上进行扩充进一步完善类代码和功能。继承一把来说在直观上是为我们节省了代码量，父类中已有的方法和属性我们无需再次书写，但是继承并非为了节省代码量而被提出的，而是因为他展示了类与类之间的联系。一般两个类有间接或直接的关系我们才会去继承，而不是单单为了节省代码量。</p>
+<h4 id="1-他的主要功能："><a href="#1-他的主要功能：" class="headerlink" title="1.他的主要功能："></a>1.他的主要功能：</h4><ol>
+<li>展现类之间的关系</li>
+<li>节省代码量</li>
+<li>提高了代码的重用性</li>
+<li>因为有了继承才有的多态</li>
+</ol>
+<h4 id="2-另外还有一些需要注意的地方："><a href="#2-另外还有一些需要注意的地方：" class="headerlink" title="2.另外还有一些需要注意的地方："></a>2.另外还有一些需要注意的地方：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;java只支持单继承，不支持多继承，多继承会导致功能紊乱<br>&nbsp;&nbsp;&nbsp;&nbsp;例如多个父类中有相同的方法，但是同时继承就会产生不知道继承哪一个方法的问题<br>但是java还是保留了C++的这种多继承的机制，叫做多实现，也就是在接口上支持多继承( 实现 )。<br>&nbsp;&nbsp;&nbsp;&nbsp;但是继承的时候要注意他们是is a的关系也就是每一个子类对象都是一个父类对象。  子类对象 is a  一个父类对象。</p>
+<h4 id="3-继承中的-super-和-this"><a href="#3-继承中的-super-和-this" class="headerlink" title="3.继承中的 super 和 this"></a>3.继承中的 super 和 this</h4><h5 id="1-super指针指向的就是父类的对象"><a href="#1-super指针指向的就是父类的对象" class="headerlink" title="1.super指针指向的就是父类的对象"></a>1.super指针指向的就是父类的对象</h5><ol>
+<li><p>变量：<br>如果子类中出现了父类中的非私有的同名变量<br>要访问子类中变量直接this或者不写，要访问父类中的变量使用super</p>
+</li>
+<li><p>函数：<br>覆盖：保留父类的方法的功能定义，重写功能内容；<br>子类的覆盖的函数权限必须大于父类的函数的权限，对于没有权限限定的就是默认权限，他是介于公有与私有之间的一种权限<br>子类中只能使用静态方法覆盖静态方法</p>
+</li>
+</ol>
+<p>注意：</p>
+<ol>
+<li>重写：他们的参数列表与返回值都必须一样</li>
+<li>重载：他们的参数列表一定不一样，返回值无所谓</li>
+</ol>
+<h5 id="2-this-代表的是所在函数所属对象"><a href="#2-this-代表的是所在函数所属对象" class="headerlink" title="2. this 代表的是所在函数所属对象"></a>2. this 代表的是所在函数所属对象</h5><p>简单来说就是this在哪个函数，这个函数是哪个对象的，this指的就是哪个对象<br>但是注意，this他并不是当前对象而是指向当前对象，他类似于一个指针<br>this的应用：</p>
+<ol>
+<li>就是当前对象的方法需要引用当前对象的时候我们才使用this  </li>
+<li>this的第二个应用就是，在构造函数中使用类似于函数的方式来调用该类中的其他构造函数，注意他也只能出现在构造函数的互相调用之中<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PersonDemo2</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">PersonDemo2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;no params &quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">PersonDemo2</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>();</span><br><span class="line">        <span class="keyword">this</span>.name=name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    PersonDemo2(String name,<span class="keyword">int</span> age)&#123;</span><br><span class="line">        <span class="keyword">this</span>(name);</span><br><span class="line">        <span class="keyword">this</span>.age=age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+this在构造函数中的互相调用不允许一直互相反复调用会造成死循环<h3 id="3-多态："><a href="#3-多态：" class="headerlink" title="3.多态："></a>3.多态：</h3>&nbsp;&nbsp;&nbsp;&nbsp;多态算是面向对象里面比较复杂的一个功能也是一个极其好用的功能。一句话来概括多态的话可以说，” 一个接口，多个实现 “。就是同一种事物表现出的多种形态。<br>&nbsp;&nbsp;&nbsp;&nbsp;多态允许将子类的对象当作父类的对象使用，某父类型的引用指向其子类型的对象,调用的方法是该子类型的方法。这里引用和调用方法的代码编译前就已经决定了,而引用所指向的对象可以在运行期间动态绑定。  <h4 id="1-他的具体体现就是："><a href="#1-他的具体体现就是：" class="headerlink" title="1.他的具体体现就是："></a>1.他的具体体现就是：</h4></li>
+<li>父类的引用指向子类的对象</li>
+<li>父类的引用可以接受子类的对象作为参数</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这里父类的引用指向了子类的实例，那么这里会发生一个自动的向上类型转换，就是自动的把子类的对象提升为父类的对象，但是这样会造成精度的损失，也就是子类的特性被销毁了子类独有的方法和属性无法再调用了。<br>&nbsp;&nbsp;&nbsp;&nbsp;但是既然可以向上类型转换必然就存在向下类型转换，也就是把父类对象转为子类对象。只不过这种转换仅仅可以出现在父类对象是因为向上类型转换的对象，而不能平白无故的把一个父类对象，转为子类对象。</p>
+<h4 id="2-多态的前提："><a href="#2-多态的前提：" class="headerlink" title="2.多态的前提："></a>2.多态的前提：</h4><ol>
+<li>必须要有继承或者接口的实现</li>
+<li>必须存在方法的覆盖  </li>
+</ol>
+<h4 id="3-参数的动态绑定："><a href="#3-参数的动态绑定：" class="headerlink" title="3.参数的动态绑定："></a>3.参数的动态绑定：</h4><h6 id="1-在多态中（也就是在父类的引用指向子类的时候）对成员函数来说："><a href="#1-在多态中（也就是在父类的引用指向子类的时候）对成员函数来说：" class="headerlink" title="1.在多态中（也就是在父类的引用指向子类的时候）对成员函数来说："></a>1.在多态中（也就是在父类的引用指向子类的时候）对成员函数来说：</h6><ol>
+<li>在编译期间：看引用的成员函数，是否存在如果不存在编译不通过。（编译期间就是看的是类型的声明，声明里有就编译通过没有就失败）</li>
+<li>在运行期间：看实际对象的函数，运行实际的对象的方法。（运行使用的是对象运行里面的this指的就是new 哪个类方法就被绑定在哪个对象上）  </li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;简单来说就是编译看右边，运行看左边（儿子充当父亲，人家编译的时候看的你是一个父亲那么就看你父亲是不是有这个方法，而运行的时候儿子会做什么就做什么而不是按照父亲的做），总之一句话：“ 编译声明检查，运行动态绑定 ”</p>
+<h6 id="2-再多态中，成员变量的特点："><a href="#2-再多态中，成员变量的特点：" class="headerlink" title="2.再多态中，成员变量的特点："></a>2.再多态中，成员变量的特点：</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;变量始终与引用类型看齐（向左看齐）无论是静态变量还是非静态  静态就好说与类绑定自然就看引用  说白了成员变量没有方法那种动态绑定</p>
+<h6 id="3-静态方法："><a href="#3-静态方法：" class="headerlink" title="3.静态方法："></a>3.静态方法：</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;始终与引用类型看齐  因为是静态绑定  静态方法与类绑定</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/WeChanQR.png',
+  alipayImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/AliPayQR.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2017/08/09/Java SE/Java面向对象基础/" target="_blank" title="Java面向对象基础">http://lwenxu.coding.me/2017/08/09/Java SE/Java面向对象基础/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/09/Java%20SE/ConcurrentHashMap/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ConcurrentHashMap
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/09/Java%20SE/Java%E5%9F%BA%E6%9C%AC%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java基本包装类型</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%B0%81%E8%A3%85%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">1.封装：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%BB%A7%E6%89%BF%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">2.继承：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BB%96%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">1.他的主要功能：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%8F%A6%E5%A4%96%E8%BF%98%E6%9C%89%E4%B8%80%E4%BA%9B%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">2.另外还有一些需要注意的地方：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E7%BB%A7%E6%89%BF%E4%B8%AD%E7%9A%84-super-%E5%92%8C-this"><span class="nav-number">2.3.</span> <span class="nav-text">3.继承中的 super 和 this</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-super%E6%8C%87%E9%92%88%E6%8C%87%E5%90%91%E7%9A%84%E5%B0%B1%E6%98%AF%E7%88%B6%E7%B1%BB%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.3.1.</span> <span class="nav-text">1.super指针指向的就是父类的对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-this-%E4%BB%A3%E8%A1%A8%E7%9A%84%E6%98%AF%E6%89%80%E5%9C%A8%E5%87%BD%E6%95%B0%E6%89%80%E5%B1%9E%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.3.2.</span> <span class="nav-text">2. this 代表的是所在函数所属对象</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%A4%9A%E6%80%81%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">3.多态：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BB%96%E7%9A%84%E5%85%B7%E4%BD%93%E4%BD%93%E7%8E%B0%E5%B0%B1%E6%98%AF%EF%BC%9A"><span class="nav-number">3.1.</span> <span class="nav-text">1.他的具体体现就是：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%A4%9A%E6%80%81%E7%9A%84%E5%89%8D%E6%8F%90%EF%BC%9A"><span class="nav-number">3.2.</span> <span class="nav-text">2.多态的前提：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%8F%82%E6%95%B0%E7%9A%84%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A%EF%BC%9A"><span class="nav-number">3.3.</span> <span class="nav-text">3.参数的动态绑定：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-%E5%9C%A8%E5%A4%9A%E6%80%81%E4%B8%AD%EF%BC%88%E4%B9%9F%E5%B0%B1%E6%98%AF%E5%9C%A8%E7%88%B6%E7%B1%BB%E7%9A%84%E5%BC%95%E7%94%A8%E6%8C%87%E5%90%91%E5%AD%90%E7%B1%BB%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%89%E5%AF%B9%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E6%9D%A5%E8%AF%B4%EF%BC%9A"><span class="nav-number">3.3.0.1.</span> <span class="nav-text">1.在多态中（也就是在父类的引用指向子类的时候）对成员函数来说：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-%E5%86%8D%E5%A4%9A%E6%80%81%E4%B8%AD%EF%BC%8C%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E7%9A%84%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="nav-number">3.3.0.2.</span> <span class="nav-text">2.再多态中，成员变量的特点：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-number">3.3.0.3.</span> <span class="nav-text">3.静态方法：</span></a></li></ol></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2020 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

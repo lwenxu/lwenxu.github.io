@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>shiro安全框架:认证 | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Shiro" />
+  
+  
+  
+  
+  <meta name="description" content="Shiro 安全框架1. 认证1. 采用简单的对象登陆认证(SimpleAccountRealm)12345678910111213141516171819202122public class AuthenticationTest &amp;#123;    &#x2F;&#x2F; 创建一个简单的认证 realm 也就是认证信息存放在对象中的    SimpleAccountRealm simpleAccountRealm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shiro安全框架:认证">
+<meta property="og:url" content="http://lwenxu.coding.me/2018/04/13/Shiro/Shiro%20%E8%AE%A4%E8%AF%81%E6%A1%86%E6%9E%B6/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="Shiro 安全框架1. 认证1. 采用简单的对象登陆认证(SimpleAccountRealm)12345678910111213141516171819202122public class AuthenticationTest &amp;#123;    &#x2F;&#x2F; 创建一个简单的认证 realm 也就是认证信息存放在对象中的    SimpleAccountRealm simpleAccountRealm">
+<meta property="og:locale">
+<meta property="og:image" content="https://user-images.githubusercontent.com/22151420/39239770-8314f4dc-48b4-11e8-9293-112ce08f712e.png">
+<meta property="article:published_time" content="2018-04-13T13:01:28.000Z">
+<meta property="article:modified_time" content="2018-12-19T12:36:42.000Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="Shiro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/22151420/39239770-8314f4dc-48b4-11e8-9293-112ce08f712e.png">
+  
+    <link rel="alternate" href="/atom.xml" title="昨夜凛雨" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">About</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Shiro/Shiro 认证框架" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Shiro安全框架:认证
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/13/Shiro/Shiro%20%E8%AE%A4%E8%AF%81%E6%A1%86%E6%9E%B6/" class="article-date">
+	  <time datetime="2018-04-13T13:01:28.000Z" itemprop="datePublished">2018-04-13</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Shiro/">Shiro</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Shiro-安全框架"><a href="#Shiro-安全框架" class="headerlink" title="Shiro 安全框架"></a>Shiro 安全框架</h1><h2 id="1-认证"><a href="#1-认证" class="headerlink" title="1. 认证"></a>1. 认证</h2><h3 id="1-采用简单的对象登陆认证-SimpleAccountRealm"><a href="#1-采用简单的对象登陆认证-SimpleAccountRealm" class="headerlink" title="1. 采用简单的对象登陆认证(SimpleAccountRealm)"></a>1. 采用简单的对象登陆认证(SimpleAccountRealm)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AuthenticationTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个简单的认证 realm 也就是认证信息存放在对象中的</span></span><br><span class="line">    SimpleAccountRealm simpleAccountRealm = <span class="keyword">new</span> SimpleAccountRealm();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addUser</span><span class="params">()</span></span>&#123;</span><br><span class="line">        simpleAccountRealm.addAccount(<span class="string">&quot;lwen&quot;</span>, <span class="string">&quot;1234&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">authentication</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// 创建一个 securityManager 环境</span></span><br><span class="line">        SecurityManager securityManager = <span class="keyword">new</span> DefaultSecurityManager(simpleAccountRealm);</span><br><span class="line">        <span class="comment">// 设置环境</span></span><br><span class="line">        SecurityUtils.setSecurityManager(securityManager);</span><br><span class="line">        <span class="comment">// 获取认证主体</span></span><br><span class="line">        Subject subject = SecurityUtils.getSubject();</span><br><span class="line">        UsernamePasswordToken token = <span class="keyword">new</span> UsernamePasswordToken(<span class="string">&quot;lwen&quot;</span>, <span class="string">&quot;1234&quot;</span>);</span><br><span class="line">        subject.login(token);</span><br><span class="line">        System.out.println(subject.isAuthenticated());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h3 id="2-简单的角色认证"><a href="#2-简单的角色认证" class="headerlink" title="2. 简单的角色认证"></a>2. 简单的角色认证</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AuthorizationTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个简单的认证 realm 也就是认证信息存放在对象中的</span></span><br><span class="line">    SimpleAccountRealm simpleAccountRealm = <span class="keyword">new</span> SimpleAccountRealm();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addUser</span><span class="params">()</span></span>&#123;</span><br><span class="line">        simpleAccountRealm.addAccount(<span class="string">&quot;lwen&quot;</span>, <span class="string">&quot;1234&quot;</span>,<span class="string">&quot;user&quot;</span>,<span class="string">&quot;admin&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">authentication</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// 创建一个 securityManager 环境</span></span><br><span class="line">        SecurityManager securityManager = <span class="keyword">new</span> DefaultSecurityManager(simpleAccountRealm);</span><br><span class="line">        <span class="comment">// 设置环境</span></span><br><span class="line">        SecurityUtils.setSecurityManager(securityManager);</span><br><span class="line">        <span class="comment">// 获取认证主体</span></span><br><span class="line">        Subject subject = SecurityUtils.getSubject();</span><br><span class="line">        UsernamePasswordToken token = <span class="keyword">new</span> UsernamePasswordToken(<span class="string">&quot;lwen&quot;</span>, <span class="string">&quot;1234&quot;</span>);</span><br><span class="line">        subject.login(token);</span><br><span class="line">        subject.checkRole(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">        subject.checkRoles(<span class="string">&quot;user&quot;</span>, <span class="string">&quot;admin&quot;</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-内置-Realm-和自定义-Realm"><a href="#2-内置-Realm-和自定义-Realm" class="headerlink" title="2. 内置 Realm 和自定义 Realm"></a>2. 内置 Realm 和自定义 Realm</h2><h3 id="1-配置文件-initRealm"><a href="#1-配置文件-initRealm" class="headerlink" title="1. 配置文件 (initRealm)"></a>1. 配置文件 (initRealm)</h3><p>创建一个配置文件，如下</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[users]</span></span><br><span class="line"><span class="attr">lwen</span>=<span class="number">1234</span>,admin</span><br><span class="line"><span class="attr">mark</span>=<span class="number">1234</span>,user</span><br><span class="line"><span class="section">[roles]</span></span><br><span class="line"><span class="attr">admin</span>=update,delete,select</span><br><span class="line"><span class="attr">user</span>=select</span><br></pre></td></tr></table></figure>
+
+<p>在代码中使用 IniRealm 即可。可用下面的代码检查用户权限。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">subject.checkPermission(<span class="string">&quot;update&quot;</span>);</span><br><span class="line">subject.checkPermission(<span class="string">&quot;select&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-数据库-JdbcRealm"><a href="#2-数据库-JdbcRealm" class="headerlink" title="2. 数据库(JdbcRealm)"></a>2. 数据库(JdbcRealm)</h3><p>首先需要创建表，这里我们采用了默认的查询方式，但是这种查询方式是不可用的，这里只做演示用。后面会说到关于自定义 Realm ，会详细说数据库的设计。</p>
+<p>这里我们采用了 Jdbc 默认的 sql 语句建表。</p>
+<p><img src="https://user-images.githubusercontent.com/22151420/39239770-8314f4dc-48b4-11e8-9293-112ce08f712e.png" alt="default"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AuthenticationJdbcRealmTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个简单的认证 realm 也就是认证信息存放在对象中的</span></span><br><span class="line">    JdbcRealm jdbcRealm = <span class="keyword">new</span> JdbcRealm();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">authentication</span><span class="params">()</span></span>&#123;</span><br><span class="line">        DruidDataSource dataSource = <span class="keyword">new</span> DruidDataSource();</span><br><span class="line">        dataSource.setUrl(<span class="string">&quot;jdbc:mysql://127.0.0.1/shiro&quot;</span>);</span><br><span class="line">        dataSource.setUsername(<span class="string">&quot;root&quot;</span>);</span><br><span class="line">        dataSource.setPassword(<span class="string">&quot;12345678&quot;</span>);</span><br><span class="line">        jdbcRealm.setDataSource(dataSource);</span><br><span class="line">        jdbcRealm.setPermissionsLookupEnabled(<span class="keyword">true</span>);<span class="comment">//这是一个坑 ，默认权限表不进行查找</span></span><br><span class="line">        <span class="comment">// 创建一个 securityManager 环境</span></span><br><span class="line">        SecurityManager securityManager = <span class="keyword">new</span> DefaultSecurityManager(jdbcRealm);</span><br><span class="line">        <span class="comment">// 设置环境</span></span><br><span class="line">        SecurityUtils.setSecurityManager(securityManager);</span><br><span class="line">        <span class="comment">// 获取认证主体</span></span><br><span class="line">        Subject subject = SecurityUtils.getSubject();</span><br><span class="line">        UsernamePasswordToken token = <span class="keyword">new</span> UsernamePasswordToken(<span class="string">&quot;lwen&quot;</span>, <span class="string">&quot;1234&quot;</span>);</span><br><span class="line">        subject.login(token);</span><br><span class="line">        System.out.println(subject.isAuthenticated());</span><br><span class="line">        subject.checkPermission(<span class="string">&quot;update&quot;</span>);</span><br><span class="line">        subject.checkPermission(<span class="string">&quot;select&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意这里有一个坑，就是默认的情况下 Jdbc 不回去查询权限表，导致失败。所以我们需要添加上 <code>setPermissionsLookupEnabled</code> 让他开启。</p>
+<h3 id="3-自定义-Realm"><a href="#3-自定义-Realm" class="headerlink" title="3. 自定义 Realm"></a>3. 自定义 Realm</h3><p>自定义 Realm 就是说我们只要继承一个 <code>AuthorizingRealm</code> 类，然后重写里面的认证和授权的方法就可以了，非常的简单。一个是认证的方法也就是 <code>doGetAuthenticationInfo</code> 另外一个就是 授权的方法 <code>doGetAuthorizationInfo</code> ，里很多操作这里采用了一个静态数据表示的，实际上这些是需要从数据库或者缓存中取出来然后进行逻辑判断。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomRealm</span> <span class="keyword">extends</span> <span class="title">AuthorizingRealm</span> </span>&#123;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>.setName(<span class="string">&quot;customRealm&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 授权  -&gt; 权限 角色</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> AuthorizationInfo <span class="title">doGetAuthorizationInfo</span><span class="params">(PrincipalCollection principalCollection)</span> </span>&#123;</span><br><span class="line">        String userName = (String) principalCollection.getPrimaryPrincipal();</span><br><span class="line">        <span class="comment">// 这个需要使用 service 层然后调用 dao 层去数据库或者缓存中查询，然后返回结果这里为了方便采用静态数据</span></span><br><span class="line">        Set&lt;String&gt; roles = getRolesByUsername(userName);</span><br><span class="line">        Set&lt;String&gt; permissions = getPermissionsByUsername(userName);</span><br><span class="line">        SimpleAuthorizationInfo authorizationInfo = <span class="keyword">new</span> SimpleAuthorizationInfo(roles);</span><br><span class="line">        authorizationInfo.setStringPermissions(permissions);</span><br><span class="line">        <span class="keyword">return</span> authorizationInfo;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 认证</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> AuthenticationInfo <span class="title">doGetAuthenticationInfo</span><span class="params">(AuthenticationToken authenticationToken)</span> <span class="keyword">throws</span> AuthenticationException </span>&#123;</span><br><span class="line">        String userName = (String) authenticationToken.getPrincipal();</span><br><span class="line">        String password = getPasswordByUsername(userName);</span><br><span class="line">        <span class="keyword">if</span> (password != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> SimpleAuthenticationInfo(userName, password,<span class="string">&quot;customRealm&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">getPasswordByUsername</span><span class="params">(String userName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;1234&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> Set&lt;String&gt; <span class="title">getPermissionsByUsername</span><span class="params">(String userName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> HashSet&lt;&gt;(Arrays.asList(<span class="string">&quot;select&quot;</span>, <span class="string">&quot;delete&quot;</span>, <span class="string">&quot;update&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> Set&lt;String&gt; <span class="title">getRolesByUsername</span><span class="params">(String userName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> HashSet&lt;&gt;(Arrays.asList(<span class="string">&quot;admin&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-密码加密加盐"><a href="#4-密码加密加盐" class="headerlink" title="4. 密码加密加盐"></a>4. 密码加密加盐</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HashedCredentialsMatcher matcher = <span class="keyword">new</span> HashedCredentialsMatcher();</span><br><span class="line">matcher.setHashAlgorithmName(<span class="string">&quot;md5&quot;</span>);</span><br><span class="line">customRealm.setCredentialsMatcher(matcher);</span><br></pre></td></tr></table></figure>
+
+<p>在代码逻辑中加上这段，然后在 Relam 中需要自定义盐。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加盐（lwen）</span></span><br><span class="line">authenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(<span class="string">&quot;lwen&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-整合-Spring"><a href="#2-整合-Spring" class="headerlink" title="2. 整合 Spring"></a>2. 整合 Spring</h2><h3 id="1-首先配置过滤器"><a href="#1-首先配置过滤器" class="headerlink" title="1. 首先配置过滤器"></a>1. 首先配置过滤器</h3><p>也就是类似于其他的登陆授权方式都是通过拦截器或者过滤器来完成登陆的，这里我们也是这样的思路。在 web.xml 中配置过滤器，过滤所有请求，交给 shiro 处理。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--shiro 配置--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>shiroFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.springframework.web.filter.DelegatingFilterProxy<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>targetFilterLifecycle<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>shiroFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-配置-beans"><a href="#2-配置-beans" class="headerlink" title="2. 配置 beans"></a>2. 配置 beans</h3><p>以前我们手动创建的 securityManager 对象以及 Realm 和 加密函数对象现在我们都交给 Spring 管理，进行自动的依赖注入和管理。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.shiro.spring.web.ShiroFilterFactoryBean&quot;</span> <span class="attr">id</span>=<span class="string">&quot;shiroFilter&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;securityManager&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;securityManager&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;loginUrl&quot;</span> <span class="attr">value</span>=<span class="string">&quot;login.html&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;unauthorizedUrl&quot;</span> <span class="attr">value</span>=<span class="string">&quot;403.html&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;filterChainDefinitions&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span></span><br><span class="line">            /login.html=anon</span><br><span class="line">            /subLogin=anon</span><br><span class="line">            /*=authc</span><br><span class="line">        <span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.shiro.web.mgt.DefaultWebSecurityManager&quot;</span> <span class="attr">id</span>=<span class="string">&quot;securityManager&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;realm&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;customRealm&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;realms.CustomRealm&quot;</span> <span class="attr">id</span>=<span class="string">&quot;customRealm&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;credentialsMatcher&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;matcher&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.shiro.authc.credential.HashedCredentialsMatcher&quot;</span> <span class="attr">id</span>=<span class="string">&quot;matcher&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;hashAlgorithmName&quot;</span> <span class="attr">value</span>=<span class="string">&quot;md5&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;hashIterations&quot;</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到上面我们配置了登录页的 url 和未认证页，最后比较重要的就是我们是否需要认证的页面的配置。我们需要把登录页，和登录数据提交页给排除掉，因为如果有这些的页面的话我们将会进入死循环中，没办法进行登录操作。其中 anon 就是无需认证的，而后面 authc 需要认证，这个东西是按照顺序来的。所以 /* 放在最后面匹配。</p>
+<h3 id="3-编写-controller-进行认证"><a href="#3-编写-controller-进行认证" class="headerlink" title="3. 编写 controller 进行认证"></a>3. 编写 controller 进行认证</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IndexController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping(value = &quot;/subLogin&quot;, method = RequestMethod.POST,produces = &quot;application/json;charset=utf-8&quot;)</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">login</span><span class="params">(User user)</span></span>&#123;</span><br><span class="line">        Subject subject = SecurityUtils.getSubject();</span><br><span class="line">        UsernamePasswordToken token = <span class="keyword">new</span> UsernamePasswordToken(user.getUsername(), user.getPassword());</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            subject.login(token);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (AuthenticationException e) &#123;</span><br><span class="line">            <span class="keyword">return</span> e.getMessage();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;登陆成功！&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>认证没有抛出异常的话我们就算认证成功了，否则的话就是认证失败。</p>
+<h3 id="4-角色和权限认证"><a href="#4-角色和权限认证" class="headerlink" title="4. 角色和权限认证"></a>4. 角色和权限认证</h3><p>首先需要导入 aop 的注解，然后我们进行授权操作的时候只需要进行写一个注解就行了，当然也可以直接编码实现。</p>
+<p>导入注解 jar 配置注解springmvc 中：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--开启 aop--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:config</span> <span class="attr">proxy-target-class</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;securityManager&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;securityManager&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.shiro.spring.LifecycleBeanPostProcessor&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.aspectj<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>aspectjweaver<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.8.11<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequiresRoles(&quot;admin&quot;)</span></span><br><span class="line"><span class="meta">@GetMapping(&quot;/testRole&quot;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testRole</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;testRole&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequiresPermissions(&quot;select&quot;)</span></span><br><span class="line"><span class="meta">@GetMapping(&quot;/testPermission&quot;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testPermission</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;has&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-自动登录"><a href="#3-自动登录" class="headerlink" title="3. 自动登录"></a>3. 自动登录</h2><p>要创建一个 cookie 对象，然后在自动登录管理器中注入 cookie ，接着需要传递给 securityManager。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.shiro.web.mgt.CookieRememberMeManager&quot;</span> <span class="attr">id</span>=<span class="string">&quot;rememberMeManager&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;cookie&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;cookie&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.shiro.web.servlet.SimpleCookie&quot;</span> <span class="attr">id</span>=<span class="string">&quot;cookie&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">&quot;rememberMe&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;maxAge&quot;</span> <span class="attr">value</span>=<span class="string">&quot;200000&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.shiro.web.mgt.DefaultWebSecurityManager&quot;</span> <span class="attr">id</span>=<span class="string">&quot;securityManager&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;realm&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;customRealm&quot;</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;rememberMeManager&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;rememberMeManager&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span>	</span><br></pre></td></tr></table></figure>
+
+<p>接着只需要在 controller 的登陆方法中进行判断就行了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置记住我</span></span><br><span class="line">token.setRememberMe(user.isRememberMe());</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/WeChanQR.png',
+  alipayImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/AliPayQR.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2018/04/13/Shiro/Shiro 认证框架/" target="_blank" title="Shiro安全框架:认证">http://lwenxu.coding.me/2018/04/13/Shiro/Shiro 认证框架/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%8C%20)%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          SpringBoot笔记 ( 二 )：自定义配置
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%80%20)%EF%BC%9A%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">SpringBoot笔记(一):启动流程</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Shiro-%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6"><span class="nav-number">1.</span> <span class="nav-text">Shiro 安全框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%AE%A4%E8%AF%81"><span class="nav-number">1.1.</span> <span class="nav-text">1. 认证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%87%87%E7%94%A8%E7%AE%80%E5%8D%95%E7%9A%84%E5%AF%B9%E8%B1%A1%E7%99%BB%E9%99%86%E8%AE%A4%E8%AF%81-SimpleAccountRealm"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 采用简单的对象登陆认证(SimpleAccountRealm)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%AE%80%E5%8D%95%E7%9A%84%E8%A7%92%E8%89%B2%E8%AE%A4%E8%AF%81"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 简单的角色认证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%86%85%E7%BD%AE-Realm-%E5%92%8C%E8%87%AA%E5%AE%9A%E4%B9%89-Realm"><span class="nav-number">1.2.</span> <span class="nav-text">2. 内置 Realm 和自定义 Realm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-initRealm"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 配置文件 (initRealm)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%95%B0%E6%8D%AE%E5%BA%93-JdbcRealm"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 数据库(JdbcRealm)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%87%AA%E5%AE%9A%E4%B9%89-Realm"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. 自定义 Realm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%AF%86%E7%A0%81%E5%8A%A0%E5%AF%86%E5%8A%A0%E7%9B%90"><span class="nav-number">1.2.4.</span> <span class="nav-text">4. 密码加密加盐</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%95%B4%E5%90%88-Spring"><span class="nav-number">1.3.</span> <span class="nav-text">2. 整合 Spring</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%A6%96%E5%85%88%E9%85%8D%E7%BD%AE%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. 首先配置过滤器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%85%8D%E7%BD%AE-beans"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. 配置 beans</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%BC%96%E5%86%99-controller-%E8%BF%9B%E8%A1%8C%E8%AE%A4%E8%AF%81"><span class="nav-number">1.3.3.</span> <span class="nav-text">3. 编写 controller 进行认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%A7%92%E8%89%B2%E5%92%8C%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81"><span class="nav-number">1.3.4.</span> <span class="nav-text">4. 角色和权限认证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%87%AA%E5%8A%A8%E7%99%BB%E5%BD%95"><span class="nav-number">1.4.</span> <span class="nav-text">3. 自动登录</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2020 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

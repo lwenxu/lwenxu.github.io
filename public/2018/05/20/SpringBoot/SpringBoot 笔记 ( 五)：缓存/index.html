@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>springboot 笔记 ( 五 )：缓存 | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="SpringBoot" />
+  
+  
+  
+  
+  <meta name="description" content="SpringBoot 笔记 (五): 缓存1.JSR107介绍1.核心概念JSR107这个规范有五个核心概念分别是：  CacheProvider  它用来管理缓存的Manager也就是用来创建，删除，管理，配置CacheManager 的 CacheManager 是用来管理各个缓存，创建，删除，管理，配置Cache的 Cache 是各个具体的缓存组件 Entry 是缓存中具体的一个缓存项 Ex">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot 笔记 ( 五 )：缓存">
+<meta property="og:url" content="http://lwenxu.coding.me/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%94)%EF%BC%9A%E7%BC%93%E5%AD%98/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="SpringBoot 笔记 (五): 缓存1.JSR107介绍1.核心概念JSR107这个规范有五个核心概念分别是：  CacheProvider  它用来管理缓存的Manager也就是用来创建，删除，管理，配置CacheManager 的 CacheManager 是用来管理各个缓存，创建，删除，管理，配置Cache的 Cache 是各个具体的缓存组件 Entry 是缓存中具体的一个缓存项 Ex">
+<meta property="og:locale">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/20/CgBCND.md.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/22151420/40279172-60c42a22-5c70-11e8-8768-b70619b6cb65.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/22151420/40300305-7c99a8f2-5d1b-11e8-8464-a691e844831d.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/22151420/40301061-7adbe334-5d1d-11e8-8767-299d181cb65e.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/22151420/40301119-afbaf608-5d1d-11e8-9e13-473277e5eddc.png">
+<meta property="article:published_time" content="2018-05-20T02:01:28.000Z">
+<meta property="article:modified_time" content="2018-12-19T12:36:42.000Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="SpringBoot">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/05/20/CgBCND.md.png">
+  
+    <link rel="alternate" href="/atom.xml" title="昨夜凛雨" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">About</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-SpringBoot/SpringBoot 笔记 ( 五)：缓存" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      SpringBoot 笔记 ( 五 )：缓存
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%94)%EF%BC%9A%E7%BC%93%E5%AD%98/" class="article-date">
+	  <time datetime="2018-05-20T02:01:28.000Z" itemprop="datePublished">2018-05-20</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SpringBoot-笔记-五-缓存"><a href="#SpringBoot-笔记-五-缓存" class="headerlink" title="SpringBoot 笔记 (五): 缓存"></a>SpringBoot 笔记 (五): 缓存</h1><h2 id="1-JSR107介绍"><a href="#1-JSR107介绍" class="headerlink" title="1.JSR107介绍"></a>1.JSR107介绍</h2><h3 id="1-核心概念"><a href="#1-核心概念" class="headerlink" title="1.核心概念"></a>1.核心概念</h3><p>JSR107这个规范有五个核心概念分别是：</p>
+<ul>
+<li>CacheProvider  它用来管理缓存的Manager也就是用来创建，删除，管理，配置CacheManager 的</li>
+<li>CacheManager 是用来管理各个缓存，创建，删除，管理，配置Cache的</li>
+<li>Cache 是各个具体的缓存组件</li>
+<li>Entry 是缓存中具体的一个缓存项</li>
+<li>Expire 缓存的过期时间</li>
+</ul>
+<a id="more"></a>
+
+<h3 id="2-导入包"><a href="#2-导入包" class="headerlink" title="2.导入包"></a>2.导入包</h3><ul>
+<li>javax.cache.cache-api</li>
+<li>javax.cache.cache</li>
+</ul>
+<h2 id="2-Spring缓存抽象"><a href="#2-Spring缓存抽象" class="headerlink" title="2.Spring缓存抽象"></a>2.Spring缓存抽象</h2><p>spring保留了两个核心的概念就是 CacheManager 和 Cache 用来支持并简化 JSR107 技术。支持JSR107的注解，以及自带一些注解。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/CgBCND"><img src="https://s1.ax1x.com/2018/05/20/CgBCND.md.png" alt="CgBCND.md.png"></a></p>
+<p>这几个注解其实都是标注在方法上面，主要说一些这几个注解：</p>
+<ol>
+<li>Cacheable 就是标注该方法在执行查询的结果是被缓存起来的，一般来说就是在dao的select的时候调用。</li>
+<li>CacheEvict 这个一般放在删除某些数据的时候我们必须清空缓存让缓存失效</li>
+<li>CachePut 这个住哟啊用于更新操作，不然的话缓存无法同步更新。</li>
+<li>EnableCache 就是开启注解。</li>
+</ol>
+<h2 id="3-搭建项目工程"><a href="#3-搭建项目工程" class="headerlink" title="3.搭建项目工程"></a>3.搭建项目工程</h2><h3 id="1-给主类加上-CacheEnable"><a href="#1-给主类加上-CacheEnable" class="headerlink" title="1.给主类加上@CacheEnable"></a>1.给主类加上@CacheEnable</h3><h3 id="2-给方法加上-Cacheable"><a href="#2-给方法加上-Cacheable" class="headerlink" title="2.给方法加上@Cacheable"></a>2.给方法加上@Cacheable</h3><p>将方法的运行结果进行缓存；以后再要相同的数据，直接从缓存中获取，不用调用方法；<br>CacheManager管理多个cache组件的，对缓存的真正CRUD操作在cache组件中，每一个缓存组件有自己唯一一个名字；<br>几个属性：</p>
+<ol>
+<li>cacheNames/value：指定缓存组件的名字</li>
+<li>key：缓存数据使用的key；可以用它来指定。默认是使用方法参数的值1-方法的返回值</li>
+<li>编写SpEL；#id；参数id的值#ae#pe#root.args[e] <img src="https://user-images.githubusercontent.com/22151420/40279172-60c42a22-5c70-11e8-8768-b70619b6cb65.png" alt="image"></li>
+<li>keyGenerator:key的生成器；可以自己指定key的生成器的组件id  注意：key/keyGenerator：二选一使用</li>
+<li>cacheManager：指定缓存管理器；或者cacheResolver指定获取解析器</li>
+<li>condition：指定符合条件的情况下才缓存；</li>
+<li>unLess：否定缓存；当unLess指定的条件为true，方法的返回值就不会被缓存；可以获取到结果进行判断</li>
+<li>unless=”#result==null”</li>
+<li>sync：是否使用用异步</li>
+</ol>
+<p>[^针对dao包开启sql调试日志]: logging:  level:    com:      example:        bootcache:          dao: debug</p>
+<h3 id="3-自动配置原理"><a href="#3-自动配置原理" class="headerlink" title="3.自动配置原理"></a>3.自动配置原理</h3><h4 id="1-CacheAutoConfiguration-自动配置类"><a href="#1-CacheAutoConfiguration-自动配置类" class="headerlink" title="1. CacheAutoConfiguration 自动配置类"></a>1. CacheAutoConfiguration 自动配置类</h4><h4 id="2-Import-CacheAutoConfiguration-CacheConfigurationImportSelector-class-导入了自动配置选择类"><a href="#2-Import-CacheAutoConfiguration-CacheConfigurationImportSelector-class-导入了自动配置选择类" class="headerlink" title="2.@Import({CacheAutoConfiguration.CacheConfigurationImportSelector.class}) 导入了自动配置选择类"></a>2.@Import({CacheAutoConfiguration.CacheConfigurationImportSelector.class}) 导入了自动配置选择类</h4><h4 id="3-CacheConfigurationImportSelector-selectImports-方法导入依赖"><a href="#3-CacheConfigurationImportSelector-selectImports-方法导入依赖" class="headerlink" title="3. CacheConfigurationImportSelector.selectImports() 方法导入依赖"></a>3. CacheConfigurationImportSelector.selectImports() 方法导入依赖</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;org.springframework.boot.autoconfigure.cache.GenericCacheConfiguration&quot;</span></span><br><span class="line"><span class="string">&quot;org.springframework.boot.autoconfigure.cache.JCacheCacheConfiguration&quot;</span></span><br><span class="line"><span class="string">&quot;org.springframework.boot.autoconfigure.cache.EhCacheCacheConfiguration&quot;</span></span><br><span class="line"><span class="string">&quot;org.springframework.boot.autoconfigure.cache.HazelcastCacheConfiguration&quot;</span></span><br><span class="line"><span class="string">&quot;org.springframework.boot.autoconfigure.cache.InfinispanCacheConfiguration&quot;</span></span><br><span class="line"><span class="string">&quot;org.springframework.boot.autoconfigure.cache.CouchbaseCacheConfiguration&quot;</span></span><br><span class="line"><span class="string">&quot;org.springframework.boot.autoconfigure.cache.RedisCacheConfiguration&quot;</span></span><br><span class="line"><span class="string">&quot;org.springframework.boot.autoconfigure.cache.CaffeineCacheConfiguration&quot;</span></span><br><span class="line"><span class="string">&quot;org.springframework.boot.autoconfigure.cache.SimpleCacheConfiguration&quot;</span></span><br><span class="line"><span class="string">&quot;org.springframework.boot.autoconfigure.cache.NoOpCacheConfiguration</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-具体哪一个配置类会生效就看我们这些配置类的condition"><a href="#4-具体哪一个配置类会生效就看我们这些配置类的condition" class="headerlink" title="4.具体哪一个配置类会生效就看我们这些配置类的condition"></a>4.具体哪一个配置类会生效就看我们这些配置类的condition</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConditionalOnClass(&#123;Cache.class, EhCacheCacheManager.class&#125;)</span></span><br><span class="line"><span class="meta">@ConditionalOnMissingBean(&#123;CacheManager.class&#125;)</span></span><br><span class="line"><span class="meta">@Conditional(&#123;CacheCondition.class, EhCacheCacheConfiguration.ConfigAvailableCondition.class&#125;)</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-我们可以打开调试，那么再启动的时候就会打印出我们自动配置的日志-（debug-true）"><a href="#5-我们可以打开调试，那么再启动的时候就会打印出我们自动配置的日志-（debug-true）" class="headerlink" title="5.我们可以打开调试，那么再启动的时候就会打印出我们自动配置的日志 （debug: true）"></a>5.我们可以打开调试，那么再启动的时候就会打印出我们自动配置的日志 （debug: true）</h4><p> 搜索CacheConfiguration 可以看到</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SimpleCacheConfiguration matched:</span><br><span class="line">   - Cache org.springframework.boot.autoconfigure.cache.SimpleCacheConfiguration automatic cache type (CacheCondition)</span><br><span class="line">   - @ConditionalOnMissingBean (types: org.springframework.cache.CacheManager; SearchStrategy: all) did not find any beans (OnBeanCondition)</span><br></pre></td></tr></table></figure>
+
+<p>那么也就是说我们没配置的时候默认是 Simple 的Cache</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ConcurrentMapCacheManager <span class="title">cacheManager</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ConcurrentMapCacheManager cacheManager = <span class="keyword">new</span> ConcurrentMapCacheManager();</span><br><span class="line">    List&lt;String&gt; cacheNames = <span class="keyword">this</span>.cacheProperties.getCacheNames();</span><br><span class="line">    <span class="keyword">if</span> (!cacheNames.isEmpty()) &#123;</span><br><span class="line">        cacheManager.setCacheNames(cacheNames);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (ConcurrentMapCacheManager)<span class="keyword">this</span>.customizerInvoker.customize(cacheManager);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>默认返回的是 ConcurrentMapCacheManager 这个CacheManager  给容器中注册缓存管理器。</p>
+<h4 id="6-ConcurrentMapCacheManager-分析"><a href="#6-ConcurrentMapCacheManager-分析" class="headerlink" title="6. ConcurrentMapCacheManager 分析"></a>6. ConcurrentMapCacheManager 分析</h4><p>这个缓存管理器的主要作用分析一下，其他的基本都类似：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcurrentMapCacheManager</span> <span class="keyword">implements</span> <span class="title">CacheManager</span>｛  //所有的缓存管理器都继承了这个<span class="title">CacheManager</span></span></span><br><span class="line"><span class="class">    //里面最重要的方法就是 <span class="title">getCache</span> 方法  这个方法就是创建和获取缓存组件！！组件</span></span><br><span class="line"><span class="class">     @<span class="title">Nullable</span></span></span><br><span class="line"><span class="class">    <span class="title">public</span> <span class="title">Cache</span> <span class="title">getCache</span>(<span class="title">String</span> <span class="title">name</span>) </span>&#123;</span><br><span class="line">        Cache cache = (Cache)<span class="keyword">this</span>.cacheMap.get(name);</span><br><span class="line">        <span class="keyword">if</span> (cache == <span class="keyword">null</span> &amp;&amp; <span class="keyword">this</span>.dynamic) &#123;</span><br><span class="line">            ConcurrentMap var3 = <span class="keyword">this</span>.cacheMap;</span><br><span class="line">            <span class="keyword">synchronized</span>(<span class="keyword">this</span>.cacheMap) &#123;</span><br><span class="line">                cache = (Cache)<span class="keyword">this</span>.cacheMap.get(name);</span><br><span class="line">                <span class="keyword">if</span> (cache == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    cache = <span class="keyword">this</span>.createConcurrentMapCache(name); <span class="comment">//创建缓存其实就是new ConcurrentHashMap(256)</span></span><br><span class="line">                    <span class="keyword">this</span>.cacheMap.put(name, cache);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cache;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">	</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-Cache的执行流程"><a href="#7-Cache的执行流程" class="headerlink" title="7.Cache的执行流程"></a>7.Cache的执行流程</h4><h5 id="1-获取缓存组件"><a href="#1-获取缓存组件" class="headerlink" title="1.获取缓存组件"></a>1.获取缓存组件</h5><p>在被注解的方法调用之前会去Cache组件按照<code>cacheName</code>获取缓存组件 <strong>（注意不是缓存数据而是组件）</strong>，也就是去 <code>CacheManager</code> 的 <code>getCache()</code> 方法，如果没有Cache组件我们就new一个Cache组件</p>
+<h5 id="2-获取key"><a href="#2-获取key" class="headerlink" title="2.获取key"></a>2.获取key</h5><p>待会说</p>
+<h5 id="3-获取缓存数据"><a href="#3-获取缓存数据" class="headerlink" title="3.获取缓存数据"></a>3.获取缓存数据</h5><p>接着使用ConcurrentMapCache.lookup()`来查找缓存数据，也就是使用 key 来查找，默认就是方法的参数。但是又是怎样生成key的呢？</p>
+<p>我们在 lookup() 上面打上断点，然后我们往上翻一下栈帧就能找到 <code>findCachedItem:491, CacheAspectSupport</code>  接着我们可以在这个方法中看到他生成了 key 也就是  <code>bject key = this.generateKey(context, result);</code>  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> Object <span class="title">generateKey</span><span class="params">(<span class="meta">@Nullable</span> Object result)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (StringUtils.hasText(<span class="keyword">this</span>.metadata.operation.getKey())) &#123; <span class="comment">//获取到key的值  直接使用</span></span><br><span class="line">        EvaluationContext evaluationContext = <span class="keyword">this</span>.createEvaluationContext(result);</span><br><span class="line">        <span class="keyword">return</span> CacheAspectSupport.<span class="keyword">this</span>.evaluator.key(<span class="keyword">this</span>.metadata.operation.getKey(), <span class="keyword">this</span>.metadata.methodKey, evaluationContext);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">//没有key的值需要生成</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.metadata.keyGenerator.generate(<span class="keyword">this</span>.target, <span class="keyword">this</span>.metadata.method, <span class="keyword">this</span>.args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的逻辑就是 获取到key的值 ，直接使用，没有key的值需要生成。好那么这个生成的 <code>generate()</code> 最后是在 一个 <code>public interface KeyGenerator</code> 接口中定义的，那么接下来这个实现类其实就是 SimpleKeyGenerator  在栈帧中是可以看出来的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title">generateKey</span><span class="params">(Object... params)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (params.length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> SimpleKey.EMPTY;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (params.length == <span class="number">1</span>) &#123;</span><br><span class="line">            Object param = params[<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">if</span> (param != <span class="keyword">null</span> &amp;&amp; !param.getClass().isArray()) &#123;</span><br><span class="line">                <span class="keyword">return</span> param;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> SimpleKey(params);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后生成了 key 值：生成策略 ：</p>
+<ul>
+<li>如果没有参数就是 Simple对象</li>
+<li>有一个参数就是这个东西</li>
+<li>多个参数就是参数传入Simple的封装</li>
+</ul>
+<p>如果我们在缓存中获取到了数据那么我们就不需要运行方法了，如果是没有的话我们必须运行方法执行下面的 put 操作，但是注意一点就是我们通篇使用了 AspectJ 完成的。</p>
+<h5 id="4-没有值put进去"><a href="#4-没有值put进去" class="headerlink" title="4.没有值put进去"></a>4.没有值put进去</h5><p>使用了  <code>ConcurrentMapCache.put()</code> 方法来put新的值。</p>
+<p><strong>所以说我们的@Cacheable代码的调用时机有两个：分别是运行之前需要查询一次缓存看有没有，以及在没有时候需要运行方法并把结果放到缓存中。所以我们不能在注解中使用#result el表达式，还有注意一点的就是这些注解都是放在Service层的别放到了Controller中，因为Controller每次都会被访问。</strong></p>
+<h3 id="4-自定义key"><a href="#4-自定义key" class="headerlink" title="4.自定义key"></a>4.自定义key</h3><h5 id="1-使用注解中的key属性"><a href="#1-使用注解中的key属性" class="headerlink" title="1.使用注解中的key属性"></a>1.使用注解中的key属性</h5><p>我们可以采用 SPEL 表达式，这里举一个简单的例子，我们的可以要用方法名加上参数 Empl[1] 我们就可以用 #root.method.name+’[‘ +#id+’]’ 来完成</p>
+<h5 id="2-重写-keyGenerator"><a href="#2-重写-keyGenerator" class="headerlink" title="2.重写 keyGenerator()"></a>2.重写 <code>keyGenerator()</code></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">KeyGeneratorConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> KeyGenerator <span class="title">keyGenerator</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// 生策略就是 方法名家参数</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> KeyGenerator() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Object <span class="title">generate</span><span class="params">(Object target, Method method, Object... params)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> method.getName() + Arrays.asList(params).toString();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在 keyGenerator的属性写上 我们的bean的id</p>
+<h3 id="5-CachePut-注解"><a href="#5-CachePut-注解" class="headerlink" title="5.@CachePut 注解"></a>5.@CachePut 注解</h3><p>这个注解就是在update数据的时候使用的，在更新数据库的同时同期的更新缓存，这个注解的代码都是在方法运行以后才开始运行的，也就是我们代码之运行一次，然后他的原理就是更新后的数据重新放到缓存里面而不是真的去查那条缓存然后更新。所以说有一个非常值得注意的地方就是如果我们的@Cacheable注解使用了自定义的key的时候我们<strong>必须保证他们两个的key一样</strong> 不然的话是没有办法同步更新数据库和缓存的。</p>
+<h3 id="6-CacheEvict-缓存清除"><a href="#6-CacheEvict-缓存清除" class="headerlink" title="6.@CacheEvict 缓存清除"></a>6.@CacheEvict 缓存清除</h3><ol>
+<li>这个删除默认的情况就是删除指定的key的缓存而非当前Cache组件中所有的缓存。</li>
+<li>我们可以指定 allEntries 属性来指定是否删除所有的缓存</li>
+<li>beforeInvocation 指定缓存是在方法之前还是之后运行，这个东西的影响就是我们的方法抛出异常的时候缓存能否被清除，显然后者是不可以的。</li>
+</ol>
+<h3 id="7-Caching-综合注解"><a href="#7-Caching-综合注解" class="headerlink" title="7.@Caching 综合注解"></a>7.@Caching 综合注解</h3><p>这个注解其实就是上面三个注解的综合，也就是我们可以定义综合注解。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Caching(</span></span><br><span class="line"><span class="meta">        cacheable = &#123;</span></span><br><span class="line"><span class="meta">            @Cacheable(cacheNames = &quot;empl&quot;)</span></span><br><span class="line"><span class="meta">        &#125;,</span></span><br><span class="line"><span class="meta">        put = &#123;</span></span><br><span class="line"><span class="meta">            //多key缓存</span></span><br><span class="line"><span class="meta">            @CachePut(cacheNames = &quot;empl&quot;,key = &quot;#id&quot;),</span></span><br><span class="line"><span class="meta">            @CachePut(cacheNames = &quot;empl&quot;,key = &quot;#result&quot;)</span></span><br><span class="line"><span class="meta">        &#125;,</span></span><br><span class="line"><span class="meta">        evict = &#123;</span></span><br><span class="line"><span class="meta">                @CacheEvict(cacheNames = &quot;empl&quot;)</span></span><br><span class="line"><span class="meta">        &#125;</span></span><br><span class="line"><span class="meta">)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="8-CacheConfig类上注解"><a href="#8-CacheConfig类上注解" class="headerlink" title="8.@CacheConfig类上注解"></a>8.@CacheConfig类上注解</h3><p>这个注解可以配置一些公共的项目，然后我们下面的方法就可以不用配置一些公共的东西了。这个注解是配置在类上面的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@CacheConfig(cacheNames = &quot;empl&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-使用redis缓存中间件"><a href="#4-使用redis缓存中间件" class="headerlink" title="4.使用redis缓存中间件"></a>4.使用redis缓存中间件</h2><h3 id="1-配置redis客户端"><a href="#1-配置redis客户端" class="headerlink" title="1. 配置redis客户端"></a>1. 配置redis客户端</h3><h3 id="2-配置redis-starter"><a href="#2-配置redis-starter" class="headerlink" title="2.配置redis-starter"></a>2.配置redis-starter</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.data<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jcl-over-slf4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.lettuce<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lettuce-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-配置redis地址"><a href="#3-配置redis地址" class="headerlink" title="3.配置redis地址"></a>3.配置redis地址</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">    <span class="attr">redis:</span></span><br><span class="line">      <span class="attr">host:</span> <span class="string">localhost</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-注入两个redis的客户端"><a href="#4-注入两个redis的客户端" class="headerlink" title="4.注入两个redis的客户端"></a>4.注入两个redis的客户端</h3><ul>
+<li>redisTemplate    基本的redis客户端</li>
+<li>stringRedisTemplate  简化字符串操作的</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">RedisTemplate redisTemplate;  <span class="comment">//默认k-v为object</span></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">StringRedisTemplate stringRedisTemplate; <span class="comment">//默认k-v为string的</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-Redis常见的五大数据类型"><a href="#5-Redis常见的五大数据类型" class="headerlink" title="5.Redis常见的五大数据类型"></a>5.Redis常见的五大数据类型</h3><p>String（字符串）、List（列表）、Set（集合）、Hash（散列）、ZSet（有序集合）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">stringRedis Template.opsForValue()[String(字符串）]</span><br><span class="line">stringRedis Template.opsForlist()[List(列表）]</span><br><span class="line">stringRedis Template.opsForSet()[Set(集合）]</span><br><span class="line">stringRedisTemplate.opsForHash()[Hash(散列）]</span><br><span class="line">stringRedis Template.opsForZSet()[ZSet(有序集合）]</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-string以及对象序列化"><a href="#6-string以及对象序列化" class="headerlink" title="6.string以及对象序列化"></a>6.string以及对象序列化</h3><h4 id="1-string类型的操作："><a href="#1-string类型的操作：" class="headerlink" title="1.string类型的操作："></a>1.string类型的操作：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">// string</span></span><br><span class="line">stringRedisTemplate.opsForValue().append(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;lwen&quot;</span>);</span><br><span class="line">stringRedisTemplate.opsForValue().append(<span class="string">&quot;age&quot;</span>, <span class="string">&quot;20&quot;</span>);</span><br><span class="line">    <span class="comment">//list</span></span><br><span class="line">stringRedisTemplate.opsForList().leftPush(<span class="string">&quot;mylist&quot;</span>, <span class="string">&quot;hello&quot;</span>);</span><br><span class="line">stringRedisTemplate.opsForList().leftPush(<span class="string">&quot;mylist&quot;</span>, <span class="string">&quot;world&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-对象的操作："><a href="#2-对象的操作：" class="headerlink" title="2.对象的操作："></a>2.对象的操作：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Employee employee = <span class="keyword">new</span> Employee(<span class="number">10</span>, <span class="number">20</span>, <span class="string">&quot;lwen&quot;</span>);</span><br><span class="line">redisTemplate.opsForValue().set(<span class="string">&quot;objStr&quot;</span>, employee);</span><br></pre></td></tr></table></figure>
+
+<p>注意一点的就是这个对象必须要实现序列化接口否则会报错的！！！</p>
+<p><img src="https://user-images.githubusercontent.com/22151420/40300305-7c99a8f2-5d1b-11e8-8464-a691e844831d.png" alt="image"></p>
+<p>测试成功以后会发现我们的数据成了这个样子，value还好说应该是序列化导致的，但是key其实也是序列化，我们的string 类也是可以被序列化的。这不是我们希望的而是采用json的格式。那么我们可以配置序列化的规则，去 <code>RedisAutoConfiguration</code> 找对应的默认序列化配置。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@ConditionalOnMissingBean(name = &quot;redisTemplate&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> RedisTemplate&lt;Object, Object&gt; <span class="title">redisTemplate</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">      RedisConnectionFactory redisConnectionFactory)</span> <span class="keyword">throws</span> UnknownHostException </span>&#123;</span><br><span class="line">   RedisTemplate&lt;Object, Object&gt; template = <span class="keyword">new</span> RedisTemplate&lt;&gt;();</span><br><span class="line">   template.setConnectionFactory(redisConnectionFactory);</span><br><span class="line">   <span class="keyword">return</span> template;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@ConditionalOnMissingBean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> StringRedisTemplate <span class="title">stringRedisTemplate</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">      RedisConnectionFactory redisConnectionFactory)</span> <span class="keyword">throws</span> UnknownHostException </span>&#123;</span><br><span class="line">   StringRedisTemplate template = <span class="keyword">new</span> StringRedisTemplate();</span><br><span class="line">   template.setConnectionFactory(redisConnectionFactory);</span><br><span class="line">   <span class="keyword">return</span> template;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到这里就是配置了两个 <code>redisTemplate</code> 我们主要就是让他重新返回新的 <code>redisTemplate</code> 并且在这些模板里面加上我们的序列话规则就好。</p>
+<p>我们去 <code>redisTemplate</code>  中看看会发现 afterPropertiesSet 这个方法中有一段逻辑： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">this</span>.defaultSerializer == <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.defaultSerializer = <span class="keyword">new</span> JdkSerializationRedisSerializer(<span class="keyword">this</span>.classLoader != <span class="keyword">null</span> ? <span class="keyword">this</span>.classLoader : <span class="keyword">this</span>.getClass().getClassLoader());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>意思就是说我们没有配置 <code>defaultSerializer </code> 的话默认使用的是jdk的序列化规则。所以我们自己配置一个 <code>redisTemplate</code>  加上我们自己的规则即可。把上面配置 <code>redisTemplate</code>   的代码复制到我们的JavaConfig中。修改一下，首先我们定位到 <code>private RedisSerializer&lt;?&gt; defaultSerializer;</code> 看到这个地方就是redis的序列化器，我们看看他的具体实现就能找到我们需要的序列化器（Ctrl+H）。</p>
+<p><img src="https://user-images.githubusercontent.com/22151420/40301061-7adbe334-5d1d-11e8-8767-299d181cb65e.png" alt="image"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@ConditionalOnMissingBean(name = &quot;redisTemplate&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> RedisTemplate&lt;Object, Object&gt; <span class="title">redisTemplate</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">      RedisConnectionFactory redisConnectionFactory)</span> <span class="keyword">throws</span> UnknownHostException </span>&#123;</span><br><span class="line">   RedisTemplate&lt;Object, Object&gt; template = <span class="keyword">new</span> RedisTemplate&lt;&gt;();</span><br><span class="line">   template.setConnectionFactory(redisConnectionFactory);</span><br><span class="line">    template.setDefaultSerializer(<span class="keyword">new</span> Jackson2JsonRedisSerializer&lt;&gt;(Employee.class));</span><br><span class="line">   <span class="keyword">return</span> template;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://user-images.githubusercontent.com/22151420/40301119-afbaf608-5d1d-11e8-9e13-473277e5eddc.png" alt="image"></p>
+<p>使用jackson序列化之后的，就很正常！！！</p>
+<h3 id="7-自定义CacheManager"><a href="#7-自定义CacheManager" class="headerlink" title="7.自定义CacheManager"></a>7.自定义CacheManager</h3><p>上面的操作我们都是在test中进行的，我们手动的拿到了 <code>redisTemplate</code> 但是实际上我们在项目中使用的时候我们是不关心我们用的是什么 <code>redisTemplate</code> 也就是我们没办法定义序列化规则了，实际上主要是因为我们的<code>CacheManager</code>被自动配置了。那么去找一下这个自动配置类 <code>RedisCacheConfiguration</code> 里面就是把 CacheManager 放到了容器里。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> RedisCacheManager <span class="title">cacheManager</span><span class="params">(RedisConnectionFactory redisConnectionFactory,</span></span></span><br><span class="line"><span class="function"><span class="params">      ResourceLoader resourceLoader)</span> </span>&#123;</span><br><span class="line">   RedisCacheManagerBuilder builder = RedisCacheManager</span><br><span class="line">         .builder(redisConnectionFactory)</span><br><span class="line">         .cacheDefaults(determineConfiguration(resourceLoader.getClassLoader()));</span><br><span class="line">   List&lt;String&gt; cacheNames = <span class="keyword">this</span>.cacheProperties.getCacheNames();</span><br><span class="line">   <span class="keyword">if</span> (!cacheNames.isEmpty()) &#123;</span><br><span class="line">      builder.initialCacheNames(<span class="keyword">new</span> LinkedHashSet&lt;&gt;(cacheNames));</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">this</span>.customizerInvoker.customize(builder.build());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是注意的一点就是我们的CacheManager是每一个Service很可能不太一样的这是因为我们的泛型不一样，否则的话我们有时候就没办法反序列化回来，所以我们现在必须在每一个Service类上面使用 @CacheConfig 注解中的CacheManager属性来制定使用哪个CacheManager。<strong>并且我们还需要一个默认的缓存管理器不然的话会导致注入异常！</strong></p>
+<p>!!!<strong>注意</strong> :在springBoot 2.0的版本我没有找到配置序列化的地方了，并且我发现不用配置序列化key是正常的，value是二进制的，但是我觉得没问题，因为生成CacheManager不是用template而是采用builder的方式，所以说我们可以不用配置序列化并且我们的Redis的缓存管理器的类的继承层次和其他几个也不太一样，个人感觉是更好的封装吧，不用再手动配置了。</p>
+<h3 id="8-手动操作缓存"><a href="#8-手动操作缓存" class="headerlink" title="8.手动操作缓存"></a>8.手动操作缓存</h3><p>我们可以直接手动注入一个缓存管理器，然后我们使用管理器获取一个缓存，接着我们剧可以手动的对缓存进行操作了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/WeChanQR.png',
+  alipayImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/AliPayQR.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2018/05/20/SpringBoot/SpringBoot 笔记 ( 五)：缓存/" target="_blank" title="SpringBoot 笔记 ( 五 )：缓存">http://lwenxu.coding.me/2018/05/20/SpringBoot/SpringBoot 笔记 ( 五)：缓存/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AD%20)%EF%BC%9A%E6%B6%88%E6%81%AF/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          SpringBoot 笔记 ( 六)：消息
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/18/Spark/Kafka%E5%85%A5%E9%97%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Kafka 入门</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringBoot-%E7%AC%94%E8%AE%B0-%E4%BA%94-%E7%BC%93%E5%AD%98"><span class="nav-number">1.</span> <span class="nav-text">SpringBoot 笔记 (五): 缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-JSR107%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.</span> <span class="nav-text">1.JSR107介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.核心概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AF%BC%E5%85%A5%E5%8C%85"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.导入包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Spring%E7%BC%93%E5%AD%98%E6%8A%BD%E8%B1%A1"><span class="nav-number">1.2.</span> <span class="nav-text">2.Spring缓存抽象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%B7%A5%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">3.搭建项目工程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%BB%99%E4%B8%BB%E7%B1%BB%E5%8A%A0%E4%B8%8A-CacheEnable"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.给主类加上@CacheEnable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%BB%99%E6%96%B9%E6%B3%95%E5%8A%A0%E4%B8%8A-Cacheable"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.给方法加上@Cacheable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.自动配置原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-CacheAutoConfiguration-%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E7%B1%BB"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">1. CacheAutoConfiguration 自动配置类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Import-CacheAutoConfiguration-CacheConfigurationImportSelector-class-%E5%AF%BC%E5%85%A5%E4%BA%86%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E9%80%89%E6%8B%A9%E7%B1%BB"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">2.@Import({CacheAutoConfiguration.CacheConfigurationImportSelector.class}) 导入了自动配置选择类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-CacheConfigurationImportSelector-selectImports-%E6%96%B9%E6%B3%95%E5%AF%BC%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">3. CacheConfigurationImportSelector.selectImports() 方法导入依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E5%85%B7%E4%BD%93%E5%93%AA%E4%B8%80%E4%B8%AA%E9%85%8D%E7%BD%AE%E7%B1%BB%E4%BC%9A%E7%94%9F%E6%95%88%E5%B0%B1%E7%9C%8B%E6%88%91%E4%BB%AC%E8%BF%99%E4%BA%9B%E9%85%8D%E7%BD%AE%E7%B1%BB%E7%9A%84condition"><span class="nav-number">1.3.3.4.</span> <span class="nav-text">4.具体哪一个配置类会生效就看我们这些配置类的condition</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E6%89%93%E5%BC%80%E8%B0%83%E8%AF%95%EF%BC%8C%E9%82%A3%E4%B9%88%E5%86%8D%E5%90%AF%E5%8A%A8%E7%9A%84%E6%97%B6%E5%80%99%E5%B0%B1%E4%BC%9A%E6%89%93%E5%8D%B0%E5%87%BA%E6%88%91%E4%BB%AC%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E7%9A%84%E6%97%A5%E5%BF%97-%EF%BC%88debug-true%EF%BC%89"><span class="nav-number">1.3.3.5.</span> <span class="nav-text">5.我们可以打开调试，那么再启动的时候就会打印出我们自动配置的日志 （debug: true）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-ConcurrentMapCacheManager-%E5%88%86%E6%9E%90"><span class="nav-number">1.3.3.6.</span> <span class="nav-text">6. ConcurrentMapCacheManager 分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-Cache%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-number">1.3.3.7.</span> <span class="nav-text">7.Cache的执行流程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E8%8E%B7%E5%8F%96%E7%BC%93%E5%AD%98%E7%BB%84%E4%BB%B6"><span class="nav-number">1.3.3.7.1.</span> <span class="nav-text">1.获取缓存组件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E8%8E%B7%E5%8F%96key"><span class="nav-number">1.3.3.7.2.</span> <span class="nav-text">2.获取key</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E8%8E%B7%E5%8F%96%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.3.7.3.</span> <span class="nav-text">3.获取缓存数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E6%B2%A1%E6%9C%89%E5%80%BCput%E8%BF%9B%E5%8E%BB"><span class="nav-number">1.3.3.7.4.</span> <span class="nav-text">4.没有值put进去</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%87%AA%E5%AE%9A%E4%B9%89key"><span class="nav-number">1.3.4.</span> <span class="nav-text">4.自定义key</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%E4%B8%AD%E7%9A%84key%E5%B1%9E%E6%80%A7"><span class="nav-number">1.3.4.0.1.</span> <span class="nav-text">1.使用注解中的key属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E9%87%8D%E5%86%99-keyGenerator"><span class="nav-number">1.3.4.0.2.</span> <span class="nav-text">2.重写 keyGenerator()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-CachePut-%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.3.5.</span> <span class="nav-text">5.@CachePut 注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-CacheEvict-%E7%BC%93%E5%AD%98%E6%B8%85%E9%99%A4"><span class="nav-number">1.3.6.</span> <span class="nav-text">6.@CacheEvict 缓存清除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Caching-%E7%BB%BC%E5%90%88%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.3.7.</span> <span class="nav-text">7.@Caching 综合注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-CacheConfig%E7%B1%BB%E4%B8%8A%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.3.8.</span> <span class="nav-text">8.@CacheConfig类上注解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E4%BD%BF%E7%94%A8redis%E7%BC%93%E5%AD%98%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-number">1.4.</span> <span class="nav-text">4.使用redis缓存中间件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%85%8D%E7%BD%AEredis%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">1.4.1.</span> <span class="nav-text">1. 配置redis客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%85%8D%E7%BD%AEredis-starter"><span class="nav-number">1.4.2.</span> <span class="nav-text">2.配置redis-starter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%85%8D%E7%BD%AEredis%E5%9C%B0%E5%9D%80"><span class="nav-number">1.4.3.</span> <span class="nav-text">3.配置redis地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%B3%A8%E5%85%A5%E4%B8%A4%E4%B8%AAredis%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.注入两个redis的客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Redis%E5%B8%B8%E8%A7%81%E7%9A%84%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.4.5.</span> <span class="nav-text">5.Redis常见的五大数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-string%E4%BB%A5%E5%8F%8A%E5%AF%B9%E8%B1%A1%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">1.4.6.</span> <span class="nav-text">6.string以及对象序列化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-string%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="nav-number">1.4.6.1.</span> <span class="nav-text">1.string类型的操作：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="nav-number">1.4.6.2.</span> <span class="nav-text">2.对象的操作：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E8%87%AA%E5%AE%9A%E4%B9%89CacheManager"><span class="nav-number">1.4.7.</span> <span class="nav-text">7.自定义CacheManager</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E6%89%8B%E5%8A%A8%E6%93%8D%E4%BD%9C%E7%BC%93%E5%AD%98"><span class="nav-number">1.4.8.</span> <span class="nav-text">8.手动操作缓存</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2020 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>
