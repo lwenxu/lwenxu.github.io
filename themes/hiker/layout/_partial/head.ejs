@@ -62,10 +62,10 @@
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
-  <%- css('css/style') %>
+  <%- cdn_css('css/style') %>
 
-  <%- js('js/jquery-3.1.1.min.js') %>
-  <%- js('js/bootstrap') %>
+  <%- js_css('js/jquery-3.1.1.min.js') %>
+  <%- js_css('js/bootstrap') %>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="<%- config.root %>css/bootstrap.css" >
@@ -73,7 +73,7 @@
   <% if (is_home()){ %>
     <link rel="stylesheet" href="<%- config.root %>css/home.css" >
   <% } else {%>
-    <%- css('css/dialog.css') %>
+    <%- cdn_css('css/dialog.css') %>
   <% } %>
 
   <% if (is_home() && theme.home_background_image.enable && theme.home_background_image.mode == "trianglify") { %>
