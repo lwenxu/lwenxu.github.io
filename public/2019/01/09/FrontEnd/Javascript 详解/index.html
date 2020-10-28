@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>javascript 从入门到精通 | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="JavaScript" />
+  
+  
+  
+  
+  <meta name="description" content="1. this​    解析器在调用函数每次都会向函数内部传递进一个隐含的参数,这个隐含的参数就是this，this指向的是一个对象， 这个对象我们称为函数执行的 上下文对象，根据函数的调用方式的不同，this会指向不同的对象，以方法的形式调用时，this就是调用方法的那个对象。当我们直接调用一个全局的函数的时候其实就是 window 对像上面的方法。 1234567891011121314151">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 从入门到精通">
+<meta property="og:url" content="http://lwenxu.coding.me/2019/01/09/FrontEnd/Javascript%20%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="1. this​    解析器在调用函数每次都会向函数内部传递进一个隐含的参数,这个隐含的参数就是this，this指向的是一个对象， 这个对象我们称为函数执行的 上下文对象，根据函数的调用方式的不同，this会指向不同的对象，以方法的形式调用时，this就是调用方法的那个对象。当我们直接调用一个全局的函数的时候其实就是 window 对像上面的方法。 1234567891011121314151">
+<meta property="og:locale">
+<meta property="og:image" content="http://images.heniankj.com/20190109233612.png">
+<meta property="og:image" content="http://images.heniankj.com/20190110002509.png">
+<meta property="article:published_time" content="2019-01-09T03:01:28.000Z">
+<meta property="article:modified_time" content="2019-01-13T09:30:20.000Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://images.heniankj.com/20190109233612.png">
+  
+
+  
+
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
+  
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-FrontEnd/Javascript 详解" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JavaScript 从入门到精通
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/01/09/FrontEnd/Javascript%20%E8%AF%A6%E8%A7%A3/" class="article-date">
+	  <time datetime="2019-01-09T03:01:28.000Z" itemprop="datePublished">2019-01-09</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/FrontEnd/">FrontEnd</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-this"><a href="#1-this" class="headerlink" title="1. this"></a>1. this</h2><p>​    解析器在调用函数每次都会向函数内部传递进一个隐含的参数,这个隐含的参数就是this，this指向的是一个对象， 这个对象我们称为函数执行的 上下文对象，根据函数的调用方式的不同，this会指向不同的对象，以方法的形式调用时，this就是调用方法的那个对象。当我们直接调用一个全局的函数的时候其实就是 window 对像上面的方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建一个对象</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">   name:<span class="string">&quot;孙悟空&quot;</span>,</span><br><span class="line">   sayName:fun</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj2 = &#123;</span><br><span class="line">   name:<span class="string">&quot;沙和尚&quot;</span>,</span><br><span class="line">   sayName:fun</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">&quot;全局的name属性&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//以函数形式调用，this是window</span></span><br><span class="line"><span class="comment">//fun();</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//以方法的形式调用，this是调用方法的对象</span></span><br><span class="line"><span class="comment">//obj.sayName();</span></span><br><span class="line">obj2.sayName();</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-构造函数"><a href="#2-构造函数" class="headerlink" title="2. 构造函数"></a>2. 构造函数</h2><p>创建一个构造函数，专门用来创建Person对象的， 构造函数就是一个普通的函数，创建方式和普通函数没有区别,不同的是构造函数习惯上首字母大写构造函数和普通函数的区别就是调用方式的不同，普通函数是直接调用，而构造函数需要使用new关键字来调用<br>构造函数的执行流程：</p>
+<ol>
+<li>立刻创建一个新的对象</li>
+<li>将新建的对象设置为函数中this,在构造函数中可以使用this来引用新建</li>
+<li>逐行执行函数中的代码</li>
+<li>将新建的对象作为返回值返回</li>
+</ol>
+<p>使用同一个构造函数创建的对象，我们称为一类对象，也将一个构造函数称为一个类。我们将通过一个构造函数创建的对象，称为是该类的实例。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name , age , gender</span>)</span>&#123;</span><br><span class="line">   <span class="built_in">this</span>.name = name;</span><br><span class="line">   <span class="built_in">this</span>.age = age;</span><br><span class="line">   <span class="built_in">this</span>.gender = gender;</span><br><span class="line">   <span class="built_in">this</span>.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      alert(<span class="built_in">this</span>.name);</span><br><span class="line">   &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> per = <span class="keyword">new</span> Person(<span class="string">&quot;孙悟空&quot;</span>,<span class="number">18</span>,<span class="string">&quot;男&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> per2 = <span class="keyword">new</span> Person(<span class="string">&quot;玉兔精&quot;</span>,<span class="number">16</span>,<span class="string">&quot;女&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> per3 = <span class="keyword">new</span> Person(<span class="string">&quot;奔波霸&quot;</span>,<span class="number">38</span>,<span class="string">&quot;男&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> dog = <span class="keyword">new</span> Dog();</span><br></pre></td></tr></table></figure>
+
+<p>使用instanceof可以检查一个对象是否是一个类的实例语法：</p>
+<blockquote>
+<p>对象 instanceof 构造函数 </p>
+</blockquote>
+<p>如果是，则返回true，否则返回false</p>
+<h2 id="3-原型"><a href="#3-原型" class="headerlink" title="3. 原型"></a>3. 原型</h2><p>​    我们所创建的每一个函数，解析器都会向函数中添加一个属性prototype，这个属性对应着一个对象，这个对象就是我们所谓的原型对象，如果函数作为普通函数调用prototype没有任何作用，当函数以构造函数的形式调用时，它所创建的对象中都会有一个隐含的属性，指向该构造函数的原型对象，我们可以通过__proto__来访问该属性<br>       原型对象就相当于一个公共的区域，所有同一个类的实例都可以访问到这个原型对象，我们可以将对象中共有的内容，统一设置到原型对象中。<br>​    当我们访问对象的一个属性或方法时，它会先在对象自身中寻找，如果有则直接使用，如果没有则会去原型对象中寻找，如果找到则直接使用。以后我们创建构造函数时，可以将这些对象共有的属性和方法，统一添加到构造函数的原型对象中，这样不用分别为每一个对象添加，也不会影响到全局作用域，就可以使每个对象都具有这些属性和方法了。</p>
+<p>​    使用in检查对象中是否含有某个属性时，如果对象中没有但是原型中有，也会返回true。可以使用对象的<code>hasOwnProperty()</code> 来检查对象自身中是否含有该属性，使用该方法只有当对象自身中含有属性时，才会返回true。</p>
+<p>​    原型对象也是对象，所以它也有原型，当我们使用一个对象的属性或方法时，会现在自身中寻找，自身中如果有，则直接使用，如果没有则去原型对象中寻找，如果原型对象中有，则使用， 如果没有则去原型的原型中寻找,直到找到Object对象的原型，Object对象的原型没有原型，如果在Object原型中依然没有找到，则返回 null。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(mc.__proto__.__proto__.hasOwnProperty(<span class="string">&quot;hasOwnProperty&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://images.heniankj.com/20190109233612.png"></p>
+<p>构造函数和让他的原型对象是互相引用的：</p>
+<p><img src="http://images.heniankj.com/20190110002509.png"></p>
+<h2 id="4-call-和-apply"><a href="#4-call-和-apply" class="headerlink" title="4. call 和 apply"></a>4. call 和 apply</h2><ul>
+<li>这两个方法都是函数对象的方法，需要通过函数对象来调用</li>
+<li>当对函数调用call()和apply()都会调用函数执行</li>
+<li>在调用call()和apply()可以将一个对象指定为第一个参数<br> 此时这个对象将会成为函数执行时的this</li>
+<li>call()方法可以将实参在对象之后依次传递</li>
+<li>apply()方法需要将实参封装到一个数组中统一传递</li>
+<li>this的情况：<br> 1.以函数形式调用时，this永远都是window<br> 2.以方法的形式调用时，this是调用方法的对象<br> 3.以构造函数的形式调用时，this是新创建的那个对象<br> 4.使用call和apply调用时，this是指定的那个对象</li>
+</ul>
+<h2 id="5-数组的方法"><a href="#5-数组的方法" class="headerlink" title="5. 数组的方法"></a>5. 数组的方法</h2><h3 id="1-slice"><a href="#1-slice" class="headerlink" title="1. slice()"></a>1. slice()</h3><ul>
+<li><p>可以用来从数组提取指定元素</p>
+</li>
+<li><p>该方法不会改变元素数组，而是将截取到的元素封装到一个新数组中返回</p>
+</li>
+<li><p>参数：<br> 1.截取开始的位置的索引,包含开始索引<br> 2.截取结束的位置的索引,不包含结束索引</p>
+<p> 第二个参数可以省略不写,此时会截取从开始索引往后的所有索引可以传递一个负值，如果传递一个负值，则从后往前计算  -1 倒数第一个  -2 倒数第二个</p>
+</li>
+</ul>
+<h3 id="2-splice"><a href="#2-splice" class="headerlink" title="2.splice()"></a>2.splice()</h3><ul>
+<li>可以用于删除数组中的指定元素</li>
+<li>使用splice()会影响到原数组，会将指定元素从原数组中删除，并将被删除的元素作为返回值返回</li>
+<li>参数：<br> 第一个，表示开始位置的索引<br> 第二个，表示删除的数量<br> 第三个及以后，可以传递一些新的元素，这些元素将会自动插入到开始位置索引前边</li>
+</ul>
+<h3 id="3-concat"><a href="#3-concat" class="headerlink" title="3.concat()"></a>3.concat()</h3><p>可以连接两个或多个数组，并将新的数组</p>
+<ul>
+<li>该方法不会对原数组产生影响</li>
+</ul>
+<h3 id="4-join"><a href="#4-join" class="headerlink" title="4. join()"></a>4. join()</h3><p>​    该方法可以将数组转换为一个字符串，该方法不会对原数组产生影响，而是将转换后的字符串作为结果返回，在join()中可以指定一个字符串作为参数，这个字符串将会成为数组中元素的连接符如果不指定连接符，则默认使用,作为连接符。</p>
+<h3 id="5-reverse"><a href="#5-reverse" class="headerlink" title="5. reverse()"></a>5. reverse()</h3><p>​    该方法用来反转数组（前边的去后边，后边的去前边）该方法会直接修改原数组</p>
+<h3 id="6-sort"><a href="#6-sort" class="headerlink" title="6.sort()"></a>6.sort()</h3><p>​    可以用来对数组中的元素进行排序也会影响原数组，默认会按照Unicode编码进行排序.</p>
+<p>​    即使对于纯数字的数组，使用sort()排序时，也会按照Unicode编码来排序，所以对数字进排序时，可能会得到错误的结果。我们可以自己来指定排序的规则,我们可以在sort()添加一个回调函数，来指定排序规则。</p>
+<h2 id="6-Date"><a href="#6-Date" class="headerlink" title="6. Date"></a>6. Date</h2><p>创建一个Date对象如果直接使用构造函数创建一个Date对象，则会封装为当前代码执行的时间。创建一个指定的时间对象需要在构造函数中传递一个表示时间的字符串作为参数日期的格式  月份/日/年 时:分:秒</p>
+<h3 id="1-getDate"><a href="#1-getDate" class="headerlink" title="1. getDate()"></a>1. getDate()</h3><p>​    获取当前日期对象是几日。</p>
+<h3 id="2-getDay"><a href="#2-getDay" class="headerlink" title="2. getDay()"></a>2. getDay()</h3><p>​    获取当前日期对象时周几会返回一个0-6的值 0 表示周日1表示周一</p>
+<h3 id="3-getMonth"><a href="#3-getMonth" class="headerlink" title="3. getMonth()"></a>3. getMonth()</h3><p>​    获取当前时间对象的月份会返回一个0-11的值0 表示1月1 表示2月11 表示12月</p>
+<h3 id="4-getFullYear"><a href="#4-getFullYear" class="headerlink" title="4.getFullYear()"></a>4.getFullYear()</h3><p>​    获取当前日期对象的年份</p>
+<h3 id="5-getTime"><a href="#5-getTime" class="headerlink" title="5. getTime()"></a>5. getTime()</h3><p>​    获取当前日期对象的时间戳</p>
+<h2 id="7-Math"><a href="#7-Math" class="headerlink" title="7. Math"></a>7. Math</h2><h3 id="1-Math-ceil"><a href="#1-Math-ceil" class="headerlink" title="1.Math.ceil()"></a>1.Math.ceil()</h3><ul>
+<li>可以对一个数进行向上取整，小数位只有有值就自动进1</li>
+</ul>
+<h3 id="2-Math-floor"><a href="#2-Math-floor" class="headerlink" title="2.Math.floor()"></a>2.Math.floor()</h3><p>可以对一个数进行向下取整，小数部分会被舍掉</p>
+<h3 id="3-Math-round"><a href="#3-Math-round" class="headerlink" title="3.Math.round()"></a>3.Math.round()</h3><p>可以对一个数进行四舍五入取整</p>
+<h3 id="4-Math-random"><a href="#4-Math-random" class="headerlink" title="4.Math.random()"></a>4.Math.random()</h3><p>可以用来生成一个0-1之间的随机数</p>
+<h2 id="8-事件冒泡"><a href="#8-事件冒泡" class="headerlink" title="8. 事件冒泡"></a>8. 事件冒泡</h2><p>​    所谓的冒泡指的就是事件的向上传导，当后代元素上的事件被触发时，其祖先元素的相同事件也会被触发。在开发中大部分情况冒泡都是有用的,如果不希望发生事件冒泡可以通过事件对象来取消冒泡。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">s1.onclick = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">   event = event || <span class="built_in">window</span>.event;</span><br><span class="line">   alert(<span class="string">&quot;我是span的单击响应函数&quot;</span>);</span><br><span class="line">   <span class="comment">//取消冒泡</span></span><br><span class="line">   <span class="comment">//可以将事件对象的cancelBubble设置为true，即可取消冒泡</span></span><br><span class="line">   event.cancelBubble = <span class="literal">true</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-事件的委派"><a href="#1-事件的委派" class="headerlink" title="1. 事件的委派"></a>1. 事件的委派</h3><p>​    指将事件统一绑定给元素的共同的祖先元素，这样当后代元素上的事件触发时，会一直冒泡到祖先元素<br>从而通过祖先元素的响应函数来处理事件。事件委派是利用了冒泡，通过委派可以减少事件绑定的次数，提高程序的性能。</p>
+<h3 id="2-事件绑定"><a href="#2-事件绑定" class="headerlink" title="2. 事件绑定"></a>2. 事件绑定</h3><p><code>addEventListener()</code> 通过这个方法也可以为元素绑定响应函数，参数：</p>
+<ol>
+<li>事件的字符串，不要on</li>
+<li>回调函数，当事件触发时该函数会被调用</li>
+<li>是否在捕获阶段触发事件，需要一个布尔值，一般都传false</li>
+</ol>
+<p>使用addEventListener()可以同时为一个元素的相同事件同时绑定多个这样的事件。当事件被触发时，响应函数将会按照函数的绑定顺序执行。</p>
+<h3 id="3-事件传播"><a href="#3-事件传播" class="headerlink" title="3. 事件传播"></a>3. 事件传播</h3><p>将事件传播分成了三个阶段</p>
+<ol>
+<li>捕获阶段：在捕获阶段时从最外层的祖先元素，向目标元素进行事件的捕获，但是默认此时不会触发事件</li>
+<li>目标阶段：事件捕获到目标元素，捕获结束开始在目标元素上触发事件</li>
+<li>冒泡阶段：事件从目标元素向他的祖先元素传递，依次触发祖先元素上的事件</li>
+</ol>
+<p>如果希望在捕获阶段就触发事件，可以将addEventListener()的第三个参数设置为true，一般情况下我们不会希望在捕获阶段触发事件，所以这个参数一般都是false。</p>
+<h2 id="8-数据类型"><a href="#8-数据类型" class="headerlink" title="8.数据类型"></a>8.数据类型</h2><p>undefined 指的是变量定义了但是没有赋值过，而 null 则是指他被赋值了，并且赋值为 null</p>
+<h2 id="9-闭包"><a href="#9-闭包" class="headerlink" title="9. 闭包"></a>9. 闭包</h2><p>​    闭包在一个函数内部声明了一个内部函数，并且这个内部函数引用了外部函数的变量。</p>
+<p>​    <strong>闭包：闭包是包含被引用变量的对象，或者简单的理解为嵌套的内部函数</strong></p>
+<p>​    闭包在执行外部函数的时候就产生了，不用等到内部不函数执行。</p>
+<h3 id="1-闭包的作用："><a href="#1-闭包的作用：" class="headerlink" title="1.闭包的作用："></a>1.闭包的作用：</h3><ol>
+<li><p>使用函数内部的变量在函数执行完后, 仍然存活在内存中(延长了局部变量的生命周期</p>
+</li>
+<li><p>让函数外部可以操作(读写)到函数内部的数据(变量/函数)</p>
+</li>
+</ol>
+<h3 id="2-生命周期"><a href="#2-生命周期" class="headerlink" title="2. 生命周期"></a>2. 生命周期</h3><ol>
+<li>产生: 在嵌套内部函数定义执行完时就产生了(不是在调用)</li>
+<li>死亡: 在嵌套的内部函数成为垃圾对象时</li>
+</ol>
+<h3 id="3-应用"><a href="#3-应用" class="headerlink" title="3. 应用"></a>3. 应用</h3><p>​    具有特定功能的js文件，将所有的数据和功能都封装在一个函数内部(私有的)，只向外暴露一个包信n个方法的对象或函数，模块的使用者, 只需要通过模块暴露的对象调用方法来实现对应的功能。</p>
+<p>方案一：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myModule</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">//私有数据</span></span><br><span class="line">  <span class="keyword">var</span> msg = <span class="string">&#x27;Hello&#x27;</span></span><br><span class="line">  <span class="comment">//操作数据的函数</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;doSomething() &#x27;</span>+msg.toUpperCase())</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">doOtherthing</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;doOtherthing() &#x27;</span>+msg.toLowerCase())</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//向外暴露对象(给外部使用的方法)</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    doSomething: doSomething,</span><br><span class="line">    doOtherthing: doOtherthing</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>方案二：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">//私有数据</span></span><br><span class="line">  <span class="keyword">var</span> msg = <span class="string">&#x27;My atguigu&#x27;</span></span><br><span class="line">  <span class="comment">//操作数据的函数</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;doSomething() &#x27;</span>+msg.toUpperCase())</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">doOtherthing</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;doOtherthing() &#x27;</span>+msg.toLowerCase())</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//向外暴露对象(给外部使用的方法)</span></span><br><span class="line">  <span class="built_in">window</span>.myModule2 = &#123;</span><br><span class="line">    doSomething: doSomething,</span><br><span class="line">    doOtherthing: doOtherthing</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-缺点及解决方案"><a href="#4-缺点及解决方案" class="headerlink" title="4. 缺点及解决方案"></a>4. 缺点及解决方案</h3><h4 id="1-缺点"><a href="#1-缺点" class="headerlink" title="1.缺点"></a>1.缺点</h4><ul>
+<li><p>函数执行完后, 函数内的局部变量没有释放, 占用内存时间会变长</p>
+</li>
+<li><p>容易造成内存泄露</p>
+<h4 id="2-解决"><a href="#2-解决" class="headerlink" title="2.解决"></a>2.解决</h4></li>
+<li><p>能不用闭包就不用</p>
+</li>
+<li><p>及时释放，将闭包设置为null </p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2019/01/09/FrontEnd/Javascript 详解/" target="_blank" title="JavaScript 从入门到精通">http://lwenxu.coding.me/2019/01/09/FrontEnd/Javascript 详解/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/01/10/FrontEnd/ECMAScript%206/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ECMAScript 从入门到精通
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/01/08/FrontEnd/CSS3%20%E8%AF%A6%E8%A7%A3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">CSS3 从入门到精通</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-this"><span class="nav-number">1.</span> <span class="nav-text">1. this</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">2. 构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%8E%9F%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">3. 原型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-call-%E5%92%8C-apply"><span class="nav-number">4.</span> <span class="nav-text">4. call 和 apply</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%95%B0%E7%BB%84%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text">5. 数组的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-slice"><span class="nav-number">5.1.</span> <span class="nav-text">1. slice()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-splice"><span class="nav-number">5.2.</span> <span class="nav-text">2.splice()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-concat"><span class="nav-number">5.3.</span> <span class="nav-text">3.concat()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-join"><span class="nav-number">5.4.</span> <span class="nav-text">4. join()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-reverse"><span class="nav-number">5.5.</span> <span class="nav-text">5. reverse()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-sort"><span class="nav-number">5.6.</span> <span class="nav-text">6.sort()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Date"><span class="nav-number">6.</span> <span class="nav-text">6. Date</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-getDate"><span class="nav-number">6.1.</span> <span class="nav-text">1. getDate()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-getDay"><span class="nav-number">6.2.</span> <span class="nav-text">2. getDay()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-getMonth"><span class="nav-number">6.3.</span> <span class="nav-text">3. getMonth()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-getFullYear"><span class="nav-number">6.4.</span> <span class="nav-text">4.getFullYear()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-getTime"><span class="nav-number">6.5.</span> <span class="nav-text">5. getTime()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Math"><span class="nav-number">7.</span> <span class="nav-text">7. Math</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Math-ceil"><span class="nav-number">7.1.</span> <span class="nav-text">1.Math.ceil()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Math-floor"><span class="nav-number">7.2.</span> <span class="nav-text">2.Math.floor()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Math-round"><span class="nav-number">7.3.</span> <span class="nav-text">3.Math.round()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Math-random"><span class="nav-number">7.4.</span> <span class="nav-text">4.Math.random()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1"><span class="nav-number">8.</span> <span class="nav-text">8. 事件冒泡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%A7%94%E6%B4%BE"><span class="nav-number">8.1.</span> <span class="nav-text">1. 事件的委派</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A"><span class="nav-number">8.2.</span> <span class="nav-text">2. 事件绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BA%8B%E4%BB%B6%E4%BC%A0%E6%92%AD"><span class="nav-number">8.3.</span> <span class="nav-text">3. 事件传播</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">9.</span> <span class="nav-text">8.数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E9%97%AD%E5%8C%85"><span class="nav-number">10.</span> <span class="nav-text">9. 闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%97%AD%E5%8C%85%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9A"><span class="nav-number">10.1.</span> <span class="nav-text">1.闭包的作用：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">10.2.</span> <span class="nav-text">2. 生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%BA%94%E7%94%A8"><span class="nav-number">10.3.</span> <span class="nav-text">3. 应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%BC%BA%E7%82%B9%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">10.4.</span> <span class="nav-text">4. 缺点及解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E7%BC%BA%E7%82%B9"><span class="nav-number">10.4.1.</span> <span class="nav-text">1.缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E8%A7%A3%E5%86%B3"><span class="nav-number">10.4.2.</span> <span class="nav-text">2.解决</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2020 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

@@ -18,19 +18,17 @@
 <meta property="article:tag" content="Java PHP Code">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="昨夜凛雨" type="application/atom+xml">
-  
 
   
 
-  <link rel="icon" href="/css/images/mylogo.jpg">
-  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
   
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
   <style type="text/css">
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
@@ -94,7 +92,7 @@
               <a class="brand" style="
                  margin-top: 0px;"  
                  >
-                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
               </a>
             
             
@@ -108,8 +106,6 @@
                   <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
                 
                   <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/about">About</a> </li>
                 
                   <li><div id="search-form-wrap">
 
@@ -166,7 +162,7 @@
         
           <section id="main" style="float:none;">
   
-    <article id="post-Java Web/Spring笔记-三"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Algorithm/分治算法"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -174,7 +170,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/23/Java%20Web/Spring%E7%AC%94%E8%AE%B0-%E4%B8%89/">Spring笔记(三)</a>
+      <a class="article-title" href="/2017/10/10/Algorithm/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/">分治算法</a>
     </h1>
   
 
@@ -182,12 +178,12 @@
     
     <div class="article-meta">
       
-	<a href="/2017/08/23/Java%20Web/Spring%E7%AC%94%E8%AE%B0-%E4%B8%89/" class="article-date">
-	  <time datetime="2017-08-23T09:37:03.000Z" itemprop="datePublished">2017-08-23</time>
+	<a href="/2017/10/10/Algorithm/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/" class="article-date">
+	  <time datetime="2017-10-10T11:45:57.000Z" itemprop="datePublished">2017-10-10</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JAVA/">-JAVA</a>
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1/">-算法设计</a>
 
       
       
@@ -196,11 +192,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1.使用注解实现 aop
-配置 xml12345678910111213141516171819202122232425262728293031323334353637&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;       xmlns:xsi=&quot;http:...
+          ​    分治算法分为 “分” 和 “治” 两个部分，所谓的分就是寻找分割点，然后对问题划分成相同的子问题，但是问题的规模变小了，这些步骤其实就是使用递归来完成的。之后就是治的问题，也就是递归里面具体的内容。最后一步就是把所分的结果要合并成为一个完整的结果。
+​    一个例子就是求出逆序数对，这个就是分治法来计算，首席我们分就是中间划分，分别求左右的两边的逆序数对，然后还需要加上横跨中间的逆序数对即可完成。重点就是横跨中间的逆序数对，中间的如果直接暴力枚举就会出现 n 平方的，所以我们首...
         </p>
         <p class="article-more-link">
-          <a href="/2017/08/23/Java%20Web/Spring%E7%AC%94%E8%AE%B0-%E4%B8%89/#more">Read More</a>
+          <a href="/2017/10/10/Algorithm/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/#more">Read More</a>
         </p>
       
     </div>
@@ -219,7 +215,7 @@
 
 
   
-    <article id="post-Java Web/Spring笔记-二"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Algorithm/贪心"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -227,7 +223,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/23/Java%20Web/Spring%E7%AC%94%E8%AE%B0-%E4%BA%8C/">Spring笔记(二)</a>
+      <a class="article-title" href="/2017/10/09/Algorithm/%E8%B4%AA%E5%BF%83/">贪心</a>
     </h1>
   
 
@@ -235,12 +231,12 @@
     
     <div class="article-meta">
       
-	<a href="/2017/08/23/Java%20Web/Spring%E7%AC%94%E8%AE%B0-%E4%BA%8C/" class="article-date">
-	  <time datetime="2017-08-23T08:05:53.000Z" itemprop="datePublished">2017-08-23</time>
+	<a href="/2017/10/09/Algorithm/%E8%B4%AA%E5%BF%83/" class="article-date">
+	  <time datetime="2017-10-09T14:22:16.000Z" itemprop="datePublished">2017-10-09</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JAVA/">-JAVA</a>
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1/">-算法设计</a>
 
       
       
@@ -249,10 +245,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1.注解ioc1.开启注解扫描123456789&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;       xmlns:conte...
+          ​    贪心算法，这个算法就是大胆的猜测，然后小心求证！求证一般就是使用反证法进行证明。假如我们说这个顺序是对的，也就是始终选取大的，或者小的，我们就要证明一下我们的猜测正确性。这里的反正方式就是交换顺序发现不符合预期结果原来的结论就是对的。    
+
         </p>
         <p class="article-more-link">
-          <a href="/2017/08/23/Java%20Web/Spring%E7%AC%94%E8%AE%B0-%E4%BA%8C/#more">Read More</a>
+          <a href="/2017/10/09/Algorithm/%E8%B4%AA%E5%BF%83/#more">Read More</a>
         </p>
       
     </div>
@@ -271,7 +268,7 @@
 
 
   
-    <article id="post-Java Web/Spring笔记-一"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Algorithm/枚举"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -279,7 +276,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/23/Java%20Web/Spring%E7%AC%94%E8%AE%B0-%E4%B8%80/">Spring笔记(一)</a>
+      <a class="article-title" href="/2017/10/09/Algorithm/%E6%9E%9A%E4%B8%BE/">枚举</a>
     </h1>
   
 
@@ -287,12 +284,12 @@
     
     <div class="article-meta">
       
-	<a href="/2017/08/23/Java%20Web/Spring%E7%AC%94%E8%AE%B0-%E4%B8%80/" class="article-date">
-	  <time datetime="2017-08-23T07:12:40.000Z" itemprop="datePublished">2017-08-23</time>
+	<a href="/2017/10/09/Algorithm/%E6%9E%9A%E4%B8%BE/" class="article-date">
+	  <time datetime="2017-10-09T07:14:24.000Z" itemprop="datePublished">2017-10-09</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JAVA/">-JAVA</a>
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1/">-算法设计</a>
 
       
       
@@ -301,15 +298,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1.基本介绍spring 是一个一站式框架，也就是有了它 web 层，service 层还有 dao 层都能直接搞定而不需使用其他的框架。这三层分别就是：
-
-SpringMVC
-ioc
-JdbcTemplate
-2.ioc基本原理ioc 原理就是使用配置文件解析到需要创建的类的 class 然后使用工厂类的静态方法获取这个类的对象。12345678&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;bean...
+          ​    枚举就是尝试所有的可能性，尤其是当我们在确定一个问题是不是的这一类问题中尤其有用，例如说给一堆数，让我我们判断他们是不是素数，或者素数的数量的时候，这里他们就是判断类问题我们就可以使用枚举。
+​    但是注意这里我们需要考虑的就是枚举的方式，也就是枚举的角度。这里有一个小的例子就是最长回文子串的问题。
+​    首先我们就是用一个最简单的方式就是枚举出所有的字串，然后在这些字串里面找回文串。这样我们首先需要进行枚举就需要 n 平方的复杂度，然后我们还需要 n 的时间去判断这个串...
         </p>
         <p class="article-more-link">
-          <a href="/2017/08/23/Java%20Web/Spring%E7%AC%94%E8%AE%B0-%E4%B8%80/#more">Read More</a>
+          <a href="/2017/10/09/Algorithm/%E6%9E%9A%E4%B8%BE/#more">Read More</a>
         </p>
       
     </div>
@@ -328,7 +322,7 @@ JdbcTemplate
 
 
   
-    <article id="post-Java Web/Struts2笔记-三"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Live/犒劳一下自己"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -336,7 +330,7 @@ JdbcTemplate
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/23/Java%20Web/Struts2%E7%AC%94%E8%AE%B0-%E4%B8%89/">Struts2笔记(三)</a>
+      <a class="article-title" href="/2017/09/27/Live/%E7%8A%92%E5%8A%B3%E4%B8%80%E4%B8%8B%E8%87%AA%E5%B7%B1/">犒劳一下自己</a>
     </h1>
   
 
@@ -344,12 +338,12 @@ JdbcTemplate
     
     <div class="article-meta">
       
-	<a href="/2017/08/23/Java%20Web/Struts2%E7%AC%94%E8%AE%B0-%E4%B8%89/" class="article-date">
-	  <time datetime="2017-08-23T02:39:26.000Z" itemprop="datePublished">2017-08-23</time>
+	<a href="/2017/09/27/Live/%E7%8A%92%E5%8A%B3%E4%B8%80%E4%B8%8B%E8%87%AA%E5%B7%B1/" class="article-date">
+	  <time datetime="2017-09-27T14:31:10.000Z" itemprop="datePublished">2017-09-27</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JAVA/">-JAVA</a>
+    <a class="article-category-link" href="/categories/%E6%9D%82%E6%96%87/">-杂文</a>
 
       
       
@@ -358,12 +352,12 @@ JdbcTemplate
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          拦截器，struts2方庄了很多功能，这些功能都是使用拦截器来实现的。一般的拦截器只是执行默认的拦截器，就是在struts-core这个包里面，然后李 main 有一个struts-default.xml这个文件李爱你就定义了很多默认的拦截器，interceptor-strck这个标签里面就是默认的拦截器。例如里面有ModelDriven。
-1.拦截器执行的时机拦截器执行的时机就是action创建完成之后在action调用的方法之前调用。
-2.底层原理1.aop思想aop就是面向切面编程。...
+          ​    心情不好的时候，可能这时候真的已经很疲惫了。
+​    不要继续沮丧让自己的心情更糟糕，或许这个时候应该犒劳一下自己，让自己的心情放松，晴朗起来或许一切看起来回事那么情切舒服！
+
         </p>
         <p class="article-more-link">
-          <a href="/2017/08/23/Java%20Web/Struts2%E7%AC%94%E8%AE%B0-%E4%B8%89/#more">Read More</a>
+          <a href="/2017/09/27/Live/%E7%8A%92%E5%8A%B3%E4%B8%80%E4%B8%8B%E8%87%AA%E5%B7%B1/#more">Read More</a>
         </p>
       
     </div>
@@ -382,7 +376,7 @@ JdbcTemplate
 
 
   
-    <article id="post-Java Web/Struts2笔记-二"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Leet Code/HouseRobberIII"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -390,7 +384,7 @@ JdbcTemplate
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/22/Java%20Web/Struts2%E7%AC%94%E8%AE%B0-%E4%BA%8C/">Struts2笔记(二)</a>
+      <a class="article-title" href="/2017/09/27/Leet%20Code/HouseRobberIII/">HouseRobberIII</a>
     </h1>
   
 
@@ -398,13 +392,11 @@ JdbcTemplate
     
     <div class="article-meta">
       
-	<a href="/2017/08/22/Java%20Web/Struts2%E7%AC%94%E8%AE%B0-%E4%BA%8C/" class="article-date">
-	  <time datetime="2017-08-22T10:52:11.000Z" itemprop="datePublished">2017-08-22</time>
+	<a href="/2017/09/27/Leet%20Code/HouseRobberIII/" class="article-date">
+	  <time datetime="2017-09-27T14:12:07.000Z" itemprop="datePublished">2017-09-27</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JAVA/">-JAVA</a>
-
       
       
 
@@ -412,11 +404,10 @@ JdbcTemplate
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1.结果页面1.全局结果页面当一些方法的返回值一样的时候并且需要跳转的页面也一样的时候就可以使用全局结果页面。  
-12345678&lt;package name=&quot;struts&quot; extends=&quot;struts-default&quot; namespace=&quot;/&quot;&gt;    &lt;global-results&gt;        &lt;result name=&quot;done&quot;&gt;index.jsp&lt;...
+          The thief has found himself a new place for his thievery again. There is only one entrance to this area, called the “root.” Besides the root, each house has one and only one parent house. After a tour, the smart thief realized that “all houses in ...
         </p>
         <p class="article-more-link">
-          <a href="/2017/08/22/Java%20Web/Struts2%E7%AC%94%E8%AE%B0-%E4%BA%8C/#more">Read More</a>
+          <a href="/2017/09/27/Leet%20Code/HouseRobberIII/#more">Read More</a>
         </p>
       
     </div>
@@ -435,7 +426,7 @@ JdbcTemplate
 
 
   
-    <article id="post-Java Web/Struts2笔记-一"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Leet Code/TargetSum"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -443,7 +434,7 @@ JdbcTemplate
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/22/Java%20Web/Struts2%E7%AC%94%E8%AE%B0-%E4%B8%80/">Struts2笔记(一)</a>
+      <a class="article-title" href="/2017/09/27/Leet%20Code/TargetSum/">Target Sum</a>
     </h1>
   
 
@@ -451,13 +442,11 @@ JdbcTemplate
     
     <div class="article-meta">
       
-	<a href="/2017/08/22/Java%20Web/Struts2%E7%AC%94%E8%AE%B0-%E4%B8%80/" class="article-date">
-	  <time datetime="2017-08-22T10:52:06.000Z" itemprop="datePublished">2017-08-22</time>
+	<a href="/2017/09/27/Leet%20Code/TargetSum/" class="article-date">
+	  <time datetime="2017-09-27T13:32:05.000Z" itemprop="datePublished">2017-09-27</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JAVA/">-JAVA</a>
-
       
       
 
@@ -465,11 +454,12 @@ JdbcTemplate
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1.创建Action创建action需要继承ActionSupport类，然后就会有一些常量以及一些方法。struts2的action默认执行的方法就是execute()方法
-123456789package demo01;import com.opensymphony.xwork2.ActionSupport;public class Hello extends ActionSupport&#123;    public String execute()&#123;        ret...
+          
+You are given a list of non-negative integers, a1, a2, …, an, and a target, S. Now you have 2 symbols + and -. For each integer, you should choose one from + and - as its new symbol.
+Find out how many ways to assign symbols to make sum of integer...
         </p>
         <p class="article-more-link">
-          <a href="/2017/08/22/Java%20Web/Struts2%E7%AC%94%E8%AE%B0-%E4%B8%80/#more">Read More</a>
+          <a href="/2017/09/27/Leet%20Code/TargetSum/#more">Read More</a>
         </p>
       
     </div>
@@ -488,7 +478,7 @@ JdbcTemplate
 
 
   
-    <article id="post-Java Web/Hibernate笔记-三"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Leet Code/QueueReconstructionbyHeight"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -496,7 +486,7 @@ JdbcTemplate
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/21/Java%20Web/Hibernate%E7%AC%94%E8%AE%B0-%E4%B8%89/">Hibernate笔记(三)</a>
+      <a class="article-title" href="/2017/09/27/Leet%20Code/QueueReconstructionbyHeight/">QueueReconstructionbyHeight</a>
     </h1>
   
 
@@ -504,13 +494,11 @@ JdbcTemplate
     
     <div class="article-meta">
       
-	<a href="/2017/08/21/Java%20Web/Hibernate%E7%AC%94%E8%AE%B0-%E4%B8%89/" class="article-date">
-	  <time datetime="2017-08-21T08:01:03.000Z" itemprop="datePublished">2017-08-21</time>
+	<a href="/2017/09/27/Leet%20Code/QueueReconstructionbyHeight/" class="article-date">
+	  <time datetime="2017-09-27T13:29:51.000Z" itemprop="datePublished">2017-09-27</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JAVA/">-JAVA</a>
-
       
       
 
@@ -518,18 +506,11 @@ JdbcTemplate
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1.对象导航查询两个相关的对象
-2.OID查询用id查出对象
-3.hql查询Query对象
-1.hql
-查询所有   from entity
-条件查询   from entity where name=?     setParameter(index,arg)  设置参数值
-模糊查询   from entity where name  like ?；  
-排序      from entity order by name desc
-分页      setFirstResult()开始位置 ...
+          
+Suppose you have a random list of people standing in a queue. Each person is described by a pair of integers (h, k), where h is the height of the person and k is the number of people in front of this person who have a height greater than or equal...
         </p>
         <p class="article-more-link">
-          <a href="/2017/08/21/Java%20Web/Hibernate%E7%AC%94%E8%AE%B0-%E4%B8%89/#more">Read More</a>
+          <a href="/2017/09/27/Leet%20Code/QueueReconstructionbyHeight/#more">Read More</a>
         </p>
       
     </div>
@@ -548,7 +529,7 @@ JdbcTemplate
 
 
   
-    <article id="post-Java Web/Hibernate笔记-二"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Leet Code/Dp经典问题LongestIncreasingSubsequence"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -556,7 +537,7 @@ JdbcTemplate
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/21/Java%20Web/Hibernate%E7%AC%94%E8%AE%B0-%E4%BA%8C/">Hibernate笔记(二)</a>
+      <a class="article-title" href="/2017/09/27/Leet%20Code/Dp%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98LongestIncreasingSubsequence/">Dp经典问题LongestIncreasingSubsequence</a>
     </h1>
   
 
@@ -564,13 +545,11 @@ JdbcTemplate
     
     <div class="article-meta">
       
-	<a href="/2017/08/21/Java%20Web/Hibernate%E7%AC%94%E8%AE%B0-%E4%BA%8C/" class="article-date">
-	  <time datetime="2017-08-21T08:00:58.000Z" itemprop="datePublished">2017-08-21</time>
+	<a href="/2017/09/27/Leet%20Code/Dp%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98LongestIncreasingSubsequence/" class="article-date">
+	  <time datetime="2017-09-27T13:26:51.000Z" itemprop="datePublished">2017-09-27</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JAVA/">-JAVA</a>
-
       
       
 
@@ -578,12 +557,12 @@ JdbcTemplate
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1.一对多的关系映射对于一的一方：
-
-1234567891011121314151617181920212223242526272829303132333435package domain;import java.util.HashSet;import java.util.Set;public class Customer &#123;    private int cid;    private String name;    //表示多个联系人    private Set&lt;Pe...
+          
+Given an unsorted array of integers, find the length of longest increasing subsequence.
+ For example, Given [10, 9, 2, 5, 3, 7, 101, 18], The longest increasing subsequence is [2, 3, 7, 101], therefore the length is 4. Note that there may be more...
         </p>
         <p class="article-more-link">
-          <a href="/2017/08/21/Java%20Web/Hibernate%E7%AC%94%E8%AE%B0-%E4%BA%8C/#more">Read More</a>
+          <a href="/2017/09/27/Leet%20Code/Dp%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98LongestIncreasingSubsequence/#more">Read More</a>
         </p>
       
     </div>
@@ -602,7 +581,7 @@ JdbcTemplate
 
 
   
-    <article id="post-Java Web/Hibernate笔记-一"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Live/烦躁"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -610,7 +589,7 @@ JdbcTemplate
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/21/Java%20Web/Hibernate%E7%AC%94%E8%AE%B0-%E4%B8%80/">Hibernate笔记(一)</a>
+      <a class="article-title" href="/2017/09/25/Live/%E7%83%A6%E8%BA%81/">烦躁</a>
     </h1>
   
 
@@ -618,13 +597,11 @@ JdbcTemplate
     
     <div class="article-meta">
       
-	<a href="/2017/08/21/Java%20Web/Hibernate%E7%AC%94%E8%AE%B0-%E4%B8%80/" class="article-date">
-	  <time datetime="2017-08-21T08:00:52.000Z" itemprop="datePublished">2017-08-21</time>
+	<a href="/2017/09/25/Live/%E7%83%A6%E8%BA%81/" class="article-date">
+	  <time datetime="2017-09-25T07:44:25.000Z" itemprop="datePublished">2017-09-25</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/Java-Web/">-Java Web</a>
-
       
       
 
@@ -632,13 +609,12 @@ JdbcTemplate
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1.导入jar包jar包主要需要导入的有两个文件夹下面的jar包
-
-required  必须要导入的核心包
-jpa 实体规范的包2.写一个实体类实体类必须要有一个唯一的id值，对应于表中的主键。其他的就是字段值，字段值不一定和数据库的字段一样，而是可以不一样，然后在配置文件中进行映射。然后生成对应的get与set方法。3.写映射配置文件一般位置就是放在该实体类的位置，名字后缀最好是hbm.xml,然后导入dtd的约束。这个约束是mapping的约束注意不要导错了。  123456789&l...
+          ​    下午两点过一点，从宿舍走出来，外面还是淅淅沥沥下着小雨。心里不是很舒服，一直不喜欢下雨，阴冷的天气，总是让人觉得不适，什么都不适合，不适合上课不适合看书，就想让人躺在床上。躺在床上就不经意间会回忆到以前，想到种种。
+​    算了不管了，还是去实验室一个人清净一会，这里就我一个人。拉上窗帘根本看不到外面在下雨，就好像一个晴天的夜晚。
+​    打开电脑准备看看 Coursera 上面的算法，可是静不下心来，真的静不下心来！我尽力让自己平静，关掉了窗口，算了！刷题吧，连续点开了三道...
         </p>
         <p class="article-more-link">
-          <a href="/2017/08/21/Java%20Web/Hibernate%E7%AC%94%E8%AE%B0-%E4%B8%80/#more">Read More</a>
+          <a href="/2017/09/25/Live/%E7%83%A6%E8%BA%81/#more">Read More</a>
         </p>
       
     </div>
@@ -657,7 +633,7 @@ jpa 实体规范的包2.写一个实体类实体类必须要有一个唯一的id
 
 
   
-    <article id="post-Java Web/JavaWeb基础五:Listener和Filter"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Leet Code/刷题列表"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -665,7 +641,7 @@ jpa 实体规范的包2.写一个实体类实体类必须要有一个唯一的id
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/21/Java%20Web/JavaWeb%E5%9F%BA%E7%A1%80%E4%BA%94:Listener%E5%92%8CFilter/">Java Web 基础五：Listener和Filter</a>
+      <a class="article-title" href="/2017/09/25/Leet%20Code/%E5%88%B7%E9%A2%98%E5%88%97%E8%A1%A8/">刷题列表</a>
     </h1>
   
 
@@ -673,12 +649,12 @@ jpa 实体规范的包2.写一个实体类实体类必须要有一个唯一的id
     
     <div class="article-meta">
       
-	<a href="/2017/08/21/Java%20Web/JavaWeb%E5%9F%BA%E7%A1%80%E4%BA%94:Listener%E5%92%8CFilter/" class="article-date">
-	  <time datetime="2017-08-21T07:49:13.000Z" itemprop="datePublished">2017-08-21</time>
+	<a href="/2017/09/25/Leet%20Code/%E5%88%B7%E9%A2%98%E5%88%97%E8%A1%A8/" class="article-date">
+	  <time datetime="2017-09-25T07:21:33.000Z" itemprop="datePublished">2017-09-25</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/Java-Web/">-Java Web</a>
+    <a class="article-category-link" href="/categories/LeetCode/">-LeetCode</a>
 
       
       
@@ -687,13 +663,15 @@ jpa 实体规范的包2.写一个实体类实体类必须要有一个唯一的id
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          Filter接口和Servlet的接口是非常类似的，它里面只有三个方法。
-1. 监听器三大域对象的监听器，每一个域对象有两种监听器，分别是生命周期监听，和属性监听。也就是对于对象的出生死亡监听以及对域中放入键值对时监听。
-​ServletContext、HttpSession、ServletRequest  这三个域对象就占用了六个监听器。还有一个域对象就是 PageContext 这个只是我们没有对应的监听器。
-我们要使用这些东西的话，我们首先需要创建一个类实现相应的接口就是上面的哪些监...
+          动态规划
+ Longest Increasing Subsequence 
+ Best Time to Buy and Sell Stock with Cooldown
+ ​
+
+
         </p>
         <p class="article-more-link">
-          <a href="/2017/08/21/Java%20Web/JavaWeb%E5%9F%BA%E7%A1%80%E4%BA%94:Listener%E5%92%8CFilter/#more">Read More</a>
+          <a href="/2017/09/25/Leet%20Code/%E5%88%B7%E9%A2%98%E5%88%97%E8%A1%A8/#more">Read More</a>
         </p>
       
     </div>
@@ -716,7 +694,7 @@ jpa 实体规范的包2.写一个实体类实体类必须要有一个唯一的id
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/11/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/13/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/11/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/13/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -770,8 +748,6 @@ jpa 实体规范的包2.写一个实体类实体类必须要有一个唯一的id
     <a href="/categories" class="mobile-nav-link">Categories</a>
   
     <a href="/tags" class="mobile-nav-link">Tags</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
   
 </nav> -->
     

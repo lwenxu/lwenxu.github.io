@@ -18,19 +18,17 @@
 <meta property="article:tag" content="Java PHP Code">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="昨夜凛雨" type="application/atom+xml">
-  
 
   
 
-  <link rel="icon" href="/css/images/mylogo.jpg">
-  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
   
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
   <style type="text/css">
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
@@ -94,7 +92,7 @@
               <a class="brand" style="
                  margin-top: 0px;"  
                  >
-                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
               </a>
             
             
@@ -108,8 +106,6 @@
                   <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
                 
                   <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/about">About</a> </li>
                 
                   <li><div id="search-form-wrap">
 
@@ -166,7 +162,7 @@
         
           <section id="main" style="float:none;">
   
-    <article id="post-Algorithm/动态规划"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Java SourceCode/Semaphore 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -174,7 +170,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/10/10/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+      <a class="article-title" href="/2018/03/31/Java%20SourceCode/Semaphore%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">Semaphore 源码分析</a>
     </h1>
   
 
@@ -182,12 +178,12 @@
     
     <div class="article-meta">
       
-	<a href="/2017/10/10/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="article-date">
-	  <time datetime="2017-10-10T12:00:49.000Z" itemprop="datePublished">2017-10-10</time>
+	<a href="/2018/03/31/Java%20SourceCode/Semaphore%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
+	  <time datetime="2018-03-31T13:35:02.000Z" itemprop="datePublished">2018-03-31</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1/">-算法设计</a>
+    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
 
       
       
@@ -196,13 +192,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          ​    动态规划一般来说和分治有点类似都是让他们去处理相同的子问题，但是在动态规划里面你会遇到更多的相同子问题。然后我们就会导致很多的重复计算，所以一般我们可以使用递归来完成一个动态规划要完成的任务，但是这样一般会重复计算很多东西，所以动态规划一般就增加了一些矩阵来存放上一次计算的结果。
-
-
-​    例如斐波那契数列，这个如果我们直接使用地柜计算的话，我们会很多重复计算。然后当我们要使用一个阵列计算的时候我们在每一次计算之前我们都需要进行一次判断看看我们目前的结果是不是已经被计算了，如...
+          Semaphore 源码分析
+1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
+1. Semephore 简单介绍&emsp;&emsp;  一般来说，在 Java 中比较常用的同步工具就是 Lock 和 Synchr...
         </p>
         <p class="article-more-link">
-          <a href="/2017/10/10/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/#more">Read More</a>
+          <a href="/2018/03/31/Java%20SourceCode/Semaphore%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
         </p>
       
     </div>
@@ -221,7 +216,7 @@
 
 
   
-    <article id="post-Algorithm/分治算法"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Java SourceCode/ReentrantLock 与 AQS 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -229,7 +224,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/10/10/Algorithm/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/">分治算法</a>
+      <a class="article-title" href="/2018/03/29/Java%20SourceCode/ReentrantLock%20%E4%B8%8E%20AQS%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">ReentrantLock 与 AQS 源码分析</a>
     </h1>
   
 
@@ -237,12 +232,12 @@
     
     <div class="article-meta">
       
-	<a href="/2017/10/10/Algorithm/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/" class="article-date">
-	  <time datetime="2017-10-10T11:45:57.000Z" itemprop="datePublished">2017-10-10</time>
+	<a href="/2018/03/29/Java%20SourceCode/ReentrantLock%20%E4%B8%8E%20AQS%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
+	  <time datetime="2018-03-29T14:55:02.000Z" itemprop="datePublished">2018-03-29</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1/">-算法设计</a>
+    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
 
       
       
@@ -251,11 +246,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          ​    分治算法分为 “分” 和 “治” 两个部分，所谓的分就是寻找分割点，然后对问题划分成相同的子问题，但是问题的规模变小了，这些步骤其实就是使用递归来完成的。之后就是治的问题，也就是递归里面具体的内容。最后一步就是把所分的结果要合并成为一个完整的结果。
-​    一个例子就是求出逆序数对，这个就是分治法来计算，首席我们分就是中间划分，分别求左右的两边的逆序数对，然后还需要加上横跨中间的逆序数对即可完成。重点就是横跨中间的逆序数对，中间的如果直接暴力枚举就会出现 n 平方的，所以我们首...
+          ReentrantLock 与 AQS 源码分析
+1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
+1. 基本结构&emsp;&emsp;  重入锁 ReetrantLock，JDK 1.5新增的类，作用与synchr...
         </p>
         <p class="article-more-link">
-          <a href="/2017/10/10/Algorithm/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/#more">Read More</a>
+          <a href="/2018/03/29/Java%20SourceCode/ReentrantLock%20%E4%B8%8E%20AQS%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
         </p>
       
     </div>
@@ -274,7 +270,7 @@
 
 
   
-    <article id="post-Algorithm/贪心"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Java SourceCode/synchronized 原理分析"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -282,7 +278,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/10/09/Algorithm/%E8%B4%AA%E5%BF%83/">贪心</a>
+      <a class="article-title" href="/2018/03/29/Java%20SourceCode/synchronized%20%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">synchronized 原理分析</a>
     </h1>
   
 
@@ -290,12 +286,12 @@
     
     <div class="article-meta">
       
-	<a href="/2017/10/09/Algorithm/%E8%B4%AA%E5%BF%83/" class="article-date">
-	  <time datetime="2017-10-09T14:22:16.000Z" itemprop="datePublished">2017-10-09</time>
+	<a href="/2018/03/29/Java%20SourceCode/synchronized%20%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/" class="article-date">
+	  <time datetime="2018-03-29T10:15:02.000Z" itemprop="datePublished">2018-03-29</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1/">-算法设计</a>
+    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
 
       
       
@@ -304,11 +300,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          ​    贪心算法，这个算法就是大胆的猜测，然后小心求证！求证一般就是使用反证法进行证明。假如我们说这个顺序是对的，也就是始终选取大的，或者小的，我们就要证明一下我们的猜测正确性。这里的反正方式就是交换顺序发现不符合预期结果原来的结论就是对的。    
-
+          synchronized 原理分析
+1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
+1. synchronized 介绍&emsp;&emsp;  在并发程序中，这个关键字可能是出现频率最高的一个字段，他可以避免多线...
         </p>
         <p class="article-more-link">
-          <a href="/2017/10/09/Algorithm/%E8%B4%AA%E5%BF%83/#more">Read More</a>
+          <a href="/2018/03/29/Java%20SourceCode/synchronized%20%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/#more">Read More</a>
         </p>
       
     </div>
@@ -327,7 +324,7 @@
 
 
   
-    <article id="post-Algorithm/枚举"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Java SourceCode/ConcurrentHashMap 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -335,7 +332,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/10/09/Algorithm/%E6%9E%9A%E4%B8%BE/">枚举</a>
+      <a class="article-title" href="/2018/03/27/Java%20SourceCode/ConcurrentHashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">ConcurrentHashMap 源码分析</a>
     </h1>
   
 
@@ -343,12 +340,12 @@
     
     <div class="article-meta">
       
-	<a href="/2017/10/09/Algorithm/%E6%9E%9A%E4%B8%BE/" class="article-date">
-	  <time datetime="2017-10-09T07:14:24.000Z" itemprop="datePublished">2017-10-09</time>
+	<a href="/2018/03/27/Java%20SourceCode/ConcurrentHashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
+	  <time datetime="2018-03-27T08:15:02.000Z" itemprop="datePublished">2018-03-27</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1/">-算法设计</a>
+    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
 
       
       
@@ -357,12 +354,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          ​    枚举就是尝试所有的可能性，尤其是当我们在确定一个问题是不是的这一类问题中尤其有用，例如说给一堆数，让我我们判断他们是不是素数，或者素数的数量的时候，这里他们就是判断类问题我们就可以使用枚举。
-​    但是注意这里我们需要考虑的就是枚举的方式，也就是枚举的角度。这里有一个小的例子就是最长回文子串的问题。
-​    首先我们就是用一个最简单的方式就是枚举出所有的字串，然后在这些字串里面找回文串。这样我们首先需要进行枚举就需要 n 平方的复杂度，然后我们还需要 n 的时间去判断这个串...
+          ConcurrentHashMap 源码分析
+1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
+1. 前言&emsp;&emsp;  终于到这个类了，其实在前面很过很多次这个类，因为这个类代码量比较大，并且涉及到并发的...
         </p>
         <p class="article-more-link">
-          <a href="/2017/10/09/Algorithm/%E6%9E%9A%E4%B8%BE/#more">Read More</a>
+          <a href="/2018/03/27/Java%20SourceCode/ConcurrentHashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
         </p>
       
     </div>
@@ -381,7 +378,7 @@
 
 
   
-    <article id="post-Live/犒劳一下自己"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Java SourceCode/HashSet 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -389,7 +386,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/09/27/Live/%E7%8A%92%E5%8A%B3%E4%B8%80%E4%B8%8B%E8%87%AA%E5%B7%B1/">犒劳一下自己</a>
+      <a class="article-title" href="/2018/03/27/Java%20SourceCode/HashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">HashSet 源码分析</a>
     </h1>
   
 
@@ -397,12 +394,12 @@
     
     <div class="article-meta">
       
-	<a href="/2017/09/27/Live/%E7%8A%92%E5%8A%B3%E4%B8%80%E4%B8%8B%E8%87%AA%E5%B7%B1/" class="article-date">
-	  <time datetime="2017-09-27T14:31:10.000Z" itemprop="datePublished">2017-09-27</time>
+	<a href="/2018/03/27/Java%20SourceCode/HashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
+	  <time datetime="2018-03-27T06:15:02.000Z" itemprop="datePublished">2018-03-27</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/%E6%9D%82%E6%96%87/">-杂文</a>
+    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
 
       
       
@@ -411,12 +408,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          ​    心情不好的时候，可能这时候真的已经很疲惫了。
-​    不要继续沮丧让自己的心情更糟糕，或许这个时候应该犒劳一下自己，让自己的心情放松，晴朗起来或许一切看起来回事那么情切舒服！
-
+          HashSet 源码分析
+1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
+1. 基本结构1. 继承这个类简直适合 HashMap 如出一辙，他们继承的类都极其相似。继承的是 AbstractSet 。
+2. 实现实现...
         </p>
         <p class="article-more-link">
-          <a href="/2017/09/27/Live/%E7%8A%92%E5%8A%B3%E4%B8%80%E4%B8%8B%E8%87%AA%E5%B7%B1/#more">Read More</a>
+          <a href="/2018/03/27/Java%20SourceCode/HashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
         </p>
       
     </div>
@@ -435,7 +433,7 @@
 
 
   
-    <article id="post-Leet Code/HouseRobberIII"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Java SourceCode/LinkedHashSet 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -443,7 +441,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/09/27/Leet%20Code/HouseRobberIII/">HouseRobberIII</a>
+      <a class="article-title" href="/2018/03/27/Java%20SourceCode/LinkedHashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">LinkedHashSet 源码分析</a>
     </h1>
   
 
@@ -451,11 +449,13 @@
     
     <div class="article-meta">
       
-	<a href="/2017/09/27/Leet%20Code/HouseRobberIII/" class="article-date">
-	  <time datetime="2017-09-27T14:12:07.000Z" itemprop="datePublished">2017-09-27</time>
+	<a href="/2018/03/27/Java%20SourceCode/LinkedHashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
+	  <time datetime="2018-03-27T05:15:02.000Z" itemprop="datePublished">2018-03-27</time>
 	</a>
 
       
+    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+
       
       
 
@@ -463,10 +463,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          The thief has found himself a new place for his thievery again. There is only one entrance to this area, called the “root.” Besides the root, each house has one and only one parent house. After a tour, the smart thief realized that “all houses in ...
+          LinkedHashSet 源码分析
+1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
+1. 基本结构&emsp;&emsp;  如果你看了 HashSet 现在基本一分钟就能弄明白 LinkedHashSet 的底层...
         </p>
         <p class="article-more-link">
-          <a href="/2017/09/27/Leet%20Code/HouseRobberIII/#more">Read More</a>
+          <a href="/2018/03/27/Java%20SourceCode/LinkedHashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
         </p>
       
     </div>
@@ -485,7 +487,7 @@
 
 
   
-    <article id="post-Leet Code/TargetSum"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Java SourceCode/LinkedHashMap 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -493,7 +495,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/09/27/Leet%20Code/TargetSum/">Target Sum</a>
+      <a class="article-title" href="/2018/03/26/Java%20SourceCode/LinkedHashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">LinkedHashMap 源码分析</a>
     </h1>
   
 
@@ -501,11 +503,13 @@
     
     <div class="article-meta">
       
-	<a href="/2017/09/27/Leet%20Code/TargetSum/" class="article-date">
-	  <time datetime="2017-09-27T13:32:05.000Z" itemprop="datePublished">2017-09-27</time>
+	<a href="/2018/03/26/Java%20SourceCode/LinkedHashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
+	  <time datetime="2018-03-26T08:15:02.000Z" itemprop="datePublished">2018-03-26</time>
 	</a>
 
       
+    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+
       
       
 
@@ -513,12 +517,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          
-You are given a list of non-negative integers, a1, a2, …, an, and a target, S. Now you have 2 symbols + and -. For each integer, you should choose one from + and - as its new symbol.
-Find out how many ways to assign symbols to make sum of integer...
+          LinkedHashMap 源码分析
+1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
+1. 基本结构1. 实现实现的接口是 Map 
+2. 继承&emsp;&emsp;  继承的是 HashMap 这个就比较熟悉了，...
         </p>
         <p class="article-more-link">
-          <a href="/2017/09/27/Leet%20Code/TargetSum/#more">Read More</a>
+          <a href="/2018/03/26/Java%20SourceCode/LinkedHashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
         </p>
       
     </div>
@@ -537,7 +542,7 @@ Find out how many ways to assign symbols to make sum of integer...
 
 
   
-    <article id="post-Leet Code/QueueReconstructionbyHeight"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Java SourceCode/HashMap 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -545,7 +550,7 @@ Find out how many ways to assign symbols to make sum of integer...
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/09/27/Leet%20Code/QueueReconstructionbyHeight/">QueueReconstructionbyHeight</a>
+      <a class="article-title" href="/2018/03/26/Java%20SourceCode/HashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">HashMap 源码分析</a>
     </h1>
   
 
@@ -553,11 +558,13 @@ Find out how many ways to assign symbols to make sum of integer...
     
     <div class="article-meta">
       
-	<a href="/2017/09/27/Leet%20Code/QueueReconstructionbyHeight/" class="article-date">
-	  <time datetime="2017-09-27T13:29:51.000Z" itemprop="datePublished">2017-09-27</time>
+	<a href="/2018/03/26/Java%20SourceCode/HashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
+	  <time datetime="2018-03-26T08:15:02.000Z" itemprop="datePublished">2018-03-26</time>
 	</a>
 
       
+    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+
       
       
 
@@ -565,11 +572,15 @@ Find out how many ways to assign symbols to make sum of integer...
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          
-Suppose you have a random list of people standing in a queue. Each person is described by a pair of integers (h, k), where h is the height of the person and k is the number of people in front of this person who have a height greater than or equal...
+          HashMap 源码分析
+1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
+1.结构1. 继承&emsp;&emsp;该类继承自 AbstractMap 这个类似于 ArrayList
+2. 实现具体如下：
+
+首先这个...
         </p>
         <p class="article-more-link">
-          <a href="/2017/09/27/Leet%20Code/QueueReconstructionbyHeight/#more">Read More</a>
+          <a href="/2018/03/26/Java%20SourceCode/HashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
         </p>
       
     </div>
@@ -588,7 +599,7 @@ Suppose you have a random list of people standing in a queue. Each person is des
 
 
   
-    <article id="post-Leet Code/Dp经典问题LongestIncreasingSubsequence"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Java SourceCode/LinkedList 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -596,7 +607,7 @@ Suppose you have a random list of people standing in a queue. Each person is des
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/09/27/Leet%20Code/Dp%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98LongestIncreasingSubsequence/">Dp经典问题LongestIncreasingSubsequence</a>
+      <a class="article-title" href="/2018/03/26/Java%20SourceCode/LinkedList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">LinkedList 源码分析</a>
     </h1>
   
 
@@ -604,11 +615,13 @@ Suppose you have a random list of people standing in a queue. Each person is des
     
     <div class="article-meta">
       
-	<a href="/2017/09/27/Leet%20Code/Dp%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98LongestIncreasingSubsequence/" class="article-date">
-	  <time datetime="2017-09-27T13:26:51.000Z" itemprop="datePublished">2017-09-27</time>
+	<a href="/2018/03/26/Java%20SourceCode/LinkedList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
+	  <time datetime="2018-03-26T07:15:02.000Z" itemprop="datePublished">2018-03-26</time>
 	</a>
 
       
+    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+
       
       
 
@@ -616,12 +629,12 @@ Suppose you have a random list of people standing in a queue. Each person is des
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          
-Given an unsorted array of integers, find the length of longest increasing subsequence.
- For example, Given [10, 9, 2, 5, 3, 7, 101, 18], The longest increasing subsequence is [2, 3, 7, 101], therefore the length is 4. Note that there may be more...
+          LinkedList 源码分析
+1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
+1.结构1. 继承&emsp;&emsp;该类继承自 AbstractSequentialList 这个是由于他是一个顺序的列表，所以说...
         </p>
         <p class="article-more-link">
-          <a href="/2017/09/27/Leet%20Code/Dp%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98LongestIncreasingSubsequence/#more">Read More</a>
+          <a href="/2018/03/26/Java%20SourceCode/LinkedList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
         </p>
       
     </div>
@@ -640,7 +653,7 @@ Given an unsorted array of integers, find the length of longest increasing subse
 
 
   
-    <article id="post-Live/烦躁"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Java SourceCode/ArrayList 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -648,7 +661,7 @@ Given an unsorted array of integers, find the length of longest increasing subse
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/09/25/Live/%E7%83%A6%E8%BA%81/">烦躁</a>
+      <a class="article-title" href="/2018/03/25/Java%20SourceCode/ArrayList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">ArrayList 源码分析</a>
     </h1>
   
 
@@ -656,11 +669,13 @@ Given an unsorted array of integers, find the length of longest increasing subse
     
     <div class="article-meta">
       
-	<a href="/2017/09/25/Live/%E7%83%A6%E8%BA%81/" class="article-date">
-	  <time datetime="2017-09-25T07:44:25.000Z" itemprop="datePublished">2017-09-25</time>
+	<a href="/2018/03/25/Java%20SourceCode/ArrayList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
+	  <time datetime="2018-03-25T13:15:02.000Z" itemprop="datePublished">2018-03-25</time>
 	</a>
 
       
+    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+
       
       
 
@@ -668,12 +683,13 @@ Given an unsorted array of integers, find the length of longest increasing subse
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          ​    下午两点过一点，从宿舍走出来，外面还是淅淅沥沥下着小雨。心里不是很舒服，一直不喜欢下雨，阴冷的天气，总是让人觉得不适，什么都不适合，不适合上课不适合看书，就想让人躺在床上。躺在床上就不经意间会回忆到以前，想到种种。
-​    算了不管了，还是去实验室一个人清净一会，这里就我一个人。拉上窗帘根本看不到外面在下雨，就好像一个晴天的夜晚。
-​    打开电脑准备看看 Coursera 上面的算法，可是静不下心来，真的静不下心来！我尽力让自己平静，关掉了窗口，算了！刷题吧，连续点开了三道...
+          ArrayList 源码分析
+1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
+1. 结构&emsp;&emsp;首先我们需要对 ArrayList 有一个大致的了解就从结构来看看吧.
+1. 继承&emsp;&emsp...
         </p>
         <p class="article-more-link">
-          <a href="/2017/09/25/Live/%E7%83%A6%E8%BA%81/#more">Read More</a>
+          <a href="/2018/03/25/Java%20SourceCode/ArrayList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
         </p>
       
     </div>
@@ -696,7 +712,7 @@ Given an unsorted array of integers, find the length of longest increasing subse
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/8/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/10/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/8/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/10/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -750,8 +766,6 @@ Given an unsorted array of integers, find the length of longest increasing subse
     <a href="/categories" class="mobile-nav-link">Categories</a>
   
     <a href="/tags" class="mobile-nav-link">Tags</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
   
 </nav> -->
     

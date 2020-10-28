@@ -18,19 +18,17 @@
 <meta property="article:tag" content="Java PHP Code">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="昨夜凛雨" type="application/atom+xml">
-  
 
   
 
-  <link rel="icon" href="/css/images/mylogo.jpg">
-  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
   
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
   <style type="text/css">
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
@@ -94,7 +92,7 @@
               <a class="brand" style="
                  margin-top: 0px;"  
                  >
-                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
               </a>
             
             
@@ -108,8 +106,6 @@
                   <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
                 
                   <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/about">About</a> </li>
                 
                   <li><div id="search-form-wrap">
 
@@ -166,7 +162,7 @@
         
           <section id="main" style="float:none;">
   
-    <article id="post-SpringBoot/SpringBoot 笔记 ( 九 )：分布式"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-FrontEnd/webpack 入门"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -174,7 +170,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/23/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B9%9D%20)%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F/">SpringBoot 笔记(九):分布式</a>
+      <a class="article-title" href="/2019/01/10/FrontEnd/webpack%20%E5%85%A5%E9%97%A8/">Webpack 入门</a>
     </h1>
   
 
@@ -182,12 +178,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/05/23/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B9%9D%20)%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F/" class="article-date">
-	  <time datetime="2018-05-23T14:01:28.000Z" itemprop="datePublished">2018-05-23</time>
+	<a href="/2019/01/10/FrontEnd/webpack%20%E5%85%A5%E9%97%A8/" class="article-date">
+	  <time datetime="2019-01-10T07:20:28.000Z" itemprop="datePublished">2019-01-10</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+    <a class="article-category-link" href="/categories/FrontEnd/">FrontEnd</a>
 
       
       
@@ -196,11 +192,18 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          SpringBoot 笔记(九):分布式我们可以使用 SpringBoot构建分布式应用，也就是我们在开发的时候可以进行多个模块的拆分，每一个功能做一个模块，然后我们使用一些分布式的框架，进行远程调用，所谓的远程调用就是RPC调用，而不是以前的WebService这个形式的.。其实这种分布式的RPC框架有很多，除了我们创常见的Doubbo还有就是我们Spring 项目自带的 SpringCloud 也是类似的东西。
-器基本理念就是：我们一个模块写好我们的业务逻辑然后，把我们写好的逻辑当作服...
+          从 webpack v4.0.0 开始，可以不用引入一个配置文件。然而，webpack 仍然还是高度可配置的。在开始前你需要先理解四个核心概念：
+
+入口(entry)
+输出(output)
+loader
+插件(plugins)
+
+1.入口(entry)*入口起点(entry point)**指示 webpack 应该使用哪个模块，来作为构建其内部依赖图*的开始。进入入口起点后，webpack 会找出有哪些模块和库是入口起点（直接和间接）依赖的。
+123module.exports = &#...
         </p>
         <p class="article-more-link">
-          <a href="/2018/05/23/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B9%9D%20)%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F/#more">Read More</a>
+          <a href="/2019/01/10/FrontEnd/webpack%20%E5%85%A5%E9%97%A8/#more">Read More</a>
         </p>
       
     </div>
@@ -219,7 +222,7 @@
 
 
   
-    <article id="post-SpringBoot/SpringBoot 笔记 ( 八 )：任务"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-FrontEnd/JavaScript 模块化"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -227,7 +230,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/22/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AB%20)%EF%BC%9A%E4%BB%BB%E5%8A%A1/">SpringBoot 笔记(八):任务</a>
+      <a class="article-title" href="/2019/01/10/FrontEnd/JavaScript%20%E6%A8%A1%E5%9D%97%E5%8C%96/">JavaScript 模块化</a>
     </h1>
   
 
@@ -235,12 +238,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/05/22/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AB%20)%EF%BC%9A%E4%BB%BB%E5%8A%A1/" class="article-date">
-	  <time datetime="2018-05-22T09:01:28.000Z" itemprop="datePublished">2018-05-22</time>
+	<a href="/2019/01/10/FrontEnd/JavaScript%20%E6%A8%A1%E5%9D%97%E5%8C%96/" class="article-date">
+	  <time datetime="2019-01-10T04:20:28.000Z" itemprop="datePublished">2019-01-10</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+    <a class="article-category-link" href="/categories/FrontEnd/">FrontEnd</a>
 
       
       
@@ -249,12 +252,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          SpringBoot 笔记 (八):任务1.异步任务1.开启异步任务注解@EnableAsync
-2.对Service层方法开启异步@Async
-123456789@Servicepublic class TaskService &#123;    @Async    public void task() throws InterruptedException &#123;        System.out.println(&quot;start&quot;);        Threa...
+          1. 模块化过程1. 全局函数123456789101112/** * 全局函数模式: 将不同的功能封装成不同的全局函数 * 问题: Global被污染了, 很容易引起命名冲突 *///数据let data = &#x27;atguigu.com&#x27;function foo() &#123;    console.log(&#x27;foo()&#x27;)&#125;function bar() &#123;    console.log(&#x27;bar()&#x27;)&#...
         </p>
         <p class="article-more-link">
-          <a href="/2018/05/22/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AB%20)%EF%BC%9A%E4%BB%BB%E5%8A%A1/#more">Read More</a>
+          <a href="/2019/01/10/FrontEnd/JavaScript%20%E6%A8%A1%E5%9D%97%E5%8C%96/#more">Read More</a>
         </p>
       
     </div>
@@ -273,7 +274,7 @@
 
 
   
-    <article id="post-SpringBoot/SpringBoot 笔记 ( 七 )：搜索"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-FrontEnd/ECMAScript 6"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -281,7 +282,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/21/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%83%20)%EF%BC%9A%E6%90%9C%E7%B4%A2/">SpringBoot 笔记(七):搜索</a>
+      <a class="article-title" href="/2019/01/10/FrontEnd/ECMAScript%206/">ECMAScript 从入门到精通</a>
     </h1>
   
 
@@ -289,12 +290,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/05/21/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%83%20)%EF%BC%9A%E6%90%9C%E7%B4%A2/" class="article-date">
-	  <time datetime="2018-05-21T06:01:28.000Z" itemprop="datePublished">2018-05-21</time>
+	<a href="/2019/01/10/FrontEnd/ECMAScript%206/" class="article-date">
+	  <time datetime="2019-01-10T00:01:28.000Z" itemprop="datePublished">2019-01-10</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+    <a class="article-category-link" href="/categories/FrontEnd/">FrontEnd</a>
 
       
       
@@ -303,11 +304,22 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          SpringBoot 笔记 (七):搜索这里我们的搜索就是用 ElasticSearch 这个工具，这个其实是在 Lauce 的基础上构建的一个搜索引擎。
-1. ES入门1.docker安装12docker pull registry.docker-cn.com/library/elasticsearchdocker run -e ES_JAVA_OPTS=&quot;-Xms256m -Xmx256m&quot; -d -p 9200:9200 -p 9300:9300 --name E...
+          1. es51. 严格模式1.理解:
+除了正常运行模式(混杂模式)，ES5添加了第二种运行模式：”严格模式”（strict mode）。
+
+顾名思义，这种模式使得Javascript在更严格的语法条件下运行
+2.目的/作用
+消除Javascript语法的一些不合理、不严谨之处，减少一些怪异行为
+消除代码运行的一些不安全之处，为代码的安全运行保驾护航
+为未来新版本的Javascript做好铺垫3.使用
+
+
+在全局或函数的第一条语句定义为: ‘use strict’;
+
+如果浏览器不支持, 只...
         </p>
         <p class="article-more-link">
-          <a href="/2018/05/21/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%83%20)%EF%BC%9A%E6%90%9C%E7%B4%A2/#more">Read More</a>
+          <a href="/2019/01/10/FrontEnd/ECMAScript%206/#more">Read More</a>
         </p>
       
     </div>
@@ -326,7 +338,7 @@
 
 
   
-    <article id="post-SpringBoot/SpringBoot 笔记 ( 六 )：消息"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-FrontEnd/Javascript 详解"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -334,7 +346,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AD%20)%EF%BC%9A%E6%B6%88%E6%81%AF/">SpringBoot 笔记 ( 六)：消息</a>
+      <a class="article-title" href="/2019/01/09/FrontEnd/Javascript%20%E8%AF%A6%E8%A7%A3/">JavaScript 从入门到精通</a>
     </h1>
   
 
@@ -342,12 +354,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AD%20)%EF%BC%9A%E6%B6%88%E6%81%AF/" class="article-date">
-	  <time datetime="2018-05-20T07:01:28.000Z" itemprop="datePublished">2018-05-20</time>
+	<a href="/2019/01/09/FrontEnd/Javascript%20%E8%AF%A6%E8%A7%A3/" class="article-date">
+	  <time datetime="2019-01-09T03:01:28.000Z" itemprop="datePublished">2019-01-09</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+    <a class="article-category-link" href="/categories/FrontEnd/">FrontEnd</a>
 
       
       
@@ -356,22 +368,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          SpringBoot 笔记 (六): 消息1.基本概念1.应用场景
-
-
-
-2.重要概念
-消息代理（broker）：消息队列服务器
-目的地：消息消费者
-
-1.消息队列的两种目的地：
-队列：点对点的通讯，这种就是消息生产者把消息发送到消息队列中，然后消息接受者去获取消息，获取后这个消息就被移除，消息的接受者可以有多个也就是可以有多个消费者，但是注意一个消息只能被其中的一个消费者消费。
-主题：发布订阅通讯，广播形式。所有的接受者都可以收到消息。
-
-2.JMS这是一个基于JVM的消息代理的规范，但...
+          1. this​    解析器在调用函数每次都会向函数内部传递进一个隐含的参数,这个隐含的参数就是this，this指向的是一个对象， 这个对象我们称为函数执行的 上下文对象，根据函数的调用方式的不同，this会指向不同的对象，以方法的形式调用时，this就是调用方法的那个对象。当我们直接调用一个全局的函数的时候其实就是 window 对像上面的方法。
+1234567891011121314151617181920212223function fun()&#123;   console.l...
         </p>
         <p class="article-more-link">
-          <a href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AD%20)%EF%BC%9A%E6%B6%88%E6%81%AF/#more">Read More</a>
+          <a href="/2019/01/09/FrontEnd/Javascript%20%E8%AF%A6%E8%A7%A3/#more">Read More</a>
         </p>
       
     </div>
@@ -390,7 +391,7 @@
 
 
   
-    <article id="post-SpringBoot/SpringBoot 笔记 ( 五)：缓存"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-FrontEnd/CSS3 详解"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -398,7 +399,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%94)%EF%BC%9A%E7%BC%93%E5%AD%98/">SpringBoot 笔记 ( 五 )：缓存</a>
+      <a class="article-title" href="/2019/01/08/FrontEnd/CSS3%20%E8%AF%A6%E8%A7%A3/">CSS3 从入门到精通</a>
     </h1>
   
 
@@ -406,12 +407,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%94)%EF%BC%9A%E7%BC%93%E5%AD%98/" class="article-date">
-	  <time datetime="2018-05-20T02:01:28.000Z" itemprop="datePublished">2018-05-20</time>
+	<a href="/2019/01/08/FrontEnd/CSS3%20%E8%AF%A6%E8%A7%A3/" class="article-date">
+	  <time datetime="2019-01-08T13:01:28.000Z" itemprop="datePublished">2019-01-08</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+    <a class="article-category-link" href="/categories/FrontEnd/">FrontEnd</a>
 
       
       
@@ -420,22 +421,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          SpringBoot 笔记 (五): 缓存1.JSR107介绍1.核心概念JSR107这个规范有五个核心概念分别是：
-
-CacheProvider  它用来管理缓存的Manager也就是用来创建，删除，管理，配置CacheManager 的
-CacheManager 是用来管理各个缓存，创建，删除，管理，配置Cache的
-Cache 是各个具体的缓存组件
-Entry 是缓存中具体的一个缓存项
-Expire 缓存的过期时间
-
-
-
-2.导入包
-javax.cache.cache-api
-jav...
+          1. 选择器1. 一些注意的点1. love &amp; hate (lvht)​    这是什么意思呢？其实是我们在写 a 表的伪类的时候会有一些优先级的问题，如果说我们没有按照这个优先级写css 的话很可能会导致我们样式不生效或者说被覆盖的问题。具体来说就是 link , visited，hover，target 。
+2. nth-child(n)​    注意这个的 n 是从 1 开始的而不是 0 开始的，另外如果我们写了 #wrap p:nth-child(1) 的含义是指 id ...
         </p>
         <p class="article-more-link">
-          <a href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%94)%EF%BC%9A%E7%BC%93%E5%AD%98/#more">Read More</a>
+          <a href="/2019/01/08/FrontEnd/CSS3%20%E8%AF%A6%E8%A7%A3/#more">Read More</a>
         </p>
       
     </div>
@@ -454,7 +444,7 @@ jav...
 
 
   
-    <article id="post-Spark/Kafka入门"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-FrontEnd/CSS2 详解"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -462,7 +452,7 @@ jav...
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/18/Spark/Kafka%E5%85%A5%E9%97%A8/">Kafka 入门</a>
+      <a class="article-title" href="/2019/01/08/FrontEnd/CSS2%20%E8%AF%A6%E8%A7%A3/">CSS2 从入门到精通</a>
     </h1>
   
 
@@ -470,12 +460,12 @@ jav...
     
     <div class="article-meta">
       
-	<a href="/2018/05/18/Spark/Kafka%E5%85%A5%E9%97%A8/" class="article-date">
-	  <time datetime="2018-05-18T11:01:28.000Z" itemprop="datePublished">2018-05-18</time>
+	<a href="/2019/01/08/FrontEnd/CSS2%20%E8%AF%A6%E8%A7%A3/" class="article-date">
+	  <time datetime="2019-01-08T03:01:28.000Z" itemprop="datePublished">2019-01-08</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/Spark/">Spark</a>
+    <a class="article-category-link" href="/categories/FrontEnd/">FrontEnd</a>
 
       
       
@@ -484,27 +474,26 @@ jav...
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1. Kafka架构
-生产者（producer）：生产资源的
-消费者（consumer）：消费资源
-broker（缓冲）：中间缓冲器
-topic（标记）：谁来消费
+          1. 常用的选择器1. 元素选择器
+作用：通过元素选择器可以选择指定的元素
+语法：tag{}
 
-2. 配置Kafka1. 配置ZK
-解压
-配置ZK_HOME
-配置PATH
-修改 zk.cfg 修改存储位置
-zkServer.sh 启动
+123456p&#123;  color: red;&#125;h1&#123;  color: red;&#125;
 
-2. 配置Kafka
-配置HOME以及PATH
-修改 server.porperties 注意以下几个条目
+2. id 选择器
+作用：通过元素的id属性值选中唯一的一个元素
+用法: #id{}
 
-123456$KAFKA_HOME/config/server.proper...
+123#p1&#123;	font-size: 20px;&#125;
+
+3.类选择器
+通过元素的class属性值选中一组元素
+语法：.class{}
+
+1234567.p2&#123; ...
         </p>
         <p class="article-more-link">
-          <a href="/2018/05/18/Spark/Kafka%E5%85%A5%E9%97%A8/#more">Read More</a>
+          <a href="/2019/01/08/FrontEnd/CSS2%20%E8%AF%A6%E8%A7%A3/#more">Read More</a>
         </p>
       
     </div>
@@ -523,7 +512,7 @@ zkServer.sh 启动
 
 
   
-    <article id="post-Spark/Flume入门"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-PHP/Composer使用指南"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -531,7 +520,7 @@ zkServer.sh 启动
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/18/Spark/Flume%E5%85%A5%E9%97%A8/">Flume 入门</a>
+      <a class="article-title" href="/2019/01/05/PHP/Composer%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">Composer 使用指南</a>
     </h1>
   
 
@@ -539,12 +528,12 @@ zkServer.sh 启动
     
     <div class="article-meta">
       
-	<a href="/2018/05/18/Spark/Flume%E5%85%A5%E9%97%A8/" class="article-date">
-	  <time datetime="2018-05-18T08:01:28.000Z" itemprop="datePublished">2018-05-18</time>
+	<a href="/2019/01/05/PHP/Composer%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="article-date">
+	  <time datetime="2019-01-05T12:08:33.000Z" itemprop="datePublished">2019-01-05</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/Spark/">Spark</a>
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
 
       
       
@@ -553,19 +542,13 @@ zkServer.sh 启动
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1. 基本架构1. 结构source    源数据：目录/
-channel    数据管道
-sink        数据输出
-2. 几种结构形式
-单个的Flume
-多个Flume串行工作，前一个Flume的sink作为后一个的source
-多个Flume并行工作然后最后用一个Flume进行合并这行并行收集的数据
-多个Flume并行工作，分别传送到不同的目的地
+          1. 安装依赖1composer install 
 
-2. 安装1. 安装JDK解压到 /app将java配置系统环境变量中：/.bash_profileexport JAVA_HOM...
+这个语句会检查当前目录下的 composer.json 然后检查是否有 composer.lock 如果有这个文件那么就按照 lock 文件中的版本号进行安装依赖，如果没有lock文件就按照 composer.json 中定义的版本进行安装。
+这里就需要注意，composer.json 定义的版本号可能是一个区间也就是他可以是一个范围，随着类库的更新而更新，但是 lock文件保证了此项目的版本号是确定的，也就是项目组成员得到的版本号是一...
         </p>
         <p class="article-more-link">
-          <a href="/2018/05/18/Spark/Flume%E5%85%A5%E9%97%A8/#more">Read More</a>
+          <a href="/2019/01/05/PHP/Composer%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/#more">Read More</a>
         </p>
       
     </div>
@@ -584,7 +567,7 @@ sink        数据输出
 
 
   
-    <article id="post-Tools/Vim使用技巧"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-PHP/记一次微信支付踩过的坑"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -592,7 +575,7 @@ sink        数据输出
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/18/Tools/Vim%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">Vim 使用技巧</a>
+      <a class="article-title" href="/2019/01/05/PHP/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/">记一次微信支付踩过的坑</a>
     </h1>
   
 
@@ -600,8 +583,65 @@ sink        数据输出
     
     <div class="article-meta">
       
-	<a href="/2018/05/18/Tools/Vim%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" class="article-date">
-	  <time datetime="2018-05-18T04:32:34.000Z" itemprop="datePublished">2018-05-18</time>
+	<a href="/2019/01/05/PHP/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/" class="article-date">
+	  <time datetime="2019-01-05T12:08:33.000Z" itemprop="datePublished">2019-01-05</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          ​    最近在做一个微信小程序，然后里面涉及到了支付的内容，本来以为微信支付挺简单的，当我开始写支付后台去看微信提供的支付文档的时候我就崩溃了，文档写了跟没写一样。
+​    本来是准备原生的php写后来觉得还是不太安全，而且真的文档不全很麻烦，就去找了一个类库。一会也会介绍一下这个类库的坑。
+1 . 微信支付流程
+​    好了，这大概就是微信支付的流程了。下面来具体的说一下：
+
+首先是小程序调用 wx.login 获取用户当前登陆的 code 这个code是会变化的，并不能作为用户的...
+        </p>
+        <p class="article-more-link">
+          <a href="/2019/01/05/PHP/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Tools/七牛云关联Windows图床"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/01/03/Tools/%E4%B8%83%E7%89%9B%E4%BA%91%E5%85%B3%E8%81%94Windows%E5%9B%BE%E5%BA%8A/">七牛云关联Windows图床</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/01/03/Tools/%E4%B8%83%E7%89%9B%E4%BA%91%E5%85%B3%E8%81%94Windows%E5%9B%BE%E5%BA%8A/" class="article-date">
+	  <time datetime="2019-01-03T07:14:53.000Z" itemprop="datePublished">2019-01-03</time>
 	</a>
 
       
@@ -614,10 +654,24 @@ sink        数据输出
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1.x 删除后面的字符 X 删除前一个字符  删除3个字符就是3x2.caw:改写单词3.J:删除换行符，使下一行并上来。     nJ:连接连同本行的n行4.u:撤销上一次操作      U:撤销当前行的所有修改5.i 在光标前插入   I 在行首插入6.a 在光标后插入 A 在行末插入7.o:在当前行的下面另起一行，并变为插入模式 O：在当前行上面另起一行，变为插入模式8.vim中Nyy可以复制光标后的N行。有时我们不容易得出行数，这时可以用做标记的方法来制定复制范围  1. 在开始行...
+          1. 注册七牛云七牛云 地址，需要在这里进行注册
+2.完成实名认证需要上传身份证的正反面以及支付宝做一下认证即可。
+首先进入个人中心
+
+然后进行实名认证
+
+由于我已经认证过了，所以显示认证完成，未认证的用户需要按照提示认证，一般来说 5分钟就能完成认证。
+3. 创建对象存储
+只需要填一下名字，然后因为是图床所以肯定是公开的访问权限。
+
+4. 绑定域名配置完空间以后就是需要关联域名，配置 CNAME 
+
+绑定域名，这个域名需要是一个已经备案过的域名。
+
+只需要填写域名这一项即可，最后就是需要...
         </p>
         <p class="article-more-link">
-          <a href="/2018/05/18/Tools/Vim%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/#more">Read More</a>
+          <a href="/2019/01/03/Tools/%E4%B8%83%E7%89%9B%E4%BA%91%E5%85%B3%E8%81%94Windows%E5%9B%BE%E5%BA%8A/#more">Read More</a>
         </p>
       
     </div>
@@ -636,7 +690,7 @@ sink        数据输出
 
 
   
-    <article id="post-Spark/Scala 入门"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Linux/Apache配置虚拟主机"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -644,7 +698,7 @@ sink        数据输出
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/08/Spark/Scala%20%E5%85%A5%E9%97%A8/">Scala 入门</a>
+      <a class="article-title" href="/2019/01/03/Linux/Apache%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/">Apache配置详解</a>
     </h1>
   
 
@@ -652,12 +706,12 @@ sink        数据输出
     
     <div class="article-meta">
       
-	<a href="/2018/05/08/Spark/Scala%20%E5%85%A5%E9%97%A8/" class="article-date">
-	  <time datetime="2018-05-08T06:01:28.000Z" itemprop="datePublished">2018-05-08</time>
+	<a href="/2019/01/03/Linux/Apache%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" class="article-date">
+	  <time datetime="2019-01-03T03:08:33.000Z" itemprop="datePublished">2019-01-03</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/Spark/">Spark</a>
+    <a class="article-category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a><a class="article-category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/Linux/">Linux</a>
 
       
       
@@ -666,71 +720,10 @@ sink        数据输出
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1. 基本语法1. 变量 var123var name:string=&quot;hello&quot;;var name=&quot;hello&quot;;var num=3.0;
-
-2. 常量 val1val name=&quot;string&quot;;
-
-3. 这里是没有 ++ 操作和 – 操作的4. 函数调用不用使用对象来调用，导入包以后直接调用即可
-1234import scala.math._sqrt(2);pow(1,2);min(1,2);
-
-5.apply()默认调...
+          1. 虚拟主机概念我们要想实现一个web站点，而且能够在互联网上被访问，首先它再能运行在操作系统，而且这个操作系统还要运行在物理主机上（第一它是一个主机）。在互联网上能够被访问，那我们需要一个主机，需要一个IP地址，需要一个时时在线的服务器，这需要多少资源？对众多小型站点来讲或者说对某种需求来讲，有可能都用不到服务器，也就是每天就10个人左右访问，只是需要我们在线而已，如果我们就为这一点点的需求就投入重大的资源的话是非常浪费的。我们就期望能够像我们使用虚拟机一样，虚拟的OS一样或虚拟的PC...
         </p>
         <p class="article-more-link">
-          <a href="/2018/05/08/Spark/Scala%20%E5%85%A5%E9%97%A8/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-Spark/SparkStreming"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/08/Spark/SparkStreming/">SparkStreaming 入门</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2018/05/08/Spark/SparkStreming/" class="article-date">
-	  <time datetime="2018-05-08T06:01:28.000Z" itemprop="datePublished">2018-05-08</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/Spark/">Spark</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          1. 基本原理其实在 SparkStreaming 中和之前的Core不同的就是他会把任务分成批次的进行处理，也就是我们需要设置间隔多久计算一次。
-我们从网络，文件系统，Kafka 等等数据源产生的地方获取数据，然后SparkStreaming放到内存中，接着进行对数据进行计算，获取结果。
-在一个Spark应用程序启动以后会产生一个SparkContext和一个StreamingContext，后者是基于前者的，接着就是每一个集群的单节点上就有Executor 这些Executor中是有R...
-        </p>
-        <p class="article-more-link">
-          <a href="/2018/05/08/Spark/SparkStreming/#more">Read More</a>
+          <a href="/2019/01/03/Linux/Apache%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/#more">Read More</a>
         </p>
       
     </div>
@@ -753,7 +746,7 @@ sink        数据输出
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -807,8 +800,6 @@ sink        数据输出
     <a href="/categories" class="mobile-nav-link">Categories</a>
   
     <a href="/tags" class="mobile-nav-link">Tags</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
   
 </nav> -->
     

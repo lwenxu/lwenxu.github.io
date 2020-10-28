@@ -14,7 +14,7 @@ spring 是一个一站式框架，也就是有了它 web 层，service 层还有
 <!--more-->
 ### 2.ioc基本原理
 ioc 原理就是使用配置文件解析到需要创建的类的 class 然后使用工厂类的静态方法获取这个类的对象。
-```xml
+    ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

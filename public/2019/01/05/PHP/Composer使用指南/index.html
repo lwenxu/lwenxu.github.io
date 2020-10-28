@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>composer 使用指南 | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="PHP,包管理器" />
+  
+  
+  
+  
+  <meta name="description" content="1. 安装依赖1composer install   这个语句会检查当前目录下的 composer.json 然后检查是否有 composer.lock 如果有这个文件那么就按照 lock 文件中的版本号进行安装依赖，如果没有lock文件就按照 composer.json 中定义的版本进行安装。 这里就需要注意，composer.json 定义的版本号可能是一个区间也就是他可以是一个范围，随着类库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Composer 使用指南">
+<meta property="og:url" content="http://lwenxu.coding.me/2019/01/05/PHP/Composer%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="1. 安装依赖1composer install   这个语句会检查当前目录下的 composer.json 然后检查是否有 composer.lock 如果有这个文件那么就按照 lock 文件中的版本号进行安装依赖，如果没有lock文件就按照 composer.json 中定义的版本进行安装。 这里就需要注意，composer.json 定义的版本号可能是一个区间也就是他可以是一个范围，随着类库">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-01-05T12:08:33.000Z">
+<meta property="article:modified_time" content="2019-01-07T19:09:14.000Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="PHP,包管理器">
+<meta name="twitter:card" content="summary">
+  
+
+  
+
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
+  
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-PHP/Composer使用指南" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Composer 使用指南
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/01/05/PHP/Composer%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="article-date">
+	  <time datetime="2019-01-05T12:08:33.000Z" itemprop="datePublished">2019-01-05</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-安装依赖"><a href="#1-安装依赖" class="headerlink" title="1. 安装依赖"></a>1. 安装依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer install </span><br></pre></td></tr></table></figure>
+
+<p>这个语句会检查当前目录下的 <strong>composer.json</strong> 然后检查是否有 <strong>composer.lock</strong> 如果有这个文件那么就按照 lock 文件中的版本号进行安装依赖，如果没有lock文件就按照 composer.json 中定义的版本进行安装。</p>
+<p>这里就需要注意，composer.json 定义的版本号可能是一个区间也就是他可以是一个范围，随着类库的更新而更新，但是 lock文件保证了此项目的版本号是确定的，也就是项目组成员得到的版本号是一致的，就不会有很多麻烦问题了。</p>
+<p>composer.json 中的版本的定义方式有：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>实例</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>确切的版本号</td>
+<td><code>1.0.2</code></td>
+<td>你可以指定包的确切版本。</td>
+</tr>
+<tr>
+<td>范围</td>
+<td><code>&gt;=1.0</code> `&gt;=1.0,&lt;2.0``&gt;=1.0,&lt;1.1</td>
+<td>&gt;=1.2`</td>
+</tr>
+<tr>
+<td>通配符</td>
+<td><code>1.0.*</code></td>
+<td>你可以使用通配符<code>*</code>来指定一种模式。<code>1.0.*</code>与<code>&gt;=1.0,&lt;1.1</code>是等效的。</td>
+</tr>
+<tr>
+<td>赋值运算符</td>
+<td><code>~1.2</code></td>
+<td>一个常见的用法是标记你所依赖的最低版本，像 <code>~1.2</code> （允许1.2以上的任何版本，但不包括2.0）。<code>~1.2</code> 相当于 <code>&gt;=1.2,&lt;2.0</code>，而 <code>~1.2.3</code> 相当于 <code>&gt;=1.2.3,&lt;1.3</code>。<code>~1.2</code> 只意味着 <code>.2</code> 部分可以改变，但是 <code>1.</code> 部分是固定的。</td>
+</tr>
+</tbody></table>
+<p>对的，这样就解决了项目成员的类库版本一致的问题，但是如果我们希望能够升级类库呢？那么就执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer update</span><br></pre></td></tr></table></figure>
+
+<p>如果只想安装或更新一个依赖，你可以白名单它们：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php composer.phar update monolog/monolog [...]</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-Packagist"><a href="#2-Packagist" class="headerlink" title="2. Packagist"></a>2. Packagist</h2><p><a target="_blank" rel="noopener" href="https://packagist.org/">packagist</a> 是 Composer 的主要资源库。 一个 Composer 的库基本上是一个包的源：记录了可以得到包的地方。但是没必要去国外的网站下载，我们可以采用国内的镜像加速：</p>
+<h3 id="方法一：-修改-composer-的全局配置文件（推荐方式）"><a href="#方法一：-修改-composer-的全局配置文件（推荐方式）" class="headerlink" title="方法一： 修改 composer 的全局配置文件（推荐方式）"></a><strong>方法一：</strong> 修改 composer 的全局配置文件<strong>（推荐方式）</strong></h3><p>打开命令行窗口（windows用户）或控制台（Linux、Mac 用户）并执行如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer config -g repo.packagist composer https://packagist.phpcomposer.com</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法二：-修改当前项目的-composer-json-配置文件："><a href="#方法二：-修改当前项目的-composer-json-配置文件：" class="headerlink" title="方法二： 修改当前项目的 composer.json 配置文件："></a><strong>方法二：</strong> 修改当前项目的 <code>composer.json</code> 配置文件：</h3><p>打开命令行窗口（windows用户）或控制台（Linux、Mac 用户），进入你的项目的根目录（也就是 <code>composer.json</code> 文件所在目录），执行如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer config repo.packagist composer https://packagist.phpcomposer.com</span><br></pre></td></tr></table></figure>
+
+<p>上述命令将会在当前项目中的 <code>composer.json</code> 文件的末尾自动添加镜像的配置信息（你也可以自己手工添加）：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;repositories&quot;: &#123;</span><br><span class="line">    &quot;packagist&quot;: &#123;</span><br><span class="line">        &quot;type&quot;: &quot;composer&quot;,</span><br><span class="line">        &quot;url&quot;: &quot;https://packagist.phpcomposer.com&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-类库自动加载"><a href="#3-类库自动加载" class="headerlink" title="3. 类库自动加载"></a>3. 类库自动加载</h2><p>除了库的下载，Composer 还准备了一个自动加载文件，它可以加载 Composer 下载的库中所有的类文件。使用它，你只需要将下面这行代码添加到你项目的引导文件中：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">&#x27;vendor/autoload.php&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-创建项目-create-project"><a href="#4-创建项目-create-project" class="headerlink" title="4. 创建项目 create-project"></a>4. 创建项目 create-project</h2><p>你可以使用 Composer 从现有的包中创建一个新的项目。这相当于执行了一个 <code>git clone</code> 或 <code>svn checkout</code> 命令后将这个包的依赖安装到它自己的 vendor 目录。</p>
+<p>此命令有几个常见的用途：</p>
+<ol>
+<li>你可以快速的部署你的应用。</li>
+<li>你可以检出任何资源包，并开发它的补丁。</li>
+<li>多人开发项目，可以用它来加快应用的初始化。</li>
+</ol>
+<p>要创建基于 Composer 的新项目，你可以使用 “create-project” 命令。传递一个包名，它会为你创建项目的目录。你也可以在第三个参数中指定版本号，否则将获取最新的版本。</p>
+<p>如果该目录目前不存在，则会在安装过程中自动创建。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php composer.phar create-project doctrine/orm path 2.2.*</span><br></pre></td></tr></table></figure>
+
+<p>此外，你也可以无需使用这个命令，而是通过现有的 <code>composer.json</code> 文件来启动这个项目。</p>
+<p>默认情况下，这个命令会在 packagist.org 上查找你指定的包。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2019/01/05/PHP/Composer使用指南/" target="_blank" title="Composer 使用指南">http://lwenxu.coding.me/2019/01/05/PHP/Composer使用指南/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/01/08/FrontEnd/CSS2%20%E8%AF%A6%E8%A7%A3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          CSS2 从入门到精通
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/01/05/PHP/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">记一次微信支付踩过的坑</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="nav-number">1.</span> <span class="nav-text">1. 安装依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Packagist"><span class="nav-number">2.</span> <span class="nav-text">2. Packagist</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A-%E4%BF%AE%E6%94%B9-composer-%E7%9A%84%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%88%E6%8E%A8%E8%8D%90%E6%96%B9%E5%BC%8F%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">方法一： 修改 composer 的全局配置文件（推荐方式）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A-%E4%BF%AE%E6%94%B9%E5%BD%93%E5%89%8D%E9%A1%B9%E7%9B%AE%E7%9A%84-composer-json-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">方法二： 修改当前项目的 composer.json 配置文件：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E7%B1%BB%E5%BA%93%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD"><span class="nav-number">3.</span> <span class="nav-text">3. 类库自动加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE-create-project"><span class="nav-number">4.</span> <span class="nav-text">4. 创建项目 create-project</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2020 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

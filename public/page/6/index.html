@@ -18,19 +18,17 @@
 <meta property="article:tag" content="Java PHP Code">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="昨夜凛雨" type="application/atom+xml">
-  
 
   
 
-  <link rel="icon" href="/css/images/mylogo.jpg">
-  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
   
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
   <style type="text/css">
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
@@ -94,7 +92,7 @@
               <a class="brand" style="
                  margin-top: 0px;"  
                  >
-                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
               </a>
             
             
@@ -108,8 +106,6 @@
                   <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
                 
                   <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/about">About</a> </li>
                 
                   <li><div id="search-form-wrap">
 
@@ -166,7 +162,7 @@
         
           <section id="main" style="float:none;">
   
-    <article id="post-Java SourceCode/Semaphore 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-SpringBoot/SpringBoot 笔记 ( 九 )：分布式"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -174,7 +170,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/03/31/Java%20SourceCode/Semaphore%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">Semaphore 源码分析</a>
+      <a class="article-title" href="/2018/05/23/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B9%9D%20)%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F/">SpringBoot 笔记(九):分布式</a>
     </h1>
   
 
@@ -182,12 +178,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/03/31/Java%20SourceCode/Semaphore%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
-	  <time datetime="2018-03-31T13:35:02.000Z" itemprop="datePublished">2018-03-31</time>
+	<a href="/2018/05/23/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B9%9D%20)%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F/" class="article-date">
+	  <time datetime="2018-05-23T14:01:28.000Z" itemprop="datePublished">2018-05-23</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
 
       
       
@@ -196,12 +192,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          Semaphore 源码分析
-1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
-1. Semephore 简单介绍&emsp;&emsp;  一般来说，在 Java 中比较常用的同步工具就是 Lock 和 Synchr...
+          SpringBoot 笔记(九):分布式我们可以使用 SpringBoot构建分布式应用，也就是我们在开发的时候可以进行多个模块的拆分，每一个功能做一个模块，然后我们使用一些分布式的框架，进行远程调用，所谓的远程调用就是RPC调用，而不是以前的WebService这个形式的.。其实这种分布式的RPC框架有很多，除了我们创常见的Doubbo还有就是我们Spring 项目自带的 SpringCloud 也是类似的东西。
+器基本理念就是：我们一个模块写好我们的业务逻辑然后，把我们写好的逻辑当作服...
         </p>
         <p class="article-more-link">
-          <a href="/2018/03/31/Java%20SourceCode/Semaphore%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
+          <a href="/2018/05/23/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B9%9D%20)%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F/#more">Read More</a>
         </p>
       
     </div>
@@ -220,7 +215,7 @@
 
 
   
-    <article id="post-Java SourceCode/ReentrantLock 与 AQS 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-SpringBoot/SpringBoot 笔记 ( 八 )：任务"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -228,7 +223,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/03/29/Java%20SourceCode/ReentrantLock%20%E4%B8%8E%20AQS%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">ReentrantLock 与 AQS 源码分析</a>
+      <a class="article-title" href="/2018/05/22/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AB%20)%EF%BC%9A%E4%BB%BB%E5%8A%A1/">SpringBoot 笔记(八):任务</a>
     </h1>
   
 
@@ -236,12 +231,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/03/29/Java%20SourceCode/ReentrantLock%20%E4%B8%8E%20AQS%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
-	  <time datetime="2018-03-29T14:55:02.000Z" itemprop="datePublished">2018-03-29</time>
+	<a href="/2018/05/22/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AB%20)%EF%BC%9A%E4%BB%BB%E5%8A%A1/" class="article-date">
+	  <time datetime="2018-05-22T09:01:28.000Z" itemprop="datePublished">2018-05-22</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
 
       
       
@@ -250,12 +245,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          ReentrantLock 与 AQS 源码分析
-1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
-1. 基本结构&emsp;&emsp;  重入锁 ReetrantLock，JDK 1.5新增的类，作用与synchr...
+          SpringBoot 笔记 (八):任务1.异步任务1.开启异步任务注解@EnableAsync
+2.对Service层方法开启异步@Async
+123456789@Servicepublic class TaskService &#123;    @Async    public void task() throws InterruptedException &#123;        System.out.println(&quot;start&quot;);        Threa...
         </p>
         <p class="article-more-link">
-          <a href="/2018/03/29/Java%20SourceCode/ReentrantLock%20%E4%B8%8E%20AQS%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
+          <a href="/2018/05/22/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AB%20)%EF%BC%9A%E4%BB%BB%E5%8A%A1/#more">Read More</a>
         </p>
       
     </div>
@@ -274,7 +269,7 @@
 
 
   
-    <article id="post-Java SourceCode/synchronized 原理分析"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-SpringBoot/SpringBoot 笔记 ( 七 )：搜索"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -282,7 +277,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/03/29/Java%20SourceCode/synchronized%20%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">synchronized 原理分析</a>
+      <a class="article-title" href="/2018/05/21/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%83%20)%EF%BC%9A%E6%90%9C%E7%B4%A2/">SpringBoot 笔记(七):搜索</a>
     </h1>
   
 
@@ -290,12 +285,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/03/29/Java%20SourceCode/synchronized%20%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/" class="article-date">
-	  <time datetime="2018-03-29T10:15:02.000Z" itemprop="datePublished">2018-03-29</time>
+	<a href="/2018/05/21/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%83%20)%EF%BC%9A%E6%90%9C%E7%B4%A2/" class="article-date">
+	  <time datetime="2018-05-21T06:01:28.000Z" itemprop="datePublished">2018-05-21</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
 
       
       
@@ -304,12 +299,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          synchronized 原理分析
-1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
-1. synchronized 介绍&emsp;&emsp;  在并发程序中，这个关键字可能是出现频率最高的一个字段，他可以避免多线...
+          SpringBoot 笔记 (七):搜索这里我们的搜索就是用 ElasticSearch 这个工具，这个其实是在 Lauce 的基础上构建的一个搜索引擎。
+1. ES入门1.docker安装12docker pull registry.docker-cn.com/library/elasticsearchdocker run -e ES_JAVA_OPTS=&quot;-Xms256m -Xmx256m&quot; -d -p 9200:9200 -p 9300:9300 --name E...
         </p>
         <p class="article-more-link">
-          <a href="/2018/03/29/Java%20SourceCode/synchronized%20%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/#more">Read More</a>
+          <a href="/2018/05/21/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%83%20)%EF%BC%9A%E6%90%9C%E7%B4%A2/#more">Read More</a>
         </p>
       
     </div>
@@ -328,7 +322,7 @@
 
 
   
-    <article id="post-Java SourceCode/ConcurrentHashMap 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-SpringBoot/SpringBoot 笔记 ( 六 )：消息"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -336,7 +330,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/03/27/Java%20SourceCode/ConcurrentHashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">ConcurrentHashMap 源码分析</a>
+      <a class="article-title" href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AD%20)%EF%BC%9A%E6%B6%88%E6%81%AF/">SpringBoot 笔记 ( 六)：消息</a>
     </h1>
   
 
@@ -344,12 +338,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/03/27/Java%20SourceCode/ConcurrentHashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
-	  <time datetime="2018-03-27T08:15:02.000Z" itemprop="datePublished">2018-03-27</time>
+	<a href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AD%20)%EF%BC%9A%E6%B6%88%E6%81%AF/" class="article-date">
+	  <time datetime="2018-05-20T07:01:28.000Z" itemprop="datePublished">2018-05-20</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
 
       
       
@@ -358,12 +352,22 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          ConcurrentHashMap 源码分析
-1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
-1. 前言&emsp;&emsp;  终于到这个类了，其实在前面很过很多次这个类，因为这个类代码量比较大，并且涉及到并发的...
+          SpringBoot 笔记 (六): 消息1.基本概念1.应用场景
+
+
+
+2.重要概念
+消息代理（broker）：消息队列服务器
+目的地：消息消费者
+
+1.消息队列的两种目的地：
+队列：点对点的通讯，这种就是消息生产者把消息发送到消息队列中，然后消息接受者去获取消息，获取后这个消息就被移除，消息的接受者可以有多个也就是可以有多个消费者，但是注意一个消息只能被其中的一个消费者消费。
+主题：发布订阅通讯，广播形式。所有的接受者都可以收到消息。
+
+2.JMS这是一个基于JVM的消息代理的规范，但...
         </p>
         <p class="article-more-link">
-          <a href="/2018/03/27/Java%20SourceCode/ConcurrentHashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
+          <a href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AD%20)%EF%BC%9A%E6%B6%88%E6%81%AF/#more">Read More</a>
         </p>
       
     </div>
@@ -382,7 +386,7 @@
 
 
   
-    <article id="post-Java SourceCode/HashSet 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-SpringBoot/SpringBoot 笔记 ( 五)：缓存"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -390,7 +394,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/03/27/Java%20SourceCode/HashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">HashSet 源码分析</a>
+      <a class="article-title" href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%94)%EF%BC%9A%E7%BC%93%E5%AD%98/">SpringBoot 笔记 ( 五 )：缓存</a>
     </h1>
   
 
@@ -398,12 +402,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/03/27/Java%20SourceCode/HashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
-	  <time datetime="2018-03-27T06:15:02.000Z" itemprop="datePublished">2018-03-27</time>
+	<a href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%94)%EF%BC%9A%E7%BC%93%E5%AD%98/" class="article-date">
+	  <time datetime="2018-05-20T02:01:28.000Z" itemprop="datePublished">2018-05-20</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
 
       
       
@@ -412,13 +416,22 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          HashSet 源码分析
-1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
-1. 基本结构1. 继承这个类简直适合 HashMap 如出一辙，他们继承的类都极其相似。继承的是 AbstractSet 。
-2. 实现实现...
+          SpringBoot 笔记 (五): 缓存1.JSR107介绍1.核心概念JSR107这个规范有五个核心概念分别是：
+
+CacheProvider  它用来管理缓存的Manager也就是用来创建，删除，管理，配置CacheManager 的
+CacheManager 是用来管理各个缓存，创建，删除，管理，配置Cache的
+Cache 是各个具体的缓存组件
+Entry 是缓存中具体的一个缓存项
+Expire 缓存的过期时间
+
+
+
+2.导入包
+javax.cache.cache-api
+jav...
         </p>
         <p class="article-more-link">
-          <a href="/2018/03/27/Java%20SourceCode/HashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
+          <a href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%94)%EF%BC%9A%E7%BC%93%E5%AD%98/#more">Read More</a>
         </p>
       
     </div>
@@ -437,7 +450,7 @@
 
 
   
-    <article id="post-Java SourceCode/LinkedHashSet 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Spark/Kafka入门"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -445,7 +458,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/03/27/Java%20SourceCode/LinkedHashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">LinkedHashSet 源码分析</a>
+      <a class="article-title" href="/2018/05/18/Spark/Kafka%E5%85%A5%E9%97%A8/">Kafka 入门</a>
     </h1>
   
 
@@ -453,12 +466,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/03/27/Java%20SourceCode/LinkedHashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
-	  <time datetime="2018-03-27T05:15:02.000Z" itemprop="datePublished">2018-03-27</time>
+	<a href="/2018/05/18/Spark/Kafka%E5%85%A5%E9%97%A8/" class="article-date">
+	  <time datetime="2018-05-18T11:01:28.000Z" itemprop="datePublished">2018-05-18</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+    <a class="article-category-link" href="/categories/Spark/">Spark</a>
 
       
       
@@ -467,12 +480,27 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          LinkedHashSet 源码分析
-1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
-1. 基本结构&emsp;&emsp;  如果你看了 HashSet 现在基本一分钟就能弄明白 LinkedHashSet 的底层...
+          1. Kafka架构
+生产者（producer）：生产资源的
+消费者（consumer）：消费资源
+broker（缓冲）：中间缓冲器
+topic（标记）：谁来消费
+
+2. 配置Kafka1. 配置ZK
+解压
+配置ZK_HOME
+配置PATH
+修改 zk.cfg 修改存储位置
+zkServer.sh 启动
+
+2. 配置Kafka
+配置HOME以及PATH
+修改 server.porperties 注意以下几个条目
+
+123456$KAFKA_HOME/config/server.proper...
         </p>
         <p class="article-more-link">
-          <a href="/2018/03/27/Java%20SourceCode/LinkedHashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
+          <a href="/2018/05/18/Spark/Kafka%E5%85%A5%E9%97%A8/#more">Read More</a>
         </p>
       
     </div>
@@ -491,7 +519,7 @@
 
 
   
-    <article id="post-Java SourceCode/LinkedHashMap 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Spark/Flume入门"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -499,7 +527,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/03/26/Java%20SourceCode/LinkedHashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">LinkedHashMap 源码分析</a>
+      <a class="article-title" href="/2018/05/18/Spark/Flume%E5%85%A5%E9%97%A8/">Flume 入门</a>
     </h1>
   
 
@@ -507,12 +535,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/03/26/Java%20SourceCode/LinkedHashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
-	  <time datetime="2018-03-26T08:15:02.000Z" itemprop="datePublished">2018-03-26</time>
+	<a href="/2018/05/18/Spark/Flume%E5%85%A5%E9%97%A8/" class="article-date">
+	  <time datetime="2018-05-18T08:01:28.000Z" itemprop="datePublished">2018-05-18</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+    <a class="article-category-link" href="/categories/Spark/">Spark</a>
 
       
       
@@ -521,13 +549,19 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          LinkedHashMap 源码分析
-1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
-1. 基本结构1. 实现实现的接口是 Map 
-2. 继承&emsp;&emsp;  继承的是 HashMap 这个就比较熟悉了，...
+          1. 基本架构1. 结构source    源数据：目录/
+channel    数据管道
+sink        数据输出
+2. 几种结构形式
+单个的Flume
+多个Flume串行工作，前一个Flume的sink作为后一个的source
+多个Flume并行工作然后最后用一个Flume进行合并这行并行收集的数据
+多个Flume并行工作，分别传送到不同的目的地
+
+2. 安装1. 安装JDK解压到 /app将java配置系统环境变量中：/.bash_profileexport JAVA_HOM...
         </p>
         <p class="article-more-link">
-          <a href="/2018/03/26/Java%20SourceCode/LinkedHashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
+          <a href="/2018/05/18/Spark/Flume%E5%85%A5%E9%97%A8/#more">Read More</a>
         </p>
       
     </div>
@@ -546,7 +580,7 @@
 
 
   
-    <article id="post-Java SourceCode/HashMap 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Tools/Vim使用技巧"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -554,7 +588,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/03/26/Java%20SourceCode/HashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">HashMap 源码分析</a>
+      <a class="article-title" href="/2018/05/18/Tools/Vim%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">Vim 使用技巧</a>
     </h1>
   
 
@@ -562,12 +596,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/03/26/Java%20SourceCode/HashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
-	  <time datetime="2018-03-26T08:15:02.000Z" itemprop="datePublished">2018-03-26</time>
+	<a href="/2018/05/18/Tools/Vim%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" class="article-date">
+	  <time datetime="2018-05-18T04:32:34.000Z" itemprop="datePublished">2018-05-18</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
 
       
       
@@ -576,15 +610,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          HashMap 源码分析
-1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
-1.结构1. 继承&emsp;&emsp;该类继承自 AbstractMap 这个类似于 ArrayList
-2. 实现具体如下：
-
-首先这个...
+          1.x 删除后面的字符 X 删除前一个字符  删除3个字符就是3x2.caw:改写单词3.J:删除换行符，使下一行并上来。     nJ:连接连同本行的n行4.u:撤销上一次操作      U:撤销当前行的所有修改5.i 在光标前插入   I 在行首插入6.a 在光标后插入 A 在行末插入7.o:在当前行的下面另起一行，并变为插入模式 O：在当前行上面另起一行，变为插入模式8.vim中Nyy可以复制光标后的N行。有时我们不容易得出行数，这时可以用做标记的方法来制定复制范围  1. 在开始行...
         </p>
         <p class="article-more-link">
-          <a href="/2018/03/26/Java%20SourceCode/HashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
+          <a href="/2018/05/18/Tools/Vim%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/#more">Read More</a>
         </p>
       
     </div>
@@ -603,7 +632,7 @@
 
 
   
-    <article id="post-Java SourceCode/LinkedList 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Spark/Scala 入门"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -611,7 +640,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/03/26/Java%20SourceCode/LinkedList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">LinkedList 源码分析</a>
+      <a class="article-title" href="/2018/05/08/Spark/Scala%20%E5%85%A5%E9%97%A8/">Scala 入门</a>
     </h1>
   
 
@@ -619,12 +648,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/03/26/Java%20SourceCode/LinkedList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
-	  <time datetime="2018-03-26T07:15:02.000Z" itemprop="datePublished">2018-03-26</time>
+	<a href="/2018/05/08/Spark/Scala%20%E5%85%A5%E9%97%A8/" class="article-date">
+	  <time datetime="2018-05-08T06:01:28.000Z" itemprop="datePublished">2018-05-08</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+    <a class="article-category-link" href="/categories/Spark/">Spark</a>
 
       
       
@@ -633,12 +662,17 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          LinkedList 源码分析
-1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
-1.结构1. 继承&emsp;&emsp;该类继承自 AbstractSequentialList 这个是由于他是一个顺序的列表，所以说...
+          1. 基本语法1. 变量 var123var name:string=&quot;hello&quot;;var name=&quot;hello&quot;;var num=3.0;
+
+2. 常量 val1val name=&quot;string&quot;;
+
+3. 这里是没有 ++ 操作和 – 操作的4. 函数调用不用使用对象来调用，导入包以后直接调用即可
+1234import scala.math._sqrt(2);pow(1,2);min(1,2);
+
+5.apply()默认调...
         </p>
         <p class="article-more-link">
-          <a href="/2018/03/26/Java%20SourceCode/LinkedList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
+          <a href="/2018/05/08/Spark/Scala%20%E5%85%A5%E9%97%A8/#more">Read More</a>
         </p>
       
     </div>
@@ -657,7 +691,7 @@
 
 
   
-    <article id="post-Java SourceCode/ArrayList 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Spark/SparkStreming"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -665,7 +699,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/03/25/Java%20SourceCode/ArrayList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">ArrayList 源码分析</a>
+      <a class="article-title" href="/2018/05/08/Spark/SparkStreming/">SparkStreaming 入门</a>
     </h1>
   
 
@@ -673,12 +707,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/03/25/Java%20SourceCode/ArrayList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
-	  <time datetime="2018-03-25T13:15:02.000Z" itemprop="datePublished">2018-03-25</time>
+	<a href="/2018/05/08/Spark/SparkStreming/" class="article-date">
+	  <time datetime="2018-05-08T06:01:28.000Z" itemprop="datePublished">2018-05-08</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+    <a class="article-category-link" href="/categories/Spark/">Spark</a>
 
       
       
@@ -687,13 +721,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          ArrayList 源码分析
-1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
-1. 结构&emsp;&emsp;首先我们需要对 ArrayList 有一个大致的了解就从结构来看看吧.
-1. 继承&emsp;&emsp...
+          1. 基本原理其实在 SparkStreaming 中和之前的Core不同的就是他会把任务分成批次的进行处理，也就是我们需要设置间隔多久计算一次。
+我们从网络，文件系统，Kafka 等等数据源产生的地方获取数据，然后SparkStreaming放到内存中，接着进行对数据进行计算，获取结果。
+在一个Spark应用程序启动以后会产生一个SparkContext和一个StreamingContext，后者是基于前者的，接着就是每一个集群的单节点上就有Executor 这些Executor中是有R...
         </p>
         <p class="article-more-link">
-          <a href="/2018/03/25/Java%20SourceCode/ArrayList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
+          <a href="/2018/05/08/Spark/SparkStreming/#more">Read More</a>
         </p>
       
     </div>
@@ -716,7 +749,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/5/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/7/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/5/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/7/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -770,8 +803,6 @@
     <a href="/categories" class="mobile-nav-link">Categories</a>
   
     <a href="/tags" class="mobile-nav-link">Tags</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
   
 </nav> -->
     
