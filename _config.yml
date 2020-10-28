@@ -82,3 +82,20 @@ deploy:
     repository: https://github.com/lwenxu/lwenxu.github.io.git
     branch: main
 
+# 对 css 和 js 资源的 cdn 加速配置
+jsdelivr_cdn:
+  use_cdn: true 
+  deploy_when_generating: true
+
+  # it should be like: https://cdn.jsdelivr.net/gh/<username for github>/<assets repo name>/
+  cdn_url_prefix: https://cdn.jsdelivr.net/gh/lwenxu/lwenxu.github.io
+
+  # git@github.com:<username>/<repo>.git
+  git_repo_url: git@github.com:lwenxu/lwenxu.github.io.git
+  
+  # you can use github token to push your assets repository. If you don't want to use a token, you can use a empty string '' or comment out this line. We do not recommand that you directly write your token in the _config.yml. We suggest that you read the token from the environment variable by setting token with a prefix '$'. e.g. '$GITHUB_TOKEN'. When you want to use token, you must use http(s) link of your repo. More information about github token can be found in https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line.
+  token: $GITHUB_TOKEN
+
+  # The path of an asset directory in asset_dirs should be the relative path to your hexo project directory, e.g. assets or source/assets or themes/<theme name>/assets. If you only want to use the cdn for the images in your posts, you can leave asset_dirs as empty
+  asset_dirs:
+    - public
