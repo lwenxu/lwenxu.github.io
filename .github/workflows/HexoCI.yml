@@ -29,7 +29,10 @@ jobs:
           git config --global user.name "lwen"
           npm install hexo-cli -g
           npm install
-          mv ./public $GITHUB_WORKSPACE
+          echo "--------------------------- work dir content ---------------------------"
+          ls -l /home/runner/work/lwenxu.github.io/lwenxu.github.io/
+          echo "--------------------------- work dir content ---------------------------"
+          mv /home/runner/work/lwenxu.github.io/lwenxu.github.io/public $GITHUB_WORKSPACE
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
