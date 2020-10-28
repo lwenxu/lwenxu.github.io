@@ -1,6 +1,6 @@
 ---
-title: 分类
-date: 2017-07-26 18:04:34
+title: categories
+date: 2017-04-26 17:47:43
 type: "categories"
-comments: false
+layout: "categories"
 ---
