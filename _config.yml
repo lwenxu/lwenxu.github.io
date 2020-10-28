@@ -13,7 +13,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://lwenxu.coding.me
+url: https://cdn.jsdelivr.net/gh/lwenxu/lwenxu.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -99,3 +99,4 @@ jsdelivr_cdn:
   # The path of an asset directory in asset_dirs should be the relative path to your hexo project directory, e.g. assets or source/assets or themes/<theme name>/assets. If you only want to use the cdn for the images in your posts, you can leave asset_dirs as empty
   asset_dirs:
     - public
+
