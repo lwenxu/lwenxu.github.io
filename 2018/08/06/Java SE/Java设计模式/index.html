@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>gof23 常用设计模式 | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Java" />
+  
+  
+  
+  
+  <meta name="description" content="GOF23 常用设计模式一、单例设计模式1.饿汉式12345678public class GOF23 &amp;#123;    &#x2F;&#x2F; 饿汉式    private static final List list &#x3D; new ArrayList();    public static List getInstance() &amp;#123;        return list;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GOF23 常用设计模式">
+<meta property="og:url" content="http://lwenxu.coding.me/2018/08/06/Java%20SE/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="GOF23 常用设计模式一、单例设计模式1.饿汉式12345678public class GOF23 &amp;#123;    &#x2F;&#x2F; 饿汉式    private static final List list &#x3D; new ArrayList();    public static List getInstance() &amp;#123;        return list;">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-08-06T00:25:29.000Z">
+<meta property="article:modified_time" content="2018-12-19T12:36:42.000Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+  
+
+  
+
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
+  
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Java SE/Java设计模式" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      GOF23 常用设计模式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/08/06/Java%20SE/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="article-date">
+	  <time datetime="2018-08-06T00:25:29.000Z" itemprop="datePublished">2018-08-06</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Java/">-Java</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="GOF23-常用设计模式"><a href="#GOF23-常用设计模式" class="headerlink" title="GOF23 常用设计模式"></a>GOF23 常用设计模式</h1><h2 id="一、单例设计模式"><a href="#一、单例设计模式" class="headerlink" title="一、单例设计模式"></a>一、单例设计模式</h2><h3 id="1-饿汉式"><a href="#1-饿汉式" class="headerlink" title="1.饿汉式"></a>1.饿汉式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class GOF23 &#123;</span><br><span class="line">    &#x2F;&#x2F; 饿汉式</span><br><span class="line">    private static final List list &#x3D; new ArrayList();</span><br><span class="line"></span><br><span class="line">    public static List getInstance() &#123;</span><br><span class="line">        return list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-懒汉式"><a href="#2-懒汉式" class="headerlink" title="2.懒汉式"></a>2.懒汉式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">    &#x2F;&#x2F; 懒汉式</span><br><span class="line">    &#x2F;&#x2F; 使用双检锁，并且由于 jvm 指令重排序我们需要使用 volatile 关键字抑制指令重排序</span><br><span class="line">public class GOF&#123;</span><br><span class="line">    private static volatile List list1;</span><br><span class="line">    public static List getInstanceLazy() &#123;</span><br><span class="line">        synchronized (Object.class) &#123;</span><br><span class="line">            if (list1 &#x3D;&#x3D; null) &#123;</span><br><span class="line">                synchronized (Object.class)&#123;</span><br><span class="line">                    list1 &#x3D; new ArrayList();</span><br><span class="line">                    return list;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                return list;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-静态内部类"><a href="#3-静态内部类" class="headerlink" title="3.静态内部类"></a>3.静态内部类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class GOF&#123;</span><br><span class="line">     &#x2F;&#x2F; 静态内部类</span><br><span class="line">    public static class SingletonClass&#123;</span><br><span class="line">        private static final List list2 &#x3D; new ArrayList();</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; 首先要去加载这个静态内部类，然后这个时候会调用 cinit 方法这个是天然的线程安全的，然后返回这个对象即可  可以延时加载</span><br><span class="line">    public List getStaticInstance()&#123;</span><br><span class="line">        return SingletonClass.list2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-枚举"><a href="#4-枚举" class="headerlink" title="4.枚举"></a>4.枚举</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class GOF23 &#123;</span><br><span class="line">    &#x2F;&#x2F; 采用枚举的方式  不能延时加载  由 jvm 底层完成的</span><br><span class="line">    public enum SingleInstanceEnum&#123;</span><br><span class="line">        INSTANCE_ENUM</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、工厂设计模式"><a href="#二、工厂设计模式" class="headerlink" title="二、工厂设计模式"></a>二、工厂设计模式</h2><p>工厂设计模式的好处就是把对象的创建和使用分开。在软公众需要遵循的三个原则：开闭原则（对修改关闭，对拓展开放）、依赖翻转（面向接口依赖而不是类的强依赖）、迪米特法则（和朋友通讯而不是陌生人）。</p>
+<h3 id="1-简单工厂"><a href="#1-简单工厂" class="headerlink" title="1.简单工厂"></a>1.简单工厂</h3><p>一般也称之为静态工厂，因为他的方法是一个静态的方法，并且必须要有一个父接口去容纳这些被创建的对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">public interface Car &#123;</span><br><span class="line">    public void run();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Audi implements Car &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        System.out.println(&quot;audi run&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Daben implements Car &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        System.out.println(&quot;daben run&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class CarFactory &#123;</span><br><span class="line">    public static Car createCar(String type) &#123;</span><br><span class="line">        if (type.equals(&quot;daben&quot;)) &#123;</span><br><span class="line">            return new Daben();</span><br><span class="line">        &#125; else if (type.equals(&quot;audi&quot;)) &#123;</span><br><span class="line">            return new Audi();</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class CarClient &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Daben daben &#x3D; (Daben) CarFactory.createCar(&quot;daben&quot;);</span><br><span class="line">        daben.run();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-工厂方法"><a href="#2-工厂方法" class="headerlink" title="2.工厂方法"></a>2.工厂方法</h3><p>这个比上面好一点的就是我们不用直接修改原来的代码而是可以面向拓展而不是修改就是开闭原则是满足的。其实我们在项目中主要使用的是简单工厂而不是这个，因为这个的类文件剧增。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public interface CarFactory &#123;</span><br><span class="line">    public Car createFactory();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class BenChiFactory implements CarFactory &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public Car createFactory() &#123;</span><br><span class="line">        return new Daben();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class AudiFactory implements CarFactory &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public Car createFactory() &#123;</span><br><span class="line">        return new Audi();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-抽象工厂"><a href="#3-抽象工厂" class="headerlink" title="3.抽象工厂"></a>3.抽象工厂</h3><p>抽象工厂其实和上面的两个方式区别很大，主要是因为上面两个的维度是创建产品而这个地方的维度是创建一个产品组。也就是比如我们有一个车的工厂，其实这个工厂是创建很多车的零部件而不是一个车，那么我们有多个车的工厂的目的就是为了创建不同层次的车零件。比如下面这个例子，就是他的维度是横向的一个维度。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 座椅类型</span><br><span class="line">public interface Seat &#123;</span><br><span class="line">    public void desc();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class LuxurySeat implements Seat &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void desc() &#123;</span><br><span class="line">        System.out.println(&quot;high quality seat&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class LowSeat implements Seat &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void desc() &#123;</span><br><span class="line">        System.out.println(&quot;low seat&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 引擎类型</span><br><span class="line">public interface Engine &#123;</span><br><span class="line">    public void run();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class LuxuryEngine implements Engine &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        System.out.println(&quot;high speed engine&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class LowEngine implements Engine &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        System.out.println(&quot;low engine&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 车的抽象工厂</span><br><span class="line">public interface AbstractCarFactory &#123;</span><br><span class="line">    public Seat createSeat();</span><br><span class="line">    public Engine creaateEngine();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 两个工厂的实现，分别是高级车工厂，低级车工厂</span><br><span class="line">public class LuxuryCarFactory implements AbstractCarFactory &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public Seat createSeat() &#123;</span><br><span class="line">        return new LuxurySeat();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Engine creaateEngine() &#123;</span><br><span class="line">        return new LuxuryEngine();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class LowCarFactory implements AbstractCarFactory&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public Seat createSeat() &#123;</span><br><span class="line">        return new LowSeat();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Engine creaateEngine() &#123;</span><br><span class="line">        return new LowEngine();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、建造者模式"><a href="#三、建造者模式" class="headerlink" title="三、建造者模式"></a>三、建造者模式</h2><p>建造者模式分为两部分，第一个部分其实就是工厂模式创建对象，然后另外一部分就是组装创建整个大对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 创建工厂</span><br><span class="line">public interface BuilderFactory &#123;</span><br><span class="line">    Engine createEngine();</span><br><span class="line">    Seat createSeat();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class AirShipBuilderFactory implements BuilderFactory &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Engine createEngine() &#123;</span><br><span class="line">        return new Engine() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Seat createSeat() &#123;</span><br><span class="line">        return new Seat() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void desc() &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; 组装工厂</span><br><span class="line">public class AirDirectFactory &#123;</span><br><span class="line"></span><br><span class="line">    private BuilderFactory builderFactory;</span><br><span class="line"></span><br><span class="line">    public AirShip buildAirShip() &#123;</span><br><span class="line">        Engine engine &#x3D; builderFactory.createEngine();</span><br><span class="line">        Seat seat &#x3D; builderFactory.createSeat();</span><br><span class="line">        return new AirShip(engine, seat);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public AirDirectFactory(BuilderFactory builderFactory) &#123;</span><br><span class="line">        this.builderFactory &#x3D; builderFactory;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、原型模式"><a href="#四、原型模式" class="headerlink" title="四、原型模式"></a>四、原型模式</h2><p>可以称之为克隆或者拷贝，然后在拷贝的对象上修改就可以产生新对象，其实js 的原型就是这么干的。</p>
+<p>这里需要注意一下这里的一个深拷贝的问题，如果没有作深拷贝而是直接的做了一个 super 的调用可能导致状态关联问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">@NoArgsConstructor</span><br><span class="line">@AllArgsConstructor</span><br><span class="line">@Builder(toBuilder &#x3D; true)</span><br><span class="line">@Data</span><br><span class="line">@Accessors(chain &#x3D; true,fluent &#x3D; true)</span><br><span class="line">public class Sheep implements Cloneable&#123;</span><br><span class="line">    private String name;</span><br><span class="line">    private Date birthday;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 注意在克隆的时候需要进行深拷贝负责就会出现错误结果</span><br><span class="line">     * @return</span><br><span class="line">     * @throws CloneNotSupportedException</span><br><span class="line">     *&#x2F;</span><br><span class="line">    @Override</span><br><span class="line">    protected Object clone() throws CloneNotSupportedException &#123;</span><br><span class="line"></span><br><span class="line">        Sheep clone &#x3D; (Sheep) super.clone();</span><br><span class="line">        clone.birthday &#x3D; (Date) this.birthday.clone();</span><br><span class="line">        return clone;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class PrototypeClient &#123;</span><br><span class="line">    public static void main(String[] args) throws CloneNotSupportedException &#123;</span><br><span class="line">        Sheep sheep1 &#x3D; new Sheep(&quot;A&quot;, new Date());</span><br><span class="line">        Sheep sheep2 &#x3D; (Sheep) sheep1.clone();</span><br><span class="line">        sheep2.birthday(new Date()).name(&quot;sss&quot;);</span><br><span class="line">        System.out.println(sheep2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>另外我们除了使用上面的克隆方法我们还可以使用序列化的方式直接生成一个一模一样的对象出来。具体来说就是我们可以用输入输出流来生成对象</strong></p>
+<h2 id="五、适配器模式"><a href="#五、适配器模式" class="headerlink" title="五、适配器模式"></a>五、适配器模式</h2><p>将一个接口转化成另外一个接口，从而使两个原来不能一起工作的组件一起工作。</p>
+<p>我们可以想像一下一个 usb 转 hdmi ，那么就有一个目标方和一个被适配方。也就是两个接口再有一个适配器就完成了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 目标方的接口</span><br><span class="line">public interface Target &#123;</span><br><span class="line">    void use();</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; 被适配方 其实最好是一个接口这里直接写成了一个类</span><br><span class="line">public class BeAdapter &#123;</span><br><span class="line">    public void hello()&#123;</span><br><span class="line">        System.out.println(&quot;say hello&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 适配器 实现了目标方，组合了被适配方</span><br><span class="line">@Data</span><br><span class="line">@AllArgsConstructor</span><br><span class="line">public class AdapterDemo implements Target &#123;</span><br><span class="line">    &#x2F;&#x2F; 其实这里可以进一步抽象 也就是所有的被适配对象另起一个接口即可</span><br><span class="line">    BeAdapter beAdapter;</span><br><span class="line"></span><br><span class="line">    public void use() &#123;</span><br><span class="line">        beAdapter.hello();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class AdapterClient &#123;</span><br><span class="line">    public static void test(Target target)&#123;</span><br><span class="line">        target.use();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        AdapterDemo adapterDemo &#x3D; new AdapterDemo(new BeAdapter());</span><br><span class="line">        test(adapterDemo);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="六、代理模式"><a href="#六、代理模式" class="headerlink" title="六、代理模式"></a>六、代理模式</h2><h3 id="1-静态代理"><a href="#1-静态代理" class="headerlink" title="1.静态代理"></a>1.静态代理</h3><p>这种代理模式就是在代理对象上保留一个被代理对象的指针，然后有些事情直接调用被代理对象的方法完成，并且可以做一些前置或者后置的操作。</p>
+<h3 id="2-动态代理"><a href="#2-动态代理" class="headerlink" title="2.动态代理"></a>2.动态代理</h3><h4 id="1-JDK-代理"><a href="#1-JDK-代理" class="headerlink" title="1.JDK 代理"></a>1.JDK 代理</h4><p>其实关键部分就两个：第一个就是一个处理器，所有的对代理的请求的方法都走到了处理器。另外一个就是生成代理对象过程。</p>
+<p>处理器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@AllArgsConstructor</span><br><span class="line">public class SimpleHandler implements InvocationHandler &#123;</span><br><span class="line">    RealObject real;</span><br><span class="line">    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;</span><br><span class="line">        System.out.println(&quot;heihei&quot;);</span><br><span class="line">        return (Object) method.invoke(real, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>被代理对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public interface ObjectInterface &#123;</span><br><span class="line">    public void hello();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class RealObject implements ObjectInterface &#123;</span><br><span class="line">    public void hello()&#123;</span><br><span class="line">        System.out.println(&quot;hello&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>生成代理对象的过程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class JdkClient &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        RealObject realObject &#x3D; new RealObject();</span><br><span class="line">        SimpleHandler simpleHandler &#x3D; new SimpleHandler(realObject);</span><br><span class="line">        ObjectInterface proxyInstance &#x3D; (ObjectInterface) Proxy.newProxyInstance(ClassLoader.getSystemClassLoader(), new Class[]&#123;ObjectInterface.class&#125;, simpleHandler);</span><br><span class="line">        proxyInstance.hello();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="七、桥接模式"><a href="#七、桥接模式" class="headerlink" title="七、桥接模式"></a>七、桥接模式</h2><p>桥接模式就是为了处理两个维度的事情，比如说我们定义一个电脑类，那么我们如果需要售卖笔记本、平板、台式机而这些东西又有不同的品牌那么我们就需要建立很多的类在电脑这个类下面。但是我们采用桥接的话我们抽出一个接口这个接口代表了品牌，然后有一个抽象类（电脑类型）包含了品牌的引用，我们只需要在不同的电脑类型下面建立各个类型，在创建一个品牌类型的电脑的时候直接 new 出来就行了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 品牌</span><br><span class="line">public interface Brand &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">class Dell implements Brand &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">class Levon implements Brand &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 电脑的类型</span><br><span class="line">@AllArgsConstructor</span><br><span class="line">public abstract class AbstractComputer &#123;</span><br><span class="line">    private Brand brand;</span><br><span class="line">    public void sell()&#123;</span><br><span class="line">        System.out.println(&quot;sell...&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class DesktopComp extends AbstractComputer &#123;</span><br><span class="line">    public DesktopComp(Brand brand) &#123;</span><br><span class="line">        super(brand);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class PadComp extends AbstractComputer &#123;</span><br><span class="line">    public PadComp(Brand brand) &#123;</span><br><span class="line">        super(brand);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;使用</span><br><span class="line">public class BridgeClient &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        DesktopComp levonDesktopComp &#x3D; new DesktopComp(new Levon());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="八、策略模式"><a href="#八、策略模式" class="headerlink" title="八、策略模式"></a>八、策略模式</h2><p>策略模式就是将一个方法传入到一个地方，简单点来说就是传入一个回调方法，真实是使用的时候看我们传递进去的那个方法作用。</p>
+<h2 id="九、模板设计模式"><a href="#九、模板设计模式" class="headerlink" title="九、模板设计模式"></a>九、模板设计模式</h2><p>在上层的抽象类中放一些抽象方法先调用上，子类在继承的时候实现这些类就行了。</p>
+<h2 id="10、观察者模式"><a href="#10、观察者模式" class="headerlink" title="10、观察者模式"></a>10、观察者模式</h2><p>在对一些变量修改或者方法调用的时候胡触发观察者的方法调用或者状态的转变，其实就相当于埋点。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2018/08/06/Java SE/Java设计模式/" target="_blank" title="GOF23 常用设计模式">http://lwenxu.coding.me/2018/08/06/Java SE/Java设计模式/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/12/17/SpringBoot/SpringData%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          SpringData笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/08/05/Java%20Web/Lombok%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Lombok 常用功能</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#GOF23-%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">GOF23 常用设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%8D%95%E4%BE%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">一、单例设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%A5%BF%E6%B1%89%E5%BC%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.饿汉式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%87%92%E6%B1%89%E5%BC%8F"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.懒汉式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%9D%99%E6%80%81%E5%86%85%E9%83%A8%E7%B1%BB"><span class="nav-number">1.1.3.</span> <span class="nav-text">3.静态内部类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%9E%9A%E4%B8%BE"><span class="nav-number">1.1.4.</span> <span class="nav-text">4.枚举</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%B7%A5%E5%8E%82%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">二、工厂设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.简单工厂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.工厂方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.抽象工厂</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">三、建造者模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.4.</span> <span class="nav-text">四、原型模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.5.</span> <span class="nav-text">五、适配器模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.6.</span> <span class="nav-text">六、代理模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%9D%99%E6%80%81%E4%BB%A3%E7%90%86"><span class="nav-number">1.6.1.</span> <span class="nav-text">1.静态代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86"><span class="nav-number">1.6.2.</span> <span class="nav-text">2.动态代理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-JDK-%E4%BB%A3%E7%90%86"><span class="nav-number">1.6.2.1.</span> <span class="nav-text">1.JDK 代理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.7.</span> <span class="nav-text">七、桥接模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.8.</span> <span class="nav-text">八、策略模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%9D%E3%80%81%E6%A8%A1%E6%9D%BF%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.9.</span> <span class="nav-text">九、模板设计模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10%E3%80%81%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.10.</span> <span class="nav-text">10、观察者模式</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2020 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

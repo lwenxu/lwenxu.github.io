@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>category: linux | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  
+  <meta name="description" content="正文定义别名：1alias vi&#x3D;&amp;#x27;vim&amp;#x27;  查看别名：1alias   让某个用户永久生效">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux小记">
+<meta property="og:url" content="http://lwenxu.coding.me/2016/03/20/Linux/Linux%E5%B0%8F%E8%AE%B0/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="正文定义别名：1alias vi&#x3D;&amp;#x27;vim&amp;#x27;  查看别名：1alias   让某个用户永久生效">
+<meta property="og:locale">
+<meta property="article:published_time" content="2016-03-20T14:53:08.000Z">
+<meta property="article:modified_time" content="2018-12-19T12:36:42.000Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="Java PHP Code">
+<meta name="twitter:card" content="summary">
+  
+
+  
+
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
+  
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Linux/Linux小记" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Linux小记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2016/03/20/Linux/Linux%E5%B0%8F%E8%AE%B0/" class="article-date">
+	  <time datetime="2016-03-20T14:53:08.000Z" itemprop="datePublished">2016-03-20</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="定义别名："><a href="#定义别名：" class="headerlink" title="定义别名："></a>定义别名：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> vi=<span class="string">&#x27;vim&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="查看别名："><a href="#查看别名：" class="headerlink" title="查看别名："></a>查看别名：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> </span><br></pre></td></tr></table></figure>
+
+<h2 id="让某个用户永久生效"><a href="#让某个用户永久生效" class="headerlink" title="让某个用户永久生效"></a>让某个用户永久生效</h2><a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除别名"><a href="#删除别名" class="headerlink" title="删除别名"></a>删除别名</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ualias vi</span><br></pre></td></tr></table></figure>
+
+<h2 id="快捷键："><a href="#快捷键：" class="headerlink" title="快捷键："></a>快捷键：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ctrl+u  删除或剪切光标左侧的所有字符</span><br><span class="line">ctrl+y  粘贴</span><br><span class="line">ctrl+r 	搜索历史命令</span><br><span class="line">ctrl+d	推出登陆</span><br><span class="line">ctrl+z  暂停放入后台</span><br><span class="line">ctrl+l 	清屏</span><br><span class="line">ctrl+a 	光标移到开头</span><br><span class="line">ctrl+e  光标移到结尾</span><br></pre></td></tr></table></figure>
+
+<h2 id="是任意多个任意字符-任意可以是0"><a href="#是任意多个任意字符-任意可以是0" class="headerlink" title="*是任意多个任意字符(任意可以是0)"></a>*是任意多个任意字符(任意可以是0)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">	ls *abc</span><br><span class="line">```	</span><br><span class="line">会显示所有以abc结尾的或者就是abc的文件</span><br><span class="line"></span><br><span class="line"><span class="comment">## []匹配括号中的任意一个，必须是一个。</span></span><br><span class="line"></span><br><span class="line">``` bash</span><br><span class="line">	ls [abc]df</span><br></pre></td></tr></table></figure>
+
+<p>匹配以abc其中一个开始，以df结尾的，文件名是三个字符</p>
+<h2 id="？这个是匹配任意一个字符"><a href="#？这个是匹配任意一个字符" class="headerlink" title="？这个是匹配任意一个字符"></a>？这个是匹配任意一个字符</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls ?asc</span><br></pre></td></tr></table></figure>
+
+<pre><code>四个字符，以asc结尾</code></pre>
+<h2 id="与2同只是取反"><a href="#与2同只是取反" class="headerlink" title="[^]与2同只是取反"></a>[^]与2同只是取反</h2><h2 id="‘’单引号中所有的特殊符号都没有特殊的含义"><a href="#‘’单引号中所有的特殊符号都没有特殊的含义" class="headerlink" title="‘’单引号中所有的特殊符号都没有特殊的含义"></a>‘’单引号中所有的特殊符号都没有特殊的含义</h2><h2 id="“”双引号特殊符号都有特殊意义"><a href="#“”双引号特殊符号都有特殊意义" class="headerlink" title="“”双引号特殊符号都有特殊意义"></a>“”双引号特殊符号都有特殊意义</h2><h2 id="反引号等价于-里面的系统命令会先执行反引号和括号里面的命令"><a href="#反引号等价于-里面的系统命令会先执行反引号和括号里面的命令" class="headerlink" title="``反引号等价于$()里面的系统命令会先执行反引号和括号里面的命令"></a>``反引号等价于$()里面的系统命令会先执行反引号和括号里面的命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> `ls`</span><br></pre></td></tr></table></figure>
+
+<p>显示本目录下的文件名</p>
+<h2 id="去掉特殊符号的意义"><a href="#去掉特殊符号的意义" class="headerlink" title="\去掉特殊符号的意义"></a>\去掉特殊符号的意义</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> \<span class="variable">$date</span></span><br></pre></td></tr></table></figure>
+
+<p>显示的是$date去掉了$的特殊意义 </p>
+<h2 id="清空历史命令："><a href="#清空历史命令：" class="headerlink" title="清空历史命令："></a>清空历史命令：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">history</span> -c </span><br></pre></td></tr></table></figure>
+
+<h2 id="强制保存到历史命令文件-bash-history-中："><a href="#强制保存到历史命令文件-bash-history-中：" class="headerlink" title="强制保存到历史命令文件(~/.bash_history)中："></a>强制保存到历史命令文件(~/.bash_history)中：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">history</span>  -w</span><br></pre></td></tr></table></figure>
+
+<h2 id="更改历史命令保存文件存的条数"><a href="#更改历史命令保存文件存的条数" class="headerlink" title="更改历史命令保存文件存的条数"></a>更改历史命令保存文件存的条数</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile   （profile是环境变量的配置文件）</span><br><span class="line">HISTZISE=1000</span><br></pre></td></tr></table></figure>
+
+<h2 id="历史命令的调用："><a href="#历史命令的调用：" class="headerlink" title="历史命令的调用："></a>历史命令的调用：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">!n  //重复执行第n条命令</span><br><span class="line">!!  //重复执行上一条命令</span><br><span class="line">!字符串  //重复执行最后一条的含有字符串的命令</span><br></pre></td></tr></table></figure>
+
+<h2 id="将错误与正确信息都存在文件里"><a href="#将错误与正确信息都存在文件里" class="headerlink" title="将错误与正确信息都存在文件里"></a>将错误与正确信息都存在文件里</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ls &amp;&gt;&gt; abc   (以追加的形式)</span><br><span class="line">ls &amp;&gt;  abc  （以覆盖的方式）</span><br></pre></td></tr></table></figure>
+
+<h2 id="普通的重定向"><a href="#普通的重定向" class="headerlink" title="普通的重定向"></a>普通的重定向</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ls &gt;&gt; abc</span><br><span class="line">ls &gt;  abc</span><br></pre></td></tr></table></figure>
+
+<h2 id="只执行命令不进行结果的输出，在脚本中经常使用"><a href="#只执行命令不进行结果的输出，在脚本中经常使用" class="headerlink" title="只执行命令不进行结果的输出，在脚本中经常使用"></a>只执行命令不进行结果的输出，在脚本中经常使用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls &amp;&gt;/dev/null</span><br></pre></td></tr></table></figure>
+
+<h2 id="分开重定向："><a href="#分开重定向：" class="headerlink" title="分开重定向："></a>分开重定向：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls &gt;&gt; abc 2&gt;&gt;def (正确的是放在abc，错误的放在def)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2016/03/20/Linux/Linux小记/" target="_blank" title="Linux小记">http://lwenxu.coding.me/2016/03/20/Linux/Linux小记/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/04/04/Linux/%E5%85%B3%E4%BA%8Eapache%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          关于apache端口被占用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/20/Linux/%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E4%B8%89%E7%A7%8D%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">虚拟机的三种网络连接方式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A3%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%88%AB%E5%90%8D%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">定义别名：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%88%AB%E5%90%8D%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">查看别名：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A9%E6%9F%90%E4%B8%AA%E7%94%A8%E6%88%B7%E6%B0%B8%E4%B9%85%E7%94%9F%E6%95%88"><span class="nav-number">1.3.</span> <span class="nav-text">让某个用户永久生效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%88%AB%E5%90%8D"><span class="nav-number">1.4.</span> <span class="nav-text">删除别名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE%EF%BC%9A"><span class="nav-number">1.5.</span> <span class="nav-text">快捷键：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%AF%E4%BB%BB%E6%84%8F%E5%A4%9A%E4%B8%AA%E4%BB%BB%E6%84%8F%E5%AD%97%E7%AC%A6-%E4%BB%BB%E6%84%8F%E5%8F%AF%E4%BB%A5%E6%98%AF0"><span class="nav-number">1.6.</span> <span class="nav-text">*是任意多个任意字符(任意可以是0)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%9F%E8%BF%99%E4%B8%AA%E6%98%AF%E5%8C%B9%E9%85%8D%E4%BB%BB%E6%84%8F%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6"><span class="nav-number">1.7.</span> <span class="nav-text">？这个是匹配任意一个字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8E2%E5%90%8C%E5%8F%AA%E6%98%AF%E5%8F%96%E5%8F%8D"><span class="nav-number">1.8.</span> <span class="nav-text">[^]与2同只是取反</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%80%98%E2%80%99%E5%8D%95%E5%BC%95%E5%8F%B7%E4%B8%AD%E6%89%80%E6%9C%89%E7%9A%84%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7%E9%83%BD%E6%B2%A1%E6%9C%89%E7%89%B9%E6%AE%8A%E7%9A%84%E5%90%AB%E4%B9%89"><span class="nav-number">1.9.</span> <span class="nav-text">‘’单引号中所有的特殊符号都没有特殊的含义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%80%9C%E2%80%9D%E5%8F%8C%E5%BC%95%E5%8F%B7%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7%E9%83%BD%E6%9C%89%E7%89%B9%E6%AE%8A%E6%84%8F%E4%B9%89"><span class="nav-number">1.10.</span> <span class="nav-text">“”双引号特殊符号都有特殊意义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%BC%95%E5%8F%B7%E7%AD%89%E4%BB%B7%E4%BA%8E-%E9%87%8C%E9%9D%A2%E7%9A%84%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4%E4%BC%9A%E5%85%88%E6%89%A7%E8%A1%8C%E5%8F%8D%E5%BC%95%E5%8F%B7%E5%92%8C%E6%8B%AC%E5%8F%B7%E9%87%8C%E9%9D%A2%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="nav-number">1.11.</span> <span class="nav-text">&#96;&#96;反引号等价于$()里面的系统命令会先执行反引号和括号里面的命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%BB%E6%8E%89%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7%E7%9A%84%E6%84%8F%E4%B9%89"><span class="nav-number">1.12.</span> <span class="nav-text">\去掉特殊符号的意义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%85%E7%A9%BA%E5%8E%86%E5%8F%B2%E5%91%BD%E4%BB%A4%EF%BC%9A"><span class="nav-number">1.13.</span> <span class="nav-text">清空历史命令：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%BA%E5%88%B6%E4%BF%9D%E5%AD%98%E5%88%B0%E5%8E%86%E5%8F%B2%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6-bash-history-%E4%B8%AD%EF%BC%9A"><span class="nav-number">1.14.</span> <span class="nav-text">强制保存到历史命令文件(~&#x2F;.bash_history)中：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%94%B9%E5%8E%86%E5%8F%B2%E5%91%BD%E4%BB%A4%E4%BF%9D%E5%AD%98%E6%96%87%E4%BB%B6%E5%AD%98%E7%9A%84%E6%9D%A1%E6%95%B0"><span class="nav-number">1.15.</span> <span class="nav-text">更改历史命令保存文件存的条数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%86%E5%8F%B2%E5%91%BD%E4%BB%A4%E7%9A%84%E8%B0%83%E7%94%A8%EF%BC%9A"><span class="nav-number">1.16.</span> <span class="nav-text">历史命令的调用：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86%E9%94%99%E8%AF%AF%E4%B8%8E%E6%AD%A3%E7%A1%AE%E4%BF%A1%E6%81%AF%E9%83%BD%E5%AD%98%E5%9C%A8%E6%96%87%E4%BB%B6%E9%87%8C"><span class="nav-number">1.17.</span> <span class="nav-text">将错误与正确信息都存在文件里</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E7%9A%84%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">1.18.</span> <span class="nav-text">普通的重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AA%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4%E4%B8%8D%E8%BF%9B%E8%A1%8C%E7%BB%93%E6%9E%9C%E7%9A%84%E8%BE%93%E5%87%BA%EF%BC%8C%E5%9C%A8%E8%84%9A%E6%9C%AC%E4%B8%AD%E7%BB%8F%E5%B8%B8%E4%BD%BF%E7%94%A8"><span class="nav-number">1.19.</span> <span class="nav-text">只执行命令不进行结果的输出，在脚本中经常使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%BC%80%E9%87%8D%E5%AE%9A%E5%90%91%EF%BC%9A"><span class="nav-number">1.20.</span> <span class="nav-text">分开重定向：</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2020 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

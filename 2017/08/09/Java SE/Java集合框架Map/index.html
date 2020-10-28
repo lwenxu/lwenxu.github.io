@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>java集合框架map | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="集合框架" />
+  
+  
+  
+  
+  <meta name="description" content="map集合是一对一对的存放，而且要保证键名的唯一性。  map的共性方法： 1.添加：  put(K key,V value)  putAll(K key,V value)  2.删除：  clear()  remove(Object key)  &lt;!--more--&gt;  3.判断：  isEmpty()  constrainKey(object key)  constrainVal">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java集合框架Map">
+<meta property="og:url" content="http://lwenxu.coding.me/2017/08/09/Java%20SE/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6Map/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="map集合是一对一对的存放，而且要保证键名的唯一性。  map的共性方法： 1.添加：  put(K key,V value)  putAll(K key,V value)  2.删除：  clear()  remove(Object key)  &lt;!--more--&gt;  3.判断：  isEmpty()  constrainKey(object key)  constrainVal">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-08-09T06:38:12.000Z">
+<meta property="article:modified_time" content="2018-12-19T12:36:42.000Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="集合框架">
+<meta name="twitter:card" content="summary">
+  
+
+  
+
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
+  
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Java SE/Java集合框架Map" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Java集合框架Map
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/08/09/Java%20SE/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6Map/" class="article-date">
+	  <time datetime="2017-08-09T06:38:12.000Z" itemprop="datePublished">2017-08-09</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Java/">-Java</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><p>map集合是一对一对的存放，而且要保证键名的唯一性。</p>
+</li>
+<li><p>map的共性方法：<br> 1.添加：</p>
+<pre><code> put(K key,V value)
+ putAll(K key,V value)</code></pre>
+<p> 2.删除：</p>
+<pre><code> clear()
+ remove(Object key)
+ &lt;!--more--&gt;</code></pre>
+<p> 3.判断：</p>
+<pre><code> isEmpty()
+ constrainKey(object key)
+ constrainValue(object value)</code></pre>
+<p> 4.获取：</p>
+<pre><code> get(Object key)
+ size()
+ values()</code></pre>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MapDemo01</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        HashMap&lt;String,String&gt; hashMap=<span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="comment">//当第一次存放元素的时候这个键不存在所以返回的是null</span></span><br><span class="line">        <span class="comment">//第二次再存放同一个键的值的时候不会报错而是返回的改建原有的值这个和Set以及collection是不一样的</span></span><br><span class="line">        System.out.println(hashMap.put(<span class="string">&quot;01&quot;</span>,<span class="string">&quot;zhansgan01&quot;</span>));</span><br><span class="line">        System.out.println(hashMap.put(<span class="string">&quot;01&quot;</span>,<span class="string">&quot;zhansgan02&quot;</span>));</span><br><span class="line">        hashMap.put(<span class="string">&quot;03&quot;</span>,<span class="string">&quot;zhansgan03&quot;</span>);</span><br><span class="line">        hashMap.put(<span class="string">&quot;04&quot;</span>,<span class="string">&quot;zhansgan04&quot;</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(hashMap.get(<span class="string">&quot;01&quot;</span>));</span><br><span class="line">        Collection&lt;String&gt; collection=hashMap.values();</span><br><span class="line">        System.out.println(collection);</span><br><span class="line"></span><br><span class="line">        System.out.println(hashMap.containsKey(<span class="string">&quot;02&quot;</span>));</span><br><span class="line">        System.out.println(hashMap.containsValue(<span class="string">&quot;zhansgan03&quot;</span>));</span><br><span class="line">        <span class="comment">//remove返回的value</span></span><br><span class="line">        System.out.println(hashMap.remove(<span class="string">&quot;03&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.Map的三个常用的小弟：</p>
+<ul>
+<li>hashTable   底层是hash表不可以使用null作为键或者值，线程同步  jdk1.0</li>
+<li>hashMap     底层是hash表可以使用null作为键或者值，线程不同步  jdk1.2  效率 更高</li>
+<li>TreeMap     底层是二叉树，可对map的键进行排序<br>其实set的底层都是Map</li>
+</ul>
+<p>4.两个特别重要的函数keySet和entrySet<br>  首先是keySet，其实在Map集合中里面的结构是双列结构也就是；两个Set构成的，里面分别存放<br>  键值的引用，而keySet就是只把键取出来，类似于values取出所有的值，当吧所有的键都取出来的时候就意味着我们<br>  具备了所有的值，这时候我们就可以遍历Map了，map本身没有遍历的方法<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">KeyMapDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        HashMap&lt;String,String&gt; hashMap=<span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        hashMap.put(<span class="string">&quot;1&quot;</span>,<span class="string">&quot;zs1&quot;</span>);</span><br><span class="line">        hashMap.put(<span class="string">&quot;2&quot;</span>,<span class="string">&quot;zs2&quot;</span>);</span><br><span class="line">        hashMap.put(<span class="string">&quot;3&quot;</span>,<span class="string">&quot;zs3&quot;</span>);</span><br><span class="line">        hashMap.put(<span class="string">&quot;4&quot;</span>,<span class="string">&quot;zs4&quot;</span>);</span><br><span class="line">        Set&lt;String&gt; keySet =hashMap.keySet();</span><br><span class="line">        Iterator&lt;String&gt; it=keySet.iterator();</span><br><span class="line">        <span class="keyword">for</span> (;it.hasNext();)&#123;</span><br><span class="line">            String key=it.next();</span><br><span class="line">            System.out.println(hashMap.get(key));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>5.entrySet则是直接返回了这个Map的映射关系，仅仅是关系而不是元组。<br>  这个关系的类型是Map.Entry类型的里面有getValue和getKey方法<br>  Entry其实是Map接口的内部接口就像是内部类一样，这是内部接口<br>  并且这个接口是静态的</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EntrySet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Map&lt;String,String&gt; map=<span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">&quot;1&quot;</span>,<span class="string">&quot;s1&quot;</span>);</span><br><span class="line">        map.put(<span class="string">&quot;2&quot;</span>,<span class="string">&quot;s2&quot;</span>);</span><br><span class="line">        map.put(<span class="string">&quot;3&quot;</span>,<span class="string">&quot;s3&quot;</span>);</span><br><span class="line">        <span class="comment">//返回的还是set集合只里面的类型是Map.Entry类型的</span></span><br><span class="line">        Set&lt;Map.Entry&lt;String, String&gt;&gt; mapEntry=map.entrySet();</span><br><span class="line">        <span class="keyword">for</span> (Map.Entry me :</span><br><span class="line">                mapEntry) &#123;</span><br><span class="line">            System.out.println(me.getKey()+<span class="string">&quot;--------&quot;</span>+me.getValue());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//类似于种东西</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Map</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">interface</span> <span class="title">Entry</span></span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">abstract</span> Object <span class="title">getKey</span><span class="params">()</span></span>;</span><br><span class="line">        <span class="function"><span class="keyword">abstract</span> Object <span class="title">getValue</span><span class="params">()</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>5.一个小demo<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by lwen on 2017/7/13.</span></span><br><span class="line"><span class="comment"> * 把一个字符串里面的字符的数目统计一下，，并且按照字符的顺序显示</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MapDemo03</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String str=charCount(<span class="string">&quot;aasdfasadcl&quot;</span>);</span><br><span class="line">        System.out.println(str);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> String <span class="title">charCount</span><span class="params">(String str)</span></span>&#123;</span><br><span class="line">        <span class="keyword">char</span>[] chs=str.toCharArray();</span><br><span class="line">        TreeMap&lt;Character,Integer&gt; treeMap=<span class="keyword">new</span> TreeMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span> count=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> ch:chs)&#123;</span><br><span class="line">            <span class="keyword">if</span> (treeMap.get(ch)!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                count=treeMap.get(ch);</span><br><span class="line">            &#125;</span><br><span class="line">            count++;</span><br><span class="line">            treeMap.put(ch,count);</span><br><span class="line">            count=<span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        StringBuilder sb=<span class="keyword">new</span> StringBuilder();</span><br><span class="line">        Set&lt;Map.Entry&lt;Character,Integer&gt;&gt; set=treeMap.entrySet();</span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;Character,Integer&gt; em:set)&#123;</span><br><span class="line">            sb.append(em.getKey()).append(<span class="string">&quot;(&quot;</span>).append(em.getValue()).append(<span class="string">&quot;)&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p> 7.集合框架总共有两大部分分别就是：<br> <pre><br>    ---Collection<br>        |--List  ArrayList LinkedList<br>        |--Set  HashSet  TreeSet<br>    ---Map<br>        |--HashTable<br>        |--HashMap<br>        |--TreeMap<br></pre><br>另外还有两个常用的类就是两个工具类Collections,Collections里面提供了:</p>
+<ul>
+<li><ol>
+<li>一个sort方法他是专门对Collection排序的</li>
+</ol>
+</li>
+<li>2)还有，max方法用法和sort方法一模一样</li>
+<li>3）binarySearch就是二分法查找元素可以自己实现一个试试</li>
+<li><ol start="5">
+<li>replaceAll(list,oldEle,newEle)</li>
+</ol>
+</li>
+<li>6)reverseOrder()强行翻转一个比较器，当不传入参数的时候强行逆转默认的自然排序，传入一个比较器则是逆转比较器</li>
+</ul>
+<p>还有一个工具类就是Arrays这个类里面的方法主要就是为了操作数组的：</p>
+<ul>
+<li>1）sort</li>
+<li>2）fill   全部替换</li>
+<li>3）shuflle  乱序</li>
+<li>4）asList  把数组转化为List集合，但是注意这个list集合不能进行增删操作否则异常，还有就是如果数组是一个对象类型的数组，转化为list最后就是对象的list<br>而数组时基本数据类型则会把数组当做一个list元素</li>
+</ul>
+<pre><code>集合变数组，集合变数组使用的就是Collection接口里面的共性方法，toArray(type [collection.size()])
+一般转过来的数组的长度最好就是集合的长度否则他会再开辟一个数组，而小于等于的情况会直接使用原来的数组
+
+数组变成集合是为了扩展数组的操作让数组作为集合来处理例如contains数组要判断元素是否存在必须遍历而集合就不用
+把集合变成数组是为了限制操作，也就是让数组无法操作，例如再返回的时候最好返回数组
+
+可变参数的方法，就是在函数声明或者定义的时候使用一个数组当做参数，但是我们传参的时候传入的并不是一个数组而是一般状况的传值，个数不限
+但是这个函数的固定参数必须放在可变参数的前面
+void fun(string str,int... arr)   后面就是可变参数个数不限但是类型有限制</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StrLenComparator</span> <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">String</span>&gt;</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String s1,String s2)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s1.length()&gt;s2.length())&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(s1.length()&lt;s2.length())&#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s1.compareTo(s2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CollectionsDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        List&lt;String&gt; list=<span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        list.add(<span class="string">&quot;aaa&quot;</span>);</span><br><span class="line">        list.add(<span class="string">&quot;ab&quot;</span>);</span><br><span class="line">        list.add(<span class="string">&quot;adc&quot;</span>);</span><br><span class="line">        list.add(<span class="string">&quot;dd&quot;</span>);</span><br><span class="line">        list.add(<span class="string">&quot;cd&quot;</span>);</span><br><span class="line">        list.add(<span class="string">&quot;efcasdc&quot;</span>);</span><br><span class="line">        Collections.sort(list);</span><br><span class="line">        <span class="keyword">for</span> (String string:list)&#123;</span><br><span class="line">            System.out.println(string);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Collections.sort(list,<span class="keyword">new</span> StrLenComparator());</span><br><span class="line">        <span class="keyword">for</span> (String string:list)&#123;</span><br><span class="line">            System.out.println(string);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>10，静态导入：<br>    当一般的我们import一个包的时候我们导入的是包中的类<br>    而我们使用静态导入的时候import static则是导入类中的所有的静态成员，无论是属性还是方法<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.util.Arrays.*;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.util.Collections.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticImport</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arr=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">11</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">10</span>,j=<span class="number">0</span>;i&gt;<span class="number">0</span>;i--,j++)&#123;</span><br><span class="line">            arr[j]=i;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(arr);   <span class="comment">//可以直接使用Arrays中的方法而不用写Arrays.sort但是如果同一个类中名字冲突的话需要加上</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> ele:arr)&#123;</span><br><span class="line">            System.out.println(ele);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>9.HashMap与HashTable的区别：<br>    1）hashmap不是线程同步的，而hashtable则是线程同步的，也就是前者效率较高后者效率较低，安全性相反<br>    2）hashmap他是Map的子类。而hashtable则是dictionary的子类<br>    3）hashMap的键值均可以为null，hashtable的键值均不可为null<br>10.hashTable的使用。<br>    一般来说hashtable使用的很少，这里也有一个常用的子类就是hashTable的常用子类Properties<br>    类，这个类的作用主要就是读，写，加载配置文件，这个容器里面只允许存放字符串，不论是键值均如此<br>    存放的键值可以转化为普通的配置文件也可以转化为xml文件，之后下一次还可以使用load进行加载</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashTableDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">        Properties properties=<span class="keyword">new</span> Properties();</span><br><span class="line">        properties.setProperty(<span class="string">&quot;user&quot;</span>,<span class="string">&quot;lwen&quot;</span>);</span><br><span class="line">        properties.setProperty(<span class="string">&quot;pwd&quot;</span>,<span class="string">&quot;123&quot;</span>);</span><br><span class="line">        properties.store(<span class="keyword">new</span> FileWriter(<span class="string">&quot;info.properties&quot;</span>),<span class="string">&quot;用户配置文件&quot;</span>);</span><br><span class="line">        properties.store(<span class="keyword">new</span> FileOutputStream(<span class="string">&quot;info_1.properties&quot;</span>),<span class="string">&quot;用户配置文件&quot;</span>);  <span class="comment">//可以字符流也可以字节流</span></span><br><span class="line">        properties.storeToXML(<span class="keyword">new</span> FileOutputStream(<span class="string">&quot;info.xml&quot;</span>),<span class="string">&quot;xml&quot;</span>);  <span class="comment">//这个只能使用字节流对象  xml没有编码</span></span><br><span class="line">        System.out.println(properties.getProperty(<span class="string">&quot;user&quot;</span>,<span class="string">&quot;not this &quot;</span>));  <span class="comment">//如果找不到这个属性，则会返回默认值</span></span><br><span class="line">        properties.load(<span class="keyword">new</span> FileReader(<span class="string">&quot;info.properties&quot;</span>));  <span class="comment">//加载配置文件是直接加载到这个对象里面，而不是打印</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>11.内存的中的变量一般分为4种，这四种对于垃圾回收机制来说是不一样的：<br>    强引用：无论什么时候都不会被gc回收<br>    软引用：可能会被gc回收，只有在jvm内存不足的时候才会被回收<br>    弱引用：当gc运行的时候就被回收<br>    虚引用：类似于无引用，主要跟踪对象被回收的状态，不能单独使用，一般和引用队列一起使用<br>    这里重点说一下强和弱引用，所谓强引用一般来说就是一些字符串常量，他们长期驻留在内存，用于共享<br>    当我们在一个hashMap中存放了很多内容的时候，有时候我们需要清除一些没用的数据，我们就可以运行gc<br>    因此就诞生了WeakHashMap这样的话，这里面的弱类型的就会被干掉</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeakHashMapDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        WeakHashMap&lt;String,String&gt; weakHashMap=<span class="keyword">new</span> WeakHashMap&lt;&gt;();</span><br><span class="line">        <span class="comment">//这两个事在常量池中的常量，所以放到weakmap中也不会被gc</span></span><br><span class="line">        weakHashMap.put(<span class="string">&quot;zhangsan0&quot;</span>,<span class="string">&quot;122&quot;</span>);</span><br><span class="line">        weakHashMap.put(<span class="string">&quot;zhangsan1&quot;</span>,<span class="string">&quot;123&quot;</span>);</span><br><span class="line">        <span class="comment">//这两个则是两个对象在堆内存中，放到这里了以后，肯定被gc</span></span><br><span class="line">        weakHashMap.put(<span class="keyword">new</span> String(<span class="string">&quot;zhangsan2&quot;</span>),<span class="string">&quot;102&quot;</span>);</span><br><span class="line">        weakHashMap.put(<span class="keyword">new</span> String(<span class="string">&quot;zhangsan3&quot;</span>),<span class="string">&quot;1245&quot;</span>);</span><br><span class="line">        <span class="comment">//运行垃圾回收机制之前</span></span><br><span class="line">        Set&lt;Map.Entry&lt;String,String&gt;&gt; me=weakHashMap.entrySet();</span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;String, String&gt; stringStringEntry : me) &#123;</span><br><span class="line">            System.out.println(stringStringEntry.getKey());</span><br><span class="line">            System.out.println(stringStringEntry.getValue());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//运行垃圾回收机制</span></span><br><span class="line">        System.gc();</span><br><span class="line">        System.runFinalization();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//垃圾回收之后</span></span><br><span class="line">        System.out.println(<span class="string">&quot;=========================&quot;</span>);</span><br><span class="line">        Set&lt;Map.Entry&lt;String,String&gt;&gt; me1=weakHashMap.entrySet();</span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;String, String&gt; stringStringEntry : me1) &#123;</span><br><span class="line">            System.out.println(stringStringEntry.getKey());</span><br><span class="line">            System.out.println(stringStringEntry.getValue());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>12.IdentityHashMap这个容器是以键的地址作为比较的对象<br>   注意是地址而不是其他的，例如说如果是一个字符串常量，显然这个只要内容相同就重复了，而如果是字符串对象就是不同的地址值，哪怕他们的内容一样</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IdentifiedHashMapDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        IdentityHashMap identityHashMap=<span class="keyword">new</span> IdentityHashMap();</span><br><span class="line">        <span class="comment">//前两个是字符串常量，在常量池中，地址是一样的</span></span><br><span class="line">        identityHashMap.put(<span class="string">&quot;a&quot;</span>,<span class="string">&quot;21&quot;</span>);</span><br><span class="line">        identityHashMap.put(<span class="string">&quot;a&quot;</span>,<span class="string">&quot;22&quot;</span>);</span><br><span class="line">        <span class="comment">//后面两个是不同的对象，因此他们都被存入</span></span><br><span class="line">        identityHashMap.put(<span class="keyword">new</span> String(<span class="string">&quot;a&quot;</span>),<span class="string">&quot;23&quot;</span>);</span><br><span class="line">        identityHashMap.put(<span class="keyword">new</span> String(<span class="string">&quot;a&quot;</span>),<span class="string">&quot;24&quot;</span>);</span><br><span class="line">        System.out.println(identityHashMap.size());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>13.对于集合框架中有时候遇到多线程，我们又需要使用那些非同步的集合的时候我们必须手动的去同步这些集合，以及希望集合不可修改的时候也需要加一些限定</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SyncDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        List&lt;String&gt; list=<span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        List&lt;String&gt; list1=Collections.synchronizedList(list);</span><br><span class="line"><span class="comment">//        这样一来list1就是一个同步的arraylist</span></span><br><span class="line"><span class="comment">//        其他的几个容器类似</span></span><br><span class="line">        List&lt;String&gt; list2=Collections.unmodifiableList(list1);</span><br><span class="line">        <span class="comment">//这样一来list2就是一个不可修改的容器也就是此时的容器不再支持增删操作</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2017/08/09/Java SE/Java集合框架Map/" target="_blank" title="Java集合框架Map">http://lwenxu.coding.me/2017/08/09/Java SE/Java集合框架Map/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/09/Java%20Web/JavaWeb%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JavaWeb基础
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/09/Java%20SE/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6Collections/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java集合框架Collections</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav">None</ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2020 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

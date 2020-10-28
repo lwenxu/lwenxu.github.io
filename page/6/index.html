@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  
+  <meta property="og:type" content="website">
+<meta property="og:title" content="昨夜凛雨">
+<meta property="og:url" content="http://lwenxu.coding.me/page/6/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:locale">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="Java PHP Code">
+<meta name="twitter:card" content="summary">
+  
+
+  
+
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
+  
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    <link rel="stylesheet" href="/css/home.css" >
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body>
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                 >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;">
+  
+    <article id="post-SpringBoot/SpringBoot 笔记 ( 九 )：分布式"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/05/23/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B9%9D%20)%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F/">SpringBoot 笔记(九):分布式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/05/23/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B9%9D%20)%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F/" class="article-date">
+	  <time datetime="2018-05-23T14:01:28.000Z" itemprop="datePublished">2018-05-23</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          SpringBoot 笔记(九):分布式我们可以使用 SpringBoot构建分布式应用，也就是我们在开发的时候可以进行多个模块的拆分，每一个功能做一个模块，然后我们使用一些分布式的框架，进行远程调用，所谓的远程调用就是RPC调用，而不是以前的WebService这个形式的.。其实这种分布式的RPC框架有很多，除了我们创常见的Doubbo还有就是我们Spring 项目自带的 SpringCloud 也是类似的东西。
+器基本理念就是：我们一个模块写好我们的业务逻辑然后，把我们写好的逻辑当作服...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/05/23/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B9%9D%20)%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-SpringBoot/SpringBoot 笔记 ( 八 )：任务"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/05/22/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AB%20)%EF%BC%9A%E4%BB%BB%E5%8A%A1/">SpringBoot 笔记(八):任务</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/05/22/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AB%20)%EF%BC%9A%E4%BB%BB%E5%8A%A1/" class="article-date">
+	  <time datetime="2018-05-22T09:01:28.000Z" itemprop="datePublished">2018-05-22</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          SpringBoot 笔记 (八):任务1.异步任务1.开启异步任务注解@EnableAsync
+2.对Service层方法开启异步@Async
+123456789@Servicepublic class TaskService &#123;    @Async    public void task() throws InterruptedException &#123;        System.out.println(&quot;start&quot;);        Threa...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/05/22/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AB%20)%EF%BC%9A%E4%BB%BB%E5%8A%A1/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-SpringBoot/SpringBoot 笔记 ( 七 )：搜索"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/05/21/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%83%20)%EF%BC%9A%E6%90%9C%E7%B4%A2/">SpringBoot 笔记(七):搜索</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/05/21/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%83%20)%EF%BC%9A%E6%90%9C%E7%B4%A2/" class="article-date">
+	  <time datetime="2018-05-21T06:01:28.000Z" itemprop="datePublished">2018-05-21</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          SpringBoot 笔记 (七):搜索这里我们的搜索就是用 ElasticSearch 这个工具，这个其实是在 Lauce 的基础上构建的一个搜索引擎。
+1. ES入门1.docker安装12docker pull registry.docker-cn.com/library/elasticsearchdocker run -e ES_JAVA_OPTS=&quot;-Xms256m -Xmx256m&quot; -d -p 9200:9200 -p 9300:9300 --name E...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/05/21/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%83%20)%EF%BC%9A%E6%90%9C%E7%B4%A2/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-SpringBoot/SpringBoot 笔记 ( 六 )：消息"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AD%20)%EF%BC%9A%E6%B6%88%E6%81%AF/">SpringBoot 笔记 ( 六)：消息</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AD%20)%EF%BC%9A%E6%B6%88%E6%81%AF/" class="article-date">
+	  <time datetime="2018-05-20T07:01:28.000Z" itemprop="datePublished">2018-05-20</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          SpringBoot 笔记 (六): 消息1.基本概念1.应用场景
+
+
+
+2.重要概念
+消息代理（broker）：消息队列服务器
+目的地：消息消费者
+
+1.消息队列的两种目的地：
+队列：点对点的通讯，这种就是消息生产者把消息发送到消息队列中，然后消息接受者去获取消息，获取后这个消息就被移除，消息的接受者可以有多个也就是可以有多个消费者，但是注意一个消息只能被其中的一个消费者消费。
+主题：发布订阅通讯，广播形式。所有的接受者都可以收到消息。
+
+2.JMS这是一个基于JVM的消息代理的规范，但...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AD%20)%EF%BC%9A%E6%B6%88%E6%81%AF/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-SpringBoot/SpringBoot 笔记 ( 五)：缓存"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%94)%EF%BC%9A%E7%BC%93%E5%AD%98/">SpringBoot 笔记 ( 五 )：缓存</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%94)%EF%BC%9A%E7%BC%93%E5%AD%98/" class="article-date">
+	  <time datetime="2018-05-20T02:01:28.000Z" itemprop="datePublished">2018-05-20</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          SpringBoot 笔记 (五): 缓存1.JSR107介绍1.核心概念JSR107这个规范有五个核心概念分别是：
+
+CacheProvider  它用来管理缓存的Manager也就是用来创建，删除，管理，配置CacheManager 的
+CacheManager 是用来管理各个缓存，创建，删除，管理，配置Cache的
+Cache 是各个具体的缓存组件
+Entry 是缓存中具体的一个缓存项
+Expire 缓存的过期时间
+
+
+
+2.导入包
+javax.cache.cache-api
+jav...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%94)%EF%BC%9A%E7%BC%93%E5%AD%98/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Spark/Kafka入门"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/05/18/Spark/Kafka%E5%85%A5%E9%97%A8/">Kafka 入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/05/18/Spark/Kafka%E5%85%A5%E9%97%A8/" class="article-date">
+	  <time datetime="2018-05-18T11:01:28.000Z" itemprop="datePublished">2018-05-18</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Spark/">Spark</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          1. Kafka架构
+生产者（producer）：生产资源的
+消费者（consumer）：消费资源
+broker（缓冲）：中间缓冲器
+topic（标记）：谁来消费
+
+2. 配置Kafka1. 配置ZK
+解压
+配置ZK_HOME
+配置PATH
+修改 zk.cfg 修改存储位置
+zkServer.sh 启动
+
+2. 配置Kafka
+配置HOME以及PATH
+修改 server.porperties 注意以下几个条目
+
+123456$KAFKA_HOME/config/server.proper...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/05/18/Spark/Kafka%E5%85%A5%E9%97%A8/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Spark/Flume入门"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/05/18/Spark/Flume%E5%85%A5%E9%97%A8/">Flume 入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/05/18/Spark/Flume%E5%85%A5%E9%97%A8/" class="article-date">
+	  <time datetime="2018-05-18T08:01:28.000Z" itemprop="datePublished">2018-05-18</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Spark/">Spark</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          1. 基本架构1. 结构source    源数据：目录/
+channel    数据管道
+sink        数据输出
+2. 几种结构形式
+单个的Flume
+多个Flume串行工作，前一个Flume的sink作为后一个的source
+多个Flume并行工作然后最后用一个Flume进行合并这行并行收集的数据
+多个Flume并行工作，分别传送到不同的目的地
+
+2. 安装1. 安装JDK解压到 /app将java配置系统环境变量中：/.bash_profileexport JAVA_HOM...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/05/18/Spark/Flume%E5%85%A5%E9%97%A8/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Tools/Vim使用技巧"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/05/18/Tools/Vim%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">Vim 使用技巧</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/05/18/Tools/Vim%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" class="article-date">
+	  <time datetime="2018-05-18T04:32:34.000Z" itemprop="datePublished">2018-05-18</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          1.x 删除后面的字符 X 删除前一个字符  删除3个字符就是3x2.caw:改写单词3.J:删除换行符，使下一行并上来。     nJ:连接连同本行的n行4.u:撤销上一次操作      U:撤销当前行的所有修改5.i 在光标前插入   I 在行首插入6.a 在光标后插入 A 在行末插入7.o:在当前行的下面另起一行，并变为插入模式 O：在当前行上面另起一行，变为插入模式8.vim中Nyy可以复制光标后的N行。有时我们不容易得出行数，这时可以用做标记的方法来制定复制范围  1. 在开始行...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/05/18/Tools/Vim%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Spark/Scala 入门"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/05/08/Spark/Scala%20%E5%85%A5%E9%97%A8/">Scala 入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/05/08/Spark/Scala%20%E5%85%A5%E9%97%A8/" class="article-date">
+	  <time datetime="2018-05-08T06:01:28.000Z" itemprop="datePublished">2018-05-08</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Spark/">Spark</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          1. 基本语法1. 变量 var123var name:string=&quot;hello&quot;;var name=&quot;hello&quot;;var num=3.0;
+
+2. 常量 val1val name=&quot;string&quot;;
+
+3. 这里是没有 ++ 操作和 – 操作的4. 函数调用不用使用对象来调用，导入包以后直接调用即可
+1234import scala.math._sqrt(2);pow(1,2);min(1,2);
+
+5.apply()默认调...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/05/08/Spark/Scala%20%E5%85%A5%E9%97%A8/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Spark/SparkStreming"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/05/08/Spark/SparkStreming/">SparkStreaming 入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/05/08/Spark/SparkStreming/" class="article-date">
+	  <time datetime="2018-05-08T06:01:28.000Z" itemprop="datePublished">2018-05-08</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Spark/">Spark</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          1. 基本原理其实在 SparkStreaming 中和之前的Core不同的就是他会把任务分成批次的进行处理，也就是我们需要设置间隔多久计算一次。
+我们从网络，文件系统，Kafka 等等数据源产生的地方获取数据，然后SparkStreaming放到内存中，接着进行对数据进行计算，获取结果。
+在一个Spark应用程序启动以后会产生一个SparkContext和一个StreamingContext，后者是基于前者的，接着就是每一个集群的单节点上就有Executor 这些Executor中是有R...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/05/08/Spark/SparkStreming/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/5/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/7/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+      </div>
+      
+        <div align="center" style="margin-top: 30px;"><hr class="hr" style="margin:0px; height:3px;"></div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2020 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+</body>
+</html>

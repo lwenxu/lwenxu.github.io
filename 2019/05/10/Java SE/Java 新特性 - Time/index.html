@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>java 新特性之 time | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Java8" />
+  
+  
+  
+  
+  <meta name="description" content="日期类 LocalDate能够简单的获取当天的日期，并且可以方便的对日期进行加减。 他是通过静态方法或者 from&#x2F;of 等方法创建对象的。 这个类不存储时区，所以他没有时区的概念，如果需要时区的话需要使用 ZonedDateTime 这个类只能进行日期的相关操作，没有具体的时间。 下面介绍常用的几个方法 atTime生成一个带有时间的日期，返回结果是 LocalDateTime 所以很明显这个就">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 新特性之 Time">
+<meta property="og:url" content="http://lwenxu.coding.me/2019/05/10/Java%20SE/Java%20%E6%96%B0%E7%89%B9%E6%80%A7%20-%20Time/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="日期类 LocalDate能够简单的获取当天的日期，并且可以方便的对日期进行加减。 他是通过静态方法或者 from&#x2F;of 等方法创建对象的。 这个类不存储时区，所以他没有时区的概念，如果需要时区的话需要使用 ZonedDateTime 这个类只能进行日期的相关操作，没有具体的时间。 下面介绍常用的几个方法 atTime生成一个带有时间的日期，返回结果是 LocalDateTime 所以很明显这个就">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-05-10T02:49:28.000Z">
+<meta property="article:modified_time" content="2019-05-11T02:45:28.000Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="Java8">
+<meta name="twitter:card" content="summary">
+  
+
+  
+
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
+  
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Java SE/Java 新特性 - Time" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Java 新特性之 Time
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/05/10/Java%20SE/Java%20%E6%96%B0%E7%89%B9%E6%80%A7%20-%20Time/" class="article-date">
+	  <time datetime="2019-05-10T02:49:28.000Z" itemprop="datePublished">2019-05-10</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Java/">-Java</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="日期类-LocalDate"><a href="#日期类-LocalDate" class="headerlink" title="日期类 LocalDate"></a>日期类 LocalDate</h2><p>能够简单的获取当天的日期，并且可以方便的对日期进行加减。</p>
+<p>他是通过静态方法或者 from/of 等方法创建对象的。</p>
+<p>这个类不存储时区，所以他没有时区的概念，如果需要时区的话需要使用 <code>ZonedDateTime</code></p>
+<p>这个类只能进行日期的相关操作，没有具体的时间。</p>
+<p>下面介绍常用的几个方法</p>
+<h3 id="atTime"><a href="#atTime" class="headerlink" title="atTime"></a>atTime</h3><p>生成一个带有时间的日期，返回结果是 <code>LocalDateTime</code> 所以很明显这个就是带有时间的日期类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LocalDateTime time = LocalDate.now().atTime(<span class="number">12</span>, <span class="number">3</span>, <span class="number">22</span>,<span class="number">232</span>);</span><br><span class="line">System.out.println(time); <span class="comment">//2019-05-10T12:03:22.000000232</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="compareTo"><a href="#compareTo" class="headerlink" title="compareTo()"></a>compareTo()</h3><p>比较两个时间返回的值是 int ，大于 0 则是比较者大，否则是被比较者大，为0相等。</p>
+<h3 id="format"><a href="#format" class="headerlink" title="format()"></a>format()</h3><p>格式化时间，需要传递一个时间的 formatter 类型为 <code>[DateTimeFormatter]</code> </p>
+<h3 id="parse"><a href="#parse" class="headerlink" title="parse()"></a>parse()</h3><p>同上第一个参数是解析的字符串，第二个就是传入formatter</p>
+<h3 id="plus-minus"><a href="#plus-minus" class="headerlink" title="plus/minus"></a>plus/minus</h3><p>对日期进行加减，第一个参数传入的是 int 第二个就是单位，单位使用 <code>ChronoUnit</code> 枚举类型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LocalDate1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        LocalDate today = LocalDate.now();</span><br><span class="line">        <span class="comment">// 添加时间</span></span><br><span class="line">        LocalDate i22day = today.plusDays(<span class="number">22</span>);</span><br><span class="line">        LocalDate tomorrow = today.plus(<span class="number">1</span>, ChronoUnit.DAYS);</span><br><span class="line">        <span class="comment">// 减去时间</span></span><br><span class="line">        LocalDate s22day = today.minus(<span class="number">22</span>, ChronoUnit.DAYS);</span><br><span class="line">        LocalDate yesterday = tomorrow.minusDays(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(today);</span><br><span class="line">        System.out.println(tomorrow);</span><br><span class="line">        System.out.println(yesterday);</span><br><span class="line">        System.out.println(i22day);</span><br><span class="line">        System.out.println(s22day);</span><br><span class="line"></span><br><span class="line">        LocalDate independenceDay = LocalDate.of(<span class="number">2014</span>, Month.JULY, <span class="number">4</span>);</span><br><span class="line">        DayOfWeek dayOfWeek = independenceDay.getDayOfWeek();</span><br><span class="line">        System.out.println(dayOfWeek);    <span class="comment">// FRIDAY</span></span><br><span class="line"></span><br><span class="line">        DateTimeFormatter germanFormatter =</span><br><span class="line">                DateTimeFormatter</span><br><span class="line">                        .ofLocalizedDate(FormatStyle.MEDIUM)</span><br><span class="line">                        .withLocale(Locale.GERMAN);</span><br><span class="line"></span><br><span class="line">        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(<span class="string">&quot;yyyy/mm/dd hh:mm:ss&quot;</span>);</span><br><span class="line">        LocalDate xmas = LocalDate.parse(<span class="string">&quot;24.12.2014&quot;</span>, germanFormatter);</span><br><span class="line">        <span class="comment">// System.out.println(LocalDate.parse(&quot;2014/02/01 12:03:22&quot;, dateTimeFormatter));</span></span><br><span class="line">        System.out.println(xmas);   <span class="comment">// 2014-12-24</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        System.out.println(LocalDate.now().atStartOfDay());</span><br><span class="line"></span><br><span class="line">        LocalDateTime time = LocalDate.now().atTime(<span class="number">12</span>, <span class="number">3</span>, <span class="number">22</span>,<span class="number">232</span>);</span><br><span class="line">        System.out.println(time);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="时间-LocalDateTime"><a href="#时间-LocalDateTime" class="headerlink" title="时间 LocalDateTime"></a>时间 LocalDateTime</h2><p>这个和上面类似是一个时间类，不仅仅有日期还是时间。</p>
+<h3 id="atZone"><a href="#atZone" class="headerlink" title="atZone"></a>atZone</h3><p>产生带有时区日期</p>
+<h3 id="format-1"><a href="#format-1" class="headerlink" title="format"></a>format</h3><p>格式化时间</p>
+<h3 id="of"><a href="#of" class="headerlink" title="of"></a>of</h3><p>从一个时间创建对象 <code>of(int year, int month, int dayOfMonth, int hour, int minute, int second)</code></p>
+<h3 id="parse-1"><a href="#parse-1" class="headerlink" title="parse"></a>parse</h3><p>解析时间 <code>**parse**([CharSequence]text, [DateTimeFormatter]</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LocalDateTime1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        LocalDateTime sylvester = LocalDateTime.of(<span class="number">2014</span>, Month.DECEMBER, <span class="number">31</span>, <span class="number">23</span>, <span class="number">59</span>, <span class="number">59</span>);</span><br><span class="line"></span><br><span class="line">        DayOfWeek dayOfWeek = sylvester.getDayOfWeek();</span><br><span class="line">        System.out.println(dayOfWeek);      <span class="comment">// WEDNESDAY</span></span><br><span class="line"></span><br><span class="line">        Month month = sylvester.getMonth();</span><br><span class="line">        System.out.println(month);          <span class="comment">// DECEMBER</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">long</span> minuteOfDay = sylvester.getLong(ChronoField.MINUTE_OF_DAY);</span><br><span class="line">        System.out.println(minuteOfDay);    <span class="comment">// 1439</span></span><br><span class="line"></span><br><span class="line">        Instant instant = sylvester</span><br><span class="line">                .atZone(ZoneId.systemDefault())</span><br><span class="line">                .toInstant();</span><br><span class="line"></span><br><span class="line">        Date legacyDate = Date.from(instant);</span><br><span class="line">        System.out.println(legacyDate);     <span class="comment">// Wed Dec 31 23:59:59 CET 2014</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        DateTimeFormatter formatter =</span><br><span class="line">                DateTimeFormatter</span><br><span class="line">                        .ofPattern(<span class="string">&quot;MMM dd, yyyy - HH:mm&quot;</span>);</span><br><span class="line"></span><br><span class="line">        LocalDateTime parsed = LocalDateTime.parse(<span class="string">&quot;Nov 03, 2014 - 07:13&quot;</span>, formatter);</span><br><span class="line">        String string = parsed.format(formatter);</span><br><span class="line">        System.out.println(string);     <span class="comment">// Nov 03, 2014 - 07:13</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="LocalTime"><a href="#LocalTime" class="headerlink" title="LocalTime"></a>LocalTime</h2><p>这个类是上面的LocaDateTime中的 Time 部分，也就是只具有时间没有日期。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">public class LocalDate1 &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        LocalDate today &#x3D; LocalDate.now();</span><br><span class="line">        &#x2F;&#x2F; 添加时间</span><br><span class="line">        LocalDate i22day &#x3D; today.plusDays(22);</span><br><span class="line">        LocalDate tomorrow &#x3D; today.plus(1, ChronoUnit.DAYS);</span><br><span class="line">        &#x2F;&#x2F; 减去时间</span><br><span class="line">        LocalDate s22day &#x3D; today.minus(22, ChronoUnit.DAYS);</span><br><span class="line">        LocalDate yesterday &#x3D; tomorrow.minusDays(2);</span><br><span class="line"></span><br><span class="line">        System.out.println(today);</span><br><span class="line">        System.out.println(tomorrow);</span><br><span class="line">        System.out.println(yesterday);</span><br><span class="line">        System.out.println(i22day);</span><br><span class="line">        System.out.println(s22day);</span><br><span class="line"></span><br><span class="line">        LocalDate independenceDay &#x3D; LocalDate.of(2014, Month.JULY, 4);</span><br><span class="line">        DayOfWeek dayOfWeek &#x3D; independenceDay.getDayOfWeek();</span><br><span class="line">        System.out.println(dayOfWeek);    &#x2F;&#x2F; FRIDAY</span><br><span class="line"></span><br><span class="line">        DateTimeFormatter germanFormatter &#x3D;</span><br><span class="line">                DateTimeFormatter</span><br><span class="line">                        .ofLocalizedDate(FormatStyle.MEDIUM)</span><br><span class="line">                        .withLocale(Locale.GERMAN);</span><br><span class="line"></span><br><span class="line">        DateTimeFormatter dateTimeFormatter &#x3D; DateTimeFormatter.ofPattern(&quot;yyyy&#x2F;mm&#x2F;dd hh:mm:ss&quot;);</span><br><span class="line">        LocalDate xmas &#x3D; LocalDate.parse(&quot;24.12.2014&quot;, germanFormatter);</span><br><span class="line">        &#x2F;&#x2F; System.out.println(LocalDate.parse(&quot;2014&#x2F;02&#x2F;01 12:03:22&quot;, dateTimeFormatter));</span><br><span class="line">        System.out.println(xmas);   &#x2F;&#x2F; 2014-12-24</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        System.out.println(LocalDate.now().atStartOfDay());</span><br><span class="line"></span><br><span class="line">        LocalDateTime time &#x3D; LocalDate.now().atTime(12, 3, 22,232);</span><br><span class="line">        System.out.println(time);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Clock"><a href="#Clock" class="headerlink" title="Clock"></a>Clock</h2><p>这个类可以获取当前的时间戳</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Clock1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Clock millis = Clock.tickMillis(ZoneOffset.UTC);</span><br><span class="line">        Clock seconds = Clock.tickSeconds(ZoneOffset.UTC);</span><br><span class="line">        Clock minutes = Clock.tickMinutes(ZoneOffset.UTC);</span><br><span class="line">        <span class="comment">// 精确到毫秒的时间戳</span></span><br><span class="line">        System.out.println(millis.millis());</span><br><span class="line">        <span class="comment">// 精确到秒的时间戳</span></span><br><span class="line">        System.out.println(seconds.millis());</span><br><span class="line">        <span class="comment">// 精确到分钟的时间戳</span></span><br><span class="line">        System.out.println(minutes.millis());</span><br><span class="line">        <span class="comment">// 精确到毫秒的时间</span></span><br><span class="line">        System.out.println(millis.instant());</span><br><span class="line">        <span class="comment">// 精确到秒的时间</span></span><br><span class="line">        System.out.println(seconds.instant());</span><br><span class="line">        <span class="comment">// 精确到分钟的时间</span></span><br><span class="line">        System.out.println(minutes.instant());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的输出结果是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1557567339397</span><br><span class="line">1557567339000</span><br><span class="line">1557567300000</span><br><span class="line">2019-05-11T09:35:39.397Z</span><br><span class="line">2019-05-11T09:35:39Z</span><br><span class="line">2019-05-11T09:35:00Z</span><br></pre></td></tr></table></figure>
+
+<h2 id="Map初始化小技巧"><a href="#Map初始化小技巧" class="headerlink" title="Map初始化小技巧"></a>Map初始化小技巧</h2><p>再看Clock类中的 ZoneId 接口的时候发现了这个接口中使用了一个Map，然对Map做了初始化。一般初始化必须使用 put 放数据，这里采用了 ofEntries 来初始化多组数据。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Map&lt;String, String&gt; SHORT_IDS = Map.ofEntries(</span><br><span class="line">        entry(<span class="string">&quot;ACT&quot;</span>, <span class="string">&quot;Australia/Darwin&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;AET&quot;</span>, <span class="string">&quot;Australia/Sydney&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;AGT&quot;</span>, <span class="string">&quot;America/Argentina/Buenos_Aires&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;ART&quot;</span>, <span class="string">&quot;Africa/Cairo&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;AST&quot;</span>, <span class="string">&quot;America/Anchorage&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;BET&quot;</span>, <span class="string">&quot;America/Sao_Paulo&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;BST&quot;</span>, <span class="string">&quot;Asia/Dhaka&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;CAT&quot;</span>, <span class="string">&quot;Africa/Harare&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;CNT&quot;</span>, <span class="string">&quot;America/St_Johns&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;CST&quot;</span>, <span class="string">&quot;America/Chicago&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;CTT&quot;</span>, <span class="string">&quot;Asia/Shanghai&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;EAT&quot;</span>, <span class="string">&quot;Africa/Addis_Ababa&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;ECT&quot;</span>, <span class="string">&quot;Europe/Paris&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;IET&quot;</span>, <span class="string">&quot;America/Indiana/Indianapolis&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;IST&quot;</span>, <span class="string">&quot;Asia/Kolkata&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;JST&quot;</span>, <span class="string">&quot;Asia/Tokyo&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;MIT&quot;</span>, <span class="string">&quot;Pacific/Apia&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;NET&quot;</span>, <span class="string">&quot;Asia/Yerevan&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;NST&quot;</span>, <span class="string">&quot;Pacific/Auckland&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;PLT&quot;</span>, <span class="string">&quot;Asia/Karachi&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;PNT&quot;</span>, <span class="string">&quot;America/Phoenix&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;PRT&quot;</span>, <span class="string">&quot;America/Puerto_Rico&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;PST&quot;</span>, <span class="string">&quot;America/Los_Angeles&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;SST&quot;</span>, <span class="string">&quot;Pacific/Guadalcanal&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;VST&quot;</span>, <span class="string">&quot;Asia/Ho_Chi_Minh&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;EST&quot;</span>, <span class="string">&quot;-05:00&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;MST&quot;</span>, <span class="string">&quot;-07:00&quot;</span>),</span><br><span class="line">        entry(<span class="string">&quot;HST&quot;</span>, <span class="string">&quot;-10:00&quot;</span>)</span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2019/05/10/Java SE/Java 新特性 - Time/" target="_blank" title="Java 新特性之 Time">http://lwenxu.coding.me/2019/05/10/Java SE/Java 新特性 - Time/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/05/11/Java%20SE/Java%20%E6%96%B0%E7%89%B9%E6%80%A7%20-%20Stream/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java 新特性之 Stream
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/14/Live/%E6%89%AC%E5%B8%86%E8%B5%B7%E8%88%AA/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">扬帆起航</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%E7%B1%BB-LocalDate"><span class="nav-number">1.</span> <span class="nav-text">日期类 LocalDate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#atTime"><span class="nav-number">1.1.</span> <span class="nav-text">atTime</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#compareTo"><span class="nav-number">1.2.</span> <span class="nav-text">compareTo()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#format"><span class="nav-number">1.3.</span> <span class="nav-text">format()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#parse"><span class="nav-number">1.4.</span> <span class="nav-text">parse()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#plus-minus"><span class="nav-number">1.5.</span> <span class="nav-text">plus&#x2F;minus</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E9%97%B4-LocalDateTime"><span class="nav-number">2.</span> <span class="nav-text">时间 LocalDateTime</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#atZone"><span class="nav-number">2.1.</span> <span class="nav-text">atZone</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#format-1"><span class="nav-number">2.2.</span> <span class="nav-text">format</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#of"><span class="nav-number">2.3.</span> <span class="nav-text">of</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#parse-1"><span class="nav-number">2.4.</span> <span class="nav-text">parse</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LocalTime"><span class="nav-number">3.</span> <span class="nav-text">LocalTime</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Clock"><span class="nav-number">4.</span> <span class="nav-text">Clock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map%E5%88%9D%E5%A7%8B%E5%8C%96%E5%B0%8F%E6%8A%80%E5%B7%A7"><span class="nav-number">5.</span> <span class="nav-text">Map初始化小技巧</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2020 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

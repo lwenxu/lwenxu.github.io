@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>arraylist 源码分析 | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="JDK 源码分析" />
+  
+  
+  
+  
+  <meta name="description" content="ArrayList 源码分析 1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！ 1. 结构&amp;emsp;&amp;emsp;首先我们需">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ArrayList 源码分析">
+<meta property="og:url" content="http://lwenxu.coding.me/2018/03/25/Java%20SourceCode/ArrayList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="ArrayList 源码分析 1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！ 1. 结构&amp;emsp;&amp;emsp;首先我们需">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-03-25T13:15:02.000Z">
+<meta property="article:modified_time" content="2018-12-19T12:36:42.000Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="JDK 源码分析">
+<meta name="twitter:card" content="summary">
+  
+
+  
+
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
+  
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Java SourceCode/ArrayList 源码分析" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      ArrayList 源码分析
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/03/25/Java%20SourceCode/ArrayList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
+	  <time datetime="2018-03-25T13:15:02.000Z" itemprop="datePublished">2018-03-25</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ArrayList-源码分析"><a href="#ArrayList-源码分析" class="headerlink" title="ArrayList 源码分析"></a>ArrayList 源码分析</h1><blockquote>
+<h3 id="1-在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有-IDE-方便，所以在-github-上提供JDK1-8-的源码、详细的注释及测试用例。欢迎大家-star、fork-！"><a href="#1-在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有-IDE-方便，所以在-github-上提供JDK1-8-的源码、详细的注释及测试用例。欢迎大家-star、fork-！" class="headerlink" title="1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！"></a>1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 <a target="_blank" rel="noopener" href="https://github.com/lwenxu/JDKSourceCode">github</a> 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！</h3><h3 id="2-由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！"><a href="#2-由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！" class="headerlink" title="2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！"></a>2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！</h3></blockquote>
+<h2 id="1-结构"><a href="#1-结构" class="headerlink" title="1. 结构"></a>1. 结构</h2><p>&emsp;&emsp;首先我们需要对 ArrayList 有一个大致的了解就从结构来看看吧.</p>
+<h3 id="1-继承"><a href="#1-继承" class="headerlink" title="1. 继承"></a>1. 继承</h3><p>&emsp;&emsp;该类继承自 AbstractList 这个比较好说</p>
+<h3 id="2-实现"><a href="#2-实现" class="headerlink" title="2. 实现"></a>2. 实现</h3><p>这个类实现的接口比较多，具体如下：</p>
+<ol>
+<li>首先这个类是一个 List 自然有 List 接口</li>
+<li>然后由于这个类需要进行随机访问，所谓随机访问就是用下标任一访问，所以实现了RandomAccess</li>
+<li>然后就是两个集合框架肯定会实现的两个接口 Cloneable, Serializable 前面这个好说序列化一会我们具体再说说<a id="more"></a>
+
+</li>
+</ol>
+<h3 id="3-主要字段"><a href="#3-主要字段" class="headerlink" title="3. 主要字段"></a>3. 主要字段</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 默认大小为10</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_CAPACITY = <span class="number">10</span>;</span><br><span class="line"><span class="comment">// 空数组  </span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object[] EMPTY_ELEMENTDATA = &#123;&#125;;</span><br><span class="line"><span class="comment">// 默认的空数组  这个是在传入无参的是构造函数会调用的待会再 add 方法中会看到</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = &#123;&#125;;</span><br><span class="line"><span class="comment">// 用来存放 ArrayList 中的元素 注意他的修饰符是一个 transient 也就是不会自动序列化</span></span><br><span class="line"><span class="keyword">transient</span> Object[] elementData; </span><br><span class="line"><span class="comment">// 大小</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> size;</span><br></pre></td></tr></table></figure>
+<h3 id="4-主要方法"><a href="#4-主要方法" class="headerlink" title="4. 主要方法"></a>4. 主要方法</h3><p>下面的方法后面标有数字的就是表示重载方法</p>
+<ol>
+<li>ctor-3 </li>
+<li>get</li>
+<li>set</li>
+<li>add-2</li>
+<li>remove-2</li>
+<li>clear </li>
+<li>addAll</li>
+<li>write/readObject</li>
+<li>fast-fail 机制</li>
+<li>subList</li>
+<li>iterator</li>
+<li>forEach</li>
+<li>sort</li>
+<li>removeIf</li>
+</ol>
+<h2 id="2-构造方法分析"><a href="#2-构造方法分析" class="headerlink" title="2. 构造方法分析"></a>2. 构造方法分析</h2><h3 id="1-无参的构造方法"><a href="#1-无参的构造方法" class="headerlink" title="1. 无参的构造方法"></a>1. 无参的构造方法</h3><p>&emsp;&emsp;  里面只有一个操作就是把 <code>elementData</code> 设置为 <code>DEFAULTCAPACITY_EMPTY_ELEMENTDATA</code> 这个空数组。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 无参的构造函数，传入一个空数组  这时候会创建一个大小为10的数组，具体操作在 add 中</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-传入数组大小的构造"><a href="#2-传入数组大小的构造" class="headerlink" title="2. 传入数组大小的构造"></a>2. 传入数组大小的构造</h3><p>&emsp;&emsp;  这个就是 new 一个数组，如果数组大小为0就 赋值为 <code>EMPTY_ELEMENTDATA</code> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 按传入的参数创建新的底层数组</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (initialCapacity &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">this</span>.elementData = <span class="keyword">new</span> Object[initialCapacity];</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (initialCapacity == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">this</span>.elementData = EMPTY_ELEMENTDATA;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">&quot;Illegal Capacity: &quot;</span>+</span><br><span class="line">                                               initialCapacity);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-传入-Collection-接口"><a href="#3-传入-Collection-接口" class="headerlink" title="3. 传入 Collection 接口"></a>3. 传入 Collection 接口</h3><p>&emsp;&emsp;  在这个方法里面主要就是把这个 Collection 转成一个数组，然后把这个数组 copy 一下，如果这个接口的 size 为0 和上面那个方法一样传入 <code>EMPTY_ELEMENTDATA</code> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</span><br><span class="line">        elementData = c.toArray();</span><br><span class="line">        <span class="keyword">if</span> ((size = elementData.length) != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// c.toArray might (incorrectly) not return Object[] (see 6260652)</span></span><br><span class="line">            <span class="comment">// 上面的注释的意思是说 jdk 有一个 bug 具体来说就是一个 Object 类型的数组不一定能够存放 Object类型的对象，有可能抛异常</span></span><br><span class="line">            <span class="comment">// 主要是因为 Object 类型的数组可能指向的是他的子类的数组，存 Object 类型的东西会报错</span></span><br><span class="line">            <span class="keyword">if</span> (elementData.getClass() != Object[].class)</span><br><span class="line">                <span class="comment">// 这个操作是首先new 了新的数组，然后再调用 System.arraycopy 拷贝值。也就是产生新的数组</span></span><br><span class="line">                elementData = Arrays.copyOf(elementData, size, Object[].class);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 传入的是空的就直接使用空数组初始化</span></span><br><span class="line">            <span class="keyword">this</span>.elementData = EMPTY_ELEMENTDATA;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;  但是注意一点这里有一个 jdk 的 bug 也就是一个 Object 类型的数组不一定能够存放 Object类型的对象，有可能抛异常，主要是因为 Object 类型的数组可能指向的是他的子类的数组，存 Object 类型的东西会报错。 为了测试这个 bug 写了几行代码测试一下。这个测试是通不过的，就是存在上面的原因。</p>
+<p>&emsp;&emsp;  一个典型的例子就是 我们创建一个 string 类型的 list 然后调用 toArray 方法发现返回的是一个 string[] 这时候自然就不能随便存放元素了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDKBug</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        B[] arrB = <span class="keyword">new</span> B[<span class="number">10</span>];</span><br><span class="line">        A[] arrA = arrB;</span><br><span class="line">        arrA[<span class="number">0</span>]=<span class="keyword">new</span> A();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-修改方法分析"><a href="#3-修改方法分析" class="headerlink" title="3. 修改方法分析"></a>3. 修改方法分析</h2><h3 id="1-Set-方法"><a href="#1-Set-方法" class="headerlink" title="1. Set 方法"></a>1. Set 方法</h3><p>&emsp;&emsp;  这个方法也很简单 ，首先进行范围判断，然后就是直接更新下标即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 也没啥好说的就是，设置新值返回老值</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">set</span><span class="params">(<span class="keyword">int</span> index, E element)</span> </span>&#123;</span><br><span class="line">    rangeCheck(index);</span><br><span class="line"></span><br><span class="line">    E oldValue = elementData(index);</span><br><span class="line">    elementData[index] = element;</span><br><span class="line">    <span class="keyword">return</span> oldValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-Add-E-e-方法"><a href="#2-Add-E-e-方法" class="headerlink" title="2. Add(E e) 方法"></a>2. Add(E e) 方法</h3><p>&emsp;&emsp;这个方法首先调用了 <code>ensureCapacityInternal()</code> 这个方法里面就判断了当前的 <code>elementData</code> 是否等于 <code>DEFAULTCAPACITY_EMPTY_ELEMENTDATA</code> 如果是的话，就把数组的大小设置为 10 然后进行扩容操作,这里刚好解释了为什么采用无参构造的List 的大小是 10 ，这里扩容操作调用的方法是 <code>ensureExplicitCapacity</code> 里面就干了一件事如果用户指定的大小 大于当前长度就扩容，扩容的方法采用了 <code>Arrays.copy</code> 方法，这个方法实现原理是 new 出一个新的数组，然后调用 <code>System.arraycopy</code> 拷贝数组，最后返回新的数组。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 当调用了无参构造，设置大小为10</span></span><br><span class="line">    ensureCapacityInternal(size + <span class="number">1</span>);  <span class="comment">// Increments modCount        </span></span><br><span class="line">    elementData[size++] = e;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureCapacityInternal</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 如果当前数组是默认空数组就设置为 10和 size+1中的最小值</span></span><br><span class="line">    <span class="comment">// 这也就是说为什么说无参构造 new 的数组大小是 10</span></span><br><span class="line">    <span class="keyword">if</span> (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) &#123;</span><br><span class="line">        minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ensureExplicitCapacity(minCapacity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureExplicitCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">    modCount++;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 若用户指定的最小容量 &gt; 最小扩充容量，则以用户指定的为准，否则还是 10</span></span><br><span class="line">    <span class="keyword">if</span> (minCapacity - elementData.length &gt; <span class="number">0</span>)</span><br><span class="line">        grow(minCapacity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">grow</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// overflow-conscious code</span></span><br><span class="line">    <span class="keyword">int</span> oldCapacity = elementData.length;</span><br><span class="line">    <span class="comment">// 1.5倍增长</span></span><br><span class="line">    <span class="keyword">int</span> newCapacity = oldCapacity + (oldCapacity &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (newCapacity - minCapacity &lt; <span class="number">0</span>)</span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    <span class="keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="number">0</span>)</span><br><span class="line">        newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">    <span class="comment">// minCapacity is usually close to size, so this is a win:</span></span><br><span class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-Add-int-index-E-e-方法"><a href="#3-Add-int-index-E-e-方法" class="headerlink" title="3. Add(int index, E e) 方法"></a>3. Add(int index, E e) 方法</h3><p>&emsp;&emsp;  这个方法比较简单和上面基本一样，然后只是最后放元素的时候的操作不一样，他是采用了 System.arraycopy 从自己向自己拷贝，目的就在于覆盖元素。 注意一个规律这里面只要涉及下标的操作的很多不是自己手写 for 循环而是采用类似的拷贝覆盖的方法。算是一个小技巧。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> index, E element)</span> </span>&#123;</span><br><span class="line">        rangeCheckForAdd(index);</span><br><span class="line">        ensureCapacityInternal(size + <span class="number">1</span>);  <span class="comment">// Increments modCount</span></span><br><span class="line">        <span class="comment">// 覆盖</span></span><br><span class="line">        System.arraycopy(elementData, index, elementData, index + <span class="number">1</span>,</span><br><span class="line">                         size - index);</span><br><span class="line">        elementData[index] = element;</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-remove-int-index"><a href="#4-remove-int-index" class="headerlink" title="4. remove(int index)"></a>4. remove(int index)</h3><p>&emsp;&emsp;同理这里面还是用了拷贝覆盖的技巧。 但是有一点注意的就是不用的节点需要手动的触发 gc ，这也是在 Efftive Java 中作者举的一个例子。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">remove</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        rangeCheck(index);</span><br><span class="line">        modCount++;</span><br><span class="line">        E oldValue = elementData(index);</span><br><span class="line">        <span class="keyword">int</span> numMoved = size - index - <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//覆盖</span></span><br><span class="line">        <span class="keyword">if</span> (numMoved &gt; <span class="number">0</span>)</span><br><span class="line">            System.arraycopy(elementData, index+<span class="number">1</span>, elementData, index,</span><br><span class="line">                             numMoved);</span><br><span class="line">        elementData[--size] = <span class="keyword">null</span>; <span class="comment">// clear to let GC do its work</span></span><br><span class="line">        <span class="keyword">return</span> oldValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="5-remove-E-e"><a href="#5-remove-E-e" class="headerlink" title="5. remove(E e)"></a>5. remove(E e)</h3><p>&emsp;&emsp;  这个方法操作很显然会判断 e 是不是 null 如果是 null 的话直接采用 <code>==</code> 比较，否则的话就直接调用 <code>equals</code> 方法然后执行拷贝覆盖。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (o == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> index = <span class="number">0</span>; index &lt; size; index++)</span><br><span class="line">                <span class="keyword">if</span> (elementData[index] == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="comment">// 覆盖</span></span><br><span class="line">                    fastRemove(index);</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> index = <span class="number">0</span>; index &lt; size; index++)</span><br><span class="line">                <span class="comment">// 调用 equals 方法</span></span><br><span class="line">                <span class="keyword">if</span> (o.equals(elementData[index])) &#123;</span><br><span class="line">                    fastRemove(index);</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="6-clear"><a href="#6-clear" class="headerlink" title="6. clear()"></a>6. clear()</h3><p>&emsp;&emsp;  这个方法就干了一件事，把数组中的引用全都设置为 null 以便 gc 。而不是仅仅把 size 设置为 0 。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// gc 所有节点</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        modCount++;</span><br><span class="line">        <span class="comment">// clear to let GC do its work</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">            elementData[i] = <span class="keyword">null</span>;</span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">### 7. addAll(Collection e)</span><br><span class="line">&amp;emsp;&amp;emsp;  这个没啥好说的就是，采用转数组然后 copy</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">    <span class="comment">// 一个套路 只要涉及到 Collection接口的方法都是把这个接口转成一个数组然后对数组操作</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">addAll</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</span><br><span class="line">        Object[] a = c.toArray();</span><br><span class="line">        <span class="keyword">int</span> numNew = a.length;</span><br><span class="line">        ensureCapacityInternal(size + numNew);  <span class="comment">// Increments modCount</span></span><br><span class="line">        System.arraycopy(a, <span class="number">0</span>, elementData, size, numNew);</span><br><span class="line">        size += numNew;</span><br><span class="line">        <span class="keyword">return</span> numNew != <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-访问方法分析"><a href="#4-访问方法分析" class="headerlink" title="4. 访问方法分析"></a>4. 访问方法分析</h2><h3 id="1-get"><a href="#1-get" class="headerlink" title="1. get"></a>1. get</h3><p>&emsp;&emsp;  直接访问数组下标。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 没啥好说的直接去找数组下标</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    rangeCheck(index);</span><br><span class="line">    <span class="keyword">return</span> elementData(index);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="2-subList"><a href="#2-subList" class="headerlink" title="2. subList"></a>2. subList</h3><p>&emsp;&emsp;  这个方法的实现比较有意思，他不是直接截取一个新的 List 返回，而是在这个类的内部还有一个 subList 的内部类，然后这个类就记录了 subList 的开始结束下标，然后返回的是这个 subList 对象。你可能会想返回的 subList 他不是 List 不会有问题吗，这里这个 subList 是继承的 AbstractList 所以还是正确的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;E&gt; <span class="title">subList</span><span class="params">(<span class="keyword">int</span> fromIndex, <span class="keyword">int</span> toIndex)</span> </span>&#123;</span><br><span class="line">        subListRangeCheck(fromIndex, toIndex, size);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> SubList(<span class="keyword">this</span>, <span class="number">0</span>, fromIndex, toIndex);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// subList 返回的是一个位置标记实例，就是在原来的数组上放了一些标志，没有修改或者拷贝新的空间</span></span><br><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">SubList</span> <span class="keyword">extends</span> <span class="title">AbstractList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">implements</span> <span class="title">RandomAccess</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> AbstractList&lt;E&gt; parent;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> parentOffset;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> offset;</span><br><span class="line">        <span class="keyword">int</span> size;</span><br><span class="line">        <span class="comment">// other functions .....</span></span><br><span class="line">     &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-其他功能方法"><a href="#5-其他功能方法" class="headerlink" title="5. 其他功能方法"></a>5. 其他功能方法</h2><h3 id="1-write-readObject"><a href="#1-write-readObject" class="headerlink" title="1. write/readObject"></a>1. write/readObject</h3><p>&emsp;&emsp;前面在介绍数据域的时候我就有标注 elementData 是一个 transition 的变量也就是在自动序列化的时候会忽略这个字段。</p>
+<p>&emsp;&emsp;  然后我们又在源码中找到到了 <code>write/readObject</code> 方法，这两个方法是用来序列化 <code>elementData</code> 中的每一个元素，也就是手动的对这个字段进行序列化和反序列化。这不是多此一举吗？</p>
+<p>&emsp;&emsp;  既然要将ArrayList的字段序列化（即将elementData序列化），那为什么又要用transient修饰elementData呢？</p>
+<p>&emsp;&emsp; 回想ArrayList的自动扩容机制，elementData数组相当于容器，当容器不足时就会再扩充容量，但是容器的容量往往都是大于或者等于ArrayList所存元素的个数。</p>
+<p>&emsp;&emsp; 比如，现在实际有了8个元素，那么elementData数组的容量可能是8x1.5=12，如果直接序列化elementData数组，那么就会浪费4个元素的空间，特别是当元素个数非常多时，这种浪费是非常不合算的。</p>
+<p>&emsp;&emsp; 所以ArrayList的设计者将elementData设计为transient，然后在writeObject方法中手动将其序列化，并且只序列化了实际存储的那些元素，而不是整个数组。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">writeObject</span><span class="params">(java.io.ObjectOutputStream s)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> java.io.IOException</span>&#123;</span><br><span class="line">        <span class="comment">// Write out element count, and any hidden stuff</span></span><br><span class="line">        <span class="keyword">int</span> expectedModCount = modCount;</span><br><span class="line">        s.defaultWriteObject();</span><br><span class="line">        <span class="comment">// Write out size as capacity for behavioural compatibility with clone()</span></span><br><span class="line">        s.writeInt(size);</span><br><span class="line">        <span class="comment">// Write out all elements in the proper order.</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;size; i++) &#123;</span><br><span class="line">            s.writeObject(elementData[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (modCount != expectedModCount) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-fast-fail"><a href="#2-fast-fail" class="headerlink" title="2. fast-fail"></a>2. fast-fail</h3><p>&emsp;&emsp;  所谓的 <code>fast-fail</code> 就是在我们进行 <code>iterator</code> 遍历的时候不允许调用 <code>Collection</code> 接口的方法进行对容器修改，否则就会抛异常。这个实现的机制是在 <code>iterator</code> 中维护了两个变量，分别是 <code>modCount</code> 和 <code>expectedModCount</code> 由于 <code>Collection</code> 接口的方法在每次修改操作的时候都会对 <code>modCount++</code> 所以如果在 <code>iterator</code> 中检测到他们不相等的时候就抛异常。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Itr</span> <span class="keyword">implements</span> <span class="title">Iterator</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> cursor;       <span class="comment">// index of next element to return</span></span><br><span class="line">        <span class="keyword">int</span> lastRet = -<span class="number">1</span>; <span class="comment">// index of last element returned; -1 if no such</span></span><br><span class="line">        <span class="keyword">int</span> expectedModCount = modCount;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">checkForComodification</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (modCount != expectedModCount)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">        &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-forEach"><a href="#3-forEach" class="headerlink" title="3. forEach"></a>3. forEach</h3><p>&emsp;&emsp;  这个是一个函数式编程的方法，看看他的参数 <code>forEach(Consumer&lt;? super E&gt; action)</code> 很有意思里面接受是一个函数式的接口，我们里面回调了 <code>Consumer</code> 的 <code>accept</code> 所以我们只需要传入一个函数接口就能对每一个元素处理。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">forEach</span><span class="params">(Consumer&lt;? <span class="keyword">super</span> E&gt; action)</span> </span>&#123;</span><br><span class="line">    Objects.requireNonNull(action);</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> expectedModCount = modCount;</span><br><span class="line">    <span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">    <span class="keyword">final</span> E[] elementData = (E[]) <span class="keyword">this</span>.elementData;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> size = <span class="keyword">this</span>.size;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; modCount == expectedModCount &amp;&amp; i &lt; size; i++) &#123;</span><br><span class="line">        <span class="comment">//回调</span></span><br><span class="line">        action.accept(elementData[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (modCount != expectedModCount) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>写了一段测试代码，但是这个方法不常用，主要是 Collection 是可以自己生成 Stream 对象，然后调用上面的方法即可。这里提一下。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayListTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">foreach</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        list.add(<span class="number">2</span>);</span><br><span class="line">        list.add(<span class="number">1</span>);</span><br><span class="line">        list.add(<span class="number">4</span>);</span><br><span class="line">        list.add(<span class="number">6</span>);</span><br><span class="line">        list.forEach(System.out::print);  <span class="comment">//打印每一次元素。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-sort"><a href="#4-sort" class="headerlink" title="4. sort"></a>4. sort</h3><p>底层调用了 Arrays.sort 方法没什么好说的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparator&lt;? <span class="keyword">super</span> E&gt; c)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> expectedModCount = modCount;</span><br><span class="line">        Arrays.sort((E[]) elementData, <span class="number">0</span>, size, c);</span><br><span class="line">        <span class="keyword">if</span> (modCount != expectedModCount) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">        &#125;</span><br><span class="line">        modCount++;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-removeIf"><a href="#5-removeIf" class="headerlink" title="5. removeIf"></a>5. removeIf</h3><p>&emsp;&emsp;  这个和 forEach 差不多，就是回调写好了。</p>
+<h2 id="6-Vector"><a href="#6-Vector" class="headerlink" title="6. Vector"></a>6. Vector</h2><p>以上基本是把 <code>ArrayList</code> 的重要的方法和属性介绍完了，我们已经比较清楚他底层的实现和数据结构了。然后提到 <code>ArrayList</code> 自然也少不了一个比较古老的容器 <code>Vector</code> 这个容器真的和 <code>ArrayList</code> 太像了。因为你会发现他们连继承和实现的接口都是一样的。但是也会有一些不同的地方，下面分条介绍一下。</p>
+<ol>
+<li><p>在 <code>Vector</code> 中基本所有的方法都是 <code>synchronized</code> 的方法，所以说他是线程安全的 <code>ArrayList</code> </p>
+</li>
+<li><p>构造方法不一样，在属性中没有两个比较特殊的常量，所以说他的构造方法直接初始化一个容量为 10 的数组。然后他有四个构造方法。</p>
+</li>
+<li><p>遍历的接口不一样。他还是有 <code>iterator</code> 的但是他以前的遍历的方法是 <code>Enumeration</code> 接口，通过 <code>elements</code> 获取 <code>Enumeration</code> 然后使用 <code>hasMoreElements</code> 和 <code>nextElement</code> 获取元素。</p>
+</li>
+<li><p>缺少一些函数式编程的方法。</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2018/03/25/Java SourceCode/ArrayList 源码分析/" target="_blank" title="ArrayList 源码分析">http://lwenxu.coding.me/2018/03/25/Java SourceCode/ArrayList 源码分析/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/26/Java%20SourceCode/LinkedList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          LinkedList 源码分析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/25/NetWork/P2P%20%E6%B5%85%E6%9E%90/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">P2P 浅析</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ArrayList-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">ArrayList 源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%9C%A8%E9%98%85%E8%AF%BB%E6%BA%90%E7%A0%81%E6%97%B6%E5%81%9A%E4%BA%86%E5%A4%A7%E9%87%8F%E7%9A%84%E6%B3%A8%E9%87%8A%EF%BC%8C%E5%B9%B6%E4%B8%94%E5%81%9A%E4%BA%86%E4%B8%80%E4%BA%9B%E6%B5%8B%E8%AF%95%E5%88%86%E6%9E%90%E6%BA%90%E7%A0%81%E5%86%85%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%EF%BC%8C%E7%94%B1%E4%BA%8E%E5%8D%9A%E5%AE%A2%E7%AF%87%E5%B9%85%E6%9C%89%E9%99%90%EF%BC%8C%E5%B9%B6%E4%B8%94%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB%E8%B5%B7%E6%9D%A5%E6%B2%A1%E6%9C%89-IDE-%E6%96%B9%E4%BE%BF%EF%BC%8C%E6%89%80%E4%BB%A5%E5%9C%A8-github-%E4%B8%8A%E6%8F%90%E4%BE%9BJDK1-8-%E7%9A%84%E6%BA%90%E7%A0%81%E3%80%81%E8%AF%A6%E7%BB%86%E7%9A%84%E6%B3%A8%E9%87%8A%E5%8F%8A%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E3%80%82%E6%AC%A2%E8%BF%8E%E5%A4%A7%E5%AE%B6-star%E3%80%81fork-%EF%BC%81"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%94%B1%E4%BA%8E%E4%B8%AA%E4%BA%BA%E6%B0%B4%E5%B9%B3%E6%9C%89%E9%99%90%EF%BC%8C%E5%AF%B9%E6%BA%90%E7%A0%81%E7%9A%84%E5%88%86%E6%9E%90%E7%90%86%E8%A7%A3%E5%8F%AF%E8%83%BD%E5%AD%98%E5%9C%A8%E5%81%8F%E5%B7%AE%E6%88%96%E4%B8%8D%E9%80%8F%E5%BD%BB%E7%9A%84%E5%9C%B0%E6%96%B9%E8%BF%98%E8%AF%B7%E5%A4%A7%E5%AE%B6%E5%9C%A8%E8%AF%84%E8%AE%BA%E5%8C%BA%E6%8C%87%E5%87%BA%EF%BC%8C%E8%B0%A2%E8%B0%A2%EF%BC%81"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">1. 结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%BB%A7%E6%89%BF"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%B8%BB%E8%A6%81%E5%AD%97%E6%AE%B5"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. 主要字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.4.</span> <span class="nav-text">4. 主要方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E5%88%86%E6%9E%90"><span class="nav-number">1.2.</span> <span class="nav-text">2. 构造方法分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%97%A0%E5%8F%82%E7%9A%84%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 无参的构造方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BC%A0%E5%85%A5%E6%95%B0%E7%BB%84%E5%A4%A7%E5%B0%8F%E7%9A%84%E6%9E%84%E9%80%A0"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 传入数组大小的构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BC%A0%E5%85%A5-Collection-%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. 传入 Collection 接口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%BF%AE%E6%94%B9%E6%96%B9%E6%B3%95%E5%88%86%E6%9E%90"><span class="nav-number">1.3.</span> <span class="nav-text">3. 修改方法分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Set-%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. Set 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Add-E-e-%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. Add(E e) 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Add-int-index-E-e-%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.3.</span> <span class="nav-text">3. Add(int index, E e) 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-remove-int-index"><span class="nav-number">1.3.4.</span> <span class="nav-text">4. remove(int index)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-remove-E-e"><span class="nav-number">1.3.5.</span> <span class="nav-text">5. remove(E e)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-clear"><span class="nav-number">1.3.6.</span> <span class="nav-text">6. clear()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E8%AE%BF%E9%97%AE%E6%96%B9%E6%B3%95%E5%88%86%E6%9E%90"><span class="nav-number">1.4.</span> <span class="nav-text">4. 访问方法分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-get"><span class="nav-number">1.4.1.</span> <span class="nav-text">1. get</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-subList"><span class="nav-number">1.4.2.</span> <span class="nav-text">2. subList</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%85%B6%E4%BB%96%E5%8A%9F%E8%83%BD%E6%96%B9%E6%B3%95"><span class="nav-number">1.5.</span> <span class="nav-text">5. 其他功能方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-write-readObject"><span class="nav-number">1.5.1.</span> <span class="nav-text">1. write&#x2F;readObject</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-fast-fail"><span class="nav-number">1.5.2.</span> <span class="nav-text">2. fast-fail</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-forEach"><span class="nav-number">1.5.3.</span> <span class="nav-text">3. forEach</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-sort"><span class="nav-number">1.5.4.</span> <span class="nav-text">4. sort</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-removeIf"><span class="nav-number">1.5.5.</span> <span class="nav-text">5. removeIf</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Vector"><span class="nav-number">1.6.</span> <span class="nav-text">6. Vector</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2020 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

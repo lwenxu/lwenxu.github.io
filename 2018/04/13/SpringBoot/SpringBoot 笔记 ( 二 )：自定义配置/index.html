@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>springboot笔记 ( 二 )：自定义配置 | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="SpringBoot" />
+  
+  
+  
+  
+  <meta name="description" content="SpringBoot 笔记 ( 二 )：自定义配置1. 配置文件SpringBoot使用一个全局的配置文件，配置文件名是固定的：  application.properties application.yml  &amp;emsp;&amp;emsp;  修改SpringBoot自动配置的默认值，因为在所有的自动配置类中他们都会去读取我们的配置文件，如果说有配置这些项目就按照我们配置的，没有则使用自动配置。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot笔记 ( 二 )：自定义配置">
+<meta property="og:url" content="http://lwenxu.coding.me/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%8C%20)%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="SpringBoot 笔记 ( 二 )：自定义配置1. 配置文件SpringBoot使用一个全局的配置文件，配置文件名是固定的：  application.properties application.yml  &amp;emsp;&amp;emsp;  修改SpringBoot自动配置的默认值，因为在所有的自动配置类中他们都会去读取我们的配置文件，如果说有配置这些项目就按照我们配置的，没有则使用自动配置。">
+<meta property="og:locale">
+<meta property="og:image" content="https://s1.ax2x.com/2018/04/13/N7KhX.png">
+<meta property="article:published_time" content="2018-04-13T14:01:28.000Z">
+<meta property="article:modified_time" content="2018-12-19T12:36:42.000Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="SpringBoot">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax2x.com/2018/04/13/N7KhX.png">
+  
+
+  
+
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
+  
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-SpringBoot/SpringBoot 笔记 ( 二 )：自定义配置" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      SpringBoot笔记 ( 二 )：自定义配置
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%8C%20)%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE/" class="article-date">
+	  <time datetime="2018-04-13T14:01:28.000Z" itemprop="datePublished">2018-04-13</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SpringBoot-笔记-二-：自定义配置"><a href="#SpringBoot-笔记-二-：自定义配置" class="headerlink" title="SpringBoot 笔记 ( 二 )：自定义配置"></a>SpringBoot 笔记 ( 二 )：自定义配置</h1><h3 id="1-配置文件"><a href="#1-配置文件" class="headerlink" title="1. 配置文件"></a>1. 配置文件</h3><p>SpringBoot使用一个全局的配置文件，配置文件名是固定的：</p>
+<ul>
+<li>application.properties</li>
+<li>application.yml</li>
+</ul>
+<p>&emsp;&emsp;  修改SpringBoot自动配置的默认值，因为在所有的自动配置类中他们都会去读取我们的配置文件，如果说有配置这些项目就按照我们配置的，没有则使用自动配置。</p>
+<a id="more"></a>
+<p>&emsp;&emsp;  支持两种格式，我们主要说说后面一种，前面比较简单就是采用的点的方式定义的。yml 其实也是一种标记语言，YAML 他的语法比较简洁，写起来没有 xml 那么臃肿。</p>
+<h3 id="2-YAML-语法"><a href="#2-YAML-语法" class="headerlink" title="2. YAML 语法"></a>2. YAML 语法</h3><h4 id="1、基本语法"><a href="#1、基本语法" class="headerlink" title="1、基本语法"></a>1、基本语法</h4><p>k:(空格)v：表示一对键值对（空格必须有）</p>
+<p>以<strong>空格</strong>的缩进来控制层级关系；只要是左对齐的一列数据，都是同一个层级的同时属性和值也是大小写敏感；</p>
+<h4 id="2-字面量：普通的值（数字，字符串，布尔）"><a href="#2-字面量：普通的值（数字，字符串，布尔）" class="headerlink" title="2. 字面量：普通的值（数字，字符串，布尔）"></a>2. 字面量：普通的值（数字，字符串，布尔）</h4><p>​    k: v：字面直接来写，字符串默认不用加上单引号或者双引号；</p>
+<h4 id="3-对象、Map（属性和值）（键值对）："><a href="#3-对象、Map（属性和值）（键值对）：" class="headerlink" title="3. 对象、Map（属性和值）（键值对）："></a>3. 对象、Map（属性和值）（键值对）：</h4><p>​    k: v：在下一行来写对象的属性和值的关系，注意缩进</p>
+<p>​        对象还是k: v的方式</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">friends:</span></span><br><span class="line">		<span class="attr">lastName:</span> <span class="string">zhangsan</span></span><br><span class="line">		<span class="attr">age:</span> <span class="number">20</span></span><br></pre></td></tr></table></figure>
+
+<p>行内写法：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">friends:</span> &#123;<span class="attr">lastName:</span> <span class="string">zhangsan</span>,<span class="attr">age:</span> <span class="number">18</span>&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-数组、表（List、Set）："><a href="#4-数组、表（List、Set）：" class="headerlink" title="4. 数组、表（List、Set）："></a>4. 数组、表（List、Set）：</h4><p>用- 值表示数组中的一个元素</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">pets:</span></span><br><span class="line"> <span class="bullet">-</span> <span class="string">cat</span></span><br><span class="line"> <span class="bullet">-</span> <span class="string">dog</span></span><br><span class="line"> <span class="bullet">-</span> <span class="string">pig</span></span><br></pre></td></tr></table></figure>
+
+<p>行内写法</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">pets:</span> [<span class="string">cat</span>,<span class="string">dog</span>,<span class="string">pig</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-配置文件注入"><a href="#3-配置文件注入" class="headerlink" title="3. 配置文件注入"></a>3. 配置文件注入</h3><h4 id="1-ConfigurationProperties"><a href="#1-ConfigurationProperties" class="headerlink" title="1.@ConfigurationProperties"></a>1.@ConfigurationProperties</h4><p>配置文件：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">person:</span></span><br><span class="line">    <span class="attr">lastName:</span> <span class="string">hello</span></span><br><span class="line">    <span class="attr">age:</span> <span class="number">18</span></span><br><span class="line">    <span class="attr">boss:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">birth:</span> <span class="number">2017</span><span class="string">/12/12</span></span><br><span class="line">    <span class="attr">maps:</span> &#123;<span class="attr">k1:</span> <span class="string">v1</span>,<span class="attr">k2:</span> <span class="number">12</span>&#125;</span><br><span class="line">    <span class="attr">lists:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">lisi</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">zhaoliu</span></span><br><span class="line">    <span class="attr">dog:</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">小狗</span></span><br><span class="line">      <span class="attr">age:</span> <span class="number">12</span></span><br></pre></td></tr></table></figure>
+
+<p>对应的Bean：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 将配置文件中配置的每一个属性的值，映射到这个组件中</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@ConfigurationProperties</span>：告诉SpringBoot将本类中的所有属性和配置文件中相关的配置进行绑定；</span></span><br><span class="line"><span class="comment"> *      prefix = &quot;person&quot;：配置文件中哪个下面的所有属性进行一一映射</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 只有这个组件是容器中的组件，才能容器提供的<span class="doctag">@ConfigurationProperties</span>功能；</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;person&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String lastName;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> Boolean boss;</span><br><span class="line">    <span class="keyword">private</span> Date birth;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Map&lt;String,Object&gt; maps;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Object&gt; lists;</span><br><span class="line">    <span class="keyword">private</span> Dog dog;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>@ConfigurationProperties：告诉SpringBoot将本类中的所有属性和配置文件中相关的配置进行绑定  prefix = “person”：配置文件中哪个下面的所有属性进行一一映射 ，这样我们就明白了我们的 springboot 的配置文件的一些属性是绑定的我们的配置类的属性，那么我们的配置类就可以读取我们的配置文件里面的内容了！</p>
+<h4 id="2-Value"><a href="#2-Value" class="headerlink" title="2.@Value"></a>2.@Value</h4><p>除了使用 <code>@ConfigurationProperties</code> 让我们的bean和配置文件绑定，我们还可以使用 @Value(“配置文件属性”) 注解去获取配置文件的内容。这个注解是支持spEL表达式的，这是他的优点。</p>
+<h4 id="3-PropertySource"><a href="#3-PropertySource" class="headerlink" title="3.@PropertySource"></a>3.@PropertySource</h4><p>这个注解的作用就是用来导入一些指定的配置文件里面的内容到我们当前的 JavaBean 中，与之关联。也就是方便我们的配置文件的拆分。 比如： <code>@PropertySource(value=&#123;&quot;classpath:person.properties&quot;&#125;)</code> 就是加载类路径下面的  person.properties 里面的内容。</p>
+<h4 id="4-ImportResource"><a href="#4-ImportResource" class="headerlink" title="4.@ImportResource"></a>4.@ImportResource</h4><p> 导入spring的xml配置文件然后让他生效。其实这个就是Spring的基本注解，导入配置文件配置类。这个东西要标注在主类上，而不是bean中。</p>
+<p>注意，如果我们的配置文件和bean关联以后没有自动提示的话我们就需要导入pom ，在导入配置文件处理器以后，编写配置就有提示了。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--导入配置文件处理器，配置文件进行绑定就会有提示--&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-configuration-processor<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一个小问题就是配置文件中配置的中文读出来会乱码，这主要是 idea 的 properties 文件默认采用的 utf-8 ，我们需要使用自动转 ascii 码。<br><img src="https://s1.ax2x.com/2018/04/13/N7KhX.png"></p>
+<h3 id="4-配置类"><a href="#4-配置类" class="headerlink" title="4. 配置类"></a>4. 配置类</h3><p>SpringBoot推荐给容器中添加组件的方式，推荐使用全注解的方式</p>
+<ol>
+<li>配置类 <strong>@Configuration</strong> 等价于 Spring 配置文件</li>
+<li>使用 <strong>@Bean</strong> 给容器中添加组件</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Configuration</span>：指明当前类是一个配置类；就是来替代之前的Spring配置文件</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 在配置文件中用&lt;bean&gt;&lt;bean/&gt;标签添加组件</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyAppConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//将方法的返回值添加到容器中；容器中这个组件默认的id就是方法名,也可以自己指定。</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> HelloService <span class="title">helloService02</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;配置类@Bean给容器中添加组件了...&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> HelloService();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-多环境配置文件"><a href="#5-多环境配置文件" class="headerlink" title="5. 多环境配置文件"></a>5. 多环境配置文件</h3><h4 id="1-多Profile文件"><a href="#1-多Profile文件" class="headerlink" title="1. 多Profile文件"></a>1. 多Profile文件</h4><p>我们在主配置文件编写的时候，文件名可以是<code>application-&#123;profile&#125;.properties/yml</code>默认使用<code>application.properties</code>的配置；</p>
+<h4 id="2-文档块方式"><a href="#2-文档块方式" class="headerlink" title="2. 文档块方式"></a>2. 文档块方式</h4><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8081</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">profiles:</span></span><br><span class="line">    <span class="attr">active:</span> <span class="string">prod</span></span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8083</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">profiles:</span> <span class="string">dev</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8084</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">profiles:</span> <span class="string">prod</span>  <span class="comment">#指定属于哪个环境</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-激活指定profile"><a href="#3-激活指定profile" class="headerlink" title="3. 激活指定profile"></a>3. 激活指定profile</h4><ol>
+<li>在配置文件中指定  spring.profiles.active=dev</li>
+<li>命令行：<code>java -jar spring-boot-02-config-0.0.1-SNAPSHOT.jar --spring.profiles.active=dev；</code>可以直接在测试的时候，配置传入命令行参数</li>
+<li>虚拟机参数；<pre><code>     `-Dspring.profiles.active=dev`</code></pre>
+</li>
+</ol>
+<h4 id="4-指定外部配置文件"><a href="#4-指定外部配置文件" class="headerlink" title="4. 指定外部配置文件"></a>4. 指定外部配置文件</h4><p>所有的配置都可以在命令行上进行指定<br><code>java -jar spring-boot-02-config-02-0.0.1-SNAPSHOT.jar --server.port=8087  --server.context-path=/abc</code></p>
+<h3 id="6-自动配置原理"><a href="#6-自动配置原理" class="headerlink" title="6. 自动配置原理"></a>6. 自动配置原理</h3><ol>
+<li><p>SpringBoot启动的时候加载主配置类，开启了自动配置功能 <code>@EnableAutoConfiguration</code></p>
+</li>
+<li><p><strong>@EnableAutoConfiguration 作用：</strong></p>
+</li>
+</ol>
+<ul>
+<li><p>EnableAutoConfigurationImportSelector 给容器中导入一些组件</p>
+</li>
+<li><p>selectImports()方法中的 <code>List&lt;String&gt; configurations = getCandidateConfigurations(annotationMetadata,      attributes);</code> 获取候选的配置</p>
+</li>
+<li><p><code>SpringFactoriesLoader.loadFactoryNames()</code>扫描所有jar包类路径下 <code>META-INF/spring.factories</code> 把扫描到的这些文件的内容包装成 <code>properties</code> 对象，从 <code>properties</code> 中获取到 <code>EnableAutoConfiguration.class</code> 类（类名）对应的值，然后把他们添加在容器中</p>
+</li>
+</ul>
+<p><strong>总之一句话将类路径下  META-INF/spring.factories 里面配置的所有EnableAutoConfiguration的值加入到了容器中</strong><br>如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Auto Configure</span></span><br><span class="line"><span class="meta">org.springframework.boot.autoconfigure.EnableAutoConfiguration</span>=<span class="string">\</span></span><br><span class="line">org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration,\</span><br><span class="line">org.springframework.boot.autoconfigure.aop.AopAutoConfiguration,\</span><br></pre></td></tr></table></figure>
+
+<p>每一个这样的  xxxAutoConfiguration 类都是容器中的一个组件，都加入到容器中，用他们来做自动配置</p>
+<h3 id="7-以HttpEncodingAutoConfiguration为例解释自动配置原理"><a href="#7-以HttpEncodingAutoConfiguration为例解释自动配置原理" class="headerlink" title="7.以HttpEncodingAutoConfiguration为例解释自动配置原理"></a>7.以HttpEncodingAutoConfiguration为例解释自动配置原理</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//表示这是一个配置类，以前编写的配置文件一样，也可以给容器中添加组件</span></span><br><span class="line"><span class="meta">@Configuration</span>   </span><br><span class="line"><span class="comment">//启动指定类的ConfigurationProperties功能；将配置文件中对应的值和HttpEncodingProperties绑定起来；并把HttpEncodingProperties加入到ioc容器中   所有能在我们的配置文件中配置什么就是看我们的 Properties 中的 prefix和属性有什么。</span></span><br><span class="line"><span class="meta">@EnableConfigurationProperties(HttpEncodingProperties.class)</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">//Spring底层@Conditional注解，根据不同的条件，如果满足指定的条件，整个配置类里面的配置就会生效,判断当前应用是否是web应用，如果是，当前配置类生效@ConditionalOnWebApplication </span></span><br><span class="line"><span class="comment">//判断当前项目有没有这个类CharacterEncodingFilter,SpringMVC中进行乱码解决的过滤器；</span></span><br><span class="line"><span class="meta">@ConditionalOnClass(CharacterEncodingFilter.class)</span>  </span><br><span class="line"></span><br><span class="line"><span class="comment">//判断配置文件中是否存在某个配置  spring.http.encoding.enabled；如果不存在，判断也是成立的,也就是说即使我们配置文件中不配置pring.http.encoding.enabled=true，也是默认生效的；</span></span><br><span class="line"><span class="meta">@ConditionalOnProperty(prefix = &quot;spring.http.encoding&quot;, value = &quot;enabled&quot;, matchIfMissing = true)</span>  </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HttpEncodingAutoConfiguration</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  	<span class="comment">//他已经和SpringBoot的配置文件映射了</span></span><br><span class="line">  	<span class="keyword">private</span> <span class="keyword">final</span> HttpEncodingProperties properties;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//只有一个有参构造器的情况下，参数的值就会从容器中拿</span></span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="title">HttpEncodingAutoConfiguration</span><span class="params">(HttpEncodingProperties properties)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.properties = properties;</span><br><span class="line">	&#125;</span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Bean</span>   <span class="comment">//给容器中添加一个组件，这个组件的某些值需要从properties中获取</span></span><br><span class="line">	<span class="meta">@ConditionalOnMissingBean(CharacterEncodingFilter.class)</span> <span class="comment">//判断容器没有这个组件？</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> CharacterEncodingFilter <span class="title">characterEncodingFilter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		CharacterEncodingFilter filter = <span class="keyword">new</span> OrderedCharacterEncodingFilter();</span><br><span class="line">		filter.setEncoding(<span class="keyword">this</span>.properties.getCharset().name());</span><br><span class="line">		filter.setForceRequestEncoding(<span class="keyword">this</span>.properties.shouldForce(Type.REQUEST));</span><br><span class="line">		filter.setForceResponseEncoding(<span class="keyword">this</span>.properties.shouldForce(Type.RESPONSE));</span><br><span class="line">		<span class="keyword">return</span> filter;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>总结：</p>
+<p><strong>1）、SpringBoot启动会加载大量的自动配置类</strong><br><strong>2）、我们看我们需要的功能有没有SpringBoot默认写好的自动配置类；</strong><br><strong>3）、我们再来看这个自动配置类中到底配置了哪些组件；（只要我们要用的组件有，我们就不需要再来配置</strong><br><strong>了）</strong><br><strong>4）、给容器中自动配置类添加组件的时候，会从properties类中获取某些属性。我们就可以在配置文件中指</strong><br><strong>定这些属性的值</strong></p>
+<p>  根据当前不同的条件判断，决定这个配置类是否生效，一但这个配置类生效，这个配置类就会给容器中添加各种组件，这些组件的属性是从对应的properties类中获取的，这些类里面的每一个属性又是和配置文件绑定的。<br>&emsp;&emsp;  也就是如下两个类非常重要：</p>
+<ul>
+<li>xxxxAutoConfigurartion：自动配置类。</li>
+<li>xxxxProperties: 封装配置文件中相关属性。</li>
+</ul>
+<h3 id="8-Conditional注解"><a href="#8-Conditional注解" class="headerlink" title="8.@Conditional注解"></a>8.@Conditional注解</h3><p>这个是Spring中原生的，就是用一个Class这个Class中重写了 match 方法，来判断这个conditional是否为真。然后我们的SpringBoot 是自己写了很多新的 @Conditional 的新版，就拓展了原来的功能。</p>
+<ul>
+<li>@ConditionalOnJava系统的java版本是否符合要求</li>
+<li>@ConditionalOnBean容器中存在指定Bean；</li>
+<li>@ConditionalOnMissingBean容器中不存在指定Bean；</li>
+<li>@ConditionalOnExpression满足SpEL表达式指定</li>
+<li>@ConditionalOnClass系统中有指定的类</li>
+<li>@ConditionalOnMissingClass系统中没有指定的类</li>
+<li>@ConditionalonSingleCandidate容器中只有一个指定的Bean，或者这个Bean是首选Bean</li>
+<li>@ConditionalOnProperty系统中指定的属性是否有指定的值</li>
+<li>@ConditionalOnResource类路径下是否存在指定资源文件</li>
+<li>@ConditionalOnWebApplication 当前是web环境</li>
+<li>@ConditionalOnNotWebApplication 当前不是web环境</li>
+<li>@ConditionalOnjndiJNDI存在指定项</li>
+</ul>
+<p>也就是自动配置类是在<strong>一定条件下才会生效</strong>，不是说每一个自动配置类都会被加载！！我们可以开启 debug 模式然后我们就可以看到自动配置报告。使用 <code>debug:true</code> 在主配置文件中。下面就是自动配置报告！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">AUTO-CONF IGURATION REPORT</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"></span><br><span class="line">Positive matches:(自动配置类启用的）</span><br><span class="line"></span><br><span class="line">DispatcherServletAutoconfiguration matched:</span><br><span class="line">-@ConditionalonClass found required class</span><br><span class="line">‘org.springframework.web.servlet.Dispatcherservlet“；ConditionalonMissingclass did not find</span><br><span class="line">unwanted class (Onclasscondition)</span><br><span class="line">-@conditionalOnwebApplication(required)found StandardServletEnvironment</span><br><span class="line">(onwebApplicationcondition)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Negative matches:(没有启动，没有匹配成功的自动配置类）</span><br><span class="line"></span><br><span class="line">ActiveMQAutoconfiguration:</span><br><span class="line">Did not match:</span><br><span class="line">-@ConditionalOnClass did not find required classes‘javax.jms.ConnectionFactory“，</span><br><span class="line">‘org.apache.activemq.ActivemQConnectionFactory“(Onclasscondition)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2018/04/13/SpringBoot/SpringBoot 笔记 ( 二 )：自定义配置/" target="_blank" title="SpringBoot笔记 ( 二 )：自定义配置">http://lwenxu.coding.me/2018/04/13/SpringBoot/SpringBoot 笔记 ( 二 )：自定义配置/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%89%20)%EF%BC%9A%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          SpringBoot 笔记 ( 三 )：日志系统
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/13/Shiro/Shiro%20%E8%AE%A4%E8%AF%81%E6%A1%86%E6%9E%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Shiro安全框架:认证</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringBoot-%E7%AC%94%E8%AE%B0-%E4%BA%8C-%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">SpringBoot 笔记 ( 二 )：自定义配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. 配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-YAML-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. YAML 语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">1、基本语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%AD%97%E9%9D%A2%E9%87%8F%EF%BC%9A%E6%99%AE%E9%80%9A%E7%9A%84%E5%80%BC%EF%BC%88%E6%95%B0%E5%AD%97%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%B8%83%E5%B0%94%EF%BC%89"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">2. 字面量：普通的值（数字，字符串，布尔）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%AF%B9%E8%B1%A1%E3%80%81Map%EF%BC%88%E5%B1%9E%E6%80%A7%E5%92%8C%E5%80%BC%EF%BC%89%EF%BC%88%E9%94%AE%E5%80%BC%E5%AF%B9%EF%BC%89%EF%BC%9A"><span class="nav-number">1.0.2.3.</span> <span class="nav-text">3. 对象、Map（属性和值）（键值对）：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E6%95%B0%E7%BB%84%E3%80%81%E8%A1%A8%EF%BC%88List%E3%80%81Set%EF%BC%89%EF%BC%9A"><span class="nav-number">1.0.2.4.</span> <span class="nav-text">4. 数组、表（List、Set）：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%B3%A8%E5%85%A5"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. 配置文件注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-ConfigurationProperties"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">1.@ConfigurationProperties</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Value"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">2.@Value</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-PropertySource"><span class="nav-number">1.0.3.3.</span> <span class="nav-text">3.@PropertySource</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-ImportResource"><span class="nav-number">1.0.3.4.</span> <span class="nav-text">4.@ImportResource</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E9%85%8D%E7%BD%AE%E7%B1%BB"><span class="nav-number">1.0.4.</span> <span class="nav-text">4. 配置类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.0.5.</span> <span class="nav-text">5. 多环境配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%A4%9AProfile%E6%96%87%E4%BB%B6"><span class="nav-number">1.0.5.1.</span> <span class="nav-text">1. 多Profile文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%96%87%E6%A1%A3%E5%9D%97%E6%96%B9%E5%BC%8F"><span class="nav-number">1.0.5.2.</span> <span class="nav-text">2. 文档块方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%BF%80%E6%B4%BB%E6%8C%87%E5%AE%9Aprofile"><span class="nav-number">1.0.5.3.</span> <span class="nav-text">3. 激活指定profile</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E6%8C%87%E5%AE%9A%E5%A4%96%E9%83%A8%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.0.5.4.</span> <span class="nav-text">4. 指定外部配置文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86"><span class="nav-number">1.0.6.</span> <span class="nav-text">6. 自动配置原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E4%BB%A5HttpEncodingAutoConfiguration%E4%B8%BA%E4%BE%8B%E8%A7%A3%E9%87%8A%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86"><span class="nav-number">1.0.7.</span> <span class="nav-text">7.以HttpEncodingAutoConfiguration为例解释自动配置原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Conditional%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.0.8.</span> <span class="nav-text">8.@Conditional注解</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2020 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

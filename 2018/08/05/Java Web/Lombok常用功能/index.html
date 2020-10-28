@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>lombok 常用功能 | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Java工具" />
+  
+  
+  
+  
+  <meta name="description" content="Lombok 常用功能1.导入123456&lt;dependency&gt;    &lt;groupId&gt;org.projectlombok&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;lombok&lt;&#x2F;artifactId&gt;    &lt;version&gt;1.16.20&lt;&#x2F;version&gt;    &amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lombok 常用功能">
+<meta property="og:url" content="http://lwenxu.coding.me/2018/08/05/Java%20Web/Lombok%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="Lombok 常用功能1.导入123456&lt;dependency&gt;    &lt;groupId&gt;org.projectlombok&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;lombok&lt;&#x2F;artifactId&gt;    &lt;version&gt;1.16.20&lt;&#x2F;version&gt;    &amp;">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-08-05T13:23:43.000Z">
+<meta property="article:modified_time" content="2018-12-19T12:36:42.000Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="Java工具">
+<meta name="twitter:card" content="summary">
+  
+
+  
+
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
+  
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Java Web/Lombok常用功能" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Lombok 常用功能
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/08/05/Java%20Web/Lombok%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/" class="article-date">
+	  <time datetime="2018-08-05T13:23:43.000Z" itemprop="datePublished">2018-08-05</time>
+	</a>
+
+      
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Lombok-常用功能"><a href="#Lombok-常用功能" class="headerlink" title="Lombok 常用功能"></a>Lombok 常用功能</h1><h2 id="1-导入"><a href="#1-导入" class="headerlink" title="1.导入"></a>1.导入</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.projectlombok&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;lombok&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.16.20&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;scope&gt;provided&lt;&#x2F;scope&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-Getter-Setter"><a href="#2-Getter-Setter" class="headerlink" title="2.@Getter/@Setter"></a>2.@Getter/@Setter</h2><p>这两个注解可以在类上也可以在字段上，看需要的粒度而定。</p>
+<h2 id="3-ToString"><a href="#3-ToString" class="headerlink" title="3.@ToString"></a>3.@ToString</h2><p>生成一个 json 类型的字符串</p>
+<h2 id="4-EqualsAndHashCode"><a href="#4-EqualsAndHashCode" class="headerlink" title="4.@EqualsAndHashCode"></a>4.@EqualsAndHashCode</h2><p>生成 equals 和 hashcode</p>
+<h2 id="5-NoArgsConstructor"><a href="#5-NoArgsConstructor" class="headerlink" title="5.@NoArgsConstructor"></a>5.@NoArgsConstructor</h2><p>生成午无参构造器</p>
+<h2 id="6-RequiredArgsConstructor"><a href="#6-RequiredArgsConstructor" class="headerlink" title="6.@RequiredArgsConstructor"></a>6.@RequiredArgsConstructor</h2><p>只对标有 @NonNull 的字段生成构造器，并且初始化的时候会检查NonNull 的字段如果为空则抛出异常。</p>
+<h2 id="7-AllArgsConstructor"><a href="#7-AllArgsConstructor" class="headerlink" title="7.@AllArgsConstructor"></a>7.@AllArgsConstructor</h2><p>所有字段的构造器</p>
+<h2 id="8-Data"><a href="#8-Data" class="headerlink" title="8.@Data"></a>8.@Data</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Data&#96;是一个集合体。包含&#96;Getter&#96;,&#96;Setter&#96;,&#96;RequiredArgsConstructor&#96;,&#96;ToString&#96;,&#96;EqualsAndHashCode</span><br></pre></td></tr></table></figure>
+
+<h2 id="9-Value"><a href="#9-Value" class="headerlink" title="9.@Value"></a>9.@Value</h2><p>可以帮忙生成一个不可变对象。对于所有的字段都将生成final的。同<code>@Data</code>， <code>@Value</code>是一个集合体。包含<code>Getter</code>,<code>AllArgsConstructor</code>,<code>ToString</code>,<code>EqualsAndHashCode</code>。</p>
+<h2 id="10-Builder"><a href="#10-Builder" class="headerlink" title="10.@Builder"></a>10.@Builder</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Room room &#x3D; builder().name(&quot;name&quot;).id(&quot;id&quot;).createTime(new Date()).occupation(&quot;1&quot;).occupation(&quot;2&quot;).build();</span><br></pre></td></tr></table></figure>
+
+<h2 id="11-Log"><a href="#11-Log" class="headerlink" title="11.@Log"></a>11.@Log</h2><p>一个日志属性，可以直接使用的。</p>
+<h2 id="12-UtilityClass"><a href="#12-UtilityClass" class="headerlink" title="12.@UtilityClass"></a>12.@UtilityClass</h2><p>工具类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@UtilityClass</span><br><span class="line">public class Utility &#123;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return &quot;name&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    &#x2F;&#x2F; Utility utility &#x3D; new Utility(); 构造函数为私有的,</span><br><span class="line">    System.out.println(Utility.getName());</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="13-Cleanup"><a href="#13-Cleanup" class="headerlink" title="13.@Cleanup"></a>13.@Cleanup</h2><p>用于流等可以不需要关闭使用流对象.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Cleanup</span><br><span class="line">OutputStream outStream &#x3D; new FileOutputStream(new File(&quot;text.txt&quot;));</span><br><span class="line">@Cleanup</span><br><span class="line">InputStream inStream &#x3D; new FileInputStream(new File(&quot;text2.txt&quot;));</span><br><span class="line">byte[] b &#x3D; new byte[65536];</span><br><span class="line">while (true) &#123;</span><br><span class="line">   int r &#x3D; inStream.read(b);</span><br><span class="line">   if (r &#x3D;&#x3D; -1) break;</span><br><span class="line">   outStream.write(b, 0, r); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2018/08/05/Java Web/Lombok常用功能/" target="_blank" title="Lombok 常用功能">http://lwenxu.coding.me/2018/08/05/Java Web/Lombok常用功能/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/08/06/Java%20SE/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          GOF23 常用设计模式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/08/04/JVM/Java%20Class%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%8F%8D%E5%B0%84/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java Class对象与反射机制</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lombok-%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD"><span class="nav-number">1.</span> <span class="nav-text">Lombok 常用功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AF%BC%E5%85%A5"><span class="nav-number">1.1.</span> <span class="nav-text">1.导入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Getter-Setter"><span class="nav-number">1.2.</span> <span class="nav-text">2.@Getter&#x2F;@Setter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-ToString"><span class="nav-number">1.3.</span> <span class="nav-text">3.@ToString</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-EqualsAndHashCode"><span class="nav-number">1.4.</span> <span class="nav-text">4.@EqualsAndHashCode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-NoArgsConstructor"><span class="nav-number">1.5.</span> <span class="nav-text">5.@NoArgsConstructor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-RequiredArgsConstructor"><span class="nav-number">1.6.</span> <span class="nav-text">6.@RequiredArgsConstructor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-AllArgsConstructor"><span class="nav-number">1.7.</span> <span class="nav-text">7.@AllArgsConstructor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-Data"><span class="nav-number">1.8.</span> <span class="nav-text">8.@Data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-Value"><span class="nav-number">1.9.</span> <span class="nav-text">9.@Value</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-Builder"><span class="nav-number">1.10.</span> <span class="nav-text">10.@Builder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-Log"><span class="nav-number">1.11.</span> <span class="nav-text">11.@Log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-UtilityClass"><span class="nav-number">1.12.</span> <span class="nav-text">12.@UtilityClass</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-Cleanup"><span class="nav-number">1.13.</span> <span class="nav-text">13.@Cleanup</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2020 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

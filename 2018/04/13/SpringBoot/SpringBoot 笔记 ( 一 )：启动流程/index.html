@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>springboot笔记(一):启动流程 | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="SpringBoot" />
+  
+  
+  
+  
+  <meta name="description" content="SpringBoot 笔记(一): 启动流程1. 配置开发环境1. 创建 Maven 项目然后我们首先在项目里面加上编译环境，防止每一次更新 Maven 的时候导致项目的语言级别自动被改成 Java5 然后导致编译不通过的问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot笔记(一):启动流程">
+<meta property="og:url" content="http://lwenxu.coding.me/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%80%20)%EF%BC%9A%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="SpringBoot 笔记(一): 启动流程1. 配置开发环境1. 创建 Maven 项目然后我们首先在项目里面加上编译环境，防止每一次更新 Maven 的时候导致项目的语言级别自动被改成 Java5 然后导致编译不通过的问题。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-04-13T13:01:28.000Z">
+<meta property="article:modified_time" content="2018-12-19T12:36:42.000Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="SpringBoot">
+<meta name="twitter:card" content="summary">
+  
+
+  
+
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
+  
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-SpringBoot/SpringBoot 笔记 ( 一 )：启动流程" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      SpringBoot笔记(一):启动流程
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%80%20)%EF%BC%9A%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" class="article-date">
+	  <time datetime="2018-04-13T13:01:28.000Z" itemprop="datePublished">2018-04-13</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SpringBoot-笔记-一-启动流程"><a href="#SpringBoot-笔记-一-启动流程" class="headerlink" title="SpringBoot 笔记(一): 启动流程"></a>SpringBoot 笔记(一): 启动流程</h1><h2 id="1-配置开发环境"><a href="#1-配置开发环境" class="headerlink" title="1. 配置开发环境"></a>1. 配置开发环境</h2><h3 id="1-创建-Maven-项目"><a href="#1-创建-Maven-项目" class="headerlink" title="1. 创建 Maven 项目"></a>1. 创建 Maven 项目</h3><p>然后我们首先在项目里面加上编译环境，防止每一次更新 Maven 的时候导致项目的语言级别自动被改成 Java5 然后导致编译不通过的问题。</p>
+<a id="more"></a>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">id</span>&gt;</span>jdk‐1.8<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">activation</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">activeByDefault</span>&gt;</span>true<span class="tag">&lt;/<span class="name">activeByDefault</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">jdk</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">jdk</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">activation</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">maven.compiler.compilerVersion</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.compilerVersion</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-Maven-中添加依赖"><a href="#2-Maven-中添加依赖" class="headerlink" title="2. Maven 中添加依赖"></a>2. Maven 中添加依赖</h3><p>&emsp;&emsp;  一开始加上最基础的依赖就是 parent 父项目和 web 的 starter 。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.5.9.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;其实很明显父工程的作用就是用来版本控制的，为什么这么说？我们跟踪一下父工程，来到父工程的 pox.xml 看到如下的配置。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.5.9.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">relativePath</span>&gt;</span>../../spring-boot-dependencies<span class="tag">&lt;/<span class="name">relativePath</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;  继续跟踪这个父工程可以看到以下内容。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- Dependency versions --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">activemq.version</span>&gt;</span>5.14.5<span class="tag">&lt;/<span class="name">activemq.version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">antlr2.version</span>&gt;</span>2.7.7<span class="tag">&lt;/<span class="name">antlr2.version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">appengine-sdk.version</span>&gt;</span>1.9.59<span class="tag">&lt;/<span class="name">appengine-sdk.version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">artemis.version</span>&gt;</span>1.5.5<span class="tag">&lt;/<span class="name">artemis.version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">aspectj.version</span>&gt;</span>1.8.13<span class="tag">&lt;/<span class="name">aspectj.version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">assertj.version</span>&gt;</span>2.6.0<span class="tag">&lt;/<span class="name">assertj.version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">atomikos.version</span>&gt;</span>3.9.3<span class="tag">&lt;/<span class="name">atomikos.version</span>&gt;</span></span><br><span class="line">		....</span><br><span class="line">		....</span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;  好的，现在终于算是找到源头了，这些 properties 就是用来规定 springboot 整合的这些框架的版本，所以说我们只用管好 <code>springboot</code> 的版本，对于里面封装的各个组件我们不用操心，他都帮我们配置好了。但是我们也是可以自己继续进行定制的，后面会说到相关的东西。</p>
+<p>&emsp;&emsp;  可以看到里面添加的另外一个 starter 就是 web 的 starter ，其实在 springboot 中的 starter 的命名很规范一眼就能看出是干嘛的。什么是 starter ？ 简单来说就是 springboot 用来整合各个框架的包，我们需要什么框架什么功能就添加上这些对应的 starter 在 springboot 中就可以享受开箱即用的快感了！</p>
+<h3 id="3-编写主类"><a href="#3-编写主类" class="headerlink" title="3. 编写主类"></a>3. 编写主类</h3><p>&emsp;&emsp;  做完了这些最简单的配置，我们就可以开始写启动代码了，代码非常简单只有几行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// @SpringBootApplication 来标注一个主程序类</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Spring启动！</span></span><br><span class="line">SpringApplication.run(MainApplication.class,args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;  很神奇这样我们就写好了一个完全可以跑起来的 springboot 应用，我们只是写了一个注解和一行代码而已，为什么会这么简单，让我们看看 <code>@SpringBootApplication</code> 注解。</p>
+<h4 id="1-SpringBootApplication-注解"><a href="#1-SpringBootApplication-注解" class="headerlink" title="1. @SpringBootApplication 注解"></a>1. @SpringBootApplication 注解</h4><p>&emsp;&emsp;  首先可以看到的是这是一个组合注解，里面有如下内容：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootConfiguration</span></span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="meta">@ComponentScan(excludeFilters = &#123;</span></span><br><span class="line"><span class="meta">		@Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),</span></span><br><span class="line"><span class="meta">		@Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) &#125;)</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;  好一个个的来看:</p>
+<ol>
+<li><code>@SpringBootConfiguration</code> 这个注解就是标注这是一个 <code>springboot</code> 的配置类，也就是可以进行 <code>springboot</code> 的配置，配置类就等于配置文件，我们要有这个等价的概念。然后我们在打开这个注解发现里面就是 <code>spring</code>的一个 Java Config 注解 <code>@Configuration</code> 所以说这个实际上是 <code>SpringBoot </code> 的主配置类。</li>
+<li><code>@EnableAutoConfiguration</code> 他是用来开启自动配置，也就就是 <code>springboot</code> 的核心，其实最终起作用的就是 <code>spring-boot-configuration-processor-1.5.9.RELEASE.jar</code> 这个包在起作用，后面会分析到。看看这个注解里面的内容！<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AutoConfigurationPackage</span></span><br><span class="line"><span class="meta">@Import(EnableAutoConfigurationImportSelector.class)</span></span><br></pre></td></tr></table></figure>
+两个注解:</li>
+</ol>
+<h5 id="1-AutoConfigurationPackage"><a href="#1-AutoConfigurationPackage" class="headerlink" title="1.@AutoConfigurationPackage"></a>1.@AutoConfigurationPackage</h5><p>第一个是自动导组件的注解，底层调用了Spring 底层注解(@Import)给容器中导入一个组件。也就是 <code>@Import(AutoConfigurationPackages.Registrar.class)</code> 可以看到他导入了一个自动配置包的注册器。Import 是Spring 的一个底层的注解，就是用来导入组件。然后我来查看这个组件到底做了什么：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Order(Ordered.HIGHEST_PRECEDENCE)</span></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Registrar</span> <span class="keyword">implements</span> <span class="title">ImportBeanDefinitionRegistrar</span>, <span class="title">DeterminableImports</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerBeanDefinitions</span><span class="params">(AnnotationMetadata metadata,</span></span></span><br><span class="line"><span class="function"><span class="params">         BeanDefinitionRegistry registry)</span> </span>&#123;</span><br><span class="line">      register(registry, <span class="keyword">new</span> PackageImport(metadata).getPackageName()); <span class="comment">//获取元数据中的包信息，然后导入这些包里面的组件 核心！！！！</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> Set&lt;Object&gt; <span class="title">determineImports</span><span class="params">(AnnotationMetadata metadata)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> Collections.&lt;Object&gt;singleton(<span class="keyword">new</span> PackageImport(metadata));</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    如果在上面的那个注册组件的位置打上断点的话，我们就会发现这个地方计算的报名就是我们主类所在的包的包名，也 就是需要导入我们主类所在的包以及子包所对应的组件，我们自己的组件。所以说我们必须把其他的类放到与主类平行的其他包中，否则没办法加载这些类到容器里。</p>
+<h5 id="2-Import-EnableAutoConfigurationImportSelector-class"><a href="#2-Import-EnableAutoConfigurationImportSelector-class" class="headerlink" title="2.@Import(EnableAutoConfigurationImportSelector.class)"></a>2.@Import(EnableAutoConfigurationImportSelector.class)</h5><p>第二个就是导入一个 Seletor 组件，先看一下这个组件的代码，里面很简单就是一个方法，但是我们发现他是继承了一个类的所以说我们需要看看父类的方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EnableAutoConfigurationImportSelector</span>  <span class="keyword">extends</span> <span class="title">AutoConfigurationImportSelector</span></span>&#123;</span><br><span class="line">          <span class="comment">//..........</span></span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们看到父类中的一个非常重要的方法， <code>selectImports</code> 这个方法就完成了我们的自动配置！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String[] selectImports(AnnotationMetadata annotationMetadata) &#123;</span><br><span class="line">   <span class="keyword">if</span> (!isEnabled(annotationMetadata)) &#123;</span><br><span class="line">      <span class="keyword">return</span> NO_IMPORTS;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">try</span> &#123;</span><br><span class="line">      AutoConfigurationMetadata autoConfigurationMetadata = AutoConfigurationMetadataLoader</span><br><span class="line">            .loadMetadata(<span class="keyword">this</span>.beanClassLoader);</span><br><span class="line">      AnnotationAttributes attributes = getAttributes(annotationMetadata);</span><br><span class="line">      List&lt;String&gt; configurations = getCandidateConfigurations(annotationMetadata,</span><br><span class="line">            attributes);</span><br><span class="line">      configurations = removeDuplicates(configurations);</span><br><span class="line">      configurations = sort(configurations, autoConfigurationMetadata);</span><br><span class="line">      Set&lt;String&gt; exclusions = getExclusions(annotationMetadata, attributes);</span><br><span class="line">      checkExcludedClasses(configurations, exclusions);</span><br><span class="line">      configurations.removeAll(exclusions);</span><br><span class="line">      configurations = filter(configurations, autoConfigurationMetadata);</span><br><span class="line">      fireAutoConfigurationImportEvents(configurations, exclusions);</span><br><span class="line">      <span class="keyword">return</span> configurations.toArray(<span class="keyword">new</span> String[configurations.size()]);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">catch</span> (IOException ex) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(ex);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到里面有个 configurations 变量这个就是我们的自动配置的一些包。可以打断点看到里面的内容。</p>
+<p>这个组件底层就是各种 beanFactory 也就是我们 Spring 底层的 Ioc 容器，然后就是向容器里面导入我们的自动配置类，<code>xxxAutoConfiguration</code> 这种类，也就是 <code>spring-boot-configuration-processor-1.5.9.RELEASE.jar</code> 包里面的内容。</p>
+<p>那么具体把这个包里面的哪些 <code>xxxAutoConfiguration</code> 加入到容器里面呢？ 这就需要看一个方法。在这个 Selector 的底层有一个 <code>getCandidateConfigurations</code> 方法，这个方法就是去扫描所有包下面的 <code>META-INF/spring.factories</code> 文件，然后这些文件中的 <code>EnableAutoConfiguratio</code> 属性就会有需要配置组件要导入哪些 <code>xxxAutoConfiguration</code> 类对这个组件进行自动配置。可以看一下<code>spring-boot-configuration-processor-1.5.9.RELEASE.jar</code> 里面的具体内容：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa=\</span><br><span class="line">org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration,\</span><br><span class="line">org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration,\</span><br><span class="line">org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,\</span><br><span class="line">org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,\</span><br><span class="line">org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration,\</span><br><span class="line">org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration,\</span><br><span class="line">org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration,\</span><br><span class="line">org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;  可以看到这就是他的自动配置机制！</p>
+<h4 id="2-run-方法"><a href="#2-run-方法" class="headerlink" title="2. run 方法"></a>2. run 方法</h4><p>在这个方法的底层 new 了一个 <code>SpringApplication</code> 的东西，这个很明显就是真正的 <code>springboot</code> 的启动类了。最后调用到了 <code> public ConfigurableApplicationContext run(String... args)</code> 这里面做了一些列的启动操作，就不具体看了。然后我们传入的那个类被放到了 <code>sources = new LinkedHashSet();</code> 这个数据结构里面。感觉没怎么被使用。</p>
+<p>&emsp;&emsp;  这样其实我们的 springboot 应用已经可以开始跑起来了。但是我们不能访问任何页面，主要是因为我们没有 controller ！好的接着编写一个简单的 controller。</p>
+<h3 id="4-controller-编写"><a href="#4-controller-编写" class="headerlink" title="4. controller 编写"></a>4. controller 编写</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span> <span class="comment">//标注他是 controller</span></span><br><span class="line"><span class="meta">@ResponseBody</span> <span class="comment">//能够返回数据</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@GetMapping(&quot;/hello&quot;)</span> <span class="comment">//url映射</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;  @Controller 、@ResponseBody 这两个注解我们可以合并采用 @RestController 这个其实就是上面两个注解的组合注解。然后下面的那个 @GetMapping 就是采用的 get 方式请求时候的映射，然后对应的还有 post、put、delete 等等，这些都是 restful 接口中有规定的在何种情况使用何种请求方式。</p>
+<p>&emsp;&emsp;  此时我们去访问 <code>localhost:8080/hello</code> 就会显示 “Hello World！” 了！</p>
+<h3 id="5-打包部署"><a href="#5-打包部署" class="headerlink" title="5. 打包部署"></a>5. 打包部署</h3><p>&emsp;&emsp;  这个在 springboot 中打包部署非常容易就是采用一个 Maven 插件我们就可以打包成 jar 而非 war 。那么也就是说我们可以直接使用 <code>java -jar</code> 命令来运行这个 jar 包。等等 ！难道不需要 tomcat 之类的 web 容器吗？ 对的！因为<code>springboot</code> 是内嵌了 tomcat 所以我们根本没有部署到 web 容器这一说，所以说部署简洁。那么我们需要加入打包插件。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;  接下来只需要在 Maven 中执行 package 命令就可以在 target 目录生成 jar 包。并且我们可以使用 <code>java -jar </code> 来执行这个 jar 。</p>
+<h3 id="6-resource-目录结构"><a href="#6-resource-目录结构" class="headerlink" title="6. resource 目录结构"></a>6. resource 目录结构</h3><p>resources文件夹中目录结构：</p>
+<ul>
+<li>static：保存所有的静态资源如 js css  images。</li>
+<li>templates：保存所有的模板页面 html 模板。</li>
+<li>application.properties：Spring Boot应用的配置文件。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2018/04/13/SpringBoot/SpringBoot 笔记 ( 一 )：启动流程/" target="_blank" title="SpringBoot笔记(一):启动流程">http://lwenxu.coding.me/2018/04/13/SpringBoot/SpringBoot 笔记 ( 一 )：启动流程/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/13/Shiro/Shiro%20%E8%AE%A4%E8%AF%81%E6%A1%86%E6%9E%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Shiro安全框架:认证
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/07/Netty/Bootstrap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Bootstrap 源码分析</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringBoot-%E7%AC%94%E8%AE%B0-%E4%B8%80-%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">SpringBoot 笔记(一): 启动流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.</span> <span class="nav-text">1. 配置开发环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA-Maven-%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 创建 Maven 项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Maven-%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. Maven 中添加依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%BC%96%E5%86%99%E4%B8%BB%E7%B1%BB"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. 编写主类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-SpringBootApplication-%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">1. @SpringBootApplication 注解</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-AutoConfigurationPackage"><span class="nav-number">1.1.3.1.1.</span> <span class="nav-text">1.@AutoConfigurationPackage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-Import-EnableAutoConfigurationImportSelector-class"><span class="nav-number">1.1.3.1.2.</span> <span class="nav-text">2.@Import(EnableAutoConfigurationImportSelector.class)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-run-%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">2. run 方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-controller-%E7%BC%96%E5%86%99"><span class="nav-number">1.1.4.</span> <span class="nav-text">4. controller 编写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%89%93%E5%8C%85%E9%83%A8%E7%BD%B2"><span class="nav-number">1.1.5.</span> <span class="nav-text">5. 打包部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-resource-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.6.</span> <span class="nav-text">6. resource 目录结构</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2020 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>
