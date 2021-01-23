@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>dsdt guide | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="-MacOS" />
+  
+  
+  
+  
+  <meta name="description" content="Overview In order to make many OS X features work well on a laptop, you will always need a properly patched DSDT (and SSDTs). The purpose of this guide is to provide a foundation for proper patching o">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DSDT GUIDE">
+<meta property="og:url" content="https://lwenxu.github.io/2017/05/05/Mac/dsdt%20guide/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="Overview In order to make many OS X features work well on a laptop, you will always need a properly patched DSDT (and SSDTs). The purpose of this guide is to provide a foundation for proper patching o">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-05-05T05:09:40.000Z">
+<meta property="article:modified_time" content="2021-01-23T15:24:50.154Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="-MacOS">
+<meta name="twitter:card" content="summary">
+  
+
+  
+
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
+  
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Mac/dsdt guide" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      DSDT GUIDE
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/05/05/Mac/dsdt%20guide/" class="article-date">
+	  <time datetime="2017-05-05T05:09:40.000Z" itemprop="datePublished">2017-05-05</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/MacOS/">-MacOS</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Overview</p>
+<p>In order to make many OS X features work well on a laptop, you will always need a properly patched DSDT (and SSDTs). The purpose of this guide is to provide a foundation for proper patching of your OEM DSDT/SSDTs.</p>
+<p>Advanced users may wish to implement hotpatching via Clover. See guide here: <a target="_blank" rel="noopener" href="http://www.tonymacx86.com/threads/guide-using-clover-to-hotpatch-acpi.200137/">http://www.tonymacx86.com/threads/guide-using-clover-to-hotpatch-acpi.200137/</a></p>
+<p>Although you may be tempted to use a DSDT from another computer, it will almost always end in failure. You simply cannot be certain it is valid to use ACPI files from another computer. Even minor differences in hardware configuration (BIOS version, amount of memory installed, BIOS options selected, and other hardware differences such as which WiFi card is installed) can make for differences that cause instability and weird bugs if you use foreign ACPI files. Differences such as BIOS version, amount of memory installed, BIOS options selected, and other hardware differences such as which WiFi card is installed, can make various OperationRegion addresses different, which makes a patched DSDT for one system incompatible with another. It is also not uncommon for the same laptop model to be produced in different runs with different motherboards, and potentially incompatible ACPI files.</p>
+<a id="more"></a>
+<p>The process of patching involves several steps:</p>
+<ul>
+<li>extracting native files</li>
+<li>disassembling the native files</li>
+<li>analyzing and filtering the native files</li>
+<li>patching</li>
+<li>saving (compiling) and installing</li>
+</ul>
+<p>Extracting native ACPI files</p>
+<p>All BIOS implementations provide ACPI files to the OS. So, on any OS, you can extract them for patching later. Extraction can therefore be done on Linux, OS X, Windows, or even in the Clover bootloader. Native files extracted are generally identical, although because of the software used to extract, they may be named differently.</p>
+<p>This guide will focus on three methods of extraction: Using patchmatic in OS X, using F4 with Clover, or using Linux.</p>
+<p>Extracting with ‘patchmatic’:</p>
+<p>If you’ve already installed OS X, provided you’re not currently booting with any patched ACPI files, you can extract your native DSDT/SSDT with patchmatic. Download the patchmatic binary here: <a target="_blank" rel="noopener" href="https://github.com/RehabMan/OS-X-MaciASL-patchmatic">https://github.com/RehabMan/OS-X-MaciASL-patchmatic</a> (be sure to read the README as the download location is linked from it). For ease of use in Terminal, you should copy the binary (inside the ZIP) to /usr/bin.</p>
+<p>After installing patchmatic, you can invoke it in Terminal, as such:</p>
+<p>Code (Text):</p>
+<p>cd ~/Desktop<br>mkdir extract<br>cd extract<br>patchmatic -extract</p>
+<p>The patchmatic binary will extract all loaded ACPI files and place them in the current directory. If you’re using any options in the bootloader that affect the injected DSDT/SSDT, you will not get native ACPI files, so be sure you’re not using those options. For example, if you’re using (Chameleon) DropSSDT=Yes, or (Clover) DropOem=true, the native SSDTs are being dropped before OS X can load them, so you’ll be missing them in the patchmatic output. Same goes for any Clover DSDT “Fixes” – those fixes are patching the native DSDT, and to do your own DSDT patching, you don’t want that. Options such as GeneratePStates/GenerateCStates=Yes, or with Clover /ACPI/SSDT/Generate/CStates /ACPI/SSDT/Generate/PStates will inject extra SSDTs which can cause complications with disassembly.</p>
+<p>It is for all those reasons, it is often easier to extract via Linux or using Clover F4.</p>
+<p>Note: Using ‘patchmatic -extract’ to confirm you’re patching DSDT/SSDTs as you expect is a useful diagnostic tool.</p>
+<p>Extracting with Clover F4 (recommended):</p>
+<p>Extracting with Clover F4 is recommended, due to ease of extraction, and due to ease of comparison between ACPI/origin and ACPI/patched (for troubleshooting).</p>
+<p>At the main Clover bootloader screen, you can press F4 and Clover will dump the native ACPI files to EFI/Clover/ACPI/origin. You can then access them after you boot OS X to disassemble them and patch. Note that some BIOS implementations reverse the function of Fn+F4 with F4, so when in doubt, press both Fn+F4 and F4. There is no feedback during or after the dump, just a slight delay as the files are written. The delay is more noticeable if they are being written to USB, as would be the case when booting from a Clover USB.</p>
+<p>Sometimes, Clover F4 will write duplicate SSDTs. These duplicates will cause problems during disassembly. If you run into issues (duplicate definitions) during disassembly, you will need to analyse all SSDTs to eliminate the files which are duplicate. It is easy to see which are duplicates by looking at the file sizes. Files with equal size are likely duplicates.</p>
+<p>You can see file sizes in bytes of all SSDTs in Terminal:<br>Code (Text):</p>
+<p>ls -l SSDT*.aml</p>
+<p>Extracting with Linux:</p>
+<p>In Linux, the native ACPI files are available directly from the file system. You can find them at /sys/firmware/acpi/tables and /sys/firmware/acpi/tables/dynamic. It is possible to copy the entire set with a single command in Terminal.</p>
+<p>It is not necessary to install Linux. Simply run it from USB: <a target="_blank" rel="noopener" href="http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-windows">http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-windows</a>.</p>
+<p>In Linux Terminal:<br>Code (Text):</p>
+<h1 id="substitute-DEST-with-the-mountpoint-of-a-FAT32-formatted-USB-stick"><a href="#substitute-DEST-with-the-mountpoint-of-a-FAT32-formatted-USB-stick" class="headerlink" title="substitute DEST with the mountpoint of a FAT32 formatted USB stick"></a>substitute DEST with the mountpoint of a FAT32 formatted USB stick</h1><p>sudo cp -R /sys/firmware/acpi/tables DEST</p>
+<p>You should copy the files to a FAT32 formatted USB. Using FAT32 avoids permissions issues as FAT32 has no file permissions. The value of DEST for an auto-mounted USB will depend on the version of Linux you’re using and how you booted it. You can see the mount-point by typing ‘mount’ in Terminal, or hover your mouse over the volume name in the Linux file explorer.</p>
+<p>Preparing tools for disassembly</p>
+<p>To properly disassemble your extracted files, you need the iasl compiler, which is run from Terminal.</p>
+<p>You will need a recent build of iasl to disassemble them properly. There is an appropriate version available here: <a target="_blank" rel="noopener" href="https://bitbucket.org/RehabMan/acpica/downloads/">https://bitbucket.org/RehabMan/acpica/downloads/</a>. It is a good idea to copy the iasl binary to your path (eg. /usr/bin), so it is easily accessed from Terminal.</p>
+<p>For example, if you downloaded it to ~/Downloads/iasl.zip, you can extract and copy it in Terminal:<br>Code (Text):</p>
+<p>cd ~/Downloads<br>unzip iasl.zip<br>sudo cp iasl /usr/bin</p>
+<p>Building the latest iasl from github</p>
+<p>You can also build the latest version of my iasl from my github. Assuming you have Xcode installed:<br>Code (Text):</p>
+<p>mkdir ~/Projects &amp;&amp; cd ~/Projects<br>git clone <a target="_blank" rel="noopener" href="https://github.com/RehabMan/Intel-iasl.git">https://github.com/RehabMan/Intel-iasl.git</a> iasl.git<br>cd iasl.git</p>
+<p>The latest version always tends to have experimental and not well tested code. For example, the new code Intel added to disassemble If/Else blocks as Switch/Case is full of bugs (I have not had time to report them to Intel).</p>
+<p>I recommend using the version prior to that change:<br>Code (Text):</p>
+<p>git checkout b9c6c2b</p>
+<p>Note: The b9c6c2b version is the one currently available from bitbucket.</p>
+<p>Then build it:<br>Code (Text):</p>
+<p>make</p>
+<p>At that point, you can install it with:<br>Code (Text):</p>
+<p>sudo make install</p>
+<p>And assuming you have MaciASL.app installed to /Applications, you can use the new version (that you just built and installed to /usr/bin) in MaciASL as well:<br>Code (Text):</p>
+<p>sudo cp /usr/bin/iasl /Applications/MaciASL.app/Contents/MacOS/iasl61</p>
+<p>The newer version of iasl will eventually be available at the bitbucket link, but for those who want to be on the “bleeding edge”…</p>
+<p>Disassembling ACPI files</p>
+<p>Although the extracted native files can be opened directly in MaciASL, it is not recommended. Opening an AML file directly in MaciASL will cause MaciASL to disassemble the file (with iasl) standalone, and if the AML has complex references to other AMLs, it will not disassemble it correctly. You’ll be left with many hard to fix errors.</p>
+<p>As a result, it is better to disassemble all files as a group using iasl in Terminal. To prepare, place all DSDT and SSDT files in a single directory (DO NOT copy ACPI files that don’t begin with DSDT or SSDT), and change the names such that they have an .aml extension.</p>
+<p>Then disassemble in OS X Terminal:<br>Code (Text):</p>
+<p>cd “to directory where you placed all SSDT/DSDT”<br>iasl -da -dl DSDT.aml SSDT*.aml</p>
+<p>Note: Do NOT attempt to disassemble other ACPI files with the -da option. It will not work.</p>
+<p>Note: Also read the section below regarding refs.txt. Using refs.txt takes little effort, but can eliminate many common errors.</p>
+<p>From this point onward, you will work exclusively with the resulting *.dsl files using MaciASL. Of course, to use them you must save as “ACPI Machine Language Binary” with an extension .aml and place them where they will be loaded by the bootloader. But keep your patched .dsl files in case you need to apply more patches in the future.</p>
+<p>Let me state it quite simply (because this comes up a lot): If you are opening an AML file directly in MaciASL and clicking Compile, you are doing it WRONG. Let that soak into the gray matter between your ears for a minute.</p>
+<p>Note: The new tools with ACPI 6.1 are much more robust when dealing with AML files that have been compiled with the new version of iasl. ACPI 6.1 adds a feature to the compiler where opcodes for External references are added to the AML binary. ACPI interpreters ignore this data, but the data is useful to the disassembler (also only ACPI 6.1 version of iasl) to create a better disassembly from a standalone AML. As a result, you might find that AML files that have been recompiled with the latest tools may open directly more reliably. Of course, existing OEM ACPI DSDT and SSDTs are not using the new tools at this point, so you still must disassemble initially with all DSDT/SSDT with option -da, as described in this guide.</p>
+<p>Note regarding Snow Leopard ACPI implementation: Unfortunately, the 10.6.8 ACPI is old enough that it chokes on AMLs with the external opcode. If you are planning to use your ACPI files with Snow Leopard use the undocumented “-oe” switch to iasl when you compile your AML files. This option is not set when you compile (Save As) from MaciASL, so you will need to compile your files in Terminal. The “-oe” option disables generation of the external opcode in the output AML files.</p>
+<p>Disassembly with refs.txt</p>
+<p>Sometimes there are additional unresolved externals (symbols not defined in any file). The iasl disassembler will attempt to guess the number of arguments, but often it guesses poorly. You can correct it, by providing the External declarations in a text file. Some common unresolved symbols are SGPO, ECRD, ECWT, and MMTB.</p>
+<p>The following refs.txt content has some common (and not so common) missing symbols (as reported by users in this thread) that the disassembler tends to be confused by.</p>
+<p>First create refs.txt in the directory where your DSDT/SSDT files are:<br>Code (Text):</p>
+<p>External(MDBG, MethodObj, 1)<br>External(_GPE.MMTB, MethodObj, 0)<br>External(_SB.PCI0.LPCB.H_EC.ECWT, MethodObj, 2)<br>External(_SB.PCI0.LPCB.H_EC.ECRD, MethodObj, 1)<br>External(_SB.PCI0.LPCB.H_EC.ECMD, MethodObj, 1)<br>External(_SB.PCI0.PEG0.PEGP.SGPO, MethodObj, 2)<br>External(_SB.PCI0.GFX0.DD02._BCM, MethodObj, 1)<br>External(_SB.PCI0.SAT0.SDSM, MethodObj, 4)<br>External(_GPE.VHOV, MethodObj, 3)<br>External(_SB.PCI0.XHC.RHUB.TPLD, MethodObj, 2)</p>
+<p>Note: A handy way to create refs.txt is to use pbpaste in Terminal. Copy the text above to the clipboard (I’m assuming you know how to do that), then:<br>Code (Text):</p>
+<p>pbpaste&gt;refs.txt</p>
+<p>That will create refs.txt in your current working directory.</p>
+<p>Then use it during disassembly:<br>Code (Text):</p>
+<p>iasl -da -dl -fe refs.txt DSDT.aml SSDT*.aml</p>
+<p>Older versions of the iasl disassembler will place these External declarations before all the other External declarations. This, also, is a poor choice. Most of the time, you’ll need to move them so they follow the other External declarations instead of preceding them. It will be obvious as you’ll get errors from the External declarations that follow those inserted from refs.txt. In the current iasl supporting ACPI 6.1, this bug has been fixed.</p>
+<p>Filtering ACPI files</p>
+<p>For older computers (Sandy Bridge and prior), the SSDTs related to CPU can cause problems. If this is the case (you already had to use the alternate DropTables, or DropOem=true, or DropSSDT=Yes), then you should not include such SSDTs in ACPI/patched.</p>
+<p>I like to include all SSDTs, in their original order, patched appropriately, unless they are known to cause a problem. Keep in mind that an SSDT that doesn’t need any patches, does not need to be recompiled. You can simply use the original AML file unmodified.</p>
+<p>Note: The ‘x’ SSDTs from a Clover dump and likewise the SSDTs in the dynamic subdirectory from a Linux dump are loaded dynamically and are never included in ACPI/patched (they are SSDTs loaded on-demand with ACPI Load from SystemMemory).</p>
+<p>After you successfully disassemble your files, look at each one in an attempt to determine the SSDT’s purpose. If it is CPU related and is known to cause a problem, set it aside, and don’t include it in your final set for injection via the bootloader. For the most part, SSDTs with objects declared in Scope _PR.CPUx are likely CPU related.</p>
+<p>Here are some typical SSDTs you’ll find:</p>
+<ul>
+<li>CPU related: already discussed above. Include unless known to cause a problem.</li>
+<li>SATA: Can be excluded or included… your choice.</li>
+<li>PTID: Usually this file is useless for OS X and contains many errors. In rare cases, it may provide clues for how to read fan speed, temperature, or other system status.</li>
+<li>IAOE: If this SSDT is present, it is usually accessed from DSDT in _PTS and _WAK. Sleep may not work properly without it.</li>
+<li>GFX0: Usually the SSDT with ‘Device GFX0’ will be for integrated graphics. This is the SSDT you patch for backlight control. With older laptops, GFX0 is usually defined in DSDT. With newer Haswell laptops, it is usually defined in SSDT (although it can also be in DSDT).</li>
+<li>PEGP: PEGP usually corresponds to the discrete card in a switched dual-GPU configuration. There can be more than one, and usually you will need to include all of them as a group in order to accomplish any meaningful patching. These SSDTs should be patched if you wish to disable the discrete card when running OS X.</li>
+</ul>
+<p>It is a good idea to keep notes on what the purpose of each SSDT is and which ones you plan to “drop”, which ones you plan to keep unmodified, and those that you plan to patch.</p>
+<p>Fixing Errors</p>
+<p>Even by disassembling all at once (iasl with -da option), the native files can still have errors. The disassembled files have errors due to changes in iasl over time, imperfections in iasl itself, and differences in the compilation environment between our laptops and the OEM. A common cause of errors (my theory), for example, is that some of the methods referenced are actually inside Windows (MMTB and MDBG for example). There is also clearly cases where bugs are in the code or code was written uninitentionally (sometimes hard to tell the difference).</p>
+<p>So.. after determining which files you need, you must patch them so they compile without errors. There are many common patches for such errors in my laptop patch repository for MaciASL.</p>
+<p>MaciASL: <a target="_blank" rel="noopener" href="https://github.com/RehabMan/OS-X-MaciASL-patchmatic">https://github.com/RehabMan/OS-X-MaciASL-patchmatic</a><br>Laptop Patches: <a target="_blank" rel="noopener" href="https://github.com/RehabMan/Laptop-DSDT-Patch">https://github.com/RehabMan/Laptop-DSDT-Patch</a></p>
+<p>Note: I do not test my patches with DSDT Editor. It has too many bugs and a very old version of iasl. Please do not ask me about it.</p>
+<p>Be certain to always read the README, in order to download from the correct location and in order to setup MaciASL correctly. The patches for syntax/error problems begin with “[syn]” in the name. Common examples for older DSDTs are “Fix _PLD Buffer/Package Error”, “Fix TNOT Error”, and “Fix FPED Parse Error”. In order to determine which patch you need, you can look at the error message coming from the iasl compiler and the code at the line the error was detected. You can also attempt to apply a patch just to see if it makes changes as shown in the Preview window in MaciASL. If you’re not familiar with each type of error, it can take some experimentation and trial/error.</p>
+<p>For some errors, you can simply remove the line of code causing the error. But, it depends on whether the line is necessary for proper operation of the code or not. For example, errors caused by ‘External’ declarations can generally be removed to fix the error. If you wish, you can create automated patches of your own to remove these lines.</p>
+<p>It helps to have some experience with the ACPI spec and some programming experience.</p>
+<p>Your goal is to get each .dsl file to compile without errors (warnings/remarks/optimizations are ok). Once you have files that compile without errors, you can move on to patching them to fix issues you may have with your OS X installation.</p>
+<p>Common Patches</p>
+<p>Generally, a DSDT patch should only be applied after finding a need for that specific fix. But there are several patches that are commonly needed and that have only a small chance of causing a problem. They are in my laptop repo and are listed here:<br>“Fix _WAK Arg0 v2”<br>“HPET Fix”<br>“SMBUS Fix”<br>“IRQ Fix”<br>“RTC Fix”<br>“OS Check Fix”<br>“Fix Mutex with non-zero SyncLevel”<br>“Fix PNOT/PPNT” (use only if you’re dropping CPU related SSDTs)<br>“Add IMEI” (do not use if your DSDT or SSDTs already have IMEI/HECI/MEI device)</p>
+<p>Note: The OS Check Fix patch you use has nothing to do with the version of Windows the laptop came with, nor with the version of Windows you’re currently using.</p>
+<p>Note: Do not use the “Fix PNOT/PPNT” patch if you’re including all OEM SSDTs. It is intended only for the case you omit the OEM CPU related SSDTs.</p>
+<p>The USB patches can be used to fix “instant wake” where the laptop will not sleep without waking up seconds after sleep begins.</p>
+<p>Apply the patch appropriate for your hardware:<br>“6-series USB”<br>“7-series/8-series USB”</p>
+<p>The USB3 Mutliplex patch can assist in using AppleUSBXHCI.kext instead of GenericUSBXCHI.kext. It is based on information published by Mieze. Most DSDTs will need modifications to use it. The ProBook, for example, uses a modified version of this patch. And the Lenovo u310/u410 can use it as-is:<br>“7-series USB3 Multiplex”</p>
+<p>If you’re using GenericUSBXHCI.kext on Yosemite, make sure you’re using one built for Yosemite. Also, to avoid instant wake you may need kernel flag -gux_defer_usb2.</p>
+<p>An alternate solution for “instant wake” using AppleUSBXHCI.kext is to use “USB _PRW 0x6D (instant wake)”. You should examine your DSDT to determine what the relevant _PRW methods return to be certain the patch is appropriate for your DSDT. Also provided in the repo is “USB _PRW 0x0D (instant wake)” (0x0D and 0x6D are both common values for XHC/EHC/HDEF return from _PRW).</p>
+<p>If you have a Haswell CPU/8-series chipset, and AppleLPC.kext is not loading, you should use this patch to inject a compatible ID that will allow it to load:<br>“Haswell LPC”</p>
+<p>If you have a Skylake CPU/100-series chipset, and AppleLPC.kext is not loading, you should use this patch to inject a compatible ID that will allow it to load:<br>“Skylake LPC”</p>
+<p>Note regarding renames: Renames must be “balanced.” It is common to rename objects to better match what OS X expects (example “Rename GFX0 to IGPU” for proper IGPU power management). In such cases, all DSDT/SSDTs with references to that name must also be renamed.</p>
+<p>Note regarding duplicate identifiers: You must be sure that your patched files do not contain duplicate identifiers. A common case would be adding a _DSM method to a given path in one SSDT, where the OEM has defined a _DSM at the same path in another SSDT. To avoid this problem, you can use the “Remove _DSM methods” patch as one of the first patches you do to all DSDT/SSDTs. Also, “Rename _DSM methods to XDSM” is an alternative (sometimes “Remove _DSM methods” exposes a bug in MaciASL).</p>
+<p>Problem specific patching</p>
+<p>Battery status: <a target="_blank" rel="noopener" href="http://www.tonymacx86.com/yosemite-...de-how-patch-dsdt-working-battery-status.html">http://www.tonymacx86.com/yosemite-...de-how-patch-dsdt-working-battery-status.html</a></p>
+<p>Backlight control: <a target="_blank" rel="noopener" href="http://www.tonymacx86.com/yosemite-...ching-dsdt-ssdt-laptop-backlight-control.html">http://www.tonymacx86.com/yosemite-...ching-dsdt-ssdt-laptop-backlight-control.html</a></p>
+<p>Disabling nVidia/Radeon discrete graphics: <a target="_blank" rel="noopener" href="http://www.tonymacx86.com/yosemite-...bling-discrete-graphics-dual-gpu-laptops.html">http://www.tonymacx86.com/yosemite-...bling-discrete-graphics-dual-gpu-laptops.html</a></p>
+<p>When following a guide for a specific laptop, it may instruct you to apply a patch that is provided in the post itself. You will recognize it as the syntax used will look similar to other patches you’ve seen in the repository (eg. ‘into_all method label FOO code_regex xxyy removeall_matched;’). These patches are intended to be pasted directly into the patch window in MaciASL so they can be applied.</p>
+<p>If you’re interested in writing your own patches, read the documentation on MaciASL patch grammar: <a target="_blank" rel="noopener" href="http://sourceforge.net/p/maciasl/wiki/Patching">http://sourceforge.net/p/maciasl/wiki/Patching</a> Syntax Grammar/</p>
+<p>Note: In many cases, DSDT patches are used in conjunction with additional kexts, patched kexts, or Clover config.plist patches that patch the system kexts as they are loaded.</p>
+<p>Patches for using patched AppleHDA</p>
+<p>With patched AppleHDA, there are two patches that are needed in conjunction with the kext:<br>“Audio Layout 12” (change the layout-id from 12 to the one used by your DSDT)<br>“IRQ Fix”</p>
+<p>Note that you must have an AppleHDA that matches your codec, and must determine which layout-id was chosen. The layout-id is an arbitrary choice by the creator of the patched AppleHDA.</p>
+<p>To determine the layout-id used by a particular patched AppleHDA: First you need to know your codec id in decimal (eg. 0x10ec0269 = 283902569). Then look in the Info.plist for AppleHDAHardwareConfigDriver.kext (at AppleHDA.kext/Contents/PlugIns/AppleHDAHardwareConfigDriver.kext/Contents/Info.plist), find your codec id under HDAConfigDefault (there may be many entries in a sloppy patched AppleHDA or only one). The LayoutID that matches your codec id is the layout id you need. It is possible that a patched AppleHDA contains more than one layout-id for a given codec. In that case, choose the one you want to use.</p>
+<p>Saving files for loading by the bootloader</p>
+<p>In order to use your patched DSDT/SSDTs, you must save them where the bootloader can load them. Each bootloader location is unique and has different requirements for naming. Files must be saved in “ACPI Machine Language Binary” (MaciASL-&gt;Save As). Saving a text file (dsl) with an AML extension will likely cause panic or very strange behavior in OS X.</p>
+<p>Clover: Files should be placed on the Clover bootloader partition (usually the EFI partition), in EFI/Clover/ACPI/patched. DSDT.aml, if present, will automatically replace the OEM DSDT. For versions of Clover prior to v3062, SSDTs must be named SSDT-x or SSDT-xx, where ‘x’ is a digit (up to SSDT-19). Clover allows gaps in the numbering (eg. SSDT-1.aml, SSDT-5.aml, SSDT-6.aml is allowed). Clover version v3062+ will load all *.aml files present in ACPI/patched, with no restrictions on the name. Keep in mind that SSDT loading order is important. The original order of the SSDTs must be maintained in the patched set.</p>
+<p>Note regarding Clover v3062+: A change in the way SSDTs are loaded from ACPI/patched makes the order non-deterministic. You should specify the order explicitly with config.plist/ACPI/SortedOrder. The SortedOrder option is implemented in Clover v3088+. The config.plist files linked from my Clover guide have a good default for SortedOrder: <a target="_blank" rel="noopener" href="http://www.tonymacx86.com/yosemite-...de-booting-os-x-installer-laptops-clover.html">http://www.tonymacx86.com/yosemite-...de-booting-os-x-installer-laptops-clover.html</a></p>
+<p>Chameleon(or Chimera): Files should be placed in /Extra on the system volume (or wherever your bootloader /Extra configuration is located). DSDT.aml, if present, will automatically replace the OEM DSDT. Chameleon requires there are no gaps in the names of SSDTs. It will load SSDT.aml, SSDT-1.aml, SSDT-2.aml, SSDT-3.aml, and so-on from /Extra until it does not find the file in the sequence. So, if you have SSDT.aml, SSDT-1.aml, SSDT-4.aml, SSDT-5.aml, only SSDT.aml and SSDT-1.aml will be loaded. SSDT-4.aml and SSDT-5.aml will be ignored.</p>
+<p>Finally, keep in mind you cannot provide patched SSDTs without dropping the OEM SSDTs that they replace. The easiest way is to use DropSSDT=Yes (Chameleon) or ACPI/SSDT/DropOem=true (Clover) to drop all the SSDTs, then provide the patched (and unpatched) files for loading by the bootloader.</p>
+<p>Floating regions</p>
+<p>In ACPI, an OperationRegion can define a MMIO region, SystemMemory region, EmbeddedControl region, etc. These regions usually have fixed addresses dependent only on the machine configuration, BIOS version, or BIOS options. Sometimes, these regions can change randomly or unexpectedly. This is referred to as “floating regions”.</p>
+<p>Since by patching DSDT and/or SSDTs, we are providing a snapshot of these addresses at a given point in time, they may not match up should the BIOS decide to place such regions at a different address. If this is the case, you may notice that certain features are intermittently working, or other stability issues that appear to be random.</p>
+<p>As a result, it is a good idea to use Clover and its FixRegions feature. You can find the details in the Clover Wiki. All of the config.plist files in the Clover laptop guide use this feature. Note: Only floating regions in DSDT can be fixed by FixRegions. Floating regions in SSDTs are problematic and there is no good solution other than to not provide patched SSDTs for SSDTs subject to randomly floating regions. Working around floating regions in patched SSDTs is beyond the scope of this guide.</p>
+<p>Resources</p>
+<p>MaciASL (RehabMan fork): <a target="_blank" rel="noopener" href="https://github.com/RehabMan/OS-X-MaciASL-patchmatic">https://github.com/RehabMan/OS-X-MaciASL-patchmatic</a><br>patchmatic: <a target="_blank" rel="noopener" href="https://github.com/RehabMan/OS-X-MaciASL-patchmatic">https://github.com/RehabMan/OS-X-MaciASL-patchmatic</a><br>iasl (RehabMan fork): <a target="_blank" rel="noopener" href="https://bitbucket.org/RehabMan/acpica/downloads">https://bitbucket.org/RehabMan/acpica/downloads</a><br>ACPI spec: <a target="_blank" rel="noopener" href="http://acpi.info/spec.htm">http://acpi.info/spec.htm</a></p>
+<p>RehabMan github: <a target="_blank" rel="noopener" href="https://github.com/RehabMan?tab=repositories">https://github.com/RehabMan?tab=repositories</a></p>
+<p>Clover laptop guide: <a target="_blank" rel="noopener" href="http://www.tonymacx86.com/yosemite-...oting-os-x-installer-laptops-clover-uefi.html">http://www.tonymacx86.com/yosemite-...oting-os-x-installer-laptops-clover-uefi.html</a><br>Clover config.plist files for laptops: <a target="_blank" rel="noopener" href="https://github.com/RehabMan/OS-X-Clover-Laptop-Config">https://github.com/RehabMan/OS-X-Clover-Laptop-Config</a></p>
+<p>Clover thread: <a target="_blank" rel="noopener" href="http://www.insanelymac.com/forum/topic/284656-clover-general-discussion/">http://www.insanelymac.com/forum/topic/284656-clover-general-discussion/</a><br>Clover changes: <a target="_blank" rel="noopener" href="http://www.insanelymac.com/forum/topic/304530-clover-change-explanations/">http://www.insanelymac.com/forum/topic/304530-clover-change-explanations/</a></p>
+<p>Providing Feedback</p>
+<p>Do not treat this thread as your private troubleshooting thread. If you have a specific problem with your specific laptop, open a separate thread. If you see something here that is in error, or wish to make a contribution, please reply to this thread.</p>
+<p>Problem Reporting</p>
+<p>Please read above “Providing Feedback”. It is best to open a separate thread.</p>
+<p>In that separate thread, describe you problem clearly. And provide relevant data…</p>
+<p>Download patchmatic: <a target="_blank" rel="noopener" href="https://bitbucket.org/RehabMan/os-x-maciasl-patchmatic/downloads/RehabMan-patchmatic-2015-0107.zip">https://bitbucket.org/RehabMan/os-x-maciasl-patchmatic/downloads/RehabMan-patchmatic-2015-0107.zip</a><br>Extract the ‘patchmatic’ binary from the ZIP. Copy it to /usr/bin, such that you have the binary at /usr/bin/patchmatic.</p>
+<p>In terminal,<br>Code (Text):</p>
+<p>if [ -d ~/Downloads/RehabMan ]; then rm -R ~/Downloads/RehabMan; fi<br>mkdir ~/Downloads/RehabMan<br>cd ~/Downloads/RehabMan<br>patchmatic -extract</p>
+<p>Note: It is easier if you use copy/paste instead of typing the commands manually.</p>
+<p>Attach contents of Downloads/RehabMan directory as ZIP.</p>
+<p>Attach ioreg as ZIP: <a target="_blank" rel="noopener" href="http://www.tonymacx86.com/audio/58368-guide-how-make-copy-ioreg.html">http://www.tonymacx86.com/audio/58368-guide-how-make-copy-ioreg.html</a>. Please, use the IORegistryExplorer v2.1 attached to the post! DO NOT reply with an ioreg from any other version of IORegistryExplorer.app.</p>
+<p>Provide output (in Terminal):<br>Code (Text):</p>
+<p>kextstat|grep -y acpiplat<br>kextstat|grep -y appleintelcpu<br>kextstat|grep -y applelpc<br>kextstat|grep -y applehda</p>
+<p>Attach EFI/Clover folder as ZIP (press F4 at main Clover screen before collecting). Please eliminate ‘themes’ directory. Provide only EFI/Clover, not the entire EFI folder.</p>
+<p>Attach output of (in Terminal):<br>Code (Text):</p>
+<p>sudo touch /System/Library/Extensions &amp;&amp; sudo kextcache -u /</p>
+<p>Compress all files as ZIP. Do not use external links. Attach all files using site attachments only.</p>
+<p>If you cannot boot, attach photo of panic/hang and the EFI/Clover that causes it (as ZIP, without themes).</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2017/05/05/Mac/dsdt guide/" target="_blank" title="DSDT GUIDE">https://lwenxu.github.io/2017/05/05/Mac/dsdt guide/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/05/Tools/Idea%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Idea使用技巧
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/05/05/Tools/Atom%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Atom使用技巧</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#substitute-DEST-with-the-mountpoint-of-a-FAT32-formatted-USB-stick"><span class="nav-number">1.</span> <span class="nav-text">substitute DEST with the mountpoint of a FAT32 formatted USB stick</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2021 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2021 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

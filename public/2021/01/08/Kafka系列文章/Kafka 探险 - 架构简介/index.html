@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>kafka 探险 - 架构简介 | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Kafka 探险" />
+  
+  
+  
+  
+  <meta name="description" content="Kafka 探险 - 架构简介 这个 Kafka 的专题，我会从系统整体架构，设计到代码落地。和大家一起杠源码，学技巧，涨知识。希望大家持续关注一起见证成长！我相信：技术的道路，十年如一日！十年磨一剑！  简介Kafka 是一种分布式的，基于发布 &#x2F; 订阅的消息系统。最初被 LinkedIn 开发，并在 2011 年初开源，2012 年 10 月从 Apache 孵化器破壳而出，成为 Apache">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kafka 探险 - 架构简介">
+<meta property="og:url" content="https://lwenxu.github.io/2021/01/08/Kafka%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/Kafka%20%E6%8E%A2%E9%99%A9%20-%20%E6%9E%B6%E6%9E%84%E7%AE%80%E4%BB%8B/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="Kafka 探险 - 架构简介 这个 Kafka 的专题，我会从系统整体架构，设计到代码落地。和大家一起杠源码，学技巧，涨知识。希望大家持续关注一起见证成长！我相信：技术的道路，十年如一日！十年磨一剑！  简介Kafka 是一种分布式的，基于发布 &#x2F; 订阅的消息系统。最初被 LinkedIn 开发，并在 2011 年初开源，2012 年 10 月从 Apache 孵化器破壳而出，成为 Apache">
+<meta property="og:locale">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/171275/1610274884474-378974bf-6a45-4969-ae07-6763b49d0bba.png#align=left&display=inline&height=540&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1080&originWidth=1920&size=441021&status=done&style=none&width=960">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/171275/1610266820578-7cf73cbb-805c-448e-9e65-4d1b15998bcc.png#align=left&display=inline&height=540&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1080&originWidth=1920&size=330056&status=done&style=none&width=960">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/171275/1610270047474-39a3031a-91ed-41ed-9e96-4c9072be7fb1.png#align=left&display=inline&height=540&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1080&originWidth=1920&size=354007&status=done&style=none&width=960">
+<meta property="article:published_time" content="2021-01-08T09:20:28.000Z">
+<meta property="article:modified_time" content="2021-01-23T16:34:03.564Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="Kafka 探险">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2021/png/171275/1610274884474-378974bf-6a45-4969-ae07-6763b49d0bba.png#align=left&display=inline&height=540&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1080&originWidth=1920&size=441021&status=done&style=none&width=960">
+  
+
+  
+
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
+  
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Kafka系列文章/Kafka 探险 - 架构简介" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Kafka 探险 - 架构简介
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2021/01/08/Kafka%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/Kafka%20%E6%8E%A2%E9%99%A9%20-%20%E6%9E%B6%E6%9E%84%E7%AE%80%E4%BB%8B/" class="article-date">
+	  <time datetime="2021-01-08T09:20:28.000Z" itemprop="datePublished">2021-01-08</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Kafka-%E6%8E%A2%E9%99%A9/">Kafka 探险</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Kafka-探险-架构简介"><a href="#Kafka-探险-架构简介" class="headerlink" title="Kafka 探险 - 架构简介"></a>Kafka 探险 - 架构简介</h1><blockquote>
+<p>这个 Kafka 的专题，我会从系统整体架构，设计到代码落地。和大家一起杠源码，学技巧，涨知识。希望大家持续关注一起见证成长！<br><strong>我相信：技术的道路，十年如一日！十年磨一剑！</strong></p>
+</blockquote>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Kafka 是一种分布式的，基于发布 / 订阅的消息系统。最初被 LinkedIn 开发，并在 2011 年初开源，2012 年 10 月从 Apache 孵化器破壳而出，成为 Apache 的顶级项目。</p>
+<p>Kafka 最初被设计的目的是 LinkedIn 流量和运维数据分析。流量数据包含 PV (Page View) , UV (Unique Visitor) ,搜索数据，详情页数据等。在高并发场景对于这些数据的统计并非实时的，不是简单的对于数据库的某个字段数据量 +1 这么简单，超大的流量洪峰下并不能因为统计数据将业务主流程阻塞。所以通常会将这些数据记录在文件或大数据存储引擎中，然后周期性的进行统计分析。</p>
+<p>Kafka 被越来越多的公司青睐主要和他的特性优势有关：</p>
+<ul>
+<li>以 O(1) 时间复杂度消息持久化，对于 TB 级别的数据也能够保证 O(1) 的访问效率</li>
+<li>支持批量 <code>读</code> 和 <code>写</code> 数据，并且对于数据进行压缩保证高吞吐</li>
+<li>支持消息分区，分布式发送，分布式消费，便于水平扩展 （Scale out），具有很高的并发能力</li>
+</ul>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>那为何需要使用消息队列，或者说在什么场景下 Kafka 更加合适</p>
+<h3 id="解耦"><a href="#解耦" class="headerlink" title="解耦"></a>解耦</h3><p>在大数据，高并发的场景下为了突破性能瓶颈会对系统进行水平扩展和垂直拆分，将一个复杂的系统拆分多个独立，纯净的子系统。数据在各个系统之间流转，但是如果某一个服务处理速度过慢，就会拖累整个链路的性能，形成瓶颈降低整个系统的性能，造成“旱的旱死涝的涝死”的局面。</p>
+<p>举个简单例子：在淘宝下单时，交易系统完成扣款，后续会有很多动作：提醒卖家发货，生成卖家工作流，核销优惠券，增加购物积分等等，如果这一步全部写到交易系统的扣款代码之后，很有可能交易系统就会被拖死，下游任何一个环节失败也会导致扣款回滚，并且如果需要添加一个新的动作需要交易去做大量修改，设计肯定是不合理的。实际上交易系统在处理完扣款后会发送一个扣款完成消息，下游接这个消息即可，下游失败不会影响核心流程失败，并且各个系统的边界更加清楚，分层更更加合理。</p>
+<h3 id="数据持久化"><a href="#数据持久化" class="headerlink" title="数据持久化"></a>数据持久化</h3><p>如今的应用程序基本都会涉及到多个系统之间的对接，数据在系统之间通过 RPC 进行传递，处理数据的过程失败就会导致数据丢失，除非数据被持久化到磁盘上。而 Kafka 将所有需要流转的数据都 <code>持久化到磁盘上</code> ，保证数据不会丢失。另外还有一个很重要的能力就是保留现场便于后续问题排查跟踪，经历过系统失败但是无法复现的人才会体会到的痛！</p>
+<p>为了保证磁盘上的数据不会爆炸式疯涨，Kafka 提供了数据清理，数据压缩等功能，清除处理完成的历史数据。</p>
+<h3 id="扩展性"><a href="#扩展性" class="headerlink" title="扩展性"></a>扩展性</h3><p>在应用的访问量剧增的情况下，代码优化往往没有直接进行水平扩展来的那么及时。诊断，分析，方案，优化，验证 一系列复杂流程让代码优化看起来只能是一个从长计议的方案。这时止血的方案只能是降级，限流，扩机器 三板斧。Kafka 的扩展性主要就体现在能热扩容，不需要修改参数，不需要修改代码，上机器 -&gt; 注册服务 就完成了扩容。并非所有系统都具备这个像 <code>调节音量旋钮一样简单的提高系统性能</code> 的能力 ，这里会涉及到扩容之前的数据是否会有热点，新节点对集群的同步，流量重分配等等一系列复杂流程。</p>
+<h3 id="容灾"><a href="#容灾" class="headerlink" title="容灾"></a>容灾</h3><p>系统的部分组件失败不会影响这个系统的运行，消息队列降低了进程间的耦合度，上游或者下游服务挂掉后不会影响其他系统的运行，在服务重新在线后能够继续处理之前未处理的数据，只是会存在一定的延时但是能够保证 <code>最终业务正确性</code> 。</p>
+<h3 id="保序"><a href="#保序" class="headerlink" title="保序"></a>保序</h3><p>强哥：你这瓜保熟吗？哦不，你这队列保序吗？<br>在大多数场景下，数据处理顺序是至关重要的，顺序错乱很可能导致数据结果错误。除非这个处理过程是无状态的，此时消息只是起到事件触发的作用，触发下游进行计算。Kafka 可以保证分区内部有序而不能保证全局有序。</p>
+<h2 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h2><h3 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h3><p><img src="https://cdn.nlark.com/yuque/0/2021/png/171275/1610274884474-378974bf-6a45-4969-ae07-6763b49d0bba.png#align=left&display=inline&height=540&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1080&originWidth=1920&size=441021&status=done&style=none&width=960" alt="image.png"></p>
+<p>上图是一个典型的 Kafka 架构图，左边为消息生产者(Producer) ，发送消息到一个特定的主题(Topic)，由于 Kafka 的分布式设计每个 Topic 被分成多个分区，因此发送到每个 Topic 的消息会被存储到对应的分区。另外如果 Topic 设置了副本，则每个分区都会有对应的副本。这些 Topic 被不同的消费者(Consumer)订阅，如果两个消费者在同一个消费者组，那么里面的消费者只能订阅一个固定的分区。</p>
+<p>用上图的 Topic A 举例， Producer 1 发送消息到 Topic-A ，消息会在存放在 Broker-2 和 Broker-3 的两个分区上，并且由于 Topic-A 开启了分区备份，所以每个分区都会由另外一个节点 Topic-A’ 备份分区数据 。发送到 Broker 的数据会被消费者订阅，由于 Consumer-1 和 Consumer-2 在同一个消费者组中，他们只能消费一个固定分区的消息, Consumer-1 只会接收到 Topic-A Partition-1 的消息，Consumer-2 只会接收到 Topic-A Partition-0 的消息。</p>
+<h3 id="Broker"><a href="#Broker" class="headerlink" title="Broker"></a>Broker</h3><p>在 Kafka 集群中的一个 Kafka Server 就是一个 Broker ，生产者将消息投递到 Broker ，Broker 保证消息的 持久化，容灾，准确性等。同时接受消费者的消息订阅，向消费者分发消息。一般来说在生产环境一台 Kafka 服务器就是一个 Broker。</p>
+<h3 id="Topic-amp-Partition-amp-Log"><a href="#Topic-amp-Partition-amp-Log" class="headerlink" title="Topic &amp; Partition &amp; Log"></a>Topic &amp; Partition &amp; Log</h3><p>Topic 可以认为是用来存储消息的逻辑概念，可简单认为他是一个 <code>信箱</code> 。每条消息发送的时候都需要指定需要发送到哪个 Topic ，消息被消费的时候也需要指定消费哪个 Topic 中的消息。</p>
+<p>Kafka 为了提高可扩展性以及吞吐量，Topic 被分成多个分区 (Partition) ，每个 Partition 对应一个 Log，Log 是一个逻辑概念， 它会对应服务器上一个文件夹，这个文件夹下存放的是这个 Partition 下所有的消息数据和消息索引 。在面对海量数据的时候，为了避免出现巨大文件出现 I/O 瓶颈，Kafka 又将 Log 分为多个 Segment 。每个 Segment 包含 <code>log 文件</code>  和 <code>index 文件</code> 文件命名是以该 Segment 第一条消息的 offset 命名。这样说下来其实还是很绕的直接看下面的架构图，可以仔细留意一下各个部分的标识和数字再结合这段文字，理解起来应该就很轻松了。</p>
+<p>另外因为 Kafka 采用顺序 I/O，顺序 I/O 效率非常高，甚至比随机写内存效率更高，这也是 Kafka 高性能的原因之一。<img src="https://cdn.nlark.com/yuque/0/2021/png/171275/1610266820578-7cf73cbb-805c-448e-9e65-4d1b15998bcc.png#align=left&display=inline&height=540&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1080&originWidth=1920&size=330056&status=done&style=none&width=960" alt="image.png"></p>
+<h3 id="Replication"><a href="#Replication" class="headerlink" title="Replication"></a>Replication</h3><p>在生产环境中，我们一般会开启 Kafka 消息冗余特性，每个 Partition 都有 1 个或多个副本，我们称之为 Replication。当分区只有一个副本的时候，该分区数据只保留了一份。每个分区副本都会选出一个 Leader ， <code>Leader 是所有读写请求的 “接口人”</code>  ，其余副本均为 Follower 。Follower 作用有两个：拉取 Leader 的 Log 数据做 <code>备份</code> ，在 Leader 失败后作为候选人 <code>参与 Leader 选举</code> 。</p>
+<h3 id="Producer"><a href="#Producer" class="headerlink" title="Producer"></a>Producer</h3><p>消息产出的源头，通过一定的策略推送到 Topic 的各个分区 。这里所说的推送策略就是消息路由机制，Kafka 内置多种策略可选例如：按照消息 Key ，轮训等等，甚至用户可以写扩展代码来自定义路由策略。</p>
+<h3 id="Consumer-amp-Consumer-Group"><a href="#Consumer-amp-Consumer-Group" class="headerlink" title="Consumer &amp; Consumer Group"></a>Consumer &amp; Consumer Group</h3><p><code>消费者(Consumer)</code> 主要工作是从 Broker 拉取消息，进行消费处理。每个消费者维护自己的消费进度，这样的设计有诸多好处，比如：每个消费者进度能够轻松的进行区分，并且可以修改单个消费者的消费位点跳过或者重新消费某些消息，避免了位点信息的集中化管理的单点故障问题。</p>
+<p>现在的应用程序大部分为分布式的系统，一个应用有几十台上百台服务器，这些服务器上运行着相同的代码，那么一个消息过来，每台服务器都执行一次消费逻辑，岂不是会造成巨大的问题。</p>
+<p>所以 Kafka 引入了一个新的概念： <code>消费者组(Consumer Group)</code> 。我们可以将这些应用的服务器都放到同一个消费者组中，而 Kafka 规定一条消息只能被同一个消费者组中的一个消费者消费，这样就能完美避免分布式情况下的重复消费问题了。上面所说的情况简单来说是希望实现消息被某台服务器独占，也就是 <code>单播</code> 问题。假如我们希望这条消息被广播出去，每台收到这个消息的服务器都做处理，例如发消息做日志清理，这种情况称为 <code>广播</code> , 那我们只需要将每个消费者放到不同的消费者组即可。</p>
+<p>Kafka 引入消费者组的概念巧妙解决了单播和广播问题，而没有区分订阅类型，通过一种逻辑概念来屏蔽掉多种订阅实现。</p>
+<p>另外在同一个消费者组中的消费者订阅的分区是确定的，只有在消费者组中的消费者有变化的时候才会进行重分配。例如我们有四个分区，三个消费者，就会出现一个消费者订阅两个分区的情况。而三个分区四个消费者就会出现有消费者处于空闲状态，造成浪费，所以一般消费者的数量尽量不要大于 Topic 的分区数。<img src="https://cdn.nlark.com/yuque/0/2021/png/171275/1610270047474-39a3031a-91ed-41ed-9e96-4c9072be7fb1.png#align=left&display=inline&height=540&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1080&originWidth=1920&size=354007&status=done&style=none&width=960" alt="image.png"></p>
+<h2 id="尾声（唠叨）"><a href="#尾声（唠叨）" class="headerlink" title="尾声（唠叨）"></a>尾声（唠叨）</h2><p>这是我 2021 年的第一篇博客，年底做回顾的时候才知道去年我过的究竟有多么糟糕。既没有输入也没有输出，虽然工作进入一个新的阶段，会越来越忙，但忙不是拒绝成长的借口，必须保证每月一到两本书的输入，一到两周输出一篇优质文章。 <code>最长的路属于一颗孤独的心，与君共勉</code> </p>
+<p>下期我会从整体梳理 Kafka 生产者，包括消息发送客户端，发送端数据缓存从源码角度看看其中的设计模式，代码组织技巧。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2021/01/08/Kafka系列文章/Kafka 探险 - 架构简介/" target="_blank" title="Kafka 探险 - 架构简介">https://lwenxu.github.io/2021/01/08/Kafka系列文章/Kafka 探险 - 架构简介/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/01/14/Kafka%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/Kafka%20%E6%8E%A2%E9%99%A9%20-%20%E6%BA%90%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Kafka 探险 - 源码环境搭建
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/01/04/Kafka%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/Kafka%20%E6%8E%A2%E9%99%A9%20-%20%20%E7%94%9F%E4%BA%A7%E8%80%85%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90_%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Kafka 探险 -  生产者源码分析:核心组件</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kafka-%E6%8E%A2%E9%99%A9-%E6%9E%B6%E6%9E%84%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">Kafka 探险 - 架构简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.2.</span> <span class="nav-text">应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E8%80%A6"><span class="nav-number">1.2.1.</span> <span class="nav-text">解耦</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96"><span class="nav-number">1.2.2.</span> <span class="nav-text">数据持久化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E6%80%A7"><span class="nav-number">1.2.3.</span> <span class="nav-text">扩展性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E7%81%BE"><span class="nav-number">1.2.4.</span> <span class="nav-text">容灾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E5%BA%8F"><span class="nav-number">1.2.5.</span> <span class="nav-text">保序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="nav-number">1.3.</span> <span class="nav-text">核心概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84%E5%9B%BE"><span class="nav-number">1.3.1.</span> <span class="nav-text">架构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Broker"><span class="nav-number">1.3.2.</span> <span class="nav-text">Broker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Topic-amp-Partition-amp-Log"><span class="nav-number">1.3.3.</span> <span class="nav-text">Topic &amp; Partition &amp; Log</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Replication"><span class="nav-number">1.3.4.</span> <span class="nav-text">Replication</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Producer"><span class="nav-number">1.3.5.</span> <span class="nav-text">Producer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Consumer-amp-Consumer-Group"><span class="nav-number">1.3.6.</span> <span class="nav-text">Consumer &amp; Consumer Group</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%BE%E5%A3%B0%EF%BC%88%E5%94%A0%E5%8F%A8%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">尾声（唠叨）</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2021 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2021 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

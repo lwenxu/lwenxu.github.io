@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>javaweb基础 | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Web" />
+  
+  
+  
+  
+  <meta name="description" content="1. XML xml一般就用来存放少量的数据，或者是作为配置文件。 xml的声明  必须放在首行的首列（也就是顶头写） 有且仅有一个根标签，其他的都是他的子标签 xml中的换行和空格都当做内容来解析，所以对于缩进来说一定要注意。 xml中的内容区分大小写，不能以数字和下划线开始,不能以xml开始，里面不能包含空格和冒号">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaWeb基础">
+<meta property="og:url" content="https://lwenxu.github.io/2017/08/09/Java%20Web/JavaWeb%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="1. XML xml一般就用来存放少量的数据，或者是作为配置文件。 xml的声明  必须放在首行的首列（也就是顶头写） 有且仅有一个根标签，其他的都是他的子标签 xml中的换行和空格都当做内容来解析，所以对于缩进来说一定要注意。 xml中的内容区分大小写，不能以数字和下划线开始,不能以xml开始，里面不能包含空格和冒号">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-08-09T07:49:28.000Z">
+<meta property="article:modified_time" content="2021-01-23T15:24:50.114Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary">
+  
+
+  
+
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
+  
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Java Web/JavaWeb总结" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JavaWeb基础
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/08/09/Java%20Web/JavaWeb%E6%80%BB%E7%BB%93/" class="article-date">
+	  <time datetime="2017-08-09T07:49:28.000Z" itemprop="datePublished">2017-08-09</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/JavaWeb/">-JavaWeb</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-XML"><a href="#1-XML" class="headerlink" title="1. XML"></a>1. XML</h3><ol>
+<li>xml一般就用来存放少量的数据，或者是作为配置文件。</li>
+<li>xml的声明<?xml version="1.0" encoding="utf-8"?>  必须放在首行的首列（也就是顶头写）</li>
+<li>有且仅有一个根标签，其他的都是他的子标签</li>
+<li>xml中的换行和空格都当做内容来解析，所以对于缩进来说一定要注意。</li>
+<li>xml中的内容区分大小写，不能以数字和下划线开始,不能以xml开始，里面不能包含空格和冒号<a id="more"></a></li>
+<li>一个元素可以有多个属性，名字自定义，属性不能冲突</li>
+<li>对于一些特殊字符需要转义，使用实体来表示，就和html里面的一样</li>
+<li>CDATA区就是里面的内容无需转义  <![CDATA[ content ]]></li>
+<li>对于xml的内容的约束有两个 dtd和scheme两种<br> –dtd：<pre><code> 1.创建一个dtd文件
+ 2.有几个元素就写几个&lt;!ELEMENT&gt;
+ 3.看元素分别是简单元素还是复杂元素，就是嵌套否
+     --简单元素&lt;!ELEMENT 元素名 (#PCDATA) &gt;
+     --复杂&lt;!ELEMENT 元素名 (子元素，逗号隔开) &gt;
+ 4.在xml中引入dtd
+     &lt;!DOCTYPE 根元素名 SYSTEM &quot;dtd文件路径&quot;&gt;</code></pre>
+</li>
+<li>xml的解析方法有两个分别就是dom和sax   （dom说白了就是构建dom树，这个方便的就是增删操作，但是文件过大可能造成内存溢出；sax则是从上往下读，一行行的解析，然后返回对象，但是不可以增删改，但是方便查询）</li>
+<li>三个常用的xml的解析器  ：dom4j(重要)  jaxp  jdom</li>
+</ol>
+<h3 id="2-HTTP-基础："><a href="#2-HTTP-基础：" class="headerlink" title="2. HTTP 基础："></a>2. HTTP 基础：</h3><ol>
+<li><p>请求头：</p>
+<pre>
+请求行（GET /hello/index.html HTTP/1.1 ）
+请求头 （多个键值对，其中有一个Keep-Alive这个东西是由于http无状态协议，所以说一个网站加载的时候肯定不止一次请求，像图片等等的东西，我们为了一次请求就让他多连接一会）
+     （Content-Type:application-x-www-from-urlencoded  ->表示表单的数据会使用url编码）
+一个空行
+请求体 （只有POST才有请求体，GET没有）
+</pre></li>
+<li><p>响应头：</p>
+<pre>
+ 响应行 （HTTP/1.1 200 OK）  2开头的都是成功  3开头的重定向  4开头的客户端错误   5开头的服务器错误
+ 请求头 （Content-Type:text/html ;charset=ISO-8859-1 文本的话必须要有编码，像图片之类的可以不要）
+ 空行
+ 响应正文
+</pre>    
+</li>
+<li><p>Reference 显示的从哪个网站过来的一般的作用就是防盗链和统计广告</p>
+</li>
+<li><p>重定向就是当客户端给服务器发送求以后，服务器返回了一个带有新的地址的返回，然后客户端去请求这个新的地址（302），而转发则是直接接通到新的服务器客户端不须在请求</p>
+</li>
+<li><p>304就是缓存  首先浏览器发了一个Last-Modify头   然后服务器比对Last-Modify-Since  如果一样那么返回304  没有请求体</p>
+</li>
+<li><p>Tomcat是支持java web而不支持java ee  因为java ee范围很广泛  主要就是不支持java ee的JEB（企业级的java 应用）  但是我们有ssh可以代替</p>
+</li>
+</ol>
+<h3 id="3-Servlet"><a href="#3-Servlet" class="headerlink" title="3. Servlet"></a>3. Servlet</h3><ol>
+<li><p>Servlet的创建有三种方式，分别就是实现Servlet接口，继承GenericServlet和继承HttpServlet类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AHttpServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Http servlet首先就是继承的是GenericServlet，它里面有更丰富的方法，但是说到底还是要运行service方法，但是这个类里面的service方法其实有两个</span></span><br><span class="line"><span class="comment">     * 第一个是从上面继承下来的，另一个是自己的实际要用的，他们的不同就在于参数，自己的那个参数是与Http协议相关的，也就是说这个东西绑定了Http协议</span></span><br><span class="line"><span class="comment">     * 但是以前的那个参数是与协议无关的，但是最终tomcat要调用的是父类里面的service方法，所以说在继承的service方法中首先把参数都强转成http类型的参数</span></span><br><span class="line"><span class="comment">     * 也就是自己的service方法的参数，然后去调用自己的service方法，自己的service方法里面会判断来自客户端的请求究竟是post还是get然后调用doPost或者doget</span></span><br><span class="line"><span class="comment">     * 方法，所以说最终我们只需要复写doGet或者doPost即可</span></span><br><span class="line"><span class="comment">     * HttpServlet这个类是抽象的，但是里面的方法没有一个是抽象的，doGet和doPost默认都是给客户端返回一个405也就是不支持的请求类型，所以如果不复写</span></span><br><span class="line"><span class="comment">     * 这两个方法就会出问题405</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;doGet&quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;doPost&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>仿写的 GenericServelt 的代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SrcGenericServlet</span> <span class="keyword">implements</span> <span class="title">Servlet</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> ServletConfig servletConfig;  <span class="comment">//很重要的一个对象，里面有五个方法，前面已经说了两个方法就是关于初始化配置的两个</span></span><br><span class="line">    <span class="comment">//还有就是Context,以及getServletName()获取Servlet的名字</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(ServletConfig servletConfig)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.servletConfig=servletConfig;</span><br><span class="line">        <span class="comment">//这个就是钩子，如果我们写好的这个类然后有别人去继承，那么如果他想在init方法里面添加一些自己的功能</span></span><br><span class="line">        <span class="comment">//这个init有参数的如果被覆盖的话，子类中的servletConfig就会指向空指针，因为没有初始化。</span></span><br><span class="line">        <span class="comment">//所以为了拓展，子类能够写自己的代码我们写了一个新的函数，子类只需要覆盖这个函数就可以到到目的</span></span><br><span class="line">        <span class="comment">//不过还有一个方式就是在子类中我们先写自己的代码，然后使用super.init()也是能够搞定的</span></span><br><span class="line">        init();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServletContext <span class="title">getServletContext</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.servletConfig.getServletContext();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServletConfig <span class="title">getServletConfig</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.servletConfig;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getServletInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>首先说Servlet接口，这个接口里面总共有五个抽象方法需要进行复写，其中有三个声明周期方法init【在第一次访问这个Servlet的时候】 server【其他每一次访问的时候】 destroy【tomcat关闭的时候】<br>这个是单例的，一个类只有一个对象<br>而且这个是线程不安全的，所以效率高</p>
+</li>
+<li><p>Servlet要被浏览器访问必须要配置一下 web.xml 让 tomcat 能够调用这个 Servlet   具体就有两块分别就是Servlet的配置也就是配置Servlet的名字和类<br>第二个就是配置浏览器访问的路径，和对应的Servlet的名称</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>AServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>Servlet.AServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>AServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/AServlet<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>或者直接在 Servlet 的类上面写 @WebServlet( name=””, url-pattern=”” ) 而不用写 web.xml 的配置</p>
+</li>
+<li><p>由于Servlet是线程不安全的，所以说最好不要创建一些成员，而一般的创建局部变量。或者是无状态成员（一个类里面没有属性，然后这个类对象作为自己类成员），或者只读的成员，只有get没有set</p>
+</li>
+<li><p>一个Servlet一般的就是第一请求的时候创建，也可以在tomcat启动的时候创建Servlet。就是在Servlet标签里面load-on-startup标签，里面是一个序号，不要重复</p>
+</li>
+<li><p>web.xml的继承，其实每一个项目都有一个web.xml，但是要注意每一个web.xml都是继承了tomcat的conf下的web.xml这个xml里面主要定义了三个东西。第一个就是默认Servlet<br>这个默认的Servlet是匹配所有的页面，当我们访问一个页面的时候没有Servlet响应就轮到defaultServlet，他处理的方法也很简单就是返回一个404<br>然后就是一个JSPServlet这个Servlet是用来处理所有的jsp页面的请求的，还有定义了很多的MIME类型</p>
+</li>
+</ol>
+<ol start="7">
+<li><p>ServletConfig是javaWeb四大域对象之一，他们的功能就是在Servlet中传递数据，这个对象就是存取属性用于Servlet交互。<br>getAttribute()   setAttribute()  removeAttribute()</p>
+</li>
+<li><p>设置公共的初始化配置在Servlet标签外面写context-param</p>
+</li>
+<li><p>获取的ServletConfig对象里面的getRealPath(“/index.jsp)这个就是获取他在服务器上得真是位置，然后需要转化为流对象的话我们可以使用getResourceAsStream()直接返回的流对象</p>
+</li>
+</ol>
+<h2 id="4-ServletContext-对象"><a href="#4-ServletContext-对象" class="headerlink" title="4. ServletContext 对象"></a>4. ServletContext 对象</h2><p>&emsp;&emsp;  这个对象其实就是我们整个的项目，所以一般我们把它称之为 application ，他在整个项目中只有一个，并且他的生命周期和 Tomcat 一模一样。一般用它来做多个 Servlet 之间的数据传递。<br>&emsp;&emsp;  可以使用 ServletConfig 获取这个对象。或者使用 <code>getServletContext()</code> 直接获取 。我们还可以使用 HttpSession 获得这个对象。还能使用 ServletContextEvent 获取这个对象。<br>&emsp;&emsp;  可以获取 Web 根目录下的资源路径，也就是 webapps 下面的项目下的 web 目录，<code>getRealPath()</code> 、<code>getResourceAsStream()</code> ，同样的我们也可以使用 class 和 classloader 来获取类路径下的资源。<br><code>className.class.getClassLoader().getResourceAsStream()</code> 或者 <code>className.class.getResourceAsStream()</code> 。</p>
+<h2 id="5-Servlet-四大域对象"><a href="#5-Servlet-四大域对象" class="headerlink" title="5. Servlet 四大域对象"></a>5. Servlet 四大域对象</h2><p>首先说一下域对象的功能，简单来说就是一个用来在多个 Servlet 之间传递数据的对象，类似于一个 Map 容器。</p>
+<ol>
+<li>PageContext</li>
+<li>ServletRequest</li>
+<li>HttpSession</li>
+<li>ServletContext</li>
+</ol>
+<p>他们都有 set/get/removeAttribute(“”,obj) 方法来存取数据。</p>
+<h3 id="4-反射："><a href="#4-反射：" class="headerlink" title="4.反射："></a>4.反射：</h3><ol>
+<li>获取class，有三种方法：<ul>
+<li>类名.class</li>
+<li>对象.getClass()</li>
+<li>Class.forName(“具体路径（包名）”)</li>
+</ul>
+</li>
+<li>对于一个类如果我们不使用new我们可以使用class来获取</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Class clazz=Class.forName(<span class="string">&quot;cn.lwen.Person&quot;</span>);</span><br><span class="line">Person p=(Person) clazz.newInstance();  <span class="comment">//p就是person的实例，这个显然也就是无参数的构造方法来实现的然后对于有参数的构造方法则是使用getConstructor来获取这个实例</span></span><br><span class="line">Class clazz=Class.forName(<span class="string">&quot;cn.lwen.Person&quot;</span>);</span><br><span class="line">Constructor cs=clazz.getConstructor(类型的<span class="class"><span class="keyword">class</span>（如：<span class="title">String</span>.<span class="title">class</span>）由于这个地方是可变参数，所以说参数的个说可以有多个)</span></span><br><span class="line"><span class="class"><span class="title">Person</span> <span class="title">p</span></span>=<span class="keyword">new</span> (Person) cs.newInstance(<span class="string">&quot;lwen&quot;</span>);  </span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>操作类的属性：类的属性是由一个叫做getDeclaredField()的方法获得的，得到的类型是Field类型，然后可以使用返回的类型的set方法类设置，第一个参数是；类的实例，第二个就是属性的内容<br>但是这里只允许操作公共的变量，私有变量是不允许的，filed上面的一个setAccessible(true)则表示可以直接操作底油属性</p>
+</li>
+<li><p>对于方法的操作就是和上面的属性很类似，首先使用getDeclaredMethod(“”,parm)获得方法然后返回的Method类型的，如果是私有的则和上面执行一样的操作，然后使用<br>返回的Method对象的invoke(obj,parmar)执行函数</p>
+</li>
+</ol>
+<h3 id="5-两大重要对象："><a href="#5-两大重要对象：" class="headerlink" title="5. 两大重要对象："></a>5. 两大重要对象：</h3><h4 id="1-在service这个方法中有两个很重要的对象response和request这两个，现在主要就说说这两个东西怎么给客户端请求以及响应"><a href="#1-在service这个方法中有两个很重要的对象response和request这两个，现在主要就说说这两个东西怎么给客户端请求以及响应" class="headerlink" title="1. 在service这个方法中有两个很重要的对象response和request这两个，现在主要就说说这两个东西怎么给客户端请求以及响应"></a>1. 在service这个方法中有两个很重要的对象response和request这两个，现在主要就说说这两个东西怎么给客户端请求以及响应</h4><h3 id="response"><a href="#response" class="headerlink" title="response"></a>response</h3><ol>
+<li><p>首先就有一个发送状态信息的方法：response.sendError(404,”访问的页面存在但是不给你看”);//发送一个错误的返回信息</p>
+</li>
+<li><p>然后就是设置头信息，头信息就是键值对这里有三个常用的设置头信息的方法：  </p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setHeader(<span class="string">&quot;&quot;</span>,<span class="string">&quot;&quot;</span>)</span><br><span class="line">setIntHeader(<span class="string">&quot;&quot;</span>,<span class="keyword">int</span>)</span><br><span class="line">setDateHeader(<span class="string">&quot;&quot;</span>,second)</span><br></pre></td></tr></table></figure>
+<p>然后这个方法把set改成add就是一个键多个值<br>设置重定向setRedirect(“URL”)  快捷的方法  也可使用设置头来做. <code>setHeader(&quot;Location&quot;,&quot;index.jsp&quot;)</code> 、 <code>setStatus(302,&quot;ss&quot;)</code></p>
+<ol start="3">
+<li><p>response里面的两个流，字符流和字节流，但是这两个流 不能同时存在否则会抛异常</p>
+<pre><code> getOutputStream()
+ getWriter()</code></pre>
+</li>
+<li><p>设置浏览器的缓存</p>
+</li>
+</ol>
+<h3 id="request"><a href="#request" class="headerlink" title="request"></a>request</h3><ol>
+<li><p>获取客户端的信息，获取客户端的url信息</p>
+</li>
+<li><p>获取客户端的请求的参数，无论是get还是post对于单值的属性都可以使用getParameter(“name”)   然后对于多值则是getParameterValues()返回数组<br>   getParameterNames()获取所有的键名，是枚举类型</p>
+</li>
+<li><p>请求转发和请求包含。</p>
+<pre><code> 请求转发：如果我们访问A，然后A做了请求转发到B，那么最终返回给客户端的就是保留了A的请求头和B的请求体（留头不留体）这次过程中url不变
+ 请求包含：同上，只是这次包含A的头和体还有B的体
+ 他们与重定向是不同的，浏览器不知道A请求了B，这始终就是一个请求</code></pre>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">request.getRequestDispatcher(<span class="string">&quot;/AServlet&quot;</span>).forward(request,response);  <span class="comment">//请求转发</span></span><br><span class="line">       request.getRequestDispatcher(<span class="string">&quot;/AServlet&quot;</span>).include(request,response);  <span class="comment">//请求包含</span></span><br><span class="line">       <span class="comment">//request域   在Servlet中有三大域对象，在javaweb中有四个</span></span><br><span class="line">       <span class="comment">//分别就是request,session,application,Context</span></span><br><span class="line">       <span class="comment">//他们的生命周期就和这个对象的生命周期相同</span></span><br><span class="line">       <span class="comment">//他们都用相同的方法setAttribute()  getAttribute()  removeAttribute()  然后供其他的Servlet使用这些存在这些对象的信息</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-编码问题："><a href="#2-编码问题：" class="headerlink" title="2. 编码问题："></a>2. 编码问题：</h4><pre><code>编码分为响应编码和请求编码
+响应编码：就是服务器向客户端发送的数据的编码，我们首先要自己发送的是utf-8并且还要浏览器用utf-8去解析，我们采用的就是http头信息
+          setHeader(&quot;Content-Type:text/html;charset:utf-8&quot;)  或者直接一个简单的方法就是setContentType(&quot;text/html;charset:utf-8&quot;)
+请求编码：则是服务器接受客户端过来的请求，进行编码，客户端默认使用的是iso，我们需要转成utf-8，而且这个地方是区分post和get请求方式的
+          post就直接使用setCharacterEncoding(&quot;utf-8&quot;)而get就需要先转化成byte数组然后使用string转成utf-8
+          byte[] by str.getBytes(&quot;ISO-8859-1&quot;);
+          string =new String(byte,&quot;utf-8&quot;)</code></pre>
+<h3 id="6-JSP"><a href="#6-JSP" class="headerlink" title="6. JSP"></a>6. JSP</h3><h4 id="1-JSP三大指令-：-page-include-taglib"><a href="#1-JSP三大指令-：-page-include-taglib" class="headerlink" title="1. JSP三大指令 ： page  include  taglib"></a>1. JSP三大指令 ： page  include  taglib</h4><p>一个jsp页面可以使用多个指令，不一定放在第一行   </p>
+<h5 id="—page："><a href="#—page：" class="headerlink" title="—page："></a>—page：</h5><pre><code>   pageEncoding  设置页面的编码   在服务器把jsp编译成java时使用这个属性
+   contentType   设置返回响应头  就和setContentType()方法一样
+   以上两个属性只要设置了一个属性另一个属性可以不设置
+   如果都不设置就是iso8859-1
+   import 导包  可以用逗号隔开
+   errorPage   当前页面如果抛出异常要转发到哪个页面，不是跳转  状态码200
+   isErrorPage  设置当前页面是否为处理错误的页面   只有这个页面可以使使用9大内置对象的exception（当标签的内容为true）   状态码为500
+   isELignore   是否忽略el表达式</code></pre>
+<h5 id="—include-静态包含"><a href="#—include-静态包含" class="headerlink" title="—include  静态包含"></a>—include  静态包含</h5><pre><code>    他是在编译成java文件的时候完成的  他们共同编译成一个java文件  然后生成一个class
+    他和ResponseDispatcher的include作用类似  只是他是动态包含  编译成两个不一样的文件class  最后运行的时候才合并  动态合并
+    静态包含的作用就是页面分解</code></pre>
+<h5 id="—taglib"><a href="#—taglib" class="headerlink" title="—taglib"></a>—taglib</h5><pre><code>    引入标签库
+    prefix引入前缀
+    uri 标签的地址</code></pre>
+<p> &lt;%@ page …..%&gt;<br>       在web.xml中配置errorPage    </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">error-page</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">error-code</span>&gt;</span>404<span class="tag">&lt;/<span class="name">error-code</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">localtion</span>&gt;</span>/error.jsp<span class="tag">&lt;/<span class="name">localtion</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">error-page</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">error-page</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">error-code</span>&gt;</span>500<span class="tag">&lt;/<span class="name">error-code</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">localtion</span>&gt;</span>/error.jsp<span class="tag">&lt;/<span class="name">localtion</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">error-page</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">error-page</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exception-type</span>&gt;</span>java.lang.RuntimeException<span class="tag">&lt;/<span class="name">exception-type</span>&gt;</span>   //页面抛出任何异常都会显示500   有事为了更加细致的分  我们可以定异常来处理</span><br><span class="line">    <span class="tag">&lt;<span class="name">localtion</span>&gt;</span>/error.jsp<span class="tag">&lt;/<span class="name">localtion</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">error-page</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="2-JSP-九大内置对象和四大域对象："><a href="#2-JSP-九大内置对象和四大域对象：" class="headerlink" title="2. JSP 九大内置对象和四大域对象："></a>2. JSP 九大内置对象和四大域对象：</h4><ul>
+<li>out   就是response.getWriter  用于想浏览器输出</li>
+<li>config   ServletConfig   就是xml中的内容</li>
+<li>page  当前jsp对象   引用类型就是Object    Object page=this</li>
+<li>pageContext  一个顶9个</li>
+<li>response   HttpServletResponse</li>
+<li>request    HttpServletRequest</li>
+<li>exception   异常</li>
+<li>session  </li>
+<li>application 整个tomcat存活期有效   ServletContext</li>
+</ul>
+<p>Servlet三大jsp四大域对象  </p>
+<ul>
+<li>ServletContext   整个应用</li>
+<li>session  整个会话</li>
+<li>request  一个请求</li>
+</ul>
+<p>——————-jsp专有</p>
+<ul>
+<li>pageContext  一个jsp页面   用于jsp标签中的数据传递   代理其他域可以其他的域查找设置pageContext.setAttribute(“”,””,PageContext.SESSION_SCOPE)   就是设置到session中<pre><code>         全域查找  findAttribute(&quot;xx&quot;)   从小到大（域范围），依次查找</code></pre>
+</li>
+</ul>
+<h4 id="3-JSP的动作标签："><a href="#3-JSP的动作标签：" class="headerlink" title="3.JSP的动作标签："></a>3.JSP的动作标签：</h4><p><a href="jsp:forward">jsp:forward</a>   他和RequestDispatcher中的forward一样  就是一个在Servlet中使用一个在jsp中使用<br><a href="jsp:include">jsp:include</a>   同上  include方法一样<br><a href="jsp:param">jsp:param</a>   用来作为前两个的子标签 用来给包含的或者转发的页面传递参数</p>
+<h4 id="4-JavaBean："><a href="#4-JavaBean：" class="headerlink" title="4.JavaBean："></a>4.JavaBean：</h4><p> 必须要为成员提供get和set方法<br> 必须要有默认构造器<br> 某个属性有get和set方法但是没有该属性 也是可以的<br> boolean的属性get方法可以直接就是is。。</p>
+<h4 id="5-EL表达式："><a href="#5-EL表达式：" class="headerlink" title="5.EL表达式："></a>5.EL表达式：</h4><p> $(pageScope.xxx)   获取并输入该域中的xxx字段<br> $(requestScope.xxx)<br> $(sessionScope.xxx)<br> $(applicationScope.xxx)<br>如果不写那么就是全域查找</p>
+<p>EL表达式就是用来输出的  用来代替&lt;%= %&gt;</p>
+<h5 id="EL的11个内置对象："><a href="#EL的11个内置对象：" class="headerlink" title="EL的11个内置对象："></a>EL的11个内置对象：</h5><p>其中只有pageContext不是map类型  因为她就是pageContext类型其他的都是map类型   在El表达式中 Map的值访问可以使用点  或者数组方式  map[‘key’]  map.key<br>上面已经有4个就是pageScope….<br>然后就是<br>param   key为参数名value为参数值   和getParam方法一样   适用于单值的<br>paramValues   适用于多值的  和上面的一样  value是一个数组<br>header:<br>headerValues:<br>这两个同上<br>initParam  获取<context-param></context-param>里面的参数<br>cookie  value是cookie对象  所以在获得cookie对象以后必须要使用value才能获得值<br>pageContext  例如${pageContext.request.contextPage}  获取request域中的contextPage内容</p>
+<h3 id="4-EL的函数库（由JSTL提供）"><a href="#4-EL的函数库（由JSTL提供）" class="headerlink" title="4.EL的函数库（由JSTL提供）"></a>4.EL的函数库（由JSTL提供）</h3><p>首先需要导入JSTL的函数库<br>${fn:substring(“123123”,1,2)}</p>
+<h3 id="5-自定义函数库："><a href="#5-自定义函数库：" class="headerlink" title="5.自定义函数库："></a>5.自定义函数库：</h3><p>  写一个java类  类中的方法可多个  但是必须为 public  static<br>  然后写tld文件,ide可以生成在xml下</p>
+<h3 id="8-JSTL-："><a href="#8-JSTL-：" class="headerlink" title="8. JSTL ："></a>8. JSTL ：</h3><h4 id="1-回顾："><a href="#1-回顾：" class="headerlink" title="1. 回顾："></a>1. 回顾：</h4><pre>
+jsp：
+    三大指令
+    include  page   taglib
+    九个内置对象
+    response cookie out page pageContext request Exception config application
+    动作标签
+    forward include param
+javaBean：
+    默认构造器
+    set，get方法
+
+EL表达式：
+    基本语法
+    11个内置对象pageScope...Header，headerValuers,initParam,cookie,pageContext,param,paramValues
+    函数库
+</pre>    
+
+
+<h4 id="2-JSTL标签库："><a href="#2-JSTL标签库：" class="headerlink" title="2.JSTL标签库："></a>2.JSTL标签库：</h4><pre><code>四大标签库：core核心库（重要），fmt（格式化），sql，xml（后两个过时）
+导入标签，使用taglib指令</code></pre>
+<h5 id="–core：【C标签】"><a href="#–core：【C标签】" class="headerlink" title="–core：【C标签】"></a>–core：【C标签】</h5><ul>
+<li>out &lt;c:out value=”aaa”&gt;字符常量  &lt;c:out value=”${aaa}”&gt;全域查找    default表示默认的值  escapeXml是否转义特殊字符  默认true</li>
+<li>set  &lt;c:set var=”” value=”” scope=””&gt;   var变量名   value可以是EL表达式  scope域  默认page</li>
+<li>remove  &lt;c:remove var=”” scope=””&gt;  给出scope就删指定的   不然就是所有域</li>
+<li>url &lt;c:url value=”” &gt;  在路径前面自动加项目名  但是value一斜杠开头  &lt;c:param name=”” value=””&gt; 子标签用于传参，并对参数进行url编码   var参数用来保存生成的url而不进行输出，否则就直接输出</li>
+<li>if  &lt;c:if test=${not empty a}/&gt;  判断a不是空就输出  在全域内查找   test中放bool类型</li>
+<li>choose &lt;c:choose /&gt;  表示if….elseif()..else  这个标签主要用于容纳when标签  when标签里面有test属性</li>
+<li>forEach &lt;c:forEach var=”” begin=”” end=”” step=””&gt;</c:forEach> 包含头也包含尾  items 需要遍历的对象(这里一定不要有空格) var 迭代到这个变量上<pre><code>  循环状态变量   vsStatus=“vs”  vs.index  vs.count   vs.first  vs.last vs.current</code></pre>
+  –fmt标签：【格式化标签】<pre><code>  &lt;fmt:formatData value=&quot;&quot; pattern=&quot;&quot;&gt;  例如 yyyy-MM-DD
+  &lt;fmt:formatNumber value=&quot;&quot; pattern=&quot;&quot;&gt;  例如0.00  两位小数  四舍五入  </code></pre>
+</li>
+</ul>
+<h4 id="3-JSTL自定义标签"><a href="#3-JSTL自定义标签" class="headerlink" title="3.JSTL自定义标签"></a>3.JSTL自定义标签</h4><pre><code>1. 步骤：
+    * 标签处理类  实现SimpleTag接口  或者继承simpleTagSupport他做了很多处理 tomcat传 给simpleTag的参数都被保存了
+    * tld文件（xml）标签和类相关联  都放在WEB-INF中  防止别人直接访问
+    * 在页面中引入
+2. 标签处理类
+    * 这些方法都是有tomcat调用  最后调用的是doTag方法  和Servlet非常类似
+    * doTag  执行标签的时候调用  
+    * getParent 获得父标签
+    * setParent  设置父标签
+    * setJspBody  设置标签体
+    * setJSPContext  设置pageContext
+3. 跳过某部分
+    直接在处理类中抛出一个跳过页面异常，最终编译的代码就是一个标签一个函数，由于这个函数也是直接抛出异常，所以该标签后面的内容就不执行了
+    而是跑到调用该函数的try块中的catch中执行响应的方法，这个catch对SkipPageException特别的照顾了一下，然后就结束了
+4. 自定义标签属性：
+    1. 在处理类中创建属性
+    2. 在tld文件中定义    </code></pre>
+<h4 id="4-三层架构"><a href="#4-三层架构" class="headerlink" title="4.三层架构"></a>4.三层架构</h4><p>mvc是bs架构的公共的东西<br>而三层架构则是java web的东西：<br>    web层  与web相关的  Servlet  jsp<br>    业务层 功能【登陆，注册，转账 等等…】(service)<br>    数据层（dao 【data access Object】）(dao)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2017/08/09/Java Web/JavaWeb总结/" target="_blank" title="JavaWeb基础">https://lwenxu.github.io/2017/08/09/Java Web/JavaWeb总结/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/09/Java%20Web/JDBC/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JDBC
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/09/Java%20SE/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6Map/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java集合框架Map</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-XML"><span class="nav-number">1.</span> <span class="nav-text">1. XML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-HTTP-%E5%9F%BA%E7%A1%80%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">2. HTTP 基础：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Servlet"><span class="nav-number">3.</span> <span class="nav-text">3. Servlet</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-ServletContext-%E5%AF%B9%E8%B1%A1"><span class="nav-number"></span> <span class="nav-text">4. ServletContext 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Servlet-%E5%9B%9B%E5%A4%A7%E5%9F%9F%E5%AF%B9%E8%B1%A1"><span class="nav-number"></span> <span class="nav-text">5. Servlet 四大域对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%8F%8D%E5%B0%84%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">4.反射：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E4%B8%A4%E5%A4%A7%E9%87%8D%E8%A6%81%E5%AF%B9%E8%B1%A1%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">5. 两大重要对象：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%9C%A8service%E8%BF%99%E4%B8%AA%E6%96%B9%E6%B3%95%E4%B8%AD%E6%9C%89%E4%B8%A4%E4%B8%AA%E5%BE%88%E9%87%8D%E8%A6%81%E7%9A%84%E5%AF%B9%E8%B1%A1response%E5%92%8Crequest%E8%BF%99%E4%B8%A4%E4%B8%AA%EF%BC%8C%E7%8E%B0%E5%9C%A8%E4%B8%BB%E8%A6%81%E5%B0%B1%E8%AF%B4%E8%AF%B4%E8%BF%99%E4%B8%A4%E4%B8%AA%E4%B8%9C%E8%A5%BF%E6%80%8E%E4%B9%88%E7%BB%99%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%B7%E6%B1%82%E4%BB%A5%E5%8F%8A%E5%93%8D%E5%BA%94"><span class="nav-number">2.1.</span> <span class="nav-text">1. 在service这个方法中有两个很重要的对象response和request这两个，现在主要就说说这两个东西怎么给客户端请求以及响应</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#response"><span class="nav-number">3.</span> <span class="nav-text">response</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#request"><span class="nav-number">4.</span> <span class="nav-text">request</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="nav-number">4.1.</span> <span class="nav-text">2. 编码问题：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-JSP"><span class="nav-number">5.</span> <span class="nav-text">6. JSP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-JSP%E4%B8%89%E5%A4%A7%E6%8C%87%E4%BB%A4-%EF%BC%9A-page-include-taglib"><span class="nav-number">5.1.</span> <span class="nav-text">1. JSP三大指令 ： page  include  taglib</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%80%94page%EF%BC%9A"><span class="nav-number">5.1.1.</span> <span class="nav-text">—page：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%80%94include-%E9%9D%99%E6%80%81%E5%8C%85%E5%90%AB"><span class="nav-number">5.1.2.</span> <span class="nav-text">—include  静态包含</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%80%94taglib"><span class="nav-number">5.1.3.</span> <span class="nav-text">—taglib</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-JSP-%E4%B9%9D%E5%A4%A7%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%9B%9B%E5%A4%A7%E5%9F%9F%E5%AF%B9%E8%B1%A1%EF%BC%9A"><span class="nav-number">5.2.</span> <span class="nav-text">2. JSP 九大内置对象和四大域对象：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-JSP%E7%9A%84%E5%8A%A8%E4%BD%9C%E6%A0%87%E7%AD%BE%EF%BC%9A"><span class="nav-number">5.3.</span> <span class="nav-text">3.JSP的动作标签：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-JavaBean%EF%BC%9A"><span class="nav-number">5.4.</span> <span class="nav-text">4.JavaBean：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-EL%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%9A"><span class="nav-number">5.5.</span> <span class="nav-text">5.EL表达式：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#EL%E7%9A%8411%E4%B8%AA%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%EF%BC%9A"><span class="nav-number">5.5.1.</span> <span class="nav-text">EL的11个内置对象：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-EL%E7%9A%84%E5%87%BD%E6%95%B0%E5%BA%93%EF%BC%88%E7%94%B1JSTL%E6%8F%90%E4%BE%9B%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">4.EL的函数库（由JSTL提供）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0%E5%BA%93%EF%BC%9A"><span class="nav-number">7.</span> <span class="nav-text">5.自定义函数库：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-JSTL-%EF%BC%9A"><span class="nav-number">8.</span> <span class="nav-text">8. JSTL ：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%9B%9E%E9%A1%BE%EF%BC%9A"><span class="nav-number">8.1.</span> <span class="nav-text">1. 回顾：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-JSTL%E6%A0%87%E7%AD%BE%E5%BA%93%EF%BC%9A"><span class="nav-number">8.2.</span> <span class="nav-text">2.JSTL标签库：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%80%93core%EF%BC%9A%E3%80%90C%E6%A0%87%E7%AD%BE%E3%80%91"><span class="nav-number">8.2.1.</span> <span class="nav-text">–core：【C标签】</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-JSTL%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%87%E7%AD%BE"><span class="nav-number">8.3.</span> <span class="nav-text">3.JSTL自定义标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84"><span class="nav-number">8.4.</span> <span class="nav-text">4.三层架构</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2021 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2021 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

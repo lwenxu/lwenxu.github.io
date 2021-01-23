@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  
+  <meta property="og:type" content="website">
+<meta property="og:title" content="昨夜凛雨">
+<meta property="og:url" content="https://lwenxu.github.io/page/21/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:locale">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="Java PHP Code">
+<meta name="twitter:card" content="summary">
+  
+
+  
+
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
+  
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    <link rel="stylesheet" href="/css/home.css" >
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body>
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                 >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;">
+  
+    <article id="post-DataBase/数据库Exists关键字举例"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/05/12/DataBase/%E6%95%B0%E6%8D%AE%E5%BA%93Exists%E5%85%B3%E9%94%AE%E5%AD%97%E4%B8%BE%E4%BE%8B/">数据库Exists关键字举例</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/05/12/DataBase/%E6%95%B0%E6%8D%AE%E5%BA%93Exists%E5%85%B3%E9%94%AE%E5%AD%97%E4%B8%BE%E4%BE%8B/" class="article-date">
+	  <time datetime="2017-05-11T23:30:00.000Z" itemprop="datePublished">2017-05-12</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">-数据库</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          一.问题描述：
+查询所有未选择03号课程的学生的姓名规定使用存在量词
+
+
+student表：
+grade表：
+二.思路：既然是存在量词那么也就是Exists和Not Exists两个存在两次来做判断条件。那么就可以想：
+1.选出所有学生然后除去那些选了03号课程的同学2.直接选出那些没有选择03号课程的同学三.开始写Sql：1.尝试首先按照第一种思路就是先连接student和grade（或者不连接）然后除掉grade中有03课程记录的学生，那么我们会写出以下Sql:
+1234567SELE...
+        </p>
+        <p class="article-more-link">
+          <a href="/2017/05/12/DataBase/%E6%95%B0%E6%8D%AE%E5%BA%93Exists%E5%85%B3%E9%94%AE%E5%AD%97%E4%B8%BE%E4%BE%8B/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-PHP/Mac配置PHP7环境"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/05/07/PHP/Mac%E9%85%8D%E7%BD%AEPHP7%E7%8E%AF%E5%A2%83/">Mac配置PHP7环境</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/05/07/PHP/Mac%E9%85%8D%E7%BD%AEPHP7%E7%8E%AF%E5%A2%83/" class="article-date">
+	  <time datetime="2017-05-07T13:40:24.000Z" itemprop="datePublished">2017-05-07</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Mac/">-Mac</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          
+在Mac下面本来就安装有Apache2和PHP5.5.3这里为了配置更新的环境就稍微折腾了一下，主要配置的就是MySQL和PHP，Apache就使用自带的就行。
+
+配置MySQL：MySQL在MySQL的官网上直接下载dmg包之后安转就行了。这里Mac版本的MySQL下载地址是
+
+https://dev.mysql.com/downloads/file/?id=461365
+
+下载之后在安装完成以后注意他会提示有一个默认的密码，一定要给记下来，一会改密码用的上。再安装完成了，打开偏好设置...
+        </p>
+        <p class="article-more-link">
+          <a href="/2017/05/07/PHP/Mac%E9%85%8D%E7%BD%AEPHP7%E7%8E%AF%E5%A2%83/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-PHP/关于PHP的回调函数"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/05/07/PHP/%E5%85%B3%E4%BA%8EPHP%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">关于PHP的回调函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/05/07/PHP/%E5%85%B3%E4%BA%8EPHP%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" class="article-date">
+	  <time datetime="2017-05-07T11:49:31.000Z" itemprop="datePublished">2017-05-07</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/PHP/">-PHP</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          
+
+普通函数的定义及调用与js相似,这个定义方式无需返回值,哪怕是有返回值在声明的时候也无需添加
+再后来的PHP版本中是添加了一向很有用的功能就是可在函数定义之前进行调用
+
+123456789101112echo add(1,2);echo &quot;&lt;&#x2F;br&gt;&quot;;function add($a,$b)&#123;    return $a+$b;&#125;function sub($a,$b)&#123;    return $a-$b;&#125;e...
+        </p>
+        <p class="article-more-link">
+          <a href="/2017/05/07/PHP/%E5%85%B3%E4%BA%8EPHP%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Python/Mac安装包版本的Python"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/05/06/Python/Mac%E5%AE%89%E8%A3%85%E5%8C%85%E7%89%88%E6%9C%AC%E7%9A%84Python/">Mac安装包版本的Python</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/05/06/Python/Mac%E5%AE%89%E8%A3%85%E5%8C%85%E7%89%88%E6%9C%AC%E7%9A%84Python/" class="article-date">
+	  <time datetime="2017-05-06T15:18:33.000Z" itemprop="datePublished">2017-05-06</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Mac/">-Mac</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          
+安装配置Python版本管理器pyenv
+
+brew install pyenv
+
+查看已经安装了哪些版本的Python
+
+pyenv versions其中版本号前面有*号的就是当前生效的版本,查看当前生效的版本也可以用pyenv version
+
+安装指定版本的Python
+
+pyenv install 3.7-dev
+
+安装完成后必须rehashpyenv rehash
+
+
+切换和使用指定的版本Python版本有3种方法
+
+系统全局用系统默认的Python比较好，不建议直接对其操作p...
+        </p>
+        <p class="article-more-link">
+          <a href="/2017/05/06/Python/Mac%E5%AE%89%E8%A3%85%E5%8C%85%E7%89%88%E6%9C%AC%E7%9A%84Python/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Python/pip 的阿里源"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/05/06/Python/pip%20%E7%9A%84%E9%98%BF%E9%87%8C%E6%BA%90/">VirtualEnv</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/05/06/Python/pip%20%E7%9A%84%E9%98%BF%E9%87%8C%E6%BA%90/" class="article-date">
+	  <time datetime="2017-05-06T15:18:33.000Z" itemprop="datePublished">2017-05-06</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Mac/">-Mac</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          修改配置文件1）检查pip.conf文件是否存在
+123&gt;&gt; cd ~&gt;&gt; mkdir .pip&gt;&gt; ls ~&#x2F;.pip
+2）直接编辑pip.conf
+1sudo vi ~&#x2F;.pip&#x2F;pip.conf 
+修改成如下的格式
+1234[global]index-url &#x3D; https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;pypi&#x2F;simple&#x2F;[install]t...
+        </p>
+        <p class="article-more-link">
+          <a href="/2017/05/06/Python/pip%20%E7%9A%84%E9%98%BF%E9%87%8C%E6%BA%90/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Python/virtualenv配置"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/05/06/Python/virtualenv%E9%85%8D%E7%BD%AE/">两个 python 的虚拟管理工具</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/05/06/Python/virtualenv%E9%85%8D%E7%BD%AE/" class="article-date">
+	  <time datetime="2017-05-06T15:18:33.000Z" itemprop="datePublished">2017-05-06</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Mac/">-Mac</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          两个 python 的虚拟管理工具
+
+virtualenv安装 virtualenv1sudo apt-get install python-virtualenv
+创建 env1virtualenv ENV
+启动 env12cd ENVsource .&#x2F;bin&#x2F;activate
+
+退出虚拟环境1deactivate
+
+virtualenv 的加强版 virtualenvwrapper优点：
+将所有虚拟环境整合在一个目录下
+管理（新增，删除，复制）虚拟环境
+切换虚拟环境
+...
+        </p>
+        <p class="article-more-link">
+          <a href="/2017/05/06/Python/virtualenv%E9%85%8D%E7%BD%AE/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Mac/打造酷炫终端"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/05/06/Mac/%E6%89%93%E9%80%A0%E9%85%B7%E7%82%AB%E7%BB%88%E7%AB%AF/">打造酷炫终端</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/05/06/Mac/%E6%89%93%E9%80%A0%E9%85%B7%E7%82%AB%E7%BB%88%E7%AB%AF/" class="article-date">
+	  <time datetime="2017-05-06T14:24:56.000Z" itemprop="datePublished">2017-05-06</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Mac/">-Mac</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          
+1.安装iTerm2iTerm2官方下载地址 http://www.iterm2.com/downloads.html
+2.安装Oh My Bash1.使用brew安装zsh：1brew install zsh
+
+2.通过echo $SHELL命令可以查看我们当前正在使用的shell；
+Mac系统中默认的shell为bash shell/bin/bash
+
+3.如果当前的shell不是zsh，我们可以通过chsh -s /bin/zsh命令可以将shell切换为shell之zsh，终端重...
+        </p>
+        <p class="article-more-link">
+          <a href="/2017/05/06/Mac/%E6%89%93%E9%80%A0%E9%85%B7%E7%82%AB%E7%BB%88%E7%AB%AF/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Tools/Idea使用技巧"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/05/05/Tools/Idea%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">Idea使用技巧</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/05/05/Tools/Idea%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" class="article-date">
+	  <time datetime="2017-05-05T05:09:40.000Z" itemprop="datePublished">2017-05-05</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">-开发工具</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          【编辑】souf:System.out.printf(“”);
+sout:System.out.println();
+
+
+soutm:System.out.println(“demo.main”);
+soutp:System.out.println(“args = [“ + args + “]”);
+soutv:System.out.println(“true = “ + true);
+Shift+Click，可以关闭文件
+Ctrl+[ / ]，可以跑到大括号的开头与结尾
+Ctrl+N，可...
+        </p>
+        <p class="article-more-link">
+          <a href="/2017/05/05/Tools/Idea%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Mac/dsdt guide"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/05/05/Mac/dsdt%20guide/">DSDT GUIDE</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/05/05/Mac/dsdt%20guide/" class="article-date">
+	  <time datetime="2017-05-05T05:09:40.000Z" itemprop="datePublished">2017-05-05</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/MacOS/">-MacOS</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          Overview
+In order to make many OS X features work well on a laptop, you will always need a properly patched DSDT (and SSDTs). The purpose of this guide is to provide a foundation for proper patching of your OEM DSDT/SSDTs.
+Advanced users may wish ...
+        </p>
+        <p class="article-more-link">
+          <a href="/2017/05/05/Mac/dsdt%20guide/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Tools/Atom使用技巧"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/05/05/Tools/Atom%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">Atom使用技巧</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/05/05/Tools/Atom%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" class="article-date">
+	  <time datetime="2017-05-05T04:32:34.000Z" itemprop="datePublished">2017-05-05</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Atom/">-Atom</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          打开项目1ctrl + o
+模糊查找文件12ctrl + t  / ctrl + pctrl + b 仅仅查找已经打开的文件
+命令模式1ctrl + shift +p
+另存为1ctrl + shift + s
+gmerge-conflicts1在使用 Git 进行合并和 rebase 的时候可以用 alt-m d 来激活这个插件，它会列出所有冲突的文件，将每一处冲突高亮，同时有按钮和快捷键供你快速选用某个版本，在你解决所有冲突后会提示你进行 Commit. 有了这个插件再也不同担心出冲突的...
+        </p>
+        <p class="article-more-link">
+          <a href="/2017/05/05/Tools/Atom%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/20/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/22/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+      </div>
+      
+        <div align="center" style="margin-top: 30px;"><hr class="hr" style="margin:0px; height:3px;"></div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2021 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2021 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+</body>
+</html>

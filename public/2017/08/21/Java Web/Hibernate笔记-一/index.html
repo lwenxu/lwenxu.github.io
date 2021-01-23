@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>hibernate笔记(一) | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Hibernate" />
+  
+  
+  
+  
+  <meta name="description" content="1.导入jar包jar包主要需要导入的有两个文件夹下面的jar包  required  必须要导入的核心包 jpa 实体规范的包2.写一个实体类实体类必须要有一个唯一的id值，对应于表中的主键。其他的就是字段值，字段值不一定和数据库的字段一样，而是可以不一样，然后在配置文件中进行映射。然后生成对应的get与set方法。3.写映射配置文件一般位置就是放在该实体类的位置，名字后缀最好是hbm.xml,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hibernate笔记(一)">
+<meta property="og:url" content="https://lwenxu.github.io/2017/08/21/Java%20Web/Hibernate%E7%AC%94%E8%AE%B0-%E4%B8%80/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="1.导入jar包jar包主要需要导入的有两个文件夹下面的jar包  required  必须要导入的核心包 jpa 实体规范的包2.写一个实体类实体类必须要有一个唯一的id值，对应于表中的主键。其他的就是字段值，字段值不一定和数据库的字段一样，而是可以不一样，然后在配置文件中进行映射。然后生成对应的get与set方法。3.写映射配置文件一般位置就是放在该实体类的位置，名字后缀最好是hbm.xml,">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-08-21T08:00:52.000Z">
+<meta property="article:modified_time" content="2021-01-23T15:24:50.109Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="Hibernate">
+<meta name="twitter:card" content="summary">
+  
+
+  
+
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
+  
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Java Web/Hibernate笔记-一" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Hibernate笔记(一)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/08/21/Java%20Web/Hibernate%E7%AC%94%E8%AE%B0-%E4%B8%80/" class="article-date">
+	  <time datetime="2017-08-21T08:00:52.000Z" itemprop="datePublished">2017-08-21</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Java-Web/">-Java Web</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-导入jar包"><a href="#1-导入jar包" class="headerlink" title="1.导入jar包"></a>1.导入jar包</h3><p>jar包主要需要导入的有两个文件夹下面的jar包</p>
+<ul>
+<li>required  必须要导入的核心包</li>
+<li>jpa 实体规范的包<h3 id="2-写一个实体类"><a href="#2-写一个实体类" class="headerlink" title="2.写一个实体类"></a>2.写一个实体类</h3>实体类必须要有一个唯一的id值，对应于表中的主键。其他的就是字段值，字段值不一定和数据库的字段一样，而是可以不一样，然后在配置文件中进行映射。<br>然后生成对应的get与set方法。<h3 id="3-写映射配置文件"><a href="#3-写映射配置文件" class="headerlink" title="3.写映射配置文件"></a>3.写映射配置文件</h3>一般位置就是放在该实体类的位置，名字后缀最好是hbm.xml,然后导入dtd的约束。这个约束是mapping的约束注意不要导错了。  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">&quot;类路径&quot;</span> <span class="attr">table</span>=<span class="string">&quot;表名&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">&quot;实体字段&quot;</span> <span class="attr">column</span>=<span class="string">&quot;表字段&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 主键的生成策略，常用的就是native自增长，还有就是uuid使用128位的uuid算法产生uuid --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">generter</span>&gt;</span>native<span class="tag">&lt;/<span class="name">gengrter</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;&quot;</span> <span class="attr">column</span>=<span class="string">&quot;&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;&quot;</span> <span class="attr">column</span>=<span class="string">&quot;&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;&quot;</span> <span class="attr">column</span>=<span class="string">&quot;&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-写Hibernate的核心配置文件"><a href="#4-写Hibernate的核心配置文件" class="headerlink" title="4. 写Hibernate的核心配置文件"></a>4. 写Hibernate的核心配置文件</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&#x27;1.0&#x27; encoding=&#x27;utf-8&#x27;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">hibernate-configuration</span> <span class="meta-keyword">PUBLIC</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">&quot;-//Hibernate/Hibernate Configuration DTD//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">&quot;http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">session-factory</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--DB base config--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;connection.url&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;connection.driver_class&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;connection.username&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;connection.password&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">         <span class="comment">&lt;!--DB schema will be updated if needed--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;hbm2ddl.auto&quot;</span>&gt;</span>update<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;hibernate.show_sql&quot;</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;hibernate.format_sql&quot;</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;hibernate.dialect&quot;</span>&gt;</span>org.hibernate.dialect.MySQLDialect<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--DB Mapping--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mapping</span> <span class="attr">resource</span>=<span class="string">&quot;&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">session-factory</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-Hibernate代码"><a href="#4-Hibernate代码" class="headerlink" title="4.Hibernate代码"></a>4.Hibernate代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> SessionFactory ourSessionFactory;</span><br><span class="line">    <span class="comment">//由于创建sessionFactory的时候他会去创建表，非常耗资源，所以一个项目之创建一个SessionFactory</span></span><br><span class="line">    <span class="comment">//所以我们写一个工具类，在静态代码快中，只被加载一次</span></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Configuration configuration = <span class="keyword">new</span> Configuration();</span><br><span class="line">            configuration.configure();</span><br><span class="line">            ourSessionFactory = configuration.buildSessionFactory();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable ex) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ExceptionInInitializerError(ex);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Session <span class="title">getSession</span><span class="params">()</span> <span class="keyword">throws</span> HibernateException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ourSessionFactory.openSession();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">final</span> String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">      <span class="comment">//session是单例的，不可多线程公用，也就是一个session只能被一个线程使用。我们可以使用threadLocal来把session和本地线程绑定。</span></span><br><span class="line">        <span class="keyword">final</span> Session session = getSession();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;querying all the managed entities...&quot;</span>);</span><br><span class="line">            <span class="keyword">final</span> Map metadataMap = session.getSessionFactory().getAllClassMetadata();</span><br><span class="line">            <span class="keyword">for</span> (Object key : metadataMap.keySet()) &#123;</span><br><span class="line">                <span class="keyword">final</span> ClassMetadata classMetadata = (ClassMetadata) metadataMap.get(key);</span><br><span class="line">                <span class="keyword">final</span> String entityName = classMetadata.getEntityName();</span><br><span class="line">                <span class="keyword">final</span> Query query = session.createQuery(<span class="string">&quot;from &quot;</span> + entityName);</span><br><span class="line">                <span class="keyword">for</span> (Object o : query.list()) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;  &quot;</span> + o);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            session.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="5-实体类编写规范"><a href="#5-实体类编写规范" class="headerlink" title="5.实体类编写规范"></a>5.实体类编写规范</h3><ul>
+<li>属性为私有的</li>
+<li>必须有一个唯一的值一般都是id或者uid</li>
+<li>属性一般都是使用包装类型，不要使用基本数据类型，就是防止出现null类型的。</li>
+</ul>
+<h3 id="6-CRUD操作"><a href="#6-CRUD操作" class="headerlink" title="6.CRUD操作"></a>6.CRUD操作</h3><h4 id="1-增加"><a href="#1-增加" class="headerlink" title="1.增加"></a>1.增加</h4><p>首先需要一个对象，这个也就是实体类的对象，然后设置字段的值，最后只需要调用session.save(user)即可插入一条数据。</p>
+<h4 id="2-查询"><a href="#2-查询" class="headerlink" title="2.查询"></a>2.查询</h4><p>根据id查询，直接使用session.get(User.class,id) 第一个参数就是类，第二个是id值。最后返回的不是数组或者list什么的，而是一个实体类的对象。</p>
+<h4 id="3-修改"><a href="#3-修改" class="headerlink" title="3.修改"></a>3.修改</h4><p>首先就需要进行查询，然后修改实体的属性，最后再使用update方法保存即可。save方法也可以，但是如果记录不存在他就会添加。</p>
+<h4 id="4-删除"><a href="#4-删除" class="headerlink" title="4.删除"></a>4.删除</h4><p>还是先查到该对象，然后在调用delete方法。</p>
+<h3 id="7-一级缓存"><a href="#7-一级缓存" class="headerlink" title="7.一级缓存"></a>7.一级缓存</h3><p>Hibernate的一级缓存默认是开启的，他的范围是在session开启导session关闭之间的，一级缓存的存放的对象只能就是持久太的数据。<br>一级缓存一个简单的例子就是，我们第一次查询一条数据的时候这条数据就被被放在内存中，而第二次再次查询此数据的时候他不会取数据库获取数据，而是直接从内存中取到这条数据。<br>Hibernate也是有耳机缓存的，但是现在基本不再使用，而是通过一些NoSQL数据库来完成，存放类似于SessionFactory对象之类的东西。</p>
+<h3 id="8-session和本地线程绑定"><a href="#8-session和本地线程绑定" class="headerlink" title="8.session和本地线程绑定"></a>8.session和本地线程绑定</h3><p>因为session是单例的不可以多个线程同时访问，我们可以使用threadLocal来绑定session和Thread，但是这样比较麻烦，我们Hibernate已经提供了session和thread绑定的方法。<br>首先需要配置核心配置文件<br><property name="hibernate.current_session_context_class">thread</property><br>然后SessionFactory.getCurrentSession()就是获得的与本地线程绑定的线程。线程结束以后session自动被销毁，不需要我们自己关闭session，否则会报错。</p>
+<h3 id="9-Hibernate三个查询对象"><a href="#9-Hibernate三个查询对象" class="headerlink" title="9.Hibernate三个查询对象"></a>9.Hibernate三个查询对象</h3><ul>
+<li>Query  执行hql语句，调用对应的方法获取结果<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Query query=session.createQuery(<span class="string">&quot;hql&quot;</span>);  <span class="comment">//执行hql</span></span><br><span class="line">query.list();  <span class="comment">//获取一个list集合</span></span><br></pre></td></tr></table></figure></li>
+<li>Criteria  无需执行hql，直接调用方法获取结果<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Criteria criteria=session.createCriteria(User.class);  <span class="comment">//实体类的class</span></span><br><span class="line">criteria.list();</span><br></pre></td></tr></table></figure></li>
+<li>SQLQuery  调用底层sql<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SQLQuery sql=session.createSQLQuery(<span class="string">&quot;sql&quot;</span>);<span class="comment">//执行sql</span></span><br><span class="line">sql.list() <span class="comment">//每一条记录是一个数组</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2017/08/21/Java Web/Hibernate笔记-一/" target="_blank" title="Hibernate笔记(一)">https://lwenxu.github.io/2017/08/21/Java Web/Hibernate笔记-一/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/21/Java%20Web/Hibernate%E7%AC%94%E8%AE%B0-%E4%BA%8C/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hibernate笔记(二)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/21/Java%20Web/jsp%E6%8C%87%E4%BB%A4%E5%92%8CEL%E8%A1%A8%E8%BE%BE%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">jsp指令和EL表达式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AF%BC%E5%85%A5jar%E5%8C%85"><span class="nav-number">1.</span> <span class="nav-text">1.导入jar包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%86%99%E4%B8%80%E4%B8%AA%E5%AE%9E%E4%BD%93%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">2.写一个实体类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%86%99%E6%98%A0%E5%B0%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">3.写映射配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%86%99Hibernate%E7%9A%84%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">4. 写Hibernate的核心配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Hibernate%E4%BB%A3%E7%A0%81"><span class="nav-number">5.</span> <span class="nav-text">4.Hibernate代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%AE%9E%E4%BD%93%E7%B1%BB%E7%BC%96%E5%86%99%E8%A7%84%E8%8C%83"><span class="nav-number">6.</span> <span class="nav-text">5.实体类编写规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-CRUD%E6%93%8D%E4%BD%9C"><span class="nav-number">7.</span> <span class="nav-text">6.CRUD操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%A2%9E%E5%8A%A0"><span class="nav-number">7.1.</span> <span class="nav-text">1.增加</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%9F%A5%E8%AF%A2"><span class="nav-number">7.2.</span> <span class="nav-text">2.查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E4%BF%AE%E6%94%B9"><span class="nav-number">7.3.</span> <span class="nav-text">3.修改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E5%88%A0%E9%99%A4"><span class="nav-number">7.4.</span> <span class="nav-text">4.删除</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98"><span class="nav-number">8.</span> <span class="nav-text">7.一级缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-session%E5%92%8C%E6%9C%AC%E5%9C%B0%E7%BA%BF%E7%A8%8B%E7%BB%91%E5%AE%9A"><span class="nav-number">9.</span> <span class="nav-text">8.session和本地线程绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-Hibernate%E4%B8%89%E4%B8%AA%E6%9F%A5%E8%AF%A2%E5%AF%B9%E8%B1%A1"><span class="nav-number">10.</span> <span class="nav-text">9.Hibernate三个查询对象</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2021 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2021 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

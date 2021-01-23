@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>springboot 笔记 ( 四 )：web 开发 | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="SpringBoot" />
+  
+  
+  
+  
+  <meta name="description" content="SpringBoot 笔记 (四): web 开发1、SpringBoot对静态资源的映射规则123456@ConfigurationProperties(prefix &#x3D; &quot;spring.resources&quot;, ignoreUnknownFields &#x3D; false)public class ResourceProperties implements ResourceLoad">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot 笔记 ( 四 )：web 开发">
+<meta property="og:url" content="https://lwenxu.github.io/2018/04/14/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%9B%9B%20)%EF%BC%9Aweb%20%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="SpringBoot 笔记 (四): web 开发1、SpringBoot对静态资源的映射规则123456@ConfigurationProperties(prefix &#x3D; &quot;spring.resources&quot;, ignoreUnknownFields &#x3D; false)public class ResourceProperties implements ResourceLoad">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-04-14T02:01:28.000Z">
+<meta property="article:modified_time" content="2021-01-23T15:24:50.181Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="SpringBoot">
+<meta name="twitter:card" content="summary">
+  
+
+  
+
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
+  
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-SpringBoot/SpringBoot 笔记 ( 四 )：web 开发" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      SpringBoot 笔记 ( 四 )：web 开发
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/14/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%9B%9B%20)%EF%BC%9Aweb%20%E5%BC%80%E5%8F%91/" class="article-date">
+	  <time datetime="2018-04-14T02:01:28.000Z" itemprop="datePublished">2018-04-14</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SpringBoot-笔记-四-web-开发"><a href="#SpringBoot-笔记-四-web-开发" class="headerlink" title="SpringBoot 笔记 (四): web 开发"></a>SpringBoot 笔记 (四): web 开发</h1><h2 id="1、SpringBoot对静态资源的映射规则"><a href="#1、SpringBoot对静态资源的映射规则" class="headerlink" title="1、SpringBoot对静态资源的映射规则"></a>1、SpringBoot对静态资源的映射规则</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;spring.resources&quot;, ignoreUnknownFields = false)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ResourceProperties</span> <span class="keyword">implements</span> <span class="title">ResourceLoaderAware</span> </span>&#123;</span><br><span class="line"><span class="comment">//静态资源的路径</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String[] CLASSPATH_RESOURCE_LOCATIONS = &#123;</span><br><span class="line">			<span class="string">&quot;classpath:/META-INF/resources/&quot;</span>, <span class="string">&quot;classpath:/resources/&quot;</span>,</span><br><span class="line">			<span class="string">&quot;classpath:/static/&quot;</span>, <span class="string">&quot;classpath:/public/&quot;</span> &#125;;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+
+<p><strong>MVC的自动配置</strong> ：WebMvcAuotConfiguration</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">WebMvcAuotConfiguration：</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addResourceHandlers</span><span class="params">(ResourceHandlerRegistry registry)</span> </span>&#123;</span><br><span class="line">   <span class="comment">// 对 webjars 的请求，也就是我们把类似于 jquery 之类的东西放到 maven 中就叫做 webjars</span></span><br><span class="line">		<span class="keyword">if</span> (!<span class="keyword">this</span>.resourceProperties.isAddMappings()) &#123;</span><br><span class="line">			logger.debug(<span class="string">&quot;Default resource handling disabled&quot;</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		Integer cachePeriod = <span class="keyword">this</span>.resourceProperties.getCachePeriod();</span><br><span class="line">		<span class="keyword">if</span> (!registry.hasMappingForPattern(<span class="string">&quot;/webjars/**&quot;</span>)) &#123;</span><br><span class="line">			customizeResourceHandlerRegistration(</span><br><span class="line">					registry.addResourceHandler(<span class="string">&quot;/webjars/**&quot;</span>)</span><br><span class="line">							.addResourceLocations(</span><br><span class="line">									<span class="string">&quot;classpath:/META-INF/resources/webjars/&quot;</span>)</span><br><span class="line">					.setCachePeriod(cachePeriod));</span><br><span class="line">		&#125;</span><br><span class="line">		String staticPathPattern = <span class="keyword">this</span>.mvcProperties.getStaticPathPattern();</span><br><span class="line">   <span class="comment">//静态资源文件夹映射  </span></span><br><span class="line">      <span class="comment">//&quot;classpath:/META-INF/resources/&quot;, </span></span><br><span class="line">      <span class="comment">//&quot;classpath:/resources/&quot;,</span></span><br><span class="line">      <span class="comment">//&quot;classpath:/static/&quot;, </span></span><br><span class="line">      <span class="comment">//&quot;classpath:/public/&quot; </span></span><br><span class="line">		<span class="keyword">if</span> (!registry.hasMappingForPattern(staticPathPattern)) &#123;</span><br><span class="line">			customizeResourceHandlerRegistration(</span><br><span class="line">					registry.addResourceHandler(staticPathPattern)</span><br><span class="line">							.addResourceLocations(</span><br><span class="line">									<span class="keyword">this</span>.resourceProperties.getStaticLocations())</span><br><span class="line">					.setCachePeriod(cachePeriod));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//配置欢迎页映射</span></span><br><span class="line">   	<span class="comment">//所有静态资源的index.html 就是欢迎页。</span></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> WelcomePageHandlerMapping <span class="title">welcomePageHandlerMapping</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">			ResourceProperties resourceProperties)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> WelcomePageHandlerMapping(resourceProperties.getWelcomePage(),</span><br><span class="line">				<span class="keyword">this</span>.mvcProperties.getStaticPathPattern());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//配置喜欢的图标</span></span><br><span class="line">	<span class="comment">//还是静态资源文件夹下的 favicon.ico</span></span><br><span class="line">	<span class="meta">@Configuration</span></span><br><span class="line">	<span class="meta">@ConditionalOnProperty(value = &quot;spring.mvc.favicon.enabled&quot;, matchIfMissing = true)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">FaviconConfiguration</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">final</span> ResourceProperties resourceProperties;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">FaviconConfiguration</span><span class="params">(ResourceProperties resourceProperties)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.resourceProperties = resourceProperties;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> SimpleUrlHandlerMapping <span class="title">faviconHandlerMapping</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			SimpleUrlHandlerMapping mapping = <span class="keyword">new</span> SimpleUrlHandlerMapping();</span><br><span class="line">			mapping.setOrder(Ordered.HIGHEST_PRECEDENCE + <span class="number">1</span>);</span><br><span class="line">             	<span class="comment">//所有  **/favicon.ico </span></span><br><span class="line">			mapping.setUrlMap(Collections.singletonMap(<span class="string">&quot;**/favicon.ico&quot;</span>,</span><br><span class="line">					faviconRequestHandler()));</span><br><span class="line">			<span class="keyword">return</span> mapping;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> ResourceHttpRequestHandler <span class="title">faviconRequestHandler</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			ResourceHttpRequestHandler requestHandler = <span class="keyword">new</span> ResourceHttpRequestHandler();</span><br><span class="line">			requestHandler</span><br><span class="line">					.setLocations(<span class="keyword">this</span>.resourceProperties.getFaviconLocations());</span><br><span class="line">			<span class="keyword">return</span> requestHandler;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>1）、所有 /webjars/** ，都去 classpath:/META-INF/resources/webjars/ 找资源<br>例如：<br>localhost:8080/webjars/jquery/3.3.1/jquery.js</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--引入jquery-webjar--&gt;</span>在访问的时候只需要写webjars下面资源的名称即可</span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.webjars<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jquery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>3.3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>2）、”/**” 这个 路径的意思就是如果没有拦截器或者Servlet去处理的请求我们就映射到这个地方来，访问当前项目的任何资源，都去（静态资源的文件夹）找映射</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;classpath:&#x2F;META-INF&#x2F;resources&#x2F;&quot;, </span><br><span class="line">&quot;classpath:&#x2F;resources&#x2F;&quot;,</span><br><span class="line">&quot;classpath:&#x2F;static&#x2F;&quot;, </span><br><span class="line">&quot;classpath:&#x2F;public&#x2F;&quot; </span><br><span class="line">&quot;&#x2F;&quot;：当前项目的根路径</span><br></pre></td></tr></table></figure>
+
+<p>localhost:8080/abc ===  去静态资源文件夹里面找abc</p>
+<p>3）、欢迎页； 静态资源文件夹下的所有index.html页面；被”/**”映射</p>
+<p>​    localhost:8080/   找index页面</p>
+<p>4）、所有的 **/favicon.ico  都是在静态资源文件下找</p>
+<h2 id="2、模板引擎"><a href="#2、模板引擎" class="headerlink" title="2、模板引擎"></a>2、模板引擎</h2><p>JSP、Velocity、Freemarker、Thymeleaf 但是SpringBoot推荐的Thymeleaf：语法更简单，功能更强大。</p>
+<h3 id="1、引入thymeleaf；"><a href="#1、引入thymeleaf；" class="headerlink" title="1、引入thymeleaf；"></a>1、引入thymeleaf；</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    2.1.6</span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">thymeleaf.version</span>&gt;</span>3.0.9.RELEASE<span class="tag">&lt;/<span class="name">thymeleaf.version</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- 切换thymeleaf版本 布局功能的支持程序  thymeleaf3主程序  layout2以上版本 --&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- thymeleaf2   layout1   不使用在 parent 工程中的定义的版本 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">thymeleaf-layout-dialect.version</span>&gt;</span>2.2.2<span class="tag">&lt;/<span class="name">thymeleaf-layout-dialect.version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2、Thymeleaf使用"><a href="#2、Thymeleaf使用" class="headerlink" title="2、Thymeleaf使用"></a>2、Thymeleaf使用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;spring.thymeleaf&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThymeleafProperties</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Charset DEFAULT_ENCODING = Charset.forName(<span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> MimeType DEFAULT_CONTENT_TYPE = MimeType.valueOf(<span class="string">&quot;text/html&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_PREFIX = <span class="string">&quot;classpath:/templates/&quot;</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_SUFFIX = <span class="string">&quot;.html&quot;</span>;</span><br><span class="line">  	<span class="comment">//</span></span><br></pre></td></tr></table></figure>
+
+<p>只要我们把HTML页面放在classpath:/templates/，thymeleaf就能自动渲染；</p>
+<h4 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h4><h4 id="1、导入thymeleaf的名称空间"><a href="#1、导入thymeleaf的名称空间" class="headerlink" title="1、导入thymeleaf的名称空间"></a>1、导入thymeleaf的名称空间</h4><p>为了语法提示！</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span> <span class="attr">xmlns:th</span>=<span class="string">&quot;http://www.thymeleaf.org&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2、使用thymeleaf语法"><a href="#2、使用thymeleaf语法" class="headerlink" title="2、使用thymeleaf语法"></a>2、使用thymeleaf语法</h4><p>在controller中的参数放入一个Map或者ModelAndView对象，然后我们直接在里面put数据，接着我们在返回值返回的时候只需要返回这个模板的逻辑名就行了。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span> <span class="attr">xmlns:th</span>=<span class="string">&quot;http://www.thymeleaf.org&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>成功！<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--th:text 将div里面的文本内容设置为 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;hello&#125;&quot;</span>&gt;</span>这是显示欢迎信息<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3、语法规则"><a href="#3、语法规则" class="headerlink" title="3、语法规则"></a>3、语法规则</h3><p>1）、th:text：改变当前元素里面的文本内容<br>      th：任意html属性：来替换原生属性的值</p>
+<p>2）、表达式</p>
+<h4 id="1-…-获取值"><a href="#1-…-获取值" class="headerlink" title="1. ${…} 获取值"></a>1. ${…} 获取值</h4><p>底层就是OGNL表达式：属性调用，数组调用，方法调用，方法传参</p>
+<h5 id="1）、获取对象的属性、调用方法、数组的取值"><a href="#1）、获取对象的属性、调用方法、数组的取值" class="headerlink" title="1）、获取对象的属性、调用方法、数组的取值"></a>1）、获取对象的属性、调用方法、数组的取值</h5><p>${obj.name}    ${obj[‘name’]}</p>
+<h5 id="2）、使用内置的基本对象"><a href="#2）、使用内置的基本对象" class="headerlink" title="2）、使用内置的基本对象"></a>2）、使用内置的基本对象</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#ctx : the context object.</span><br><span class="line">#vars: the context variables.</span><br><span class="line">#locale : the context locale.</span><br><span class="line">#request : (only in Web Contexts) the HttpServletRequest object.</span><br><span class="line">#response : (only in Web Contexts) the HttpServletResponse object.</span><br><span class="line">#session : (only in Web Contexts) the HttpSession object.</span><br><span class="line">#servletContext : (only in Web Contexts) the ServletContext object.</span><br></pre></td></tr></table></figure>
+
+<p>对象必须是采用 # 来引用     </p>
+<h5 id="3）、内置的一些工具对象："><a href="#3）、内置的一些工具对象：" class="headerlink" title="3）、内置的一些工具对象："></a>3）、内置的一些工具对象：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#execInfo : information about the template being processed.</span><br><span class="line">#messages : methods for obtaining externalized messages inside variables expressions, in the same way as they would be obtained using #&#123;…&#125; syntax.</span><br><span class="line">#uris : methods for escaping parts of URLs&#x2F;URIs</span><br><span class="line">#conversions : methods for executing the configured conversion service (if any).</span><br><span class="line">#dates : methods for java.util.Date objects: formatting, component extraction, etc.</span><br><span class="line">#calendars : analogous to #dates , but for java.util.Calendar objects.</span><br><span class="line">#numbers : methods for formatting numeric objects.</span><br><span class="line">#strings : methods for String objects: contains, startsWith, prepending&#x2F;appending, etc.</span><br><span class="line">#objects : methods for objects in general.</span><br><span class="line">#bools : methods for boolean evaluation.</span><br><span class="line">#arrays : methods for arrays.</span><br><span class="line">#lists : methods for lists.</span><br><span class="line">#sets : methods for sets.</span><br><span class="line">#maps : methods for maps.</span><br><span class="line">#aggregates : methods for creating aggregates on arrays or collections.</span><br><span class="line">#ids : methods for dealing with id attributes that might be repeated (for example, as a result of an iteration).</span><br></pre></td></tr></table></figure>
+
+<h4 id="2"><a href="#2" class="headerlink" title="2.*{..}"></a>2.*{..}</h4><p>这个东西其实和 ${} 是一样的，但是他多了一个辅助功能就是我们在一个标签中使用了 <code>th:object=&quot;obj&quot;</code> 来指定一个对象的时候，我们在这个标签里面可以直接用 <code>*&#123;user&#125;</code> 来用 <code>*</code> 代替我们上面的那个 obj 对象，也就是我们可以简化书写。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:object</span>=<span class="string">&quot;$&#123;session.user&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Name: <span class="tag">&lt;<span class="name">span</span> <span class="attr">th:text</span>=<span class="string">&quot;*&#123;firstName&#125;&quot;</span>&gt;</span>Sebastian<span class="tag">&lt;/<span class="name">span</span>&gt;</span>.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Surname: <span class="tag">&lt;<span class="name">span</span> <span class="attr">th:text</span>=<span class="string">&quot;*&#123;lastName&#125;&quot;</span>&gt;</span>Pepper<span class="tag">&lt;/<span class="name">span</span>&gt;</span>.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Nationality: <span class="tag">&lt;<span class="name">span</span> <span class="attr">th:text</span>=<span class="string">&quot;*&#123;nationality&#125;&quot;</span>&gt;</span>Saturn<span class="tag">&lt;/<span class="name">span</span>&gt;</span>.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3"><a href="#3" class="headerlink" title="3.#{..}"></a>3.#{..}</h4><p>这个是用来取国际化内容的</p>
+<h4 id="4-…"><a href="#4-…" class="headerlink" title="4.@{…}"></a>4.@{…}</h4><p>定义URL，<code>@&#123;/order/process(execId=$&#123;execId&#125;,execType=&#39;FAST&#39;)&#125;</code> 就可以表示当前项目下面的一个url 就类似我们的 @GetMapping 里面的映射一样，然后我们的参数就不用使用 <code>？</code> 来拼接字符串了，直接使用圆括号即可。</p>
+<h4 id="5-…"><a href="#5-…" class="headerlink" title="5.~{…}"></a>5.~{…}</h4><p>片段引用表达式</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:insert</span>=<span class="string">&quot;~&#123;commons :: main&#125;&quot;</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="6-Literals（字面量）"><a href="#6-Literals（字面量）" class="headerlink" title="6.Literals（字面量）"></a>6.Literals（字面量）</h4><p>​      Text literals: ‘one text’ , ‘Another one!’ ,…<br>      Number literals: 0 , 34 , 3.0 , 12.3 ,…<br>      Boolean literals: true , false<br>      Null literal: null<br>      Literal tokens: one , sometext , main ,…</p>
+<h4 id="7-Text-operations-（文本操作）"><a href="#7-Text-operations-（文本操作）" class="headerlink" title="7.Text operations:（文本操作）"></a>7.Text operations:（文本操作）</h4><p>​    String concatenation: +<br>    Literal substitutions: |The name is ${name}|</p>
+<h4 id="8-Arithmetic-operations-（数学运算）"><a href="#8-Arithmetic-operations-（数学运算）" class="headerlink" title="8.Arithmetic operations:（数学运算）"></a>8.Arithmetic operations:（数学运算）</h4><p>​    Binary operators: + , - , * , / , %<br>    Minus sign (unary operator): -</p>
+<h4 id="9-Boolean-operations-（布尔运算）"><a href="#9-Boolean-operations-（布尔运算）" class="headerlink" title="9.Boolean operations:（布尔运算）"></a>9.Boolean operations:（布尔运算）</h4><p>​    Binary operators: and , or<br>    Boolean negation (unary operator): ! , not</p>
+<h4 id="10-Comparisons-and-equality-（比较运算）"><a href="#10-Comparisons-and-equality-（比较运算）" class="headerlink" title="10.Comparisons and equality:（比较运算）"></a>10.Comparisons and equality:（比较运算）</h4><p>​    Comparators: &gt; , &lt; , &gt;= , &lt;= ( gt , lt , ge , le )<br>    Equality operators: == , != ( eq , ne )</p>
+<h4 id="11-Conditional-operators-条件运算（三元运算符）"><a href="#11-Conditional-operators-条件运算（三元运算符）" class="headerlink" title="11.Conditional operators:条件运算（三元运算符）"></a>11.Conditional operators:条件运算（三元运算符）</h4><p>​    If-then: (if) ? (then)<br>    If-then-else: (if) ? (then) : (else)<br>    Default: (value) ?: (defaultvalue)</p>
+<h4 id="12-Special-tokens"><a href="#12-Special-tokens" class="headerlink" title="12.Special tokens:"></a>12.Special tokens:</h4><p>​    No-Operation: _ </p>
+<h4 id="13-foreach"><a href="#13-foreach" class="headerlink" title="13.foreach"></a>13.foreach</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:each</span>=<span class="string">&quot;user:$&#123;users&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;user&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br><span class="line">    或者使用行内写法</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        [[$&#123;user&#125;]]  text  会转义</span><br><span class="line">        [($&#123;user&#125;)]  utext	不转义字符</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4、SpringMVC自动配置"><a href="#4、SpringMVC自动配置" class="headerlink" title="4、SpringMVC自动配置"></a><a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/1.5.10.RELEASE/reference/htmlsingle/#boot-features-developing-web-applications">4、SpringMVC自动配置</a></h2><h3 id="1-Spring-MVC-auto-configuration"><a href="#1-Spring-MVC-auto-configuration" class="headerlink" title="1. Spring MVC auto-configuration"></a>1. Spring MVC auto-configuration</h3><p>Spring Boot 自动配置好了SpringMVC</p>
+<p>以下是SpringBoot对SpringMVC的默认配置:<strong>WebMvcAutoConfiguration</strong></p>
+<ol>
+<li><p>注入了 <code>ContentNegotiatingViewResolver</code> and <code>BeanNameViewResolver</code> 的 bean.</p>
+<ul>
+<li>自动配置了ViewResolver（视图解析器：根据方法的返回值得到视图对象（View），视图对象决定如何渲染（转发/重定向））</li>
+<li>ContentNegotiatingViewResolver：组合所有的视图解析器的，也就是把容器中所有的视图解析器都放到一块，也就是放到自己的一个集合里面，我们可以在debug的时候去DispatcherServlet 这个地方查看到我们的视图解析器，然后在挑选出一个最合适的视图解析器工作，处理视图。</li>
+<li>如何定制自己的视图解析器？：我们可以自己给容器中添加一个视图解析器（实现了ViewResolver接口的类）,<code>ContentNegotiatingViewResolver</code>自动的将其组合进来，放到自己的容器里面。</li>
+</ul>
+</li>
+<li><p>静态资源文件夹路径,webjars</p>
+</li>
+<li><p>静态首页访问,index 页面</p>
+</li>
+<li><p>自定义 favicon.ico 图标</p>
+</li>
+<li><p>自动注册了 <code>Converter</code>, <code>GenericConverter</code>, <code>Formatter</code> 组件</p>
+<ul>
+<li>Converter：转换器就是把网页提交过来的参数转化成我们需要的类型  public String hello(User user)：类型转换使用Converter</li>
+<li><code>Formatter</code>  格式化器，2017.12.17===Date。自己添加的格式化器转换器，我们只需要放在容器中即可，然后配置一下对应的配置文件就行 。</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@ConditionalOnProperty(prefix = &quot;spring.mvc&quot;, name = &quot;date-format&quot;)</span><span class="comment">//需要我们在文件中配置日期格式化的规则，他才进行格式化。</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Formatter&lt;Date&gt; <span class="title">dateFormatter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> DateFormatter(<span class="keyword">this</span>.mvcProperties.getDateFormat());<span class="comment">//日期格式化组件</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li><p><code>HttpMessageConverters</code> Http 请求响应转换。</p>
+<ul>
+<li><p>HttpMessageConverter：SpringMVC用来转换Http请求和响应的，User—Json</p>
+</li>
+<li><p><code>HttpMessageConverters</code> 是从容器中确定，从容器中自动获取所有的HttpMessageConverter，自己给容器中添加HttpMessageConverter，只需要将自己的组件注册容器中（@Bean,@Component）</p>
+</li>
+</ul>
+</li>
+<li><p><code>MessageCodesResolver</code> .定义错误代码生成规则，我们也可以手动的配置，就是向容器中添加bean</p>
+</li>
+<li><p>使用了 <code>ConfigurableWebBindingInitializer</code> 组件到容器里面。我们可以配置一个ConfigurableWebBindingInitializer来替换默认的,添加到容器。这个东西的功能就是把我们页面提交过来的数据与我们的JavaBean的属性来做绑定，就是我们在 Spring中看到的 <code>WebBinder</code> 。 </p>
+</li>
+</ol>
+<p><strong>注意：org.springframework.boot.autoconfigure.web这个包里面有所有的web自动配置场景</strong></p>
+<p>&emsp;&emsp;</p>
+<p>可以看出来我们的SpringBoot的自动配置基本就是使用 AutoConfiguration 来向容器中添加Bean，条件就是如果容器中没有这个 bean 的话。然后就是如果是这个组价可以存在多个，我们配置的bean就会被SpringBoot给整合掉，形成在一起。</p>
+<p>如果说我们想要保留 springboot 的对 mvc 的自动配置，并且希望添加一些新的功能(interceptors, formatters, view controllers etc.)我们可能就要添加自己的配置类，也就是有 <code>@Configuration</code> 的 <code>WebMvcConfigurerAdapter</code> 子类。但是不要有 <code>@EnableWebMvc</code> 因为这个注解是完全的接管 mvc 的配置。 <a target="_blank" rel="noopener" href="https://docs.spring.io/spring/docs/4.3.14.RELEASE/spring-framework-reference/htmlsingle#mvc">MVC configuration</a> </p>
+<h3 id="2、扩展SpringMVC"><a href="#2、扩展SpringMVC" class="headerlink" title="2、扩展SpringMVC"></a>2、扩展SpringMVC</h3><p><strong>编写一个配置类（@Configuration），是WebMvcConfigurerAdapter类型，但是这个类不能标注@EnableWebMvc注解</strong>，这样的话我们既保留了所有的自动配置，也能用我们扩展的配置。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用WebMvcConfigurerAdapter可以来扩展SpringMVC的功能</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyMvcConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addViewControllers</span><span class="params">(ViewControllerRegistry registry)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// super.addViewControllers(registry);</span></span><br><span class="line">        <span class="comment">//浏览器发送 /hello 请求来到 success</span></span><br><span class="line">        registry.addViewController(<span class="string">&quot;/hello&quot;</span>).setViewName(<span class="string">&quot;success&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//... 其他的功能我们就直接重写里面对应的方法即可。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>原理：</p>
+<p>​    1）、WebMvcAutoConfiguration是SpringMVC的自动配置类</p>
+<p>​    2）、在做其他自动配置时会导入 @Import(<strong>EnableWebMvcConfiguration</strong>.class) 这个类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">   <span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">EnableWebMvcConfiguration</span> <span class="keyword">extends</span> <span class="title">DelegatingWebMvcConfiguration</span> </span>&#123;</span><br><span class="line">     <span class="keyword">private</span> <span class="keyword">final</span> WebMvcConfigurerComposite configurers = <span class="keyword">new</span> WebMvcConfigurerComposite();</span><br><span class="line"></span><br><span class="line"> <span class="comment">//从容器中获取所有的WebMvcConfigurer</span></span><br><span class="line">     <span class="meta">@Autowired(required = false)</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setConfigurers</span><span class="params">(List&lt;WebMvcConfigurer&gt; configurers)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">if</span> (!CollectionUtils.isEmpty(configurers)) &#123;</span><br><span class="line">             <span class="keyword">this</span>.configurers.addWebMvcConfigurers(configurers);</span><br><span class="line">           	<span class="comment">//一个参考实现，将所有的WebMvcConfigurer相关配置都便利一遍，然后把里面的方法都调用一遍 </span></span><br><span class="line">           	<span class="meta">@Override</span></span><br><span class="line">            <span class="comment">// public void addViewControllers(ViewControllerRegistry registry) &#123;</span></span><br><span class="line">             <span class="comment">//    for (WebMvcConfigurer delegate : this.delegates) &#123;</span></span><br><span class="line">              <span class="comment">//       delegate.addViewControllers(registry);</span></span><br><span class="line">              <span class="comment">//   &#125;</span></span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    3）、容器中所有的WebMvcConfigurer都会一起起作用</p>
+<p>​    4）、我们的配置类也会被调用；</p>
+<p>​    效果：SpringMVC的自动配置和我们的扩展配置都会起作用；</p>
+<h3 id="3、全面接管SpringMVC；"><a href="#3、全面接管SpringMVC；" class="headerlink" title="3、全面接管SpringMVC；"></a>3、全面接管SpringMVC；</h3><p>SpringBoot对SpringMVC的自动配置不需要了，所有都是我们自己配置；所有的SpringMVC的自动配置都失效了</p>
+<p><strong>我们需要在配置类中添加@EnableWebMvc即可；</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用WebMvcConfigurerAdapter可以来扩展SpringMVC的功能</span></span><br><span class="line"><span class="meta">@EnableWebMvc</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyMvcConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addViewControllers</span><span class="params">(ViewControllerRegistry registry)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// super.addViewControllers(registry);</span></span><br><span class="line">        <span class="comment">//浏览器发送 /atguigu 请求来到 success</span></span><br><span class="line">        registry.addViewController(<span class="string">&quot;/atguigu&quot;</span>).setViewName(<span class="string">&quot;success&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>原理：</p>
+<p>为什么@EnableWebMvc自动配置就失效了；</p>
+<p>1）@EnableWebMvc的核心，就是帮我们导入这个类，帮我们做一些基本的配置。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Import(DelegatingWebMvcConfiguration.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableWebMvc &#123;</span><br></pre></td></tr></table></figure>
+
+<p>2）、</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DelegatingWebMvcConfiguration</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurationSupport</span> </span>&#123;</span><br></pre></td></tr></table></figure>
+
+<p>3）、</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ConditionalOnWebApplication</span></span><br><span class="line"><span class="meta">@ConditionalOnClass(&#123; Servlet.class, DispatcherServlet.class,</span></span><br><span class="line"><span class="meta">		WebMvcConfigurerAdapter.class &#125;)</span></span><br><span class="line"><span class="comment">//容器中没有这个组件的时候，这个自动配置类才生效</span></span><br><span class="line"><span class="meta">@ConditionalOnMissingBean(WebMvcConfigurationSupport.class)</span></span><br><span class="line"><span class="meta">@AutoConfigureOrder(Ordered.HIGHEST_PRECEDENCE + 10)</span></span><br><span class="line"><span class="meta">@AutoConfigureAfter(&#123; DispatcherServletAutoConfiguration.class,</span></span><br><span class="line"><span class="meta">		ValidationAutoConfiguration.class &#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebMvcAutoConfiguration</span> </span>&#123;</span><br></pre></td></tr></table></figure>
+
+<p>4）、@EnableWebMvc将WebMvcConfigurationSupport组件导入进来；</p>
+<p>5）、导入的WebMvcConfigurationSupport只是SpringMVC最基本的功能；</p>
+<h2 id="5、如何修改SpringBoot的默认配置"><a href="#5、如何修改SpringBoot的默认配置" class="headerlink" title="5、如何修改SpringBoot的默认配置"></a>5、如何修改SpringBoot的默认配置</h2><p>模式：</p>
+<p>​    1）、SpringBoot在自动配置很多组件的时候，先看容器中有没有用户自己配置的（@Bean、@Component）如果有就用用户配置的，如果没有，才自动配置；如果有些组件可以有多个（ViewResolver）将用户配置的和自己默认的组合起来；</p>
+<p>​    2）、在SpringBoot中会有非常多的xxxConfigurer帮助我们进行扩展配置</p>
+<p>​    3）、在SpringBoot中会有很多的xxxCustomizer帮助我们进行定制配置</p>
+<h2 id="6、RestfulCRUD"><a href="#6、RestfulCRUD" class="headerlink" title="6、RestfulCRUD"></a>6、RestfulCRUD</h2><h3 id="1）、默认访问首页"><a href="#1）、默认访问首页" class="headerlink" title="1）、默认访问首页"></a>1）、默认访问首页</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//使用WebMvcConfigurerAdapter可以来扩展SpringMVC的功能</span></span><br><span class="line"><span class="comment">//@EnableWebMvc   不要接管SpringMVC</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyMvcConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addViewControllers</span><span class="params">(ViewControllerRegistry registry)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// super.addViewControllers(registry);</span></span><br><span class="line">        <span class="comment">//浏览器发送 /hello 请求来到 success</span></span><br><span class="line">        registry.addViewController(<span class="string">&quot;/hello&quot;</span>).setViewName(<span class="string">&quot;success&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//所有的WebMvcConfigurerAdapter组件都会一起起作用，也就是可以有多个这个东西。</span></span><br><span class="line">    <span class="meta">@Bean</span> <span class="comment">//将组件注册在容器</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> WebMvcConfigurerAdapter <span class="title">webMvcConfigurerAdapter</span><span class="params">()</span></span>&#123;</span><br><span class="line">        WebMvcConfigurerAdapter adapter = <span class="keyword">new</span> WebMvcConfigurerAdapter() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addViewControllers</span><span class="params">(ViewControllerRegistry registry)</span> </span>&#123;</span><br><span class="line">                registry.addViewController(<span class="string">&quot;/&quot;</span>).setViewName(<span class="string">&quot;login&quot;</span>);</span><br><span class="line">                registry.addViewController(<span class="string">&quot;/index.html&quot;</span>).setViewName(<span class="string">&quot;login&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">return</span> adapter;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2）、国际化"><a href="#2）、国际化" class="headerlink" title="2）、国际化"></a>2）、国际化</h3><p>1）、编写国际化配置文件</p>
+<p>2）、使用ResourceBundleMessageSource管理国际化资源文件</p>
+<p>3）、在页面使用fmt:message取出国际化内容</p>
+<p>步骤：</p>
+<p>1）、编写国际化配置文件，抽取页面需要显示的国际化消息<br>2）、SpringBoot自动配置好了管理国际化资源文件的组件；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;spring.messages&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MessageSourceAutoConfiguration</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * Comma-separated list of basenames (essentially a fully-qualified classpath</span></span><br><span class="line"><span class="comment">	 * location), each following the ResourceBundle convention with relaxed support for</span></span><br><span class="line"><span class="comment">	 * slash based locations. If it doesn&#x27;t contain a package qualifier (such as</span></span><br><span class="line"><span class="comment">	 * &quot;org.mypackage&quot;), it will be resolved from the classpath root.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">private</span> String basename = <span class="string">&quot;messages&quot;</span>;  </span><br><span class="line">    <span class="comment">//我们的配置文件可以直接放在类路径下叫messages.properties；</span></span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> MessageSource <span class="title">messageSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		ResourceBundleMessageSource messageSource = <span class="keyword">new</span> ResourceBundleMessageSource();</span><br><span class="line">		<span class="keyword">if</span> (StringUtils.hasText(<span class="keyword">this</span>.basename)) &#123;</span><br><span class="line">            <span class="comment">//设置国际化资源文件的基础名（去掉语言国家代码的）</span></span><br><span class="line">			messageSource.setBasenames(StringUtils.commaDelimitedListToStringArray(</span><br><span class="line">					StringUtils.trimAllWhitespace(<span class="keyword">this</span>.basename)));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">this</span>.encoding != <span class="keyword">null</span>) &#123;</span><br><span class="line">			messageSource.setDefaultEncoding(<span class="keyword">this</span>.encoding.name());</span><br><span class="line">		&#125;</span><br><span class="line">		messageSource.setFallbackToSystemLocale(<span class="keyword">this</span>.fallbackToSystemLocale);</span><br><span class="line">		messageSource.setCacheSeconds(<span class="keyword">this</span>.cacheSeconds);</span><br><span class="line">		messageSource.setAlwaysUseMessageFormat(<span class="keyword">this</span>.alwaysUseMessageFormat);</span><br><span class="line">		<span class="keyword">return</span> messageSource;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>3）、去页面获取国际化的值；</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>  <span class="attr">xmlns:th</span>=<span class="string">&quot;http://www.thymeleaf.org&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">&quot;asserts/css/bootstrap.min.css&quot;</span> <span class="attr">th:href</span>=<span class="string">&quot;@&#123;/webjars/bootstrap/4.0.0/css/bootstrap.css&#125;&quot;</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- Custom styles for this template --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">&quot;asserts/css/signin.css&quot;</span> <span class="attr">th:href</span>=<span class="string">&quot;@&#123;/asserts/css/signin.css&#125;&quot;</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;h3 mb-3 font-weight-normal&quot;</span> <span class="attr">th:text</span>=<span class="string">&quot;#&#123;login.tip&#125;&quot;</span>&gt;</span>Please sign in<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>效果：根据浏览器语言设置的信息切换了国际化；</p>
+<p>原理：</p>
+<p>​    国际化Locale（区域信息对象）；LocaleResolver（获取区域信息对象）；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="meta">@ConditionalOnMissingBean</span></span><br><span class="line">		<span class="meta">@ConditionalOnProperty(prefix = &quot;spring.mvc&quot;, name = &quot;locale&quot;)</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> LocaleResolver <span class="title">localeResolver</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.mvcProperties</span><br><span class="line">					.getLocaleResolver() == WebMvcProperties.LocaleResolver.FIXED) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">new</span> FixedLocaleResolver(<span class="keyword">this</span>.mvcProperties.getLocale());</span><br><span class="line">			&#125;</span><br><span class="line">			AcceptHeaderLocaleResolver localeResolver = <span class="keyword">new</span> AcceptHeaderLocaleResolver();</span><br><span class="line">			localeResolver.setDefaultLocale(<span class="keyword">this</span>.mvcProperties.getLocale());</span><br><span class="line">			<span class="keyword">return</span> localeResolver;</span><br><span class="line">		&#125;</span><br><span class="line">默认的就是根据请求头带来的区域信息获取Locale进行国际化</span><br></pre></td></tr></table></figure>
+
+<p>4）、点击链接切换国际化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 可以在连接上携带区域信息</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyLocaleResolver</span> <span class="keyword">implements</span> <span class="title">LocaleResolver</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Locale <span class="title">resolveLocale</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</span><br><span class="line">        String l = request.getParameter(<span class="string">&quot;l&quot;</span>);</span><br><span class="line">        Locale locale = Locale.getDefault();</span><br><span class="line">        <span class="keyword">if</span>(!StringUtils.isEmpty(l))&#123;</span><br><span class="line">            String[] split = l.split(<span class="string">&quot;_&quot;</span>);</span><br><span class="line">            locale = <span class="keyword">new</span> Locale(split[<span class="number">0</span>],split[<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> locale;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLocale</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Locale locale)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> LocaleResolver <span class="title">localeResolver</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MyLocaleResolver();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="3）、登陆"><a href="#3）、登陆" class="headerlink" title="3）、登陆"></a>3）、登陆</h3><p>开发期间模板引擎页面修改以后，要实时生效</p>
+<p>1）、禁用模板引擎的缓存</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 禁用缓存</span><br><span class="line">spring.thymeleaf.cache&#x3D;false </span><br></pre></td></tr></table></figure>
+
+<p>2）、页面修改完成以后ctrl+f9：重新编译；</p>
+<p>登陆错误消息的显示</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">&quot;color: red&quot;</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;msg&#125;&quot;</span> <span class="attr">th:if</span>=<span class="string">&quot;$&#123;not #strings.isEmpty(msg)&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>表单重复提交，我们使用post请求提交数据来到新的页面的时候如果我们再次刷新，就会询问我们是否需要重复提交表单数据，这样我们就可以登陆成功以后使用重定向来完成，而不是采用默认的行为。</p>
+<h3 id="4）、拦截器进行登陆检查"><a href="#4）、拦截器进行登陆检查" class="headerlink" title="4）、拦截器进行登陆检查"></a>4）、拦截器进行登陆检查</h3><p>拦截器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 登陆检查，</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginHandlerInterceptor</span> <span class="keyword">implements</span> <span class="title">HandlerInterceptor</span> </span>&#123;</span><br><span class="line">    <span class="comment">//目标方法执行之前</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Object user = request.getSession().getAttribute(<span class="string">&quot;loginUser&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span>(user == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="comment">//未登陆，返回登陆页面</span></span><br><span class="line">            request.setAttribute(<span class="string">&quot;msg&quot;</span>,<span class="string">&quot;没有权限请先登陆&quot;</span>);</span><br><span class="line">            request.getRequestDispatcher(<span class="string">&quot;/index.html&quot;</span>).forward(request,response);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">//已登陆，放行请求</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterCompletion</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>注册拦截器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//所有的WebMvcConfigurerAdapter组件都会一起起作用</span></span><br><span class="line">  <span class="meta">@Bean</span> <span class="comment">//将组件注册在容器</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> WebMvcConfigurerAdapter <span class="title">webMvcConfigurerAdapter</span><span class="params">()</span></span>&#123;</span><br><span class="line">      WebMvcConfigurerAdapter adapter = <span class="keyword">new</span> WebMvcConfigurerAdapter() &#123;</span><br><span class="line">          <span class="meta">@Override</span></span><br><span class="line">          <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addViewControllers</span><span class="params">(ViewControllerRegistry registry)</span> </span>&#123;</span><br><span class="line">              registry.addViewController(<span class="string">&quot;/&quot;</span>).setViewName(<span class="string">&quot;login&quot;</span>);</span><br><span class="line">              registry.addViewController(<span class="string">&quot;/index.html&quot;</span>).setViewName(<span class="string">&quot;login&quot;</span>);</span><br><span class="line">              registry.addViewController(<span class="string">&quot;/main.html&quot;</span>).setViewName(<span class="string">&quot;dashboard&quot;</span>);</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          <span class="comment">//注册拦截器</span></span><br><span class="line">          <span class="meta">@Override</span></span><br><span class="line">          <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> </span>&#123;</span><br><span class="line">              <span class="comment">//super.addInterceptors(registry);</span></span><br><span class="line">              <span class="comment">//静态资源；  *.css , *.js</span></span><br><span class="line">              <span class="comment">//SpringBoot已经做好了静态资源映射</span></span><br><span class="line">              registry.addInterceptor(<span class="keyword">new</span> LoginHandlerInterceptor()).addPathPatterns(<span class="string">&quot;/**&quot;</span>)</span><br><span class="line">                      .excludePathPatterns(<span class="string">&quot;/index.html&quot;</span>,<span class="string">&quot;/&quot;</span>,<span class="string">&quot;/user/login&quot;</span>);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">      <span class="keyword">return</span> adapter;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5）、CRUD-员工列表"><a href="#5）、CRUD-员工列表" class="headerlink" title="5）、CRUD-员工列表"></a>5）、CRUD-员工列表</h3><p>实验要求：</p>
+<p>1）、RestfulCRUD：CRUD满足Rest风格；</p>
+<p>URI：  /资源名称/资源标识       HTTP请求方式区分对资源CRUD操作</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>普通CRUD（uri来区分操作）</th>
+<th>RestfulCRUD</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>查询</td>
+<td>getEmp</td>
+<td>emp—GET</td>
+</tr>
+<tr>
+<td>添加</td>
+<td>addEmp?xxx</td>
+<td>emp—POST</td>
+</tr>
+<tr>
+<td>修改</td>
+<td>updateEmp?id=xxx&amp;xxx=xx</td>
+<td>emp/{id}—PUT</td>
+</tr>
+<tr>
+<td>删除</td>
+<td>deleteEmp?id=1</td>
+<td>emp/{id}—DELETE</td>
+</tr>
+</tbody></table>
+<p>2）、实验的请求架构;</p>
+<table>
+<thead>
+<tr>
+<th>实验功能</th>
+<th>请求URI</th>
+<th>请求方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>查询所有员工</td>
+<td>emps</td>
+<td>GET</td>
+</tr>
+<tr>
+<td>查询某个员工(来到修改页面)</td>
+<td>emp/1</td>
+<td>GET</td>
+</tr>
+<tr>
+<td>来到添加页面</td>
+<td>emp</td>
+<td>GET</td>
+</tr>
+<tr>
+<td>添加员工</td>
+<td>emp</td>
+<td>POST</td>
+</tr>
+<tr>
+<td>来到修改页面（查出员工进行信息回显）</td>
+<td>emp/1</td>
+<td>GET</td>
+</tr>
+<tr>
+<td>修改员工</td>
+<td>emp</td>
+<td>PUT</td>
+</tr>
+<tr>
+<td>删除员工</td>
+<td>emp/1</td>
+<td>DELETE</td>
+</tr>
+</tbody></table>
+<p>3）、员工列表：</p>
+<h4 id="thymeleaf公共页面元素抽取"><a href="#thymeleaf公共页面元素抽取" class="headerlink" title="thymeleaf公共页面元素抽取"></a>thymeleaf公共页面元素抽取</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1、抽取公共片段</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:fragment</span>=<span class="string">&quot;copy&quot;</span>&gt;</span></span><br><span class="line"><span class="symbol">&amp;copy;</span> 2011 The Good Thymes Virtual Grocery</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">2、引入公共片段</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:insert</span>=<span class="string">&quot;~&#123;footer :: copy&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">~&#123;templatename::selector&#125;：模板名::选择器</span><br><span class="line">~&#123;templatename::fragmentname&#125;:模板名::片段名</span><br><span class="line"></span><br><span class="line">3、默认效果：</span><br><span class="line">insert的公共片段在div标签中</span><br><span class="line">如果使用th:insert等属性进行引入，可以不用写~&#123;&#125;：</span><br><span class="line">行内写法可以加上：[[~&#123;&#125;]];[(~&#123;&#125;)]；</span><br></pre></td></tr></table></figure>
+
+
+
+<p>三种引入公共片段的th属性：</p>
+<p><strong>th:insert</strong>：将公共片段整个插入到声明引入的元素中</p>
+<p><strong>th:replace</strong>：将声明引入的元素替换为公共片段</p>
+<p><strong>th:include</strong>：将被引入的片段的内容包含进这个标签中</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">footer</span> <span class="attr">th:fragment</span>=<span class="string">&quot;copy&quot;</span>&gt;</span></span><br><span class="line"><span class="symbol">&amp;copy;</span> 2011 The Good Thymes Virtual Grocery</span><br><span class="line"><span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line"></span><br><span class="line">引入方式</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:insert</span>=<span class="string">&quot;footer :: copy&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:replace</span>=<span class="string">&quot;footer :: copy&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:include</span>=<span class="string">&quot;footer :: copy&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">效果</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">    <span class="symbol">&amp;copy;</span> 2011 The Good Thymes Virtual Grocery</span><br><span class="line">    <span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line"><span class="symbol">&amp;copy;</span> 2011 The Good Thymes Virtual Grocery</span><br><span class="line"><span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="symbol">&amp;copy;</span> 2011 The Good Thymes Virtual Grocery</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>引入片段的时候传入参数： </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">nav</span> <span class="attr">class</span>=<span class="string">&quot;col-md-2 d-none d-md-block bg-light sidebar&quot;</span> <span class="attr">id</span>=<span class="string">&quot;sidebar&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;sidebar-sticky&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;nav flex-column&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;nav-item&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;nav-link active&quot;</span></span></span><br><span class="line"><span class="tag">                   <span class="attr">th:class</span>=<span class="string">&quot;$&#123;activeUri==&#x27;main.html&#x27;?&#x27;nav-link active&#x27;:&#x27;nav-link&#x27;&#125;&quot;</span></span></span><br><span class="line"><span class="tag">                   <span class="attr">href</span>=<span class="string">&quot;#&quot;</span> <span class="attr">th:href</span>=<span class="string">&quot;@&#123;/main.html&#125;&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">svg</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.w3.org/2000/svg&quot;</span> <span class="attr">width</span>=<span class="string">&quot;24&quot;</span> <span class="attr">height</span>=<span class="string">&quot;24&quot;</span> <span class="attr">viewBox</span>=<span class="string">&quot;0 0 24 24&quot;</span> <span class="attr">fill</span>=<span class="string">&quot;none&quot;</span> <span class="attr">stroke</span>=<span class="string">&quot;currentColor&quot;</span> <span class="attr">stroke-width</span>=<span class="string">&quot;2&quot;</span> <span class="attr">stroke-linecap</span>=<span class="string">&quot;round&quot;</span> <span class="attr">stroke-linejoin</span>=<span class="string">&quot;round&quot;</span> <span class="attr">class</span>=<span class="string">&quot;feather feather-home&quot;</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">&quot;M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">polyline</span> <span class="attr">points</span>=<span class="string">&quot;9 22 9 12 15 12 15 22&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">polyline</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line">                    Dashboard <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;sr-only&quot;</span>&gt;</span>(current)<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--引入侧边栏;传入参数--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:replace</span>=<span class="string">&quot;commons/bar::#sidebar(activeUri=&#x27;emps&#x27;)&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6）、CRUD-员工添加"><a href="#6）、CRUD-员工添加" class="headerlink" title="6）、CRUD-员工添加"></a>6）、CRUD-员工添加</h3><p>添加页面</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span>&gt;</span>LastName<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;zhangsan&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span>&gt;</span>Email<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;email&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;zhangsan@atguigu.com&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span>&gt;</span>Gender<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-check form-check-inline&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;form-check-input&quot;</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;gender&quot;</span>  <span class="attr">value</span>=<span class="string">&quot;1&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">&quot;form-check-label&quot;</span>&gt;</span>男<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-check form-check-inline&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;form-check-input&quot;</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;gender&quot;</span>  <span class="attr">value</span>=<span class="string">&quot;0&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">&quot;form-check-label&quot;</span>&gt;</span>女<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span>&gt;</span>department<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">select</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span>&gt;</span>1<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span>&gt;</span>2<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span>&gt;</span>3<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span>&gt;</span>4<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span>&gt;</span>5<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span>&gt;</span>Birth<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;zhangsan&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-primary&quot;</span>&gt;</span>添加<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>提交的数据格式不对：生日：日期；</p>
+<p>2017-12-12；2017/12/12；2017.12.12；</p>
+<p>日期的格式化；SpringMVC将页面提交的值需要转换为指定的类型;</p>
+<p>2017-12-12—Date； 类型转换，格式化;</p>
+<p>默认日期是按照/的方式；</p>
+<h3 id="7）、CRUD-员工修改"><a href="#7）、CRUD-员工修改" class="headerlink" title="7）、CRUD-员工修改"></a>7）、CRUD-员工修改</h3><p>修改添加二合一表单</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--需要区分是员工修改还是添加；--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">th:action</span>=<span class="string">&quot;@&#123;/emp&#125;&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--发送put请求修改员工数据--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">1、SpringMVC中配置HiddenHttpMethodFilter;（SpringBoot自动配置好的）</span></span><br><span class="line"><span class="comment">2、页面创建一个post表单</span></span><br><span class="line"><span class="comment">3、创建一个input项，name=&quot;_method&quot;;值就是我们指定的请求方式</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;_method&quot;</span> <span class="attr">value</span>=<span class="string">&quot;put&quot;</span> <span class="attr">th:if</span>=<span class="string">&quot;$&#123;emp!=null&#125;&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;id&quot;</span> <span class="attr">th:if</span>=<span class="string">&quot;$&#123;emp!=null&#125;&quot;</span> <span class="attr">th:value</span>=<span class="string">&quot;$&#123;emp.id&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span>&gt;</span>LastName<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;lastName&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;zhangsan&quot;</span> <span class="attr">th:value</span>=<span class="string">&quot;$&#123;emp!=null&#125;?$&#123;emp.lastName&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span>&gt;</span>Email<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;email&quot;</span> <span class="attr">type</span>=<span class="string">&quot;email&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;zhangsan@atguigu.com&quot;</span> <span class="attr">th:value</span>=<span class="string">&quot;$&#123;emp!=null&#125;?$&#123;emp.email&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span>&gt;</span>Gender<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-check form-check-inline&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;form-check-input&quot;</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;gender&quot;</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span> <span class="attr">th:checked</span>=<span class="string">&quot;$&#123;emp!=null&#125;?$&#123;emp.gender==1&#125;&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">&quot;form-check-label&quot;</span>&gt;</span>男<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-check form-check-inline&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;form-check-input&quot;</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;gender&quot;</span> <span class="attr">value</span>=<span class="string">&quot;0&quot;</span> <span class="attr">th:checked</span>=<span class="string">&quot;$&#123;emp!=null&#125;?$&#123;emp.gender==0&#125;&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">&quot;form-check-label&quot;</span>&gt;</span>女<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span>&gt;</span>department<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--提交的是部门的id--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">select</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">name</span>=<span class="string">&quot;department.id&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">th:selected</span>=<span class="string">&quot;$&#123;emp!=null&#125;?$&#123;dept.id == emp.department.id&#125;&quot;</span> <span class="attr">th:value</span>=<span class="string">&quot;$&#123;dept.id&#125;&quot;</span> <span class="attr">th:each</span>=<span class="string">&quot;dept:$&#123;depts&#125;&quot;</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;dept.departmentName&#125;&quot;</span>&gt;</span>1<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span>&gt;</span>Birth<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;birth&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;zhangsan&quot;</span> <span class="attr">th:value</span>=<span class="string">&quot;$&#123;emp!=null&#125;?$&#123;#dates.format(emp.birth, &#x27;yyyy-MM-dd HH:mm&#x27;)&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-primary&quot;</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;emp!=null&#125;?&#x27;修改&#x27;:&#x27;添加&#x27;&quot;</span>&gt;</span>添加<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="8）、CRUD-员工删除"><a href="#8）、CRUD-员工删除" class="headerlink" title="8）、CRUD-员工删除"></a>8）、CRUD-员工删除</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">tr</span> <span class="attr">th:each</span>=<span class="string">&quot;emp:$&#123;emps&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;emp.id&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>[[$&#123;emp.lastName&#125;]]<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;emp.email&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;emp.gender&#125;==0?&#x27;女&#x27;:&#x27;男&#x27;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;emp.department.departmentName&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;#dates.format(emp.birth, &#x27;yyyy-MM-dd HH:mm&#x27;)&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-sm btn-primary&quot;</span> <span class="attr">th:href</span>=<span class="string">&quot;@&#123;/emp/&#125;+$&#123;emp.id&#125;&quot;</span>&gt;</span>编辑<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">th:attr</span>=<span class="string">&quot;del_uri=@&#123;/emp/&#125;+$&#123;emp.id&#125;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-sm btn-danger deleteBtn&quot;</span>&gt;</span>删除<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    $(<span class="string">&quot;.deleteBtn&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">//删除当前员工的</span></span></span><br><span class="line"><span class="javascript">        $(<span class="string">&quot;#deleteEmpForm&quot;</span>).attr(<span class="string">&quot;action&quot;</span>,$(<span class="built_in">this</span>).attr(<span class="string">&quot;del_uri&quot;</span>)).submit();</span></span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> <span class="literal">false</span>;</span></span><br><span class="line">    &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2018/04/14/SpringBoot/SpringBoot 笔记 ( 四 )：web 开发/" target="_blank" title="SpringBoot 笔记 ( 四 )：web 开发">https://lwenxu.github.io/2018/04/14/SpringBoot/SpringBoot 笔记 ( 四 )：web 开发/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/16/Netty/NioEventLoop%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          NioEventLoop 源码分析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%89%20)%EF%BC%9A%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">SpringBoot 笔记 ( 三 )：日志系统</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringBoot-%E7%AC%94%E8%AE%B0-%E5%9B%9B-web-%E5%BC%80%E5%8F%91"><span class="nav-number">1.</span> <span class="nav-text">SpringBoot 笔记 (四): web 开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81SpringBoot%E5%AF%B9%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E7%9A%84%E6%98%A0%E5%B0%84%E8%A7%84%E5%88%99"><span class="nav-number">1.1.</span> <span class="nav-text">1、SpringBoot对静态资源的映射规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E"><span class="nav-number">1.2.</span> <span class="nav-text">2、模板引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%BC%95%E5%85%A5thymeleaf%EF%BC%9B"><span class="nav-number">1.2.1.</span> <span class="nav-text">1、引入thymeleaf；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81Thymeleaf%E4%BD%BF%E7%94%A8"><span class="nav-number">1.2.2.</span> <span class="nav-text">2、Thymeleaf使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">步骤：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E5%AF%BC%E5%85%A5thymeleaf%E7%9A%84%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">1、导入thymeleaf的名称空间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E4%BD%BF%E7%94%A8thymeleaf%E8%AF%AD%E6%B3%95"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">2、使用thymeleaf语法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E8%AF%AD%E6%B3%95%E8%A7%84%E5%88%99"><span class="nav-number">1.2.3.</span> <span class="nav-text">3、语法规则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E2%80%A6-%E8%8E%B7%E5%8F%96%E5%80%BC"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">1. ${…} 获取值</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1%EF%BC%89%E3%80%81%E8%8E%B7%E5%8F%96%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%E3%80%81%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95%E3%80%81%E6%95%B0%E7%BB%84%E7%9A%84%E5%8F%96%E5%80%BC"><span class="nav-number">1.2.3.1.1.</span> <span class="nav-text">1）、获取对象的属性、调用方法、数组的取值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2%EF%BC%89%E3%80%81%E4%BD%BF%E7%94%A8%E5%86%85%E7%BD%AE%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.2.3.1.2.</span> <span class="nav-text">2）、使用内置的基本对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3%EF%BC%89%E3%80%81%E5%86%85%E7%BD%AE%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7%E5%AF%B9%E8%B1%A1%EF%BC%9A"><span class="nav-number">1.2.3.1.3.</span> <span class="nav-text">3）、内置的一些工具对象：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">2.*{..}</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">3.#{..}</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E2%80%A6"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">4.@{…}</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E2%80%A6"><span class="nav-number">1.2.3.5.</span> <span class="nav-text">5.~{…}</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Literals%EF%BC%88%E5%AD%97%E9%9D%A2%E9%87%8F%EF%BC%89"><span class="nav-number">1.2.3.6.</span> <span class="nav-text">6.Literals（字面量）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-Text-operations-%EF%BC%88%E6%96%87%E6%9C%AC%E6%93%8D%E4%BD%9C%EF%BC%89"><span class="nav-number">1.2.3.7.</span> <span class="nav-text">7.Text operations:（文本操作）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-Arithmetic-operations-%EF%BC%88%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97%EF%BC%89"><span class="nav-number">1.2.3.8.</span> <span class="nav-text">8.Arithmetic operations:（数学运算）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-Boolean-operations-%EF%BC%88%E5%B8%83%E5%B0%94%E8%BF%90%E7%AE%97%EF%BC%89"><span class="nav-number">1.2.3.9.</span> <span class="nav-text">9.Boolean operations:（布尔运算）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-Comparisons-and-equality-%EF%BC%88%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%EF%BC%89"><span class="nav-number">1.2.3.10.</span> <span class="nav-text">10.Comparisons and equality:（比较运算）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-Conditional-operators-%E6%9D%A1%E4%BB%B6%E8%BF%90%E7%AE%97%EF%BC%88%E4%B8%89%E5%85%83%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%89"><span class="nav-number">1.2.3.11.</span> <span class="nav-text">11.Conditional operators:条件运算（三元运算符）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-Special-tokens"><span class="nav-number">1.2.3.12.</span> <span class="nav-text">12.Special tokens:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-foreach"><span class="nav-number">1.2.3.13.</span> <span class="nav-text">13.foreach</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81SpringMVC%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">1.3.</span> <span class="nav-text">4、SpringMVC自动配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Spring-MVC-auto-configuration"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. Spring MVC auto-configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E6%89%A9%E5%B1%95SpringMVC"><span class="nav-number">1.3.2.</span> <span class="nav-text">2、扩展SpringMVC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E5%85%A8%E9%9D%A2%E6%8E%A5%E7%AE%A1SpringMVC%EF%BC%9B"><span class="nav-number">1.3.3.</span> <span class="nav-text">3、全面接管SpringMVC；</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81%E5%A6%82%E4%BD%95%E4%BF%AE%E6%94%B9SpringBoot%E7%9A%84%E9%BB%98%E8%AE%A4%E9%85%8D%E7%BD%AE"><span class="nav-number">1.4.</span> <span class="nav-text">5、如何修改SpringBoot的默认配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81RestfulCRUD"><span class="nav-number">1.5.</span> <span class="nav-text">6、RestfulCRUD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%EF%BC%89%E3%80%81%E9%BB%98%E8%AE%A4%E8%AE%BF%E9%97%AE%E9%A6%96%E9%A1%B5"><span class="nav-number">1.5.1.</span> <span class="nav-text">1）、默认访问首页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%EF%BC%89%E3%80%81%E5%9B%BD%E9%99%85%E5%8C%96"><span class="nav-number">1.5.2.</span> <span class="nav-text">2）、国际化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%EF%BC%89%E3%80%81%E7%99%BB%E9%99%86"><span class="nav-number">1.5.3.</span> <span class="nav-text">3）、登陆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%EF%BC%89%E3%80%81%E6%8B%A6%E6%88%AA%E5%99%A8%E8%BF%9B%E8%A1%8C%E7%99%BB%E9%99%86%E6%A3%80%E6%9F%A5"><span class="nav-number">1.5.4.</span> <span class="nav-text">4）、拦截器进行登陆检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%EF%BC%89%E3%80%81CRUD-%E5%91%98%E5%B7%A5%E5%88%97%E8%A1%A8"><span class="nav-number">1.5.5.</span> <span class="nav-text">5）、CRUD-员工列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#thymeleaf%E5%85%AC%E5%85%B1%E9%A1%B5%E9%9D%A2%E5%85%83%E7%B4%A0%E6%8A%BD%E5%8F%96"><span class="nav-number">1.5.5.1.</span> <span class="nav-text">thymeleaf公共页面元素抽取</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%EF%BC%89%E3%80%81CRUD-%E5%91%98%E5%B7%A5%E6%B7%BB%E5%8A%A0"><span class="nav-number">1.5.6.</span> <span class="nav-text">6）、CRUD-员工添加</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7%EF%BC%89%E3%80%81CRUD-%E5%91%98%E5%B7%A5%E4%BF%AE%E6%94%B9"><span class="nav-number">1.5.7.</span> <span class="nav-text">7）、CRUD-员工修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8%EF%BC%89%E3%80%81CRUD-%E5%91%98%E5%B7%A5%E5%88%A0%E9%99%A4"><span class="nav-number">1.5.8.</span> <span class="nav-text">8）、CRUD-员工删除</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2021 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2021 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

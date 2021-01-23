@@ -1,5 +1,5 @@
 ---
-title: Kafka 探险 -  生产者源码分析: 核心组件
+title: Kafka 探险 -  生产者源码分析:核心组件
 date: 2021-01-04 17:20:28
 tags: Kafka 探险
 categories:

@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  
+  <meta property="og:type" content="website">
+<meta property="og:title" content="昨夜凛雨">
+<meta property="og:url" content="https://lwenxu.github.io/page/9/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:locale">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="Java PHP Code">
+<meta name="twitter:card" content="summary">
+  
+
+  
+
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
+  
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    <link rel="stylesheet" href="/css/home.css" >
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body>
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                 >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;">
+  
+    <article id="post-SpringMVC/Spring踩坑记录"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/22/SpringMVC/Spring%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/">SpringMVC 踩坑记录</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/22/SpringMVC/Spring%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" class="article-date">
+	  <time datetime="2018-04-22T00:01:28.000Z" itemprop="datePublished">2018-04-22</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/SpringMVC/">SpringMVC</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          1. 处理静态资源静态资源直接放在 webapp/web 下，而我们的模板一般是在 WEB-INF 下，但是 WEN-INF     下的东西一般不让访问的，模板之所以能访问到是因为有模板引擎的映射，但是我们的警惕资源应该是直接能访问的东西，直接放在 web 下类似于 jsp 直接访问，而不能放在 WEB-INF 下，并且我们要开启静态资源访问 &lt;mvc:default-servlet-handler/&gt;
+2. Thymeleaf 乱码问题一开始除了乱码想着直接在 web.xm...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/04/22/SpringMVC/Spring%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-SpringMVC/Spring 整合"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/21/SpringMVC/Spring%20%E6%95%B4%E5%90%88/">SpringMVC 整合</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/21/SpringMVC/Spring%20%E6%95%B4%E5%90%88/" class="article-date">
+	  <time datetime="2018-04-21T12:01:28.000Z" itemprop="datePublished">2018-04-21</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/SpringMVC/">SpringMVC</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          今天一开始直接用了 Idea 来创建一个 SpringMVC+Spring+Mybatis+Thymeleaf 的项目，一开始还是挺顺利的，除了在 Thymeleaf 那个地方卡了一下，后面项目还是顺利跑起来了。
+接着想用 Maven 搭建，因为一开始用 Idea 生成的项目使用的手动导入 jar 这样非常费力，为了一劳永逸和简单就采用了 maven 来构建项目。最后发现自己陷入了一个大坑，好久没有跳上来。
+接着我就把用 Maven 搭建 SpringMVC + Spring + Myba...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/04/21/SpringMVC/Spring%20%E6%95%B4%E5%90%88/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Tools/iTerm2 配置及使用"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/20/Tools/iTerm2%20%E9%85%8D%E7%BD%AE%E5%8F%8A%E4%BD%BF%E7%94%A8/">iTerm2 配置及使用技巧</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/20/Tools/iTerm2%20%E9%85%8D%E7%BD%AE%E5%8F%8A%E4%BD%BF%E7%94%A8/" class="article-date">
+	  <time datetime="2018-04-20T13:09:40.000Z" itemprop="datePublished">2018-04-20</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          1. 技巧：1. 选中双击选中，三击选中整行，选中即复制。即任何选中状态的字符串都被放到了系统剪切板中。
+2. command
+可以拖拽选中的字符串；
+点击 url：调用默认浏览器访问该网址；
+点击文件：调用默认程序打开文件
+
+3. 快捷键
+切换 tab：⌘+←, ⌘+→
+切换分屏：⌘+[/]
+新建 tab：⌘+t；
+切分屏幕：⌘+d 水平切分，⌘+Shift+d 垂直切分；
+智能查找，支持正则查找：⌘+f。
+
+
+
+
+命令
+说明
+
+
+
+command + t
+新建标签
+
+
+command ...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/04/20/Tools/iTerm2%20%E9%85%8D%E7%BD%AE%E5%8F%8A%E4%BD%BF%E7%94%A8/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-SpringMVC/SpringMVC 基础"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/18/SpringMVC/SpringMVC%20%E5%9F%BA%E7%A1%80/">SpringMVC 基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/18/SpringMVC/SpringMVC%20%E5%9F%BA%E7%A1%80/" class="article-date">
+	  <time datetime="2018-04-18T14:01:28.000Z" itemprop="datePublished">2018-04-18</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/SpringMVC/">SpringMVC</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          1.SpringMVC 基础原理
+C     前端控制器 ——&gt; DispatcherServlet
+M    数据对象
+V      视图处理器ViewResvor
+
+&lt;!—more–&gt;
+处理步骤：
+发起请求到前端控制器 DispatcherServlet 
+然后这个控制器会调用 HandlerMapping  查找对应的 Controller或者说 Handler 
+找到了对应的 Controller 就让 HandlerAdaptor 去执行 handler 
+执行...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/04/18/SpringMVC/SpringMVC%20%E5%9F%BA%E7%A1%80/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Netty/NioEventLoop 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/16/Netty/NioEventLoop%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">NioEventLoop 源码分析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/16/Netty/NioEventLoop%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
+	  <time datetime="2018-04-16T09:40:24.000Z" itemprop="datePublished">2018-04-16</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Netty-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">Netty 源码分析</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          NioEventLoop 源码分析1. SingleThreadEventExecutor 的 execute 方法NioEventLoop 的核心就在于它的 run() 他是在第一次添加任务的时候开始执行。那我们先看看第一次添加任务的地方，其实第一次添加任务的地方是在父类中的 execute() 方法。所以先去分析一下 SingleThreadEventExecutor 的execute() 方法。我把代码精简了贴出来，只看核心的部分。
+123456789101112public voi...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/04/16/Netty/NioEventLoop%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-SpringBoot/SpringBoot 笔记 ( 四 )：web 开发"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/14/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%9B%9B%20)%EF%BC%9Aweb%20%E5%BC%80%E5%8F%91/">SpringBoot 笔记 ( 四 )：web 开发</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/14/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%9B%9B%20)%EF%BC%9Aweb%20%E5%BC%80%E5%8F%91/" class="article-date">
+	  <time datetime="2018-04-14T02:01:28.000Z" itemprop="datePublished">2018-04-14</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          SpringBoot 笔记 (四): web 开发1、SpringBoot对静态资源的映射规则123456@ConfigurationProperties(prefix = &quot;spring.resources&quot;, ignoreUnknownFields = false)public class ResourceProperties implements ResourceLoaderAware &#123;//静态资源的路径	private static final St...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/04/14/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%9B%9B%20)%EF%BC%9Aweb%20%E5%BC%80%E5%8F%91/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-SpringBoot/SpringBoot 笔记 ( 三 )：日志系统"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%89%20)%EF%BC%9A%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/">SpringBoot 笔记 ( 三 )：日志系统</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%89%20)%EF%BC%9A%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="article-date">
+	  <time datetime="2018-04-13T14:01:28.000Z" itemprop="datePublished">2018-04-13</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          SpringBoot 笔记 ( 三 )：日志系统1、日志框架日志框架就是防止我们再去像以前那样，一直进行System.out.println(“”)将关键数据打印在控制台。框架来记录系统的一些运行时信息，但是随着日志框架的增长，和接口的不一致，导致了使用上的差别很大，这里采用了一个类似于数据库驱动的模式，数据库驱动是 Java 提供的一个 API，然后真正的实现是需要各个数据库厂商去完成的，而 log 也开始采用这种面向接口编程的方法采用日志抽象层。
+
+市面上的日志框架JUL、JCL、Jb...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%89%20)%EF%BC%9A%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-SpringBoot/SpringBoot 笔记 ( 二 )：自定义配置"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%8C%20)%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE/">SpringBoot笔记 ( 二 )：自定义配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%8C%20)%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE/" class="article-date">
+	  <time datetime="2018-04-13T14:01:28.000Z" itemprop="datePublished">2018-04-13</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          SpringBoot 笔记 ( 二 )：自定义配置1. 配置文件SpringBoot使用一个全局的配置文件，配置文件名是固定的：
+
+application.properties
+application.yml
+
+&emsp;&emsp;  修改SpringBoot自动配置的默认值，因为在所有的自动配置类中他们都会去读取我们的配置文件，如果说有配置这些项目就按照我们配置的，没有则使用自动配置。
+
+&emsp;&emsp;  支持两种格式，我们主要说说后面一种，前面比较简单就是采用的点的方式定...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%8C%20)%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Shiro/Shiro 认证框架"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/13/Shiro/Shiro%20%E8%AE%A4%E8%AF%81%E6%A1%86%E6%9E%B6/">Shiro安全框架:认证</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/13/Shiro/Shiro%20%E8%AE%A4%E8%AF%81%E6%A1%86%E6%9E%B6/" class="article-date">
+	  <time datetime="2018-04-13T13:01:28.000Z" itemprop="datePublished">2018-04-13</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Shiro/">Shiro</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          Shiro 安全框架1. 认证1. 采用简单的对象登陆认证(SimpleAccountRealm)12345678910111213141516171819202122public class AuthenticationTest &#123;    // 创建一个简单的认证 realm 也就是认证信息存放在对象中的    SimpleAccountRealm simpleAccountRealm = new SimpleAccountRealm();    @Before    publ...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/04/13/Shiro/Shiro%20%E8%AE%A4%E8%AF%81%E6%A1%86%E6%9E%B6/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-SpringBoot/SpringBoot 笔记 ( 一 )：启动流程"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%80%20)%EF%BC%9A%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/">SpringBoot笔记(一):启动流程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%80%20)%EF%BC%9A%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" class="article-date">
+	  <time datetime="2018-04-13T13:01:28.000Z" itemprop="datePublished">2018-04-13</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          SpringBoot 笔记(一): 启动流程1. 配置开发环境1. 创建 Maven 项目然后我们首先在项目里面加上编译环境，防止每一次更新 Maven 的时候导致项目的语言级别自动被改成 Java5 然后导致编译不通过的问题。
+
+123456789101112&lt;profile&gt;  &lt;id&gt;jdk‐1.8&lt;/id&gt;  &lt;activation&gt;    &lt;activeByDefault&gt;true&lt;/activeByDefault...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%80%20)%EF%BC%9A%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/8/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/10/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+      </div>
+      
+        <div align="center" style="margin-top: 30px;"><hr class="hr" style="margin:0px; height:3px;"></div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2021 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2021 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+</body>
+</html>
