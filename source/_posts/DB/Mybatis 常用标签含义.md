@@ -1,3 +1,11 @@
+---
+title: Mybatis 常用标签
+date: 2021-01-10 08:01:28
+tags: Mybatis
+categories:
+ - Mybatis
+---
+
 ## trim 
 
 这个标签的作用就是帮你给标签的内容的头部或者尾部 `删除` 或者 `添加` 特定字符。
