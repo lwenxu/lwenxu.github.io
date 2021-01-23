@@ -6,6 +6,7 @@ categories:
  - FrontEnd
 ---
 
+
 ## 1. es5
 
 ### 1. 严格模式
