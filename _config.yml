@@ -81,15 +81,6 @@ deploy:
   # - type: git
   #   repository: https://github.com/lwenxu/lwenxu.github.io.git
   #   branch: master
-  - type: cos-cdn
-    cloud: aliyun
-    bucket: lwen-blog-static
-    region: oss-cn-beijing
-    secretId: LTAI4Fh5VYH4tHXTsQyntUWQ
-    secretKey: e5900bPPXQ660et0UiNamKYqUuruUS
-    cdnEnable: true
-    deleteExtraFiles: true
-    updatePosts: true
 
 # 对 css 和 js 资源的 cdn 加速配置
 #jsdelivr_cdn:
