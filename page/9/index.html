@@ -11,26 +11,24 @@
   
   <meta property="og:type" content="website">
 <meta property="og:title" content="昨夜凛雨">
-<meta property="og:url" content="http://lwenxu.coding.me/page/9/index.html">
+<meta property="og:url" content="https://lwenxu.github.io/page/9/index.html">
 <meta property="og:site_name" content="昨夜凛雨">
 <meta property="og:locale">
 <meta property="article:author" content="lwen">
 <meta property="article:tag" content="Java PHP Code">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="昨夜凛雨" type="application/atom+xml">
-  
 
   
 
-  <link rel="icon" href="/css/images/mylogo.jpg">
-  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
   
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
   <style type="text/css">
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
@@ -94,7 +92,7 @@
               <a class="brand" style="
                  margin-top: 0px;"  
                  >
-                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
               </a>
             
             
@@ -108,8 +106,6 @@
                   <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
                 
                   <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/about">About</a> </li>
                 
                   <li><div id="search-form-wrap">
 
@@ -166,7 +162,7 @@
         
           <section id="main" style="float:none;">
   
-    <article id="post-Algorithm/动态规划"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-SpringMVC/SpringMVC 基础"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -174,7 +170,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/10/10/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+      <a class="article-title" href="/2018/04/18/SpringMVC/SpringMVC%20%E5%9F%BA%E7%A1%80/">SpringMVC 基础</a>
     </h1>
   
 
@@ -182,12 +178,12 @@
     
     <div class="article-meta">
       
-	<a href="/2017/10/10/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="article-date">
-	  <time datetime="2017-10-10T12:00:49.000Z" itemprop="datePublished">2017-10-10</time>
+	<a href="/2018/04/18/SpringMVC/SpringMVC%20%E5%9F%BA%E7%A1%80/" class="article-date">
+	  <time datetime="2018-04-18T14:01:28.000Z" itemprop="datePublished">2018-04-18</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1/">-算法设计</a>
+    <a class="article-category-link" href="/categories/SpringMVC/">SpringMVC</a>
 
       
       
@@ -196,13 +192,20 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          ​    动态规划一般来说和分治有点类似都是让他们去处理相同的子问题，但是在动态规划里面你会遇到更多的相同子问题。然后我们就会导致很多的重复计算，所以一般我们可以使用递归来完成一个动态规划要完成的任务，但是这样一般会重复计算很多东西，所以动态规划一般就增加了一些矩阵来存放上一次计算的结果。
+          1.SpringMVC 基础原理
+C     前端控制器 ——&gt; DispatcherServlet
+M    数据对象
+V      视图处理器ViewResvor
 
-
-​    例如斐波那契数列，这个如果我们直接使用地柜计算的话，我们会很多重复计算。然后当我们要使用一个阵列计算的时候我们在每一次计算之前我们都需要进行一次判断看看我们目前的结果是不是已经被计算了，如...
+&lt;!—more–&gt;
+处理步骤：
+发起请求到前端控制器 DispatcherServlet 
+然后这个控制器会调用 HandlerMapping  查找对应的 Controller或者说 Handler 
+找到了对应的 Controller 就让 HandlerAdaptor 去执行 handler 
+执行...
         </p>
         <p class="article-more-link">
-          <a href="/2017/10/10/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/#more">Read More</a>
+          <a href="/2018/04/18/SpringMVC/SpringMVC%20%E5%9F%BA%E7%A1%80/#more">Read More</a>
         </p>
       
     </div>
@@ -221,7 +224,7 @@
 
 
   
-    <article id="post-Algorithm/分治算法"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Netty/NioEventLoop 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -229,7 +232,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/10/10/Algorithm/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/">分治算法</a>
+      <a class="article-title" href="/2018/04/16/Netty/NioEventLoop%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">NioEventLoop 源码分析</a>
     </h1>
   
 
@@ -237,12 +240,12 @@
     
     <div class="article-meta">
       
-	<a href="/2017/10/10/Algorithm/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/" class="article-date">
-	  <time datetime="2017-10-10T11:45:57.000Z" itemprop="datePublished">2017-10-10</time>
+	<a href="/2018/04/16/Netty/NioEventLoop%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
+	  <time datetime="2018-04-16T09:40:24.000Z" itemprop="datePublished">2018-04-16</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1/">-算法设计</a>
+    <a class="article-category-link" href="/categories/Netty-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">Netty 源码分析</a>
 
       
       
@@ -251,11 +254,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          ​    分治算法分为 “分” 和 “治” 两个部分，所谓的分就是寻找分割点，然后对问题划分成相同的子问题，但是问题的规模变小了，这些步骤其实就是使用递归来完成的。之后就是治的问题，也就是递归里面具体的内容。最后一步就是把所分的结果要合并成为一个完整的结果。
-​    一个例子就是求出逆序数对，这个就是分治法来计算，首席我们分就是中间划分，分别求左右的两边的逆序数对，然后还需要加上横跨中间的逆序数对即可完成。重点就是横跨中间的逆序数对，中间的如果直接暴力枚举就会出现 n 平方的，所以我们首...
+          NioEventLoop 源码分析1. SingleThreadEventExecutor 的 execute 方法NioEventLoop 的核心就在于它的 run() 他是在第一次添加任务的时候开始执行。那我们先看看第一次添加任务的地方，其实第一次添加任务的地方是在父类中的 execute() 方法。所以先去分析一下 SingleThreadEventExecutor 的execute() 方法。我把代码精简了贴出来，只看核心的部分。
+123456789101112public voi...
         </p>
         <p class="article-more-link">
-          <a href="/2017/10/10/Algorithm/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/#more">Read More</a>
+          <a href="/2018/04/16/Netty/NioEventLoop%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
         </p>
       
     </div>
@@ -274,7 +277,7 @@
 
 
   
-    <article id="post-Algorithm/贪心"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-SpringBoot/SpringBoot 笔记 ( 四 )：web 开发"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -282,7 +285,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/10/09/Algorithm/%E8%B4%AA%E5%BF%83/">贪心</a>
+      <a class="article-title" href="/2018/04/14/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%9B%9B%20)%EF%BC%9Aweb%20%E5%BC%80%E5%8F%91/">SpringBoot 笔记 ( 四 )：web 开发</a>
     </h1>
   
 
@@ -290,12 +293,12 @@
     
     <div class="article-meta">
       
-	<a href="/2017/10/09/Algorithm/%E8%B4%AA%E5%BF%83/" class="article-date">
-	  <time datetime="2017-10-09T14:22:16.000Z" itemprop="datePublished">2017-10-09</time>
+	<a href="/2018/04/14/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%9B%9B%20)%EF%BC%9Aweb%20%E5%BC%80%E5%8F%91/" class="article-date">
+	  <time datetime="2018-04-14T02:01:28.000Z" itemprop="datePublished">2018-04-14</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1/">-算法设计</a>
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
 
       
       
@@ -304,11 +307,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          ​    贪心算法，这个算法就是大胆的猜测，然后小心求证！求证一般就是使用反证法进行证明。假如我们说这个顺序是对的，也就是始终选取大的，或者小的，我们就要证明一下我们的猜测正确性。这里的反正方式就是交换顺序发现不符合预期结果原来的结论就是对的。    
-
+          SpringBoot 笔记 (四): web 开发1、SpringBoot对静态资源的映射规则123456@ConfigurationProperties(prefix = &quot;spring.resources&quot;, ignoreUnknownFields = false)public class ResourceProperties implements ResourceLoaderAware &#123;//静态资源的路径	private static final St...
         </p>
         <p class="article-more-link">
-          <a href="/2017/10/09/Algorithm/%E8%B4%AA%E5%BF%83/#more">Read More</a>
+          <a href="/2018/04/14/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%9B%9B%20)%EF%BC%9Aweb%20%E5%BC%80%E5%8F%91/#more">Read More</a>
         </p>
       
     </div>
@@ -327,7 +329,7 @@
 
 
   
-    <article id="post-Algorithm/枚举"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-SpringBoot/SpringBoot 笔记 ( 三 )：日志系统"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -335,7 +337,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/10/09/Algorithm/%E6%9E%9A%E4%B8%BE/">枚举</a>
+      <a class="article-title" href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%89%20)%EF%BC%9A%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/">SpringBoot 笔记 ( 三 )：日志系统</a>
     </h1>
   
 
@@ -343,12 +345,12 @@
     
     <div class="article-meta">
       
-	<a href="/2017/10/09/Algorithm/%E6%9E%9A%E4%B8%BE/" class="article-date">
-	  <time datetime="2017-10-09T07:14:24.000Z" itemprop="datePublished">2017-10-09</time>
+	<a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%89%20)%EF%BC%9A%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="article-date">
+	  <time datetime="2018-04-13T14:01:28.000Z" itemprop="datePublished">2018-04-13</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1/">-算法设计</a>
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
 
       
       
@@ -357,12 +359,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          ​    枚举就是尝试所有的可能性，尤其是当我们在确定一个问题是不是的这一类问题中尤其有用，例如说给一堆数，让我我们判断他们是不是素数，或者素数的数量的时候，这里他们就是判断类问题我们就可以使用枚举。
-​    但是注意这里我们需要考虑的就是枚举的方式，也就是枚举的角度。这里有一个小的例子就是最长回文子串的问题。
-​    首先我们就是用一个最简单的方式就是枚举出所有的字串，然后在这些字串里面找回文串。这样我们首先需要进行枚举就需要 n 平方的复杂度，然后我们还需要 n 的时间去判断这个串...
+          SpringBoot 笔记 ( 三 )：日志系统1、日志框架日志框架就是防止我们再去像以前那样，一直进行System.out.println(“”)将关键数据打印在控制台。框架来记录系统的一些运行时信息，但是随着日志框架的增长，和接口的不一致，导致了使用上的差别很大，这里采用了一个类似于数据库驱动的模式，数据库驱动是 Java 提供的一个 API，然后真正的实现是需要各个数据库厂商去完成的，而 log 也开始采用这种面向接口编程的方法采用日志抽象层。
+
+市面上的日志框架JUL、JCL、Jb...
         </p>
         <p class="article-more-link">
-          <a href="/2017/10/09/Algorithm/%E6%9E%9A%E4%B8%BE/#more">Read More</a>
+          <a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%89%20)%EF%BC%9A%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/#more">Read More</a>
         </p>
       
     </div>
@@ -381,7 +383,7 @@
 
 
   
-    <article id="post-Live/犒劳一下自己"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-SpringBoot/SpringBoot 笔记 ( 二 )：自定义配置"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -389,7 +391,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/09/27/Live/%E7%8A%92%E5%8A%B3%E4%B8%80%E4%B8%8B%E8%87%AA%E5%B7%B1/">犒劳一下自己</a>
+      <a class="article-title" href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%8C%20)%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE/">SpringBoot笔记 ( 二 )：自定义配置</a>
     </h1>
   
 
@@ -397,12 +399,12 @@
     
     <div class="article-meta">
       
-	<a href="/2017/09/27/Live/%E7%8A%92%E5%8A%B3%E4%B8%80%E4%B8%8B%E8%87%AA%E5%B7%B1/" class="article-date">
-	  <time datetime="2017-09-27T14:31:10.000Z" itemprop="datePublished">2017-09-27</time>
+	<a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%8C%20)%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE/" class="article-date">
+	  <time datetime="2018-04-13T14:01:28.000Z" itemprop="datePublished">2018-04-13</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/%E6%9D%82%E6%96%87/">-杂文</a>
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
 
       
       
@@ -411,12 +413,17 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          ​    心情不好的时候，可能这时候真的已经很疲惫了。
-​    不要继续沮丧让自己的心情更糟糕，或许这个时候应该犒劳一下自己，让自己的心情放松，晴朗起来或许一切看起来回事那么情切舒服！
+          SpringBoot 笔记 ( 二 )：自定义配置1. 配置文件SpringBoot使用一个全局的配置文件，配置文件名是固定的：
 
+application.properties
+application.yml
+
+&emsp;&emsp;  修改SpringBoot自动配置的默认值，因为在所有的自动配置类中他们都会去读取我们的配置文件，如果说有配置这些项目就按照我们配置的，没有则使用自动配置。
+
+&emsp;&emsp;  支持两种格式，我们主要说说后面一种，前面比较简单就是采用的点的方式定...
         </p>
         <p class="article-more-link">
-          <a href="/2017/09/27/Live/%E7%8A%92%E5%8A%B3%E4%B8%80%E4%B8%8B%E8%87%AA%E5%B7%B1/#more">Read More</a>
+          <a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%8C%20)%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE/#more">Read More</a>
         </p>
       
     </div>
@@ -435,7 +442,7 @@
 
 
   
-    <article id="post-Leet Code/HouseRobberIII"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Shiro/Shiro 认证框架"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -443,7 +450,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/09/27/Leet%20Code/HouseRobberIII/">HouseRobberIII</a>
+      <a class="article-title" href="/2018/04/13/Shiro/Shiro%20%E8%AE%A4%E8%AF%81%E6%A1%86%E6%9E%B6/">Shiro安全框架:认证</a>
     </h1>
   
 
@@ -451,11 +458,13 @@
     
     <div class="article-meta">
       
-	<a href="/2017/09/27/Leet%20Code/HouseRobberIII/" class="article-date">
-	  <time datetime="2017-09-27T14:12:07.000Z" itemprop="datePublished">2017-09-27</time>
+	<a href="/2018/04/13/Shiro/Shiro%20%E8%AE%A4%E8%AF%81%E6%A1%86%E6%9E%B6/" class="article-date">
+	  <time datetime="2018-04-13T13:01:28.000Z" itemprop="datePublished">2018-04-13</time>
 	</a>
 
       
+    <a class="article-category-link" href="/categories/Shiro/">Shiro</a>
+
       
       
 
@@ -463,10 +472,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          The thief has found himself a new place for his thievery again. There is only one entrance to this area, called the “root.” Besides the root, each house has one and only one parent house. After a tour, the smart thief realized that “all houses in ...
+          Shiro 安全框架1. 认证1. 采用简单的对象登陆认证(SimpleAccountRealm)12345678910111213141516171819202122public class AuthenticationTest &#123;    // 创建一个简单的认证 realm 也就是认证信息存放在对象中的    SimpleAccountRealm simpleAccountRealm = new SimpleAccountRealm();    @Before    publ...
         </p>
         <p class="article-more-link">
-          <a href="/2017/09/27/Leet%20Code/HouseRobberIII/#more">Read More</a>
+          <a href="/2018/04/13/Shiro/Shiro%20%E8%AE%A4%E8%AF%81%E6%A1%86%E6%9E%B6/#more">Read More</a>
         </p>
       
     </div>
@@ -485,7 +494,7 @@
 
 
   
-    <article id="post-Leet Code/TargetSum"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-SpringBoot/SpringBoot 笔记 ( 一 )：启动流程"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -493,7 +502,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/09/27/Leet%20Code/TargetSum/">Target Sum</a>
+      <a class="article-title" href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%80%20)%EF%BC%9A%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/">SpringBoot笔记(一):启动流程</a>
     </h1>
   
 
@@ -501,11 +510,13 @@
     
     <div class="article-meta">
       
-	<a href="/2017/09/27/Leet%20Code/TargetSum/" class="article-date">
-	  <time datetime="2017-09-27T13:32:05.000Z" itemprop="datePublished">2017-09-27</time>
+	<a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%80%20)%EF%BC%9A%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" class="article-date">
+	  <time datetime="2018-04-13T13:01:28.000Z" itemprop="datePublished">2018-04-13</time>
 	</a>
 
       
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+
       
       
 
@@ -513,12 +524,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          
-You are given a list of non-negative integers, a1, a2, …, an, and a target, S. Now you have 2 symbols + and -. For each integer, you should choose one from + and - as its new symbol.
-Find out how many ways to assign symbols to make sum of integer...
+          SpringBoot 笔记(一): 启动流程1. 配置开发环境1. 创建 Maven 项目然后我们首先在项目里面加上编译环境，防止每一次更新 Maven 的时候导致项目的语言级别自动被改成 Java5 然后导致编译不通过的问题。
+
+123456789101112&lt;profile&gt;  &lt;id&gt;jdk‐1.8&lt;/id&gt;  &lt;activation&gt;    &lt;activeByDefault&gt;true&lt;/activeByDefault...
         </p>
         <p class="article-more-link">
-          <a href="/2017/09/27/Leet%20Code/TargetSum/#more">Read More</a>
+          <a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%80%20)%EF%BC%9A%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/#more">Read More</a>
         </p>
       
     </div>
@@ -537,7 +548,7 @@ Find out how many ways to assign symbols to make sum of integer...
 
 
   
-    <article id="post-Leet Code/QueueReconstructionbyHeight"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Netty/Bootstrap 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -545,7 +556,7 @@ Find out how many ways to assign symbols to make sum of integer...
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/09/27/Leet%20Code/QueueReconstructionbyHeight/">QueueReconstructionbyHeight</a>
+      <a class="article-title" href="/2018/04/07/Netty/Bootstrap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">Bootstrap 源码分析</a>
     </h1>
   
 
@@ -553,11 +564,13 @@ Find out how many ways to assign symbols to make sum of integer...
     
     <div class="article-meta">
       
-	<a href="/2017/09/27/Leet%20Code/QueueReconstructionbyHeight/" class="article-date">
-	  <time datetime="2017-09-27T13:29:51.000Z" itemprop="datePublished">2017-09-27</time>
+	<a href="/2018/04/07/Netty/Bootstrap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
+	  <time datetime="2018-04-07T13:40:24.000Z" itemprop="datePublished">2018-04-07</time>
 	</a>
 
       
+    <a class="article-category-link" href="/categories/Netty-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">Netty 源码分析</a>
+
       
       
 
@@ -565,11 +578,13 @@ Find out how many ways to assign symbols to make sum of integer...
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          
-Suppose you have a random list of people standing in a queue. Each person is described by a pair of integers (h, k), where h is the height of the person and k is the number of people in front of this person who have a height greater than or equal...
+          Netty 源码分析: Bootstrap1. 结构先看一个这个类的类层次结构，好，这个结构还是比较明晰的，然后看他的主要字段，因为这些字段比较重要，在后面的代码分析中是用的上的。
+
+
+12345678// options 选项private final Map&lt;ChannelOption&lt;?&gt;, Object&gt; childOptions = new LinkedHashMap&lt;ChannelOption&lt;?&gt;, Object&gt;();// 属...
         </p>
         <p class="article-more-link">
-          <a href="/2017/09/27/Leet%20Code/QueueReconstructionbyHeight/#more">Read More</a>
+          <a href="/2018/04/07/Netty/Bootstrap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
         </p>
       
     </div>
@@ -588,7 +603,7 @@ Suppose you have a random list of people standing in a queue. Each person is des
 
 
   
-    <article id="post-Leet Code/Dp经典问题LongestIncreasingSubsequence"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Netty/NioEventLoopGroup 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -596,7 +611,7 @@ Suppose you have a random list of people standing in a queue. Each person is des
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/09/27/Leet%20Code/Dp%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98LongestIncreasingSubsequence/">Dp经典问题LongestIncreasingSubsequence</a>
+      <a class="article-title" href="/2018/04/07/Netty/NioEventLoopGroup%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">NioEventLoopGroup 源码分析</a>
     </h1>
   
 
@@ -604,11 +619,13 @@ Suppose you have a random list of people standing in a queue. Each person is des
     
     <div class="article-meta">
       
-	<a href="/2017/09/27/Leet%20Code/Dp%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98LongestIncreasingSubsequence/" class="article-date">
-	  <time datetime="2017-09-27T13:26:51.000Z" itemprop="datePublished">2017-09-27</time>
+	<a href="/2018/04/07/Netty/NioEventLoopGroup%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
+	  <time datetime="2018-04-07T13:40:24.000Z" itemprop="datePublished">2018-04-07</time>
 	</a>
 
       
+    <a class="article-category-link" href="/categories/Netty-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">Netty 源码分析</a>
+
       
       
 
@@ -616,12 +633,12 @@ Suppose you have a random list of people standing in a queue. Each person is des
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          
-Given an unsorted array of integers, find the length of longest increasing subsequence.
- For example, Given [10, 9, 2, 5, 3, 7, 101, 18], The longest increasing subsequence is [2, 3, 7, 101], therefore the length is 4. Note that there may be more...
+          NioEventLoopGroup 源码分析
+1. 在阅读源码时做了一定的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限。为了方便 IDE 查看、跟踪、调试 代码，所以在 github 上提供 netty 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
+&emsp;&emsp;  从今天开始，就准备进军 ne    tty 了，主要的想法是看看 netty4 中一些比...
         </p>
         <p class="article-more-link">
-          <a href="/2017/09/27/Leet%20Code/Dp%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98LongestIncreasingSubsequence/#more">Read More</a>
+          <a href="/2018/04/07/Netty/NioEventLoopGroup%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
         </p>
       
     </div>
@@ -640,7 +657,7 @@ Given an unsorted array of integers, find the length of longest increasing subse
 
 
   
-    <article id="post-Live/烦躁"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Netty/Netty 入门"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -648,7 +665,7 @@ Given an unsorted array of integers, find the length of longest increasing subse
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/09/25/Live/%E7%83%A6%E8%BA%81/">烦躁</a>
+      <a class="article-title" href="/2018/04/06/Netty/Netty%20%E5%85%A5%E9%97%A8/">Netty 入门</a>
     </h1>
   
 
@@ -656,11 +673,13 @@ Given an unsorted array of integers, find the length of longest increasing subse
     
     <div class="article-meta">
       
-	<a href="/2017/09/25/Live/%E7%83%A6%E8%BA%81/" class="article-date">
-	  <time datetime="2017-09-25T07:44:25.000Z" itemprop="datePublished">2017-09-25</time>
+	<a href="/2018/04/06/Netty/Netty%20%E5%85%A5%E9%97%A8/" class="article-date">
+	  <time datetime="2018-04-06T10:40:24.000Z" itemprop="datePublished">2018-04-06</time>
 	</a>
 
       
+    <a class="article-category-link" href="/categories/Netty/">Netty</a>
+
       
       
 
@@ -668,12 +687,12 @@ Given an unsorted array of integers, find the length of longest increasing subse
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          ​    下午两点过一点，从宿舍走出来，外面还是淅淅沥沥下着小雨。心里不是很舒服，一直不喜欢下雨，阴冷的天气，总是让人觉得不适，什么都不适合，不适合上课不适合看书，就想让人躺在床上。躺在床上就不经意间会回忆到以前，想到种种。
-​    算了不管了，还是去实验室一个人清净一会，这里就我一个人。拉上窗帘根本看不到外面在下雨，就好像一个晴天的夜晚。
-​    打开电脑准备看看 Coursera 上面的算法，可是静不下心来，真的静不下心来！我尽力让自己平静，关掉了窗口，算了！刷题吧，连续点开了三道...
+          1. 粘包问题一 .长连接与短连接：1.长连接：Client方与Server方先建立通讯连接，连接建立后不断开， 然后再进行报文发送和接收。长连接在 netty 中是默认开启的，也就是我们创建了一个 Server 以后监听端口，我们的客户端去连接发现只要我们的客户端不主动的断开连接他们之间的连接是一直保持有效的。
+
+2.短连接：Client方与Server每进行一次报文收发交易时才进行通讯连接，交易完毕后立即断开连接。此种方式常用于一点对多点通讯，比如多个Client连接一个Server。...
         </p>
         <p class="article-more-link">
-          <a href="/2017/09/25/Live/%E7%83%A6%E8%BA%81/#more">Read More</a>
+          <a href="/2018/04/06/Netty/Netty%20%E5%85%A5%E9%97%A8/#more">Read More</a>
         </p>
       
     </div>
@@ -696,7 +715,7 @@ Given an unsorted array of integers, find the length of longest increasing subse
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/8/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/10/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/8/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/10/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -711,7 +730,7 @@ Given an unsorted array of integers, find the length of longest increasing subse
   <div class="container">
       	<div class="row">
 	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
-	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2021 昨夜凛雨 All Rights Reserved.</p>
 	      
 	      
     		<p class="busuanzi_uv">
@@ -750,8 +769,6 @@ Given an unsorted array of integers, find the length of longest increasing subse
     <a href="/categories" class="mobile-nav-link">Categories</a>
   
     <a href="/tags" class="mobile-nav-link">Tags</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
   
 </nav> -->
     
@@ -873,7 +890,7 @@ Given an unsorted array of integers, find the length of longest increasing subse
             昨夜凛雨
           </div>
           <div class="panel-body">
-            Copyright © 2020 lwen All Rights Reserved.
+            Copyright © 2021 lwen All Rights Reserved.
           </div>
         </div>
       </div>

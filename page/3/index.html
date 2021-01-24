@@ -11,26 +11,24 @@
   
   <meta property="og:type" content="website">
 <meta property="og:title" content="昨夜凛雨">
-<meta property="og:url" content="http://lwenxu.coding.me/page/3/index.html">
+<meta property="og:url" content="https://lwenxu.github.io/page/3/index.html">
 <meta property="og:site_name" content="昨夜凛雨">
 <meta property="og:locale">
 <meta property="article:author" content="lwen">
 <meta property="article:tag" content="Java PHP Code">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="昨夜凛雨" type="application/atom+xml">
-  
 
   
 
-  <link rel="icon" href="/css/images/mylogo.jpg">
-  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
   
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
   <style type="text/css">
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
@@ -94,7 +92,7 @@
               <a class="brand" style="
                  margin-top: 0px;"  
                  >
-                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
               </a>
             
             
@@ -108,8 +106,6 @@
                   <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
                 
                   <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/about">About</a> </li>
                 
                   <li><div id="search-form-wrap">
 
@@ -166,7 +162,7 @@
         
           <section id="main" style="float:none;">
   
-    <article id="post-SpringBoot/SpringBoot 笔记 ( 九 )：分布式"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-DesignPattern/设计模式-策略设计模式"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -174,7 +170,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/23/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B9%9D%20)%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F/">SpringBoot 笔记(九):分布式</a>
+      <a class="article-title" href="/2019/06/04/DesignPattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%AD%96%E7%95%A5%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式 - 策略设计模式</a>
     </h1>
   
 
@@ -182,12 +178,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/05/23/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B9%9D%20)%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F/" class="article-date">
-	  <time datetime="2018-05-23T14:01:28.000Z" itemprop="datePublished">2018-05-23</time>
+	<a href="/2019/06/04/DesignPattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%AD%96%E7%95%A5%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="article-date">
+	  <time datetime="2019-06-04T09:20:28.000Z" itemprop="datePublished">2019-06-04</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+    <a class="article-category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
 
       
       
@@ -196,11 +192,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          SpringBoot 笔记(九):分布式我们可以使用 SpringBoot构建分布式应用，也就是我们在开发的时候可以进行多个模块的拆分，每一个功能做一个模块，然后我们使用一些分布式的框架，进行远程调用，所谓的远程调用就是RPC调用，而不是以前的WebService这个形式的.。其实这种分布式的RPC框架有很多，除了我们创常见的Doubbo还有就是我们Spring 项目自带的 SpringCloud 也是类似的东西。
-器基本理念就是：我们一个模块写好我们的业务逻辑然后，把我们写好的逻辑当作服...
+          策略设计模式
+本文转载自屈定’s Blog
+
+策略模式是一种简单的设计模式,但是其在业务开发中是一种非常有用的设计模式.举个例子,当你的业务需要针对不同的场景(可以简单理解为枚举类),执行不同的策略时那么使用策略模式可以帮助你更好的写出低耦合与高可扩展的代码.
+
+标准策略模式策略模式: 把具体的算法从业务逻辑中分离出来,使得业务类不必膨胀,并且业务与具体算法分离,便于扩展新算法.类图如下:使用策略模式往往策略上有着相似的输入参数以及输出结果,或者有一个公共的上下文,便于抽象出策略接口Str...
         </p>
         <p class="article-more-link">
-          <a href="/2018/05/23/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B9%9D%20)%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F/#more">Read More</a>
+          <a href="/2019/06/04/DesignPattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%AD%96%E7%95%A5%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/#more">Read More</a>
         </p>
       
     </div>
@@ -219,7 +219,7 @@
 
 
   
-    <article id="post-SpringBoot/SpringBoot 笔记 ( 八 )：任务"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-DesignPattern/设计模式-适配器模式"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -227,7 +227,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/22/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AB%20)%EF%BC%9A%E4%BB%BB%E5%8A%A1/">SpringBoot 笔记(八):任务</a>
+      <a class="article-title" href="/2019/06/04/DesignPattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/">设计模式 - 适配器模式</a>
     </h1>
   
 
@@ -235,12 +235,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/05/22/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AB%20)%EF%BC%9A%E4%BB%BB%E5%8A%A1/" class="article-date">
-	  <time datetime="2018-05-22T09:01:28.000Z" itemprop="datePublished">2018-05-22</time>
+	<a href="/2019/06/04/DesignPattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" class="article-date">
+	  <time datetime="2019-06-04T08:49:28.000Z" itemprop="datePublished">2019-06-04</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+    <a class="article-category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
 
       
       
@@ -249,12 +249,16 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          SpringBoot 笔记 (八):任务1.异步任务1.开启异步任务注解@EnableAsync
-2.对Service层方法开启异步@Async
-123456789@Servicepublic class TaskService &#123;    @Async    public void task() throws InterruptedException &#123;        System.out.println(&quot;start&quot;);        Threa...
+          设计模式–适配器模式的思考
+
+本文转载自屈定’s Blog
+
+个人认为适配器模式是一种加中间层来解决问题的思想,为的是减少开发工作量,提高代码复用率.另外在对于第三方的服务中使用适配器层则可以很好的把自己系统与第三方依赖解耦,降低依赖.
+什么是适配器模式适配器模式: 将一个类的接口转换为客户所期望的另一个接口.适配器让原本接口不兼容的类可以合作无间.类图如下:
+Client: 调用方Target: 需要提供的新功能AdaptedObject: 系统中原本存在的类似本次需要提供的新功能的类A...
         </p>
         <p class="article-more-link">
-          <a href="/2018/05/22/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AB%20)%EF%BC%9A%E4%BB%BB%E5%8A%A1/#more">Read More</a>
+          <a href="/2019/06/04/DesignPattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/#more">Read More</a>
         </p>
       
     </div>
@@ -273,7 +277,7 @@
 
 
   
-    <article id="post-SpringBoot/SpringBoot 笔记 ( 七 )：搜索"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-SoftwareEngineer/你写的代码是别人的噩梦吗"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -281,7 +285,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/21/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%83%20)%EF%BC%9A%E6%90%9C%E7%B4%A2/">SpringBoot 笔记(七):搜索</a>
+      <a class="article-title" href="/2019/06/04/SoftwareEngineer/%E4%BD%A0%E5%86%99%E7%9A%84%E4%BB%A3%E7%A0%81%E6%98%AF%E5%88%AB%E4%BA%BA%E7%9A%84%E5%99%A9%E6%A2%A6%E5%90%97/">你写的代码,是别人的噩梦吗</a>
     </h1>
   
 
@@ -289,189 +293,8 @@
     
     <div class="article-meta">
       
-	<a href="/2018/05/21/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%83%20)%EF%BC%9A%E6%90%9C%E7%B4%A2/" class="article-date">
-	  <time datetime="2018-05-21T06:01:28.000Z" itemprop="datePublished">2018-05-21</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          SpringBoot 笔记 (七):搜索这里我们的搜索就是用 ElasticSearch 这个工具，这个其实是在 Lauce 的基础上构建的一个搜索引擎。
-1. ES入门1.docker安装12docker pull registry.docker-cn.com/library/elasticsearchdocker run -e ES_JAVA_OPTS=&quot;-Xms256m -Xmx256m&quot; -d -p 9200:9200 -p 9300:9300 --name E...
-        </p>
-        <p class="article-more-link">
-          <a href="/2018/05/21/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%83%20)%EF%BC%9A%E6%90%9C%E7%B4%A2/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-SpringBoot/SpringBoot 笔记 ( 六 )：消息"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AD%20)%EF%BC%9A%E6%B6%88%E6%81%AF/">SpringBoot 笔记 ( 六)：消息</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AD%20)%EF%BC%9A%E6%B6%88%E6%81%AF/" class="article-date">
-	  <time datetime="2018-05-20T07:01:28.000Z" itemprop="datePublished">2018-05-20</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          SpringBoot 笔记 (六): 消息1.基本概念1.应用场景
-
-
-
-2.重要概念
-消息代理（broker）：消息队列服务器
-目的地：消息消费者
-
-1.消息队列的两种目的地：
-队列：点对点的通讯，这种就是消息生产者把消息发送到消息队列中，然后消息接受者去获取消息，获取后这个消息就被移除，消息的接受者可以有多个也就是可以有多个消费者，但是注意一个消息只能被其中的一个消费者消费。
-主题：发布订阅通讯，广播形式。所有的接受者都可以收到消息。
-
-2.JMS这是一个基于JVM的消息代理的规范，但...
-        </p>
-        <p class="article-more-link">
-          <a href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AD%20)%EF%BC%9A%E6%B6%88%E6%81%AF/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-SpringBoot/SpringBoot 笔记 ( 五)：缓存"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%94)%EF%BC%9A%E7%BC%93%E5%AD%98/">SpringBoot 笔记 ( 五 )：缓存</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%94)%EF%BC%9A%E7%BC%93%E5%AD%98/" class="article-date">
-	  <time datetime="2018-05-20T02:01:28.000Z" itemprop="datePublished">2018-05-20</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          SpringBoot 笔记 (五): 缓存1.JSR107介绍1.核心概念JSR107这个规范有五个核心概念分别是：
-
-CacheProvider  它用来管理缓存的Manager也就是用来创建，删除，管理，配置CacheManager 的
-CacheManager 是用来管理各个缓存，创建，删除，管理，配置Cache的
-Cache 是各个具体的缓存组件
-Entry 是缓存中具体的一个缓存项
-Expire 缓存的过期时间
-
-
-
-2.导入包
-javax.cache.cache-api
-jav...
-        </p>
-        <p class="article-more-link">
-          <a href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%94)%EF%BC%9A%E7%BC%93%E5%AD%98/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-Spark/Kafka入门"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/18/Spark/Kafka%E5%85%A5%E9%97%A8/">Kafka 入门</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2018/05/18/Spark/Kafka%E5%85%A5%E9%97%A8/" class="article-date">
-	  <time datetime="2018-05-18T11:01:28.000Z" itemprop="datePublished">2018-05-18</time>
+	<a href="/2019/06/04/SoftwareEngineer/%E4%BD%A0%E5%86%99%E7%9A%84%E4%BB%A3%E7%A0%81%E6%98%AF%E5%88%AB%E4%BA%BA%E7%9A%84%E5%99%A9%E6%A2%A6%E5%90%97/" class="article-date">
+	  <time datetime="2019-06-04T08:01:28.000Z" itemprop="datePublished">2019-06-04</time>
 	</a>
 
       
@@ -484,27 +307,15 @@ jav...
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1. Kafka架构
-生产者（producer）：生产资源的
-消费者（consumer）：消费资源
-broker（缓冲）：中间缓冲器
-topic（标记）：谁来消费
+          你写的代码,是别人的噩梦吗
 
-2. 配置Kafka1. 配置ZK
-解压
-配置ZK_HOME
-配置PATH
-修改 zk.cfg 修改存储位置
-zkServer.sh 启动
+本文转自屈定’s Blog
+Frank，是来自阿里国际技术事业部的高级技术专家，从业十年，也是一位英语说到飞起的型男。今天他将与大家聊聊关于企业应用架构实践的话题。
 
-2. 配置Kafka
-配置HOME以及PATH
-修改 server.porperties 注意以下几个条目
-
-123456$KAFKA_HOME/config/server.proper...
+从业这么多年，接触过银行的应用，Apple的应用，eBay的应用和现在阿里的应用，虽然分属于不同的公司，使用了不同的架构，但有一个共同点就是都很复杂。导致复杂性的原因有很多，如果从架构的层面看，主要有两点，一个是架构设计过于复杂，层次太多能把人绕晕。另一个是根本就没架构，ServiceImpl作...
         </p>
         <p class="article-more-link">
-          <a href="/2018/05/18/Spark/Kafka%E5%85%A5%E9%97%A8/#more">Read More</a>
+          <a href="/2019/06/04/SoftwareEngineer/%E4%BD%A0%E5%86%99%E7%9A%84%E4%BB%A3%E7%A0%81%E6%98%AF%E5%88%AB%E4%BA%BA%E7%9A%84%E5%99%A9%E6%A2%A6%E5%90%97/#more">Read More</a>
         </p>
       
     </div>
@@ -523,7 +334,7 @@ zkServer.sh 启动
 
 
   
-    <article id="post-Spark/Flume入门"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-DesignPattern/设计模式-组合模式"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -531,7 +342,7 @@ zkServer.sh 启动
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/18/Spark/Flume%E5%85%A5%E9%97%A8/">Flume 入门</a>
+      <a class="article-title" href="/2019/06/04/DesignPattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/">设计模式 - 组合模式</a>
     </h1>
   
 
@@ -539,12 +350,12 @@ zkServer.sh 启动
     
     <div class="article-meta">
       
-	<a href="/2018/05/18/Spark/Flume%E5%85%A5%E9%97%A8/" class="article-date">
-	  <time datetime="2018-05-18T08:01:28.000Z" itemprop="datePublished">2018-05-18</time>
+	<a href="/2019/06/04/DesignPattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/" class="article-date">
+	  <time datetime="2019-06-04T07:48:28.000Z" itemprop="datePublished">2019-06-04</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/Spark/">Spark</a>
+    <a class="article-category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
 
       
       
@@ -553,19 +364,20 @@ zkServer.sh 启动
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1. 基本架构1. 结构source    源数据：目录/
-channel    数据管道
-sink        数据输出
-2. 几种结构形式
-单个的Flume
-多个Flume串行工作，前一个Flume的sink作为后一个的source
-多个Flume并行工作然后最后用一个Flume进行合并这行并行收集的数据
-多个Flume并行工作，分别传送到不同的目的地
+          设计模式–组合模式的思考
+本文转载自屈定’s Blog
 
-2. 安装1. 安装JDK解压到 /app将java配置系统环境变量中：/.bash_profileexport JAVA_HOM...
+
+组合模式是一种抽象树形结构的模式,其在业务开发中也是一种很有用的设计模式,下面开始分析.
+组合模式业务中有很多树形结构的表示,比如下面的目录结构
+1234567-- 男装    -- 上衣        -- 品牌1        -- 品牌2    -- 裤子        -- 品牌1        -- 品牌3
+
+
+
+针对男装可以认为其是树的根节点,上衣,裤子这种下面还可以有节点的称为树枝节点,品牌这种下面不再有分支的称为叶...
         </p>
         <p class="article-more-link">
-          <a href="/2018/05/18/Spark/Flume%E5%85%A5%E9%97%A8/#more">Read More</a>
+          <a href="/2019/06/04/DesignPattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/#more">Read More</a>
         </p>
       
     </div>
@@ -584,7 +396,7 @@ sink        数据输出
 
 
   
-    <article id="post-Tools/Vim使用技巧"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-DesignPattern/设计模式-观察者模式"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -592,7 +404,7 @@ sink        数据输出
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/18/Tools/Vim%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">Vim 使用技巧</a>
+      <a class="article-title" href="/2019/06/04/DesignPattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">设计模式 - 观察者模式</a>
     </h1>
   
 
@@ -600,12 +412,12 @@ sink        数据输出
     
     <div class="article-meta">
       
-	<a href="/2018/05/18/Tools/Vim%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" class="article-date">
-	  <time datetime="2018-05-18T04:32:34.000Z" itemprop="datePublished">2018-05-18</time>
+	<a href="/2019/06/04/DesignPattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" class="article-date">
+	  <time datetime="2019-06-04T07:30:28.000Z" itemprop="datePublished">2019-06-04</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+    <a class="article-category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
 
       
       
@@ -614,10 +426,14 @@ sink        数据输出
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1.x 删除后面的字符 X 删除前一个字符  删除3个字符就是3x2.caw:改写单词3.J:删除换行符，使下一行并上来。     nJ:连接连同本行的n行4.u:撤销上一次操作      U:撤销当前行的所有修改5.i 在光标前插入   I 在行首插入6.a 在光标后插入 A 在行末插入7.o:在当前行的下面另起一行，并变为插入模式 O：在当前行上面另起一行，变为插入模式8.vim中Nyy可以复制光标后的N行。有时我们不容易得出行数，这时可以用做标记的方法来制定复制范围  1. 在开始行...
+          设计模式 - 观察者模式
+
+本文转载自屈定’s Blog
+
+观察者模式观察者模式描述的是一种一对多的关系,这里的一可能是某个状态发生变化,也可能是某一个事件产生.举个例子,针对订单付款,这一事件产生后可能需要经过很多个处理步骤,比如积分,入库,消费排行榜之类的操作,这些操作之间并没有任何关联性甚至可以并行处理,那么就可以理解为订单付款与处理步骤之间的一对多关系.还有一个特点就是单向依赖,处理步骤对于订单付款是单向依赖的,比如有订单付款,才能有处理步骤.但是反之就不依赖,订单付款对于有没有处...
         </p>
         <p class="article-more-link">
-          <a href="/2018/05/18/Tools/Vim%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/#more">Read More</a>
+          <a href="/2019/06/04/DesignPattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/#more">Read More</a>
         </p>
       
     </div>
@@ -636,7 +452,7 @@ sink        数据输出
 
 
   
-    <article id="post-Spark/Scala 入门"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Java SE/Fliter链"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -644,7 +460,7 @@ sink        数据输出
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/08/Spark/Scala%20%E5%85%A5%E9%97%A8/">Scala 入门</a>
+      <a class="article-title" href="/2019/06/04/Java%20SE/Fliter%E9%93%BE/">Filter 链</a>
     </h1>
   
 
@@ -652,12 +468,12 @@ sink        数据输出
     
     <div class="article-meta">
       
-	<a href="/2018/05/08/Spark/Scala%20%E5%85%A5%E9%97%A8/" class="article-date">
-	  <time datetime="2018-05-08T06:01:28.000Z" itemprop="datePublished">2018-05-08</time>
+	<a href="/2019/06/04/Java%20SE/Fliter%E9%93%BE/" class="article-date">
+	  <time datetime="2019-06-04T02:49:28.000Z" itemprop="datePublished">2019-06-04</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/Spark/">Spark</a>
+    <a class="article-category-link" href="/categories/Java/">-Java</a>
 
       
       
@@ -666,17 +482,14 @@ sink        数据输出
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1. 基本语法1. 变量 var123var name:string=&quot;hello&quot;;var name=&quot;hello&quot;;var num=3.0;
+           在写JavaWeb的时候我们经常会遇到一个概念就是 Filter 链，比如对于路由拦截，以及文件目录拦截都有一个Filter 和Filter链，那么他们底层具体到底是怎么工作的呢？
+听到Filter 链这个名词我们觉得一个 Filter 链应该可以进行链式调用，来判断我们的条件是否成立，也就是类似于下面的规则:
+1filterChain.doFilter(pattern).doFilter(pattern)
 
-2. 常量 val1val name=&quot;string&quot;;
-
-3. 这里是没有 ++ 操作和 – 操作的4. 函数调用不用使用对象来调用，导入包以后直接调用即可
-1234import scala.math._sqrt(2);pow(1,2);min(1,2);
-
-5.apply()默认调...
+这样想是没错，那每次就需要返回下一个 Filter 这么想是没错，可是我们怎么...
         </p>
         <p class="article-more-link">
-          <a href="/2018/05/08/Spark/Scala%20%E5%85%A5%E9%97%A8/#more">Read More</a>
+          <a href="/2019/06/04/Java%20SE/Fliter%E9%93%BE/#more">Read More</a>
         </p>
       
     </div>
@@ -695,7 +508,7 @@ sink        数据输出
 
 
   
-    <article id="post-Spark/SparkStreming"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Java SE/Java 新特性 - Stream"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -703,7 +516,7 @@ sink        数据输出
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/08/Spark/SparkStreming/">SparkStreaming 入门</a>
+      <a class="article-title" href="/2019/05/11/Java%20SE/Java%20%E6%96%B0%E7%89%B9%E6%80%A7%20-%20Stream/">Java 新特性之 Stream</a>
     </h1>
   
 
@@ -711,12 +524,12 @@ sink        数据输出
     
     <div class="article-meta">
       
-	<a href="/2018/05/08/Spark/SparkStreming/" class="article-date">
-	  <time datetime="2018-05-08T06:01:28.000Z" itemprop="datePublished">2018-05-08</time>
+	<a href="/2019/05/11/Java%20SE/Java%20%E6%96%B0%E7%89%B9%E6%80%A7%20-%20Stream/" class="article-date">
+	  <time datetime="2019-05-11T09:49:28.000Z" itemprop="datePublished">2019-05-11</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/Spark/">Spark</a>
+    <a class="article-category-link" href="/categories/Java/">Java</a>
 
       
       
@@ -725,12 +538,180 @@ sink        数据输出
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1. 基本原理其实在 SparkStreaming 中和之前的Core不同的就是他会把任务分成批次的进行处理，也就是我们需要设置间隔多久计算一次。
-我们从网络，文件系统，Kafka 等等数据源产生的地方获取数据，然后SparkStreaming放到内存中，接着进行对数据进行计算，获取结果。
-在一个Spark应用程序启动以后会产生一个SparkContext和一个StreamingContext，后者是基于前者的，接着就是每一个集群的单节点上就有Executor 这些Executor中是有R...
+          Stream使用这个方法创建一个 Stream 对象。
+1new ArrayList&lt;&gt;().stream()
+
+Filter过滤器，里面传递一个函数，这个函数的返回结果如果为 true 则保留这个元素，否则的话丢弃这个元素。
+1234stringCollection        .stream()        .filter((s) -&gt; s.startsWith(&quot;a&quot;))        .forEach(System.out::println...
         </p>
         <p class="article-more-link">
-          <a href="/2018/05/08/Spark/SparkStreming/#more">Read More</a>
+          <a href="/2019/05/11/Java%20SE/Java%20%E6%96%B0%E7%89%B9%E6%80%A7%20-%20Stream/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Java SE/Java 新特性 - Time"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/05/10/Java%20SE/Java%20%E6%96%B0%E7%89%B9%E6%80%A7%20-%20Time/">Java 新特性之 Time</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/05/10/Java%20SE/Java%20%E6%96%B0%E7%89%B9%E6%80%A7%20-%20Time/" class="article-date">
+	  <time datetime="2019-05-10T02:49:28.000Z" itemprop="datePublished">2019-05-10</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Java/">-Java</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          日期类 LocalDate能够简单的获取当天的日期，并且可以方便的对日期进行加减。
+他是通过静态方法或者 from/of 等方法创建对象的。
+这个类不存储时区，所以他没有时区的概念，如果需要时区的话需要使用 ZonedDateTime
+这个类只能进行日期的相关操作，没有具体的时间。
+下面介绍常用的几个方法
+atTime生成一个带有时间的日期，返回结果是 LocalDateTime 所以很明显这个就是带有时间的日期类。
+12LocalDateTime time = LocalDate.now...
+        </p>
+        <p class="article-more-link">
+          <a href="/2019/05/10/Java%20SE/Java%20%E6%96%B0%E7%89%B9%E6%80%A7%20-%20Time/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Life/扬帆起航"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/04/14/Life/%E6%89%AC%E5%B8%86%E8%B5%B7%E8%88%AA/">扬帆起航</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/04/14/Life/%E6%89%AC%E5%B8%86%E8%B5%B7%E8%88%AA/" class="article-date">
+	  <time datetime="2019-04-14T01:33:55.000Z" itemprop="datePublished">2019-04-14</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F/">生活感悟</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          扬帆起航其实很早就想写这篇文章，只是一直不知道从何说起。或者说，没能腾出一片完整的时间，给自己的大学生活写一个完整的回忆录。其实细细想来，这段时光更像是平静的水面，偶然也有湍急之处泛着白色的浪花。
+开始​    和大多数人一样，以萌新的身份来到大学，看着即将成为自己学长学姐的那群人，一时不知道从哪里开始了解这个陌生而又神秘的校园。好，美好的大学生活就先从图书馆开始。良好的习惯是成功一半，也得要先熟悉熟悉自己以后学习的地方。
+​    摸索了挺久，才找到了计算机学科的阅览室。怎么说呢，被一大...
+        </p>
+        <p class="article-more-link">
+          <a href="/2019/04/14/Life/%E6%89%AC%E5%B8%86%E8%B5%B7%E8%88%AA/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Live/扬帆起航"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/04/14/Live/%E6%89%AC%E5%B8%86%E8%B5%B7%E8%88%AA/">扬帆起航</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/04/14/Live/%E6%89%AC%E5%B8%86%E8%B5%B7%E8%88%AA/" class="article-date">
+	  <time datetime="2019-04-14T01:33:55.000Z" itemprop="datePublished">2019-04-14</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F/">生活感悟</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          扬帆起航其实很早就想写这篇文章，只是一直不知道从何说起。或者说，没能腾出一片完整的时间，给自己的大学生活写一个完整的回忆录。其实细细想来，这段时光更像是平静的水面，偶然也有湍急之处泛着白色的浪花。
+开始​    和大多数人一样，以萌新的身份来到大学，看着即将成为自己学长学姐的那群人，一时不知道从哪里开始了解这个陌生而又神秘的校园。好，美好的大学生活就先从图书馆开始。良好的习惯是成功一半，也得要先熟悉熟悉自己以后学习的地方。
+​    摸索了挺久，才找到了计算机学科的阅览室。怎么说呢，被一大...
+        </p>
+        <p class="article-more-link">
+          <a href="/2019/04/14/Live/%E6%89%AC%E5%B8%86%E8%B5%B7%E8%88%AA/#more">Read More</a>
         </p>
       
     </div>
@@ -753,7 +734,7 @@ sink        数据输出
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -768,7 +749,7 @@ sink        数据输出
   <div class="container">
       	<div class="row">
 	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
-	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2021 昨夜凛雨 All Rights Reserved.</p>
 	      
 	      
     		<p class="busuanzi_uv">
@@ -807,8 +788,6 @@ sink        数据输出
     <a href="/categories" class="mobile-nav-link">Categories</a>
   
     <a href="/tags" class="mobile-nav-link">Tags</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
   
 </nav> -->
     
@@ -930,7 +909,7 @@ sink        数据输出
             昨夜凛雨
           </div>
           <div class="panel-body">
-            Copyright © 2020 lwen All Rights Reserved.
+            Copyright © 2021 lwen All Rights Reserved.
           </div>
         </div>
       </div>

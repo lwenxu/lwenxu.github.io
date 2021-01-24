@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>apache配置详解 | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Linux" />
+  
+  
+  
+  
+  <meta name="description" content="1. 虚拟主机概念我们要想实现一个web站点，而且能够在互联网上被访问，首先它再能运行在操作系统，而且这个操作系统还要运行在物理主机上（第一它是一个主机）。在互联网上能够被访问，那我们需要一个主机，需要一个IP地址，需要一个时时在线的服务器，这需要多少资源？对众多小型站点来讲或者说对某种需求来讲，有可能都用不到服务器，也就是每天就10个人左右访问，只是需要我们在线而已，如果我们就为这一点点的需求就">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Apache配置详解">
+<meta property="og:url" content="https://lwenxu.github.io/2019/01/03/Linux/Apache%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="1. 虚拟主机概念我们要想实现一个web站点，而且能够在互联网上被访问，首先它再能运行在操作系统，而且这个操作系统还要运行在物理主机上（第一它是一个主机）。在互联网上能够被访问，那我们需要一个主机，需要一个IP地址，需要一个时时在线的服务器，这需要多少资源？对众多小型站点来讲或者说对某种需求来讲，有可能都用不到服务器，也就是每天就10个人左右访问，只是需要我们在线而已，如果我们就为这一点点的需求就">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-01-03T03:08:33.000Z">
+<meta property="article:modified_time" content="2021-01-23T15:24:50.144Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+  
+
+  
+
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
+  
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Linux/Apache配置虚拟主机" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Apache配置详解
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/01/03/Linux/Apache%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" class="article-date">
+	  <time datetime="2019-01-03T03:08:33.000Z" itemprop="datePublished">2019-01-03</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a><a class="article-category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/Linux/">Linux</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-虚拟主机概念"><a href="#1-虚拟主机概念" class="headerlink" title="1. 虚拟主机概念"></a>1. 虚拟主机概念</h1><p>我们要想实现一个web站点，而且能够在互联网上被访问，首先它再能运行在操作系统，而且这个操作系统还要运行在物理主机上（第一它是一个主机）。在互联网上能够被访问，那我们需要一个主机，需要一个IP地址，需要一个时时在线的服务器，这需要多少资源？对众多小型站点来讲或者说对某种需求来讲，有可能都用不到服务器，也就是每天就10个人左右访问，只是需要我们在线而已，如果我们就为这一点点的需求就投入重大的资源的话是非常浪费的。我们就期望能够像我们使用虚拟机一样，虚拟的OS一样或虚拟的PC一样，能够在一台物理主机上虚拟出来多个可以同时运行的站点或者我们把它称为主机因此就把它称为虚拟主机。</p>
+<h1 id="2-Apache-主机的类型"><a href="#2-Apache-主机的类型" class="headerlink" title="2. Apache 主机的类型"></a>2. Apache 主机的类型</h1><h3 id="1-中心主机"><a href="#1-中心主机" class="headerlink" title="1. 中心主机"></a>1. 中心主机</h3><h3 id="2-虚拟主机"><a href="#2-虚拟主机" class="headerlink" title="2. 虚拟主机"></a>2. 虚拟主机</h3><ol>
+<li><p>基于IP: 端口相同，IP地址不同。</p>
+</li>
+<li><p>基于端口：IP相同，端口不同。</p>
+</li>
+<li><p>基于域名：IP地址相同，端口相同主机名不同</p>
+</li>
+</ol>
+<p><strong>注意：所有的虚拟主机的配置我们都需要取消中心主机，也就是注释掉 DocumentRoot 这是配置虚拟主机的前提</strong></p>
+<h1 id="3-基于域名的虚拟主机"><a href="#3-基于域名的虚拟主机" class="headerlink" title="3. 基于域名的虚拟主机"></a>3. 基于域名的虚拟主机</h1><p>例如我采用的 xampp 所以配置虚拟主机就在 <code>C:\xampp\apache\conf\extra\httpd-vhosts.conf</code> 中配置，由于这个文件默认被 include 到主配置文件中了，所以在这里的修改都可以生效。</p>
+<p>首先需要保证主配置文件中的中心主机被取消了也就是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#DocumentRoot &quot;C:/xampp/htdocs&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后打开 <code>httpd-vhosts.conf</code> 配置文件，按照下面的格式配置虚拟主机</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">	DocumentRoot &quot;C:&#x2F;xampp&#x2F;htdocs&quot;</span><br><span class="line">	ServerName localhost</span><br><span class="line">	&lt;Directory &quot;C:&#x2F;xampp&#x2F;htdocs&quot;&gt;</span><br><span class="line">		Options Indexes FollowSymLinks Includes ExecCGI</span><br><span class="line">		AllowOverride All</span><br><span class="line">		Require all granted</span><br><span class="line">	&lt;&#x2F;Directory&gt;</span><br><span class="line">&lt;&#x2F;VirtualHost&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-lt-VirtualHost-80-gt"><a href="#1-lt-VirtualHost-80-gt" class="headerlink" title="1.  &lt;VirtualHost *:80&gt;"></a>1.  <code>&lt;VirtualHost *:80&gt;</code></h2><p> apache监听本机的所有 IP 和 80 端口做多域名虚拟主机</p>
+<h2 id="2-DocumentRoot"><a href="#2-DocumentRoot" class="headerlink" title="2. DocumentRoot"></a>2. DocumentRoot</h2><p>表示服务器的根目录</p>
+<h2 id="3-ServerName"><a href="#3-ServerName" class="headerlink" title="3. ServerName"></a>3. ServerName</h2><p>就是表示域名，我们采用域名方式配置虚拟主机，所以每个虚拟主机的域名应该是不一样的才行</p>
+<h2 id="4-Directory"><a href="#4-Directory" class="headerlink" title="4. Directory"></a>4. Directory</h2><p>对根目录的规则应用，其中涉及到对于目录的访问权限和其他配置问题</p>
+<h2 id="5-对于-Directory-指令解析"><a href="#5-对于-Directory-指令解析" class="headerlink" title="5. 对于 Directory 指令解析"></a>5. 对于 Directory 指令解析</h2><h3 id="1-Options"><a href="#1-Options" class="headerlink" title="1.  Options"></a>1.  Options</h3><p>配置在特定目录使用哪些特性，常用的值和基本含义如下</p>
+<ol>
+<li>ExecCGI: 在该目录下允许执行CGI脚本。</li>
+<li>FollowSymLinks: 在该目录下允许文件系统使用符号连接。</li>
+<li>Indexes: 当用户访问该目录时，如果用户找不到DirectoryIndex指定的主页文件(例如index.html),则返回该目录下的文件列表给用户。</li>
+<li>SymLinksIfOwnerMatch: 当使用符号连接时，只有当符号连接的文件拥有者与实际文件的拥有者相同时才可以访问。</li>
+</ol>
+<p>所以我们一般在配置 PHP 的时候所配置的内容是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Options Indexes FollowSymLinks Includes ExecCGI</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-AllowOverride"><a href="#2-AllowOverride" class="headerlink" title="2. AllowOverride"></a>2. AllowOverride</h3><p>允许存在于.htaccess文件中的指令类型(.htaccess文件名是可以改变的，其文件名由AccessFileName指令决定)：</p>
+<ul>
+<li>None: 当AllowOverride被设置为None时。不搜索该目录下的.htaccess文件（可以减小服务器开销）。</li>
+<li>All: 在.htaccess文件中可以使用所有的指令。</li>
+</ul>
+<p>建议关闭这个选项，因为apache在文档中已经明确支持不建议使用它了，主要是会降低服务器性能，.htaccess 文件可以做到的我们都可以在 Directory 指令中做的更好。</p>
+<h3 id="3-Order"><a href="#3-Order" class="headerlink" title="3. Order"></a>3. Order</h3><p>控制在访问时Allow和Deny两个访问规则哪个优先，也就是黑白名单的匹配顺序</p>
+<ul>
+<li>Allow：允许访问的主机列表(可用域名或子网，例如：Allow from 192.168.0.0/16)。</li>
+<li>Deny：拒绝访问的主机列表。</li>
+</ul>
+<blockquote>
+<p>更详细的用法可参看：<a target="_blank" rel="noopener" href="https://httpd.apache.org/docs/trunk/zh-cn/mod/mod_access_compat.html#order">order用法</a></p>
+</blockquote>
+<p>匹配原则：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Allow,Deny</span><br></pre></td></tr></table></figure>
+
+<p>First, all <code>Allow</code> directives are evaluated; at least one must match, or the request is rejected. Next, all <code>Deny</code> directives are evaluated. If any matches, the request is rejected. Last, any requests which do not match an <code>Allow</code> or a <code>Deny</code> directive are denied by default.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Deny,Allow</span><br></pre></td></tr></table></figure>
+
+<p>First, all <code>Deny</code> directives are evaluated; if any match, the request is denied <strong>unless</strong> it also matches an <code>Allow</code> directive. Any requests which do not match any <code>Allow</code> or <code>Deny</code> directives are permitted.</p>
+<h3 id="4-DirectoryIndex"><a href="#4-DirectoryIndex" class="headerlink" title="4. DirectoryIndex"></a>4. DirectoryIndex</h3><p>主页文件设置 一般都是 index.html  index.php</p>
+<h3 id="5-Deny-Allow"><a href="#5-Deny-Allow" class="headerlink" title="5. Deny /Allow"></a>5. Deny /Allow</h3><p>黑白名单书写规则如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Allow from example.org</span><br><span class="line">Allow from .net example.edu</span><br><span class="line">Allow from 10.1.2.3</span><br><span class="line">Allow from 192.168.1.104 192.168.1.205</span><br><span class="line">Allow all</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-基于端口的虚拟主机"><a href="#4-基于端口的虚拟主机" class="headerlink" title="4. 基于端口的虚拟主机"></a>4. 基于端口的虚拟主机</h1><p>对于同一个 ip 来做虚拟主机，就是需要监听不同的端口，首先需要在主配置文件中添加新的监听端口：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Listen 80</span><br><span class="line">Listen 81</span><br></pre></td></tr></table></figure>
+
+<p>然后再虚拟主机里面配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;Virtualhost *:80&gt;</span><br><span class="line">	DocumentRoot &quot;&#x2F;var1&quot;</span><br><span class="line">&lt;&#x2F;Virtualhost&gt;</span><br><span class="line">&lt;Virtualhost *:81&gt;</span><br><span class="line">	DocumentRoot &quot;&#x2F;var2&quot;</span><br><span class="line">&lt;&#x2F;Virtualhost&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-基于ip的虚拟主机"><a href="#5-基于ip的虚拟主机" class="headerlink" title="5. 基于ip的虚拟主机"></a>5. 基于ip的虚拟主机</h1><p>这个就不过多赘述了，完全和基于端口的配置方式一样。也就是修改的是ip 而非端口、</p>
+<h1 id="6-服务器的优化-MPM-Multi-Processing-Modules"><a href="#6-服务器的优化-MPM-Multi-Processing-Modules" class="headerlink" title="6.服务器的优化 (MPM: Multi-Processing Modules)"></a>6.服务器的优化 (MPM: Multi-Processing Modules)</h1><p>apache2主要的优势就是对多处理器的支持更好，在编译时同过使用–with-mpm选项来决定apache2的工作模式。如果知道当前的apache2使用什么工作机制，可以通过httpd -l命令列出apache的所有模块，就可以知道其工作方式：</p>
+<ul>
+<li><p>prefork：如果httpd -l列出prefork.c，则需要对下面的段进行配置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule prefork.c&gt;</span><br><span class="line"> StartServers 5 #启动apache时启动的httpd进程个数。</span><br><span class="line"> MinSpareServers 5 #服务器保持的最小空闲进程数。</span><br><span class="line"> MaxSpareServers 10 #服务器保持的最大空闲进程数。</span><br><span class="line"> MaxClients 150 #最大并发连接数。</span><br><span class="line"> MaxRequestsPerChild 1000 #每个子进程被请求服务多少次后被kill掉。0表示不限制，推荐设置为1000。</span><br><span class="line"> &lt;&#x2F;IfModule&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>在该工作模式下，服务器启动后起动5个httpd进程(加父进程共6个，通过ps -ax|grep httpd命令可以看到)。当有用户连接时，apache会使用一个空闲进程为该连接服务，同时父进程会fork一个子进程。直到内存中的空闲进程达到MaxSpareServers。该模式是为了兼容一些旧版本的程序。我缺省编译时的选项。</p>
+<ul>
+<li>worker：如果httpd -l列出worker.c，则需要对下面的段进行配置：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule worker.c&gt; </span><br><span class="line">    StartServers 2 #启动apache时启动的httpd进程个数。 </span><br><span class="line">    MaxClients 150 #最大并发连接数。 </span><br><span class="line">    MinSpareThreads 25 #服务器保持的最小空闲线程数。 </span><br><span class="line">    MaxSpareThreads 75 #服务器保持的最大空闲线程数。 </span><br><span class="line">    ThreadsPerChild 25 #每个子进程的产生的线程数。 </span><br><span class="line">    MaxRequestsPerChild 0 #每个子进程被请求服务多少次后被kill掉。0表示不限制，推荐设置为1000。 </span><br><span class="line">&lt;&#x2F;IfModule&gt; </span><br></pre></td></tr></table></figure>
+
+<p>该模式是由线程来监听客户的连接。当有新客户连接时，由其中的一个空闲线程接受连接。服务器在启动时启动两个进程，每个进程产生的线程数是固定的(ThreadsPerChild决定)，因此启动时有50个线程。当50个线程不够用时，服务器自动fork一个进程，再产生25个线程。</p>
+<ul>
+<li>perchild：如果httpd -l列出perchild.c，则需要对下面的段进行配置：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule perchild.c&gt; </span><br><span class="line">    NumServers 5 #服务器启动时启动的子进程数 </span><br><span class="line">    StartThreads 5 #每个子进程启动时启动的线程数 </span><br><span class="line">    MinSpareThreads 5 #内存中的最小空闲线程数 </span><br><span class="line">    MaxSpareThreads 10 #最大空闲线程数 </span><br><span class="line">    MaxThreadsPerChild 2000 #每个线程最多被请求多少次后退出。0不受限制。 </span><br><span class="line">    MaxRequestsPerChild 10000 #每个子进程服务多少次后被重新fork。0表示不受限制。 </span><br><span class="line">&lt;&#x2F;IfModule&gt; </span><br></pre></td></tr></table></figure>
+
+<p>该模式下，子进程的数量是固定的，线程数不受限制。当客户端连接到服务器时，又空闲的线程提供服务。 如果空闲线程数不够，子进程自动产生线程来为新的连接服务。该模式用于多站点服务器。</p>
+<h1 id="7-别名设置"><a href="#7-别名设置" class="headerlink" title="7.别名设置"></a>7.别名设置</h1><p>对于不在DocumentRoot指定的目录内的页面，既可以使用符号连接，也可以使用别名。别名的设置如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Alias &#x2F;download&#x2F; &quot;&#x2F;var&#x2F;www&#x2F;download&#x2F;&quot; #访问时可以输入:http:&#x2F;&#x2F;www.custing.com&#x2F;download&#x2F; </span><br><span class="line"> </span><br><span class="line">&lt;Directory &quot;&#x2F;var&#x2F;www&#x2F;download&quot;&gt; #对该目录进行访问控制设置 </span><br><span class="line">    Options Indexes MultiViews </span><br><span class="line">    AllowOverride AuthConfig </span><br><span class="line">    Order allow,deny </span><br><span class="line">    Allow from all </span><br><span class="line">&lt;&#x2F;Directory&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="6、CGI设置"><a href="#6、CGI设置" class="headerlink" title="6、CGI设置"></a>6、CGI设置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 访问时可以：http:&#x2F;&#x2F;www.clusting.com&#x2F;cgi-bin&#x2F;，但是该目录下的CGI脚本文件要加可执行权限</span><br><span class="line">ScriptAlias &#x2F;cgi-bin&#x2F; &quot;&#x2F;mnt&#x2F;software&#x2F;apache2&#x2F;cgi-bin&#x2F;&quot; </span><br><span class="line"> </span><br><span class="line">&lt;Directory &quot;&#x2F;usr&#x2F;local&#x2F;apache2&#x2F;cgi-bin&quot;&gt; #设置目录属性 </span><br><span class="line">    AllowOverride None </span><br><span class="line">    Options None </span><br><span class="line">    Order allow,deny </span><br><span class="line">    Allow from all </span><br><span class="line">&lt;&#x2F;Directory&gt; </span><br></pre></td></tr></table></figure>
+
+<h1 id="8、日志的设置"><a href="#8、日志的设置" class="headerlink" title="8、日志的设置"></a>8、日志的设置</h1><h5 id="1-错误日志的设置"><a href="#1-错误日志的设置" class="headerlink" title="(1) 错误日志的设置"></a>(1) 错误日志的设置</h5><ul>
+<li><p>ErrorLog logs/error_log :日志的保存位置</p>
+</li>
+<li><p>LogLevel warn #日志的级别</p>
+</li>
+</ul>
+<p>显示的格式日下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Mon Oct 10 15:54:29 2005] [error] [client 192.168.10.22] access to &#x2F;download&#x2F; failed, reason: user admin not allowed access </span><br></pre></td></tr></table></figure>
+
+<h5 id="2-访问日志设置"><a href="#2-访问日志设置" class="headerlink" title="(2) 访问日志设置"></a>(2) 访问日志设置</h5><p>日志的缺省格式有如下几种：</p>
+<ul>
+<li>LogFormat “%h %l %u %t “%r” %&gt;s %b “%{Referer}i” “%{User-Agent}i”” combined</li>
+<li>LogFormat “%h %l %u %t “%r” %&gt;s %b” common #common为日志格式名称</li>
+<li>LogFormat “%{Referer}i -&gt; %U” referer</li>
+<li>LogFormat “%{User-agent}i” agent</li>
+<li>CustomLog logs/access_log common</li>
+</ul>
+<p>格式中的各个参数如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">%h --客户端的ip地址或主机名 </span><br><span class="line">%l --The 这是由客户端 identd 判断的RFC 1413身份，输出中的符号 &quot;-&quot; 表示此处信息无效。 </span><br><span class="line">%u --由HTTP认证系统得到的访问该网页的客户名。有认证时才有效，输出中的符号 &quot;-&quot; 表示此处信息无效。 </span><br><span class="line">%t --服务器完成对请求的处理时的时间。 </span><br><span class="line">&quot;%r&quot; --引号中是客户发出的包含了许多有用信息的请求内容。 </span><br><span class="line">%&gt;s --这个是服务器返回给客户端的状态码。 </span><br><span class="line">%b --最后这项是返回给客户端的不包括响应头的字节数。 </span><br><span class="line">&quot;%&#123;Referer&#125;i&quot; --此项指明了该请求是从被哪个网页提交过来的。 </span><br><span class="line">&quot;%&#123;User-Agent&#125;i&quot; --此项是客户浏览器提供的浏览器识别信息。 </span><br></pre></td></tr></table></figure>
+
+<p>下面是一段访问日志的实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">192.168.10.22 - bearzhang [10&#x2F;Oct&#x2F;2005:16:53:06 +0800] &quot;GET &#x2F;download&#x2F; HTTP&#x2F;1.1&quot; 200 1228 </span><br><span class="line">192.168.10.22 - - [10&#x2F;Oct&#x2F;2005:16:53:06 +0800] &quot;GET &#x2F;icons&#x2F;blank.gif HTTP&#x2F;1.1&quot; 304 - </span><br><span class="line">192.168.10.22 - - [10&#x2F;Oct&#x2F;2005:16:53:06 +0800] &quot;GET &#x2F;icons&#x2F;back.gif HTTP&#x2F;1.1&quot; 304 – </span><br></pre></td></tr></table></figure>
+
+<h1 id="9、用户认证的配置"><a href="#9、用户认证的配置" class="headerlink" title="9、用户认证的配置"></a>9、用户认证的配置</h1><h5 id="1-httpd-conf用户认证配置"><a href="#1-httpd-conf用户认证配置" class="headerlink" title="(1) httpd.conf用户认证配置:"></a>(1) httpd.conf用户认证配置:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">AccessFileName .htaccess </span><br><span class="line">......... </span><br><span class="line">Alias &#x2F;download&#x2F; &quot;&#x2F;var&#x2F;www&#x2F;download&#x2F;&quot; </span><br><span class="line">&lt;Directory &quot;&#x2F;var&#x2F;www&#x2F;download&quot;&gt; </span><br><span class="line">    Options Indexes </span><br><span class="line">    AllowOverride AuthConfig </span><br><span class="line">&lt;&#x2F;Directory&gt; </span><br></pre></td></tr></table></figure>
+
+<h5 id="2-create-a-password-file"><a href="#2-create-a-password-file" class="headerlink" title="(2) create a password file:"></a>(2) create a password file:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;local&#x2F;apache2&#x2F;bin&#x2F;htpasswd -c &#x2F;var&#x2F;httpuser&#x2F;passwords bearzhang</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="3-configure-the-server-to-request-a-password-and-tell-the-server-which-users-are-allowed-access"><a href="#3-configure-the-server-to-request-a-password-and-tell-the-server-which-users-are-allowed-access" class="headerlink" title="(3) configure the server to request a password and tell the server which users are allowed access."></a>(3) configure the server to request a password and tell the server which users are allowed access.</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;var&#x2F;www&#x2F;download&#x2F;.htaccess: </span><br><span class="line"> </span><br><span class="line">AuthType Basic </span><br><span class="line">AuthName &quot;Restricted Files&quot; </span><br><span class="line">AuthUserFile &#x2F;var&#x2F;httpuser&#x2F;passwords </span><br><span class="line">Require user bearzhang </span><br><span class="line">#Require valid-user #all valid user </span><br></pre></td></tr></table></figure>
+
+<h1 id="10、虚拟主机的配置总结"><a href="#10、虚拟主机的配置总结" class="headerlink" title="10、虚拟主机的配置总结"></a>10、虚拟主机的配置总结</h1><h5 id="1-基于IP地址的虚拟主机配置"><a href="#1-基于IP地址的虚拟主机配置" class="headerlink" title="(1)基于IP地址的虚拟主机配置"></a>(1)基于IP地址的虚拟主机配置</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Listen 80 </span><br><span class="line"> </span><br><span class="line">&lt;VirtualHost 172.20.30.40&gt; </span><br><span class="line">    DocumentRoot &#x2F;www&#x2F;example1 </span><br><span class="line">    ServerName www.example1.com </span><br><span class="line">&lt;&#x2F;VirtualHost&gt; </span><br><span class="line"> </span><br><span class="line">&lt;VirtualHost 172.20.30.50&gt; </span><br><span class="line">    DocumentRoot &#x2F;www&#x2F;example2 </span><br><span class="line">    ServerName www.example2.org </span><br><span class="line">&lt;&#x2F;VirtualHost&gt; </span><br></pre></td></tr></table></figure>
+
+<h5 id="2-基于IP和多端口的虚拟主机配置"><a href="#2-基于IP和多端口的虚拟主机配置" class="headerlink" title="(2) 基于IP和多端口的虚拟主机配置"></a>(2) 基于IP和多端口的虚拟主机配置</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Listen 172.20.30.40:80 </span><br><span class="line">Listen 172.20.30.40:8080 </span><br><span class="line">Listen 172.20.30.50:80 </span><br><span class="line">Listen 172.20.30.50:8080 </span><br><span class="line"> </span><br><span class="line">&lt;VirtualHost 172.20.30.40:80&gt; </span><br><span class="line">    DocumentRoot &#x2F;www&#x2F;example1-80 </span><br><span class="line">    ServerName www.example1.com </span><br><span class="line">&lt;&#x2F;VirtualHost&gt; </span><br><span class="line"> </span><br><span class="line">&lt;VirtualHost 172.20.30.40:8080&gt; </span><br><span class="line">    DocumentRoot &#x2F;www&#x2F;example1-8080</span><br><span class="line">    ServerName www.example1.com </span><br><span class="line">&lt;&#x2F;VirtualHost&gt; </span><br><span class="line"> </span><br><span class="line">&lt;VirtualHost 172.20.30.50:80&gt; </span><br><span class="line">    DocumentRoot &#x2F;www&#x2F;example2-80 </span><br><span class="line">    ServerName www.example1.org </span><br><span class="line">&lt;&#x2F;VirtualHost&gt; </span><br><span class="line"> </span><br><span class="line">&lt;VirtualHost 172.20.30.50:8080&gt; </span><br><span class="line">    DocumentRoot &#x2F;www&#x2F;example2-8080 </span><br><span class="line">    ServerName www.example2.org </span><br><span class="line">&lt;&#x2F;VirtualHost&gt; </span><br></pre></td></tr></table></figure>
+
+<h5 id="3-单个IP地址的服务器上基于域名的虚拟主机配置："><a href="#3-单个IP地址的服务器上基于域名的虚拟主机配置：" class="headerlink" title="(3) 单个IP地址的服务器上基于域名的虚拟主机配置："></a>(3) 单个IP地址的服务器上基于域名的虚拟主机配置：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># Ensure that Apache listens on port 80 </span><br><span class="line">Listen 80 </span><br><span class="line"> </span><br><span class="line"># Listen for virtual host requests on all IP addresses </span><br><span class="line">NameVirtualHost *:80 </span><br><span class="line"> </span><br><span class="line">&lt;VirtualHost *:80&gt; </span><br><span class="line">    DocumentRoot &#x2F;www&#x2F;example1 </span><br><span class="line">    ServerName www.example1.com </span><br><span class="line">    ServerAlias example1.com. *.example1.com </span><br><span class="line">    # Other directives here </span><br><span class="line">&lt;&#x2F;VirtualHost&gt; </span><br><span class="line"> </span><br><span class="line">&lt;VirtualHost *:80&gt; </span><br><span class="line">    DocumentRoot &#x2F;www&#x2F;example2 </span><br><span class="line">    ServerName www.example2.org </span><br><span class="line">    # Other directives here </span><br><span class="line">&lt;&#x2F;VirtualHost&gt; </span><br></pre></td></tr></table></figure>
+
+<h5 id="4-在多个IP地址的服务器上配置基于域名的虚拟主机："><a href="#4-在多个IP地址的服务器上配置基于域名的虚拟主机：" class="headerlink" title="(4) 在多个IP地址的服务器上配置基于域名的虚拟主机："></a>(4) 在多个IP地址的服务器上配置基于域名的虚拟主机：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Listen 80 </span><br><span class="line"> </span><br><span class="line"># This is the &quot;main&quot; server running on 172.20.30.40 </span><br><span class="line">ServerName server.domain.com </span><br><span class="line">DocumentRoot &#x2F;www&#x2F;mainserver </span><br><span class="line"> </span><br><span class="line"># This is the other address </span><br><span class="line">NameVirtualHost 172.20.30.50 </span><br><span class="line"> </span><br><span class="line">&lt;VirtualHost 172.20.30.50&gt; </span><br><span class="line">    DocumentRoot &#x2F;www&#x2F;example1 </span><br><span class="line">    ServerName www.example1.com </span><br><span class="line">    # Other directives here ... </span><br><span class="line">&lt;&#x2F;VirtualHost&gt; </span><br><span class="line"> </span><br><span class="line">&lt;VirtualHost 172.20.30.50&gt; </span><br><span class="line">    DocumentRoot &#x2F;www&#x2F;example2 </span><br><span class="line">    ServerName www.example2.org </span><br><span class="line">    # Other directives here ... </span><br><span class="line">&lt;&#x2F;VirtualHost&gt; </span><br></pre></td></tr></table></figure>
+
+<h5 id="5-在不同的端口上运行不同的站点-基于多端口的服务器上配置基于域名的虚拟主机-："><a href="#5-在不同的端口上运行不同的站点-基于多端口的服务器上配置基于域名的虚拟主机-：" class="headerlink" title="(5) 在不同的端口上运行不同的站点(基于多端口的服务器上配置基于域名的虚拟主机)："></a>(5) 在不同的端口上运行不同的站点(基于多端口的服务器上配置基于域名的虚拟主机)：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Listen 80 </span><br><span class="line">Listen 8080 </span><br><span class="line"> </span><br><span class="line">NameVirtualHost 172.20.30.40:80 </span><br><span class="line">NameVirtualHost 172.20.30.40:8080 </span><br><span class="line"></span><br><span class="line">&lt;VirtualHost 172.20.30.40:80&gt; </span><br><span class="line">    ServerName www.example1.com </span><br><span class="line">    DocumentRoot &#x2F;www&#x2F;domain-80 </span><br><span class="line">&lt;&#x2F;VirtualHost&gt; </span><br><span class="line"> </span><br><span class="line">&lt;VirtualHost 172.20.30.40:8080&gt; </span><br><span class="line">    ServerName www.example1.com</span><br><span class="line">    DocumentRoot &#x2F;www&#x2F;domain-8080 </span><br><span class="line">&lt;&#x2F;VirtualHost&gt; </span><br><span class="line"> </span><br><span class="line">&lt;VirtualHost 172.20.30.40:80&gt;</span><br><span class="line">    ServerName www.example2.org </span><br><span class="line">    DocumentRoot &#x2F;www&#x2F;otherdomain-80 </span><br><span class="line">&lt;&#x2F;VirtualHost&gt; </span><br><span class="line"> </span><br><span class="line">&lt;VirtualHost 172.20.30.40:8080&gt; </span><br><span class="line">    ServerName www.example2.org </span><br><span class="line">    DocumentRoot &#x2F;www&#x2F;otherdomain-8080 </span><br><span class="line">&lt;&#x2F;VirtualHost&gt; </span><br></pre></td></tr></table></figure>
+
+<h5 id="6-基于域名和基于IP的混合虚拟主机的配置"><a href="#6-基于域名和基于IP的混合虚拟主机的配置" class="headerlink" title="(6) 基于域名和基于IP的混合虚拟主机的配置:"></a>(6) 基于域名和基于IP的混合虚拟主机的配置:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Listen 80 </span><br><span class="line"> </span><br><span class="line">NameVirtualHost 172.20.30.40 </span><br><span class="line"> </span><br><span class="line">&lt;VirtualHost 172.20.30.40&gt; </span><br><span class="line">    DocumentRoot &#x2F;www&#x2F;example1 </span><br><span class="line">    ServerName www.example1.com </span><br><span class="line">&lt;&#x2F;VirtualHost&gt; </span><br><span class="line"> </span><br><span class="line">&lt;VirtualHost 172.20.30.40&gt; </span><br><span class="line">    DocumentRoot &#x2F;www&#x2F;example2 </span><br><span class="line">    ServerName www.example2.org </span><br><span class="line">&lt;&#x2F;VirtualHost&gt; </span><br><span class="line"> </span><br><span class="line">&lt;VirtualHost 172.20.30.40&gt; </span><br><span class="line">    DocumentRoot &#x2F;www&#x2F;example3 </span><br><span class="line">    ServerName www.example3.net </span><br><span class="line">&lt;&#x2F;VirtualHost&gt; </span><br></pre></td></tr></table></figure>
+
+<h1 id="11-SSL加密的配置"><a href="#11-SSL加密的配置" class="headerlink" title="11.SSL加密的配置"></a>11.SSL加密的配置</h1><p>首先在配置之前先来了解一些基本概念：</p>
+<blockquote>
+<p>a. 证书的概念：首先要有一个根证书，然后用根证书来签发服务器证书和客户证书，一般理解：服务器证书和客户证书是平级关系。SSL必须安装 服务器证书来认证。 因此：在此环境中，至少必须有三个证书：根证书，服务器证书，客户端证书。 在生成证书之前，一般会有一个私钥，同时用私钥生成证书请求，再利用证书服务器的根证来签发证书。 SSL所使用的证书可以自己生成，也可以通过一个商业性CA（如Verisign 或 Thawte）签署证书。</p>
+</blockquote>
+<blockquote>
+<p>b. 签发证书的问题：如果使用的是商业证书，具体的签署方法请查看相关销售商的说明；如果是知己签发的证书，可以使用openssl自带的CA.sh  脚本工具。</p>
+</blockquote>
+<p>如果不为单独的客户端签发证书，客户端证书可以不用生成，客户端与服务器端使用相同的证书。</p>
+<h4 id="1-conf-ssl-conf-配置文件中的主要参数配置如下："><a href="#1-conf-ssl-conf-配置文件中的主要参数配置如下：" class="headerlink" title="(1) conf/ssl.conf 配置文件中的主要参数配置如下："></a>(1) conf/ssl.conf 配置文件中的主要参数配置如下：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Listen 443 </span><br><span class="line"> </span><br><span class="line">SSLPassPhraseDialog buildin </span><br><span class="line">#SSLPassPhraseDialog exec:&#x2F;path&#x2F;to&#x2F;program </span><br><span class="line">SSLSessionCache dbm:&#x2F;usr&#x2F;local&#x2F;apache2&#x2F;logs&#x2F;ssl_scache </span><br><span class="line">SSLSessionCacheTimeout 300 </span><br><span class="line">SSLMutex file:&#x2F;usr&#x2F;local&#x2F;apache2&#x2F;logs&#x2F;ssl_mutex </span><br><span class="line"> </span><br><span class="line">&lt;VirtualHost _default_:443&gt; </span><br><span class="line"># General setup for the virtual host </span><br><span class="line">DocumentRoot &quot;&#x2F;usr&#x2F;local&#x2F;apache2&#x2F;htdocs&quot; </span><br><span class="line">ServerName www.example.com:443 </span><br><span class="line">ServerAdmin you@example.com </span><br><span class="line">ErrorLog &#x2F;usr&#x2F;local&#x2F;apache2&#x2F;logs&#x2F;error_log </span><br><span class="line">TransferLog &#x2F;usr&#x2F;local&#x2F;apache2&#x2F;logs&#x2F;access_log </span><br><span class="line">  </span><br><span class="line">SSLEngine on </span><br><span class="line">SSLCipherSuite ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:+eNULL </span><br><span class="line">  </span><br><span class="line">SSLCertificateFile &#x2F;usr&#x2F;local&#x2F;apache2&#x2F;conf&#x2F;ssl.crt&#x2F;server.crt </span><br><span class="line">SSLCertificateKeyFile &#x2F;usr&#x2F;local&#x2F;apache2&#x2F;conf&#x2F;ssl.key&#x2F;server.key </span><br><span class="line">CustomLog &#x2F;usr&#x2F;local&#x2F;apache2&#x2F;logs&#x2F;ssl_request_log &quot;%t %h %&#123;SSL_PROTOCOL&#125;x %&#123;SSL_CIPHER&#125;x &quot;%r&quot; %b&quot; </span><br><span class="line">&lt;&#x2F;VirtualHost&gt; </span><br></pre></td></tr></table></figure>
+
+<h4 id="2-创建和使用自签署的证书："><a href="#2-创建和使用自签署的证书：" class="headerlink" title="(2) 创建和使用自签署的证书："></a>(2) 创建和使用自签署的证书：</h4><p>a. Create a RSA private key for your Apache server</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;local&#x2F;openssl&#x2F;bin&#x2F;openssl genrsa -des3 -out &#x2F;usr&#x2F;local&#x2F;apache2&#x2F;conf&#x2F;ssl.key&#x2F;server.key 1024 </span><br></pre></td></tr></table></figure>
+
+<p>b. Create a Certificate Signing Request (CSR)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;local&#x2F;openssl&#x2F;bin&#x2F;openssl req -new -key &#x2F;usr&#x2F;local&#x2F;apache2&#x2F;conf&#x2F;ssl.key&#x2F;server.key -out &#x2F;usr&#x2F;local&#x2F;apache2&#x2F;conf&#x2F;ssl.key&#x2F;server.csr </span><br></pre></td></tr></table></figure>
+
+<p>c. Create a self-signed CA Certificate (X509 structure) with the RSA key of the CA</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;local&#x2F;openssl&#x2F;bin&#x2F;openssl req -x509 -days 365 -key &#x2F;usr&#x2F;local&#x2F;apache2&#x2F;conf&#x2F;ssl.key&#x2F;server.key -in &#x2F;usr&#x2F;local&#x2F;apache2&#x2F;conf&#x2F;ssl.key&#x2F;server.csr -out &#x2F;usr&#x2F;local&#x2F;apache2&#x2F;conf&#x2F;ssl.crt&#x2F;server.crt </span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;openssl&#x2F;bin&#x2F;openssl genrsa 1024 -out server.key </span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;openssl&#x2F;bin&#x2F;openssl req -new -key server.key -out server.csr </span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;openssl&#x2F;bin&#x2F;openssl req -x509 -days 365 -key server.key -in server.csr -out server.crt </span><br></pre></td></tr></table></figure>
+
+<h4 id="3-创建自己的CA（认证证书），并使用该CA来签署服务器的证书。"><a href="#3-创建自己的CA（认证证书），并使用该CA来签署服务器的证书。" class="headerlink" title="(3) 创建自己的CA（认证证书），并使用该CA来签署服务器的证书。"></a>(3) 创建自己的CA（认证证书），并使用该CA来签署服务器的证书。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mkdir &#x2F;CA </span><br><span class="line">cd &#x2F;CA </span><br><span class="line">cp openssl-0.9.7g&#x2F;apps&#x2F;CA.sh &#x2F;CA </span><br><span class="line">.&#x2F;CA.sh -newca </span><br><span class="line">openssl genrsa -des3 -out server.key 1024 </span><br><span class="line">openssl req -new -key server.key -out server.csr </span><br><span class="line">cp server.csr newreq.pem </span><br><span class="line">.&#x2F;CA.sh -sign </span><br><span class="line">cp newcert.pem &#x2F;usr&#x2F;local&#x2F;apache2&#x2F;conf&#x2F;ssl.crt&#x2F;server.crt </span><br><span class="line">cp server.key &#x2F;usr&#x2F;local&#x2F;apache2&#x2F;conf&#x2F;ssl.key&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p><strong>参考文章</strong>：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://blog.51cto.com/yahoon/36239">深入理解Apache虚拟主机</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c36dd3946e74">Apache配置文件httpd.conf详解</a></p>
+<p><a target="_blank" rel="noopener" href="https://httpd.apache.org/docs/trunk/zh-cn/howto/htaccess.html">Apache文档</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2019/01/03/Linux/Apache配置虚拟主机/" target="_blank" title="Apache配置详解">https://lwenxu.github.io/2019/01/03/Linux/Apache配置虚拟主机/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/01/03/Tools/%E4%B8%83%E7%89%9B%E4%BA%91%E5%85%B3%E8%81%94Windows%E5%9B%BE%E5%BA%8A/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          七牛云关联Windows图床
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/12/18/Article/%E4%BC%98%E7%A7%80%E6%96%87%E7%AB%A0%E9%9B%86%E9%94%A6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">优秀文章集锦</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">1. 虚拟主机概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Apache-%E4%B8%BB%E6%9C%BA%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">2. Apache 主机的类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%AD%E5%BF%83%E4%B8%BB%E6%9C%BA"><span class="nav-number">2.0.1.</span> <span class="nav-text">1. 中心主机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA"><span class="nav-number">2.0.2.</span> <span class="nav-text">2. 虚拟主机</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%9F%BA%E4%BA%8E%E5%9F%9F%E5%90%8D%E7%9A%84%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA"><span class="nav-number">3.</span> <span class="nav-text">3. 基于域名的虚拟主机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-lt-VirtualHost-80-gt"><span class="nav-number">3.1.</span> <span class="nav-text">1.  &lt;VirtualHost *:80&gt;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-DocumentRoot"><span class="nav-number">3.2.</span> <span class="nav-text">2. DocumentRoot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-ServerName"><span class="nav-number">3.3.</span> <span class="nav-text">3. ServerName</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Directory"><span class="nav-number">3.4.</span> <span class="nav-text">4. Directory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%AF%B9%E4%BA%8E-Directory-%E6%8C%87%E4%BB%A4%E8%A7%A3%E6%9E%90"><span class="nav-number">3.5.</span> <span class="nav-text">5. 对于 Directory 指令解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Options"><span class="nav-number">3.5.1.</span> <span class="nav-text">1.  Options</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-AllowOverride"><span class="nav-number">3.5.2.</span> <span class="nav-text">2. AllowOverride</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Order"><span class="nav-number">3.5.3.</span> <span class="nav-text">3. Order</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-DirectoryIndex"><span class="nav-number">3.5.4.</span> <span class="nav-text">4. DirectoryIndex</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Deny-Allow"><span class="nav-number">3.5.5.</span> <span class="nav-text">5. Deny &#x2F;Allow</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E5%9F%BA%E4%BA%8E%E7%AB%AF%E5%8F%A3%E7%9A%84%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA"><span class="nav-number">4.</span> <span class="nav-text">4. 基于端口的虚拟主机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E5%9F%BA%E4%BA%8Eip%E7%9A%84%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA"><span class="nav-number">5.</span> <span class="nav-text">5. 基于ip的虚拟主机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E4%BC%98%E5%8C%96-MPM-Multi-Processing-Modules"><span class="nav-number">6.</span> <span class="nav-text">6.服务器的优化 (MPM: Multi-Processing Modules)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-%E5%88%AB%E5%90%8D%E8%AE%BE%E7%BD%AE"><span class="nav-number">7.</span> <span class="nav-text">7.别名设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6%E3%80%81CGI%E8%AE%BE%E7%BD%AE"><span class="nav-number">7.0.0.1.</span> <span class="nav-text">6、CGI设置</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8%E3%80%81%E6%97%A5%E5%BF%97%E7%9A%84%E8%AE%BE%E7%BD%AE"><span class="nav-number">8.</span> <span class="nav-text">8、日志的设置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E9%94%99%E8%AF%AF%E6%97%A5%E5%BF%97%E7%9A%84%E8%AE%BE%E7%BD%AE"><span class="nav-number">8.0.0.0.1.</span> <span class="nav-text">(1) 错误日志的设置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E8%AE%BF%E9%97%AE%E6%97%A5%E5%BF%97%E8%AE%BE%E7%BD%AE"><span class="nav-number">8.0.0.0.2.</span> <span class="nav-text">(2) 访问日志设置</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9%E3%80%81%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">9.</span> <span class="nav-text">9、用户认证的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-httpd-conf%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81%E9%85%8D%E7%BD%AE"><span class="nav-number">9.0.0.0.1.</span> <span class="nav-text">(1) httpd.conf用户认证配置:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-create-a-password-file"><span class="nav-number">9.0.0.0.2.</span> <span class="nav-text">(2) create a password file:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-configure-the-server-to-request-a-password-and-tell-the-server-which-users-are-allowed-access"><span class="nav-number">9.0.0.0.3.</span> <span class="nav-text">(3) configure the server to request a password and tell the server which users are allowed access.</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10%E3%80%81%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E7%9A%84%E9%85%8D%E7%BD%AE%E6%80%BB%E7%BB%93"><span class="nav-number">10.</span> <span class="nav-text">10、虚拟主机的配置总结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E5%9F%BA%E4%BA%8EIP%E5%9C%B0%E5%9D%80%E7%9A%84%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E9%85%8D%E7%BD%AE"><span class="nav-number">10.0.0.0.1.</span> <span class="nav-text">(1)基于IP地址的虚拟主机配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E5%9F%BA%E4%BA%8EIP%E5%92%8C%E5%A4%9A%E7%AB%AF%E5%8F%A3%E7%9A%84%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E9%85%8D%E7%BD%AE"><span class="nav-number">10.0.0.0.2.</span> <span class="nav-text">(2) 基于IP和多端口的虚拟主机配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E5%8D%95%E4%B8%AAIP%E5%9C%B0%E5%9D%80%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E5%9F%BA%E4%BA%8E%E5%9F%9F%E5%90%8D%E7%9A%84%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E9%85%8D%E7%BD%AE%EF%BC%9A"><span class="nav-number">10.0.0.0.3.</span> <span class="nav-text">(3) 单个IP地址的服务器上基于域名的虚拟主机配置：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E5%9C%A8%E5%A4%9A%E4%B8%AAIP%E5%9C%B0%E5%9D%80%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%85%8D%E7%BD%AE%E5%9F%BA%E4%BA%8E%E5%9F%9F%E5%90%8D%E7%9A%84%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%EF%BC%9A"><span class="nav-number">10.0.0.0.4.</span> <span class="nav-text">(4) 在多个IP地址的服务器上配置基于域名的虚拟主机：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-%E5%9C%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E7%AB%AF%E5%8F%A3%E4%B8%8A%E8%BF%90%E8%A1%8C%E4%B8%8D%E5%90%8C%E7%9A%84%E7%AB%99%E7%82%B9-%E5%9F%BA%E4%BA%8E%E5%A4%9A%E7%AB%AF%E5%8F%A3%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%85%8D%E7%BD%AE%E5%9F%BA%E4%BA%8E%E5%9F%9F%E5%90%8D%E7%9A%84%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA-%EF%BC%9A"><span class="nav-number">10.0.0.0.5.</span> <span class="nav-text">(5) 在不同的端口上运行不同的站点(基于多端口的服务器上配置基于域名的虚拟主机)：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-%E5%9F%BA%E4%BA%8E%E5%9F%9F%E5%90%8D%E5%92%8C%E5%9F%BA%E4%BA%8EIP%E7%9A%84%E6%B7%B7%E5%90%88%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">10.0.0.0.6.</span> <span class="nav-text">(6) 基于域名和基于IP的混合虚拟主机的配置:</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-SSL%E5%8A%A0%E5%AF%86%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">11.</span> <span class="nav-text">11.SSL加密的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-conf-ssl-conf-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="nav-number">11.0.0.1.</span> <span class="nav-text">(1) conf&#x2F;ssl.conf 配置文件中的主要参数配置如下：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%88%9B%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8%E8%87%AA%E7%AD%BE%E7%BD%B2%E7%9A%84%E8%AF%81%E4%B9%A6%EF%BC%9A"><span class="nav-number">11.0.0.2.</span> <span class="nav-text">(2) 创建和使用自签署的证书：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%88%9B%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84CA%EF%BC%88%E8%AE%A4%E8%AF%81%E8%AF%81%E4%B9%A6%EF%BC%89%EF%BC%8C%E5%B9%B6%E4%BD%BF%E7%94%A8%E8%AF%A5CA%E6%9D%A5%E7%AD%BE%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E8%AF%81%E4%B9%A6%E3%80%82"><span class="nav-number">11.0.0.3.</span> <span class="nav-text">(3) 创建自己的CA（认证证书），并使用该CA来签署服务器的证书。</span></a></li></ol></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2021 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2021 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

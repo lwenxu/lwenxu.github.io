@@ -12,31 +12,29 @@
   <meta name="description" content="手动二进制包的安装方法一般来说我们在Node的官网上是找不到Linux的Deb包，或者是Rpm包的，他针对Windows和mac都有二进制的安装包，但是Linux只有一个tar.xz这个包下载下来虽然也是一个二进制的包，类似于Windows中的绿色软件，也非常好配置，仅仅使用 1tar -xvf package.tar.xz 即可完成解压，然后使用软连接，把node与npm文件链接到*&#x2F;usr&#x2F;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux下安装Node.js">
-<meta property="og:url" content="http://lwenxu.coding.me/2017/05/04/Linux/Linux%E4%B8%8B%E5%AE%89%E8%A3%85Node-js/index.html">
+<meta property="og:url" content="https://lwenxu.github.io/2017/05/04/Linux/Linux%E4%B8%8B%E5%AE%89%E8%A3%85Node-js/index.html">
 <meta property="og:site_name" content="昨夜凛雨">
 <meta property="og:description" content="手动二进制包的安装方法一般来说我们在Node的官网上是找不到Linux的Deb包，或者是Rpm包的，他针对Windows和mac都有二进制的安装包，但是Linux只有一个tar.xz这个包下载下来虽然也是一个二进制的包，类似于Windows中的绿色软件，也非常好配置，仅仅使用 1tar -xvf package.tar.xz 即可完成解压，然后使用软连接，把node与npm文件链接到*&#x2F;usr&#x2F;">
 <meta property="og:locale">
 <meta property="og:image" content="http://i2.muimg.com/567571/e273349501de49b0.jpg">
 <meta property="article:published_time" content="2017-05-04T09:51:37.000Z">
-<meta property="article:modified_time" content="2018-12-19T12:36:42.000Z">
+<meta property="article:modified_time" content="2021-01-23T15:24:50.145Z">
 <meta property="article:author" content="lwen">
 <meta property="article:tag" content="Java PHP Code">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://i2.muimg.com/567571/e273349501de49b0.jpg">
   
-    <link rel="alternate" href="/atom.xml" title="昨夜凛雨" type="application/atom+xml">
-  
 
   
 
-  <link rel="icon" href="/css/images/mylogo.jpg">
-  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
   
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
   <style type="text/css">
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
@@ -102,7 +100,7 @@
               <a class="brand" style="
                  margin-top: 0px;"  
                 href="#" data-toggle="modal" data-target="#myModal" >
-                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
               </a>
             
             
@@ -116,8 +114,6 @@
                   <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
                 
                   <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/about">About</a> </li>
                 
                   <li><div id="search-form-wrap">
 
@@ -235,11 +231,11 @@
 
 <script>
 var a = new Donate({
-  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
   btnText: 'Donate', // 可选参数，打赏按钮文字
   el: document.getElementById('donation_div'),
-  wechatImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/WeChanQR.png',
-  alipayImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/AliPayQR.jpg'
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
 });
 </script>
       
@@ -251,7 +247,7 @@ var a = new Donate({
           </li>
           <li class="post-copyright-link">
           <strong>Post link:  </strong>
-          <a href="/2017/05/04/Linux/Linux下安装Node-js/" target="_blank" title="Linux下安装Node.js">http://lwenxu.coding.me/2017/05/04/Linux/Linux下安装Node-js/</a>
+          <a href="/2017/05/04/Linux/Linux下安装Node-js/" target="_blank" title="Linux下安装Node.js">https://lwenxu.github.io/2017/05/04/Linux/Linux下安装Node-js/</a>
           </li>
           <li class="post-copyright-license">
             <strong>Copyright Notice:   </strong>
@@ -338,7 +334,7 @@ var a = new Donate({
   <div class="container">
       	<div class="row">
 	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
-	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2021 昨夜凛雨 All Rights Reserved.</p>
 	      
 	      
     		<p class="busuanzi_uv">
@@ -377,8 +373,6 @@ var a = new Donate({
     <a href="/categories" class="mobile-nav-link">Categories</a>
   
     <a href="/tags" class="mobile-nav-link">Tags</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
   
 </nav> -->
     
@@ -504,7 +498,7 @@ var a = new Donate({
             昨夜凛雨
           </div>
           <div class="panel-body">
-            Copyright © 2020 lwen All Rights Reserved.
+            Copyright © 2021 lwen All Rights Reserved.
           </div>
         </div>
       </div>

@@ -12,33 +12,31 @@
   <meta name="description" content="Markdown 语法说明 (简体中文版) &#x2F; (点击查看快速入门) 概述宗旨兼容 HTML特殊字符自动转换区块元素段落和换行标题区块引用列表代码区块分隔线区段元素链接强调代码图片其它反斜杠自动链接感谢概述">
 <meta property="og:type" content="article">
 <meta property="og:title" content="markdown语法">
-<meta property="og:url" content="http://lwenxu.coding.me/2017/04/27/Tools/markdown%E8%AF%AD%E6%B3%95/index.html">
+<meta property="og:url" content="https://lwenxu.github.io/2017/04/27/Tools/markdown%E8%AF%AD%E6%B3%95/index.html">
 <meta property="og:site_name" content="昨夜凛雨">
 <meta property="og:description" content="Markdown 语法说明 (简体中文版) &#x2F; (点击查看快速入门) 概述宗旨兼容 HTML特殊字符自动转换区块元素段落和换行标题区块引用列表代码区块分隔线区段元素链接强调代码图片其它反斜杠自动链接感谢概述">
 <meta property="og:locale">
-<meta property="og:image" content="http://lwenxu.coding.me/path/to/img.jpg">
-<meta property="og:image" content="http://lwenxu.coding.me/path/to/img.jpg">
+<meta property="og:image" content="https://lwenxu.github.io/path/to/img.jpg">
+<meta property="og:image" content="https://lwenxu.github.io/path/to/img.jpg">
 <meta property="og:image" content="http://example.com/">
 <meta property="article:published_time" content="2017-04-27T10:10:46.000Z">
-<meta property="article:modified_time" content="2018-12-19T12:36:42.000Z">
+<meta property="article:modified_time" content="2021-01-23T15:24:50.199Z">
 <meta property="article:author" content="lwen">
 <meta property="article:tag" content="Java PHP Code">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://lwenxu.coding.me/path/to/img.jpg">
-  
-    <link rel="alternate" href="/atom.xml" title="昨夜凛雨" type="application/atom+xml">
+<meta name="twitter:image" content="https://lwenxu.github.io/path/to/img.jpg">
   
 
   
 
-  <link rel="icon" href="/css/images/mylogo.jpg">
-  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
   
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
   <style type="text/css">
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
@@ -104,7 +102,7 @@
               <a class="brand" style="
                  margin-top: 0px;"  
                 href="#" data-toggle="modal" data-target="#myModal" >
-                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
               </a>
             
             
@@ -118,8 +116,6 @@
                   <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
                 
                   <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/about">About</a> </li>
                 
                   <li><div id="search-form-wrap">
 
@@ -523,10 +519,10 @@ equivalent of <code>&amp;mdash;</code>.</p>
 <p>Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱，只要是用方括号包起来， Markdown 就会自动把它转成链接。一般网址的链接文字就和链接地址一样，例如：</p>
 <p><a target="_blank" rel="noopener" href="http://example.com/">http://example.com/</a><br>Markdown 会转为：</p>
 <p><a target="_blank" rel="noopener" href="http://example.com/">http://example.com/</a><br>邮址的自动链接也很类似，只是 Markdown 会先做一个编码转换的过程，把文字字符转成 16 进位码的 HTML 实体，这样的格式可以糊弄一些不好的邮址收集机器人，例如：</p>
-<p><a href="mailto:&#97;&#x64;&#100;&#x72;&#101;&#115;&#x73;&#x40;&#x65;&#x78;&#97;&#x6d;&#112;&#x6c;&#x65;&#x2e;&#99;&#111;&#109;">&#97;&#x64;&#100;&#x72;&#101;&#115;&#x73;&#x40;&#x65;&#x78;&#97;&#x6d;&#112;&#x6c;&#x65;&#x2e;&#99;&#111;&#109;</a><br>Markdown 会转成：</p>
+<p><a href="mailto:&#x61;&#x64;&#100;&#x72;&#x65;&#x73;&#x73;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#x6c;&#101;&#x2e;&#x63;&#111;&#109;">&#x61;&#x64;&#100;&#x72;&#x65;&#x73;&#x73;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#x6c;&#101;&#x2e;&#x63;&#111;&#109;</a><br>Markdown 会转成：</p>
 <p><a href="&#x6D;&#x61;i&#x6C;&#x74;&#x6F;:&#x61;&#x64;&#x64;&#x72;&#x65;
 &#115;&#115;&#64;&#101;&#120;&#x61;&#109;&#x70;&#x6C;e&#x2E;&#99;&#111;
-&#109;">&#x61;&#x64;&#x64;&#x72;&#x65;&#115;&#115;&#64;&#101;&#120;&#x61;<br>&#109;&#x70;&#x6C;e&#x2E;&#99;&#111;&#109;</a><br>在浏览器里面，这段字串（其实是 <a href="mailto:address@example.com">address@example.com</a>）会变成一个可以点击的「<a href="mailto:&#x61;&#100;&#100;&#114;&#101;&#x73;&#115;&#x40;&#101;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#101;&#46;&#x63;&#x6f;&#x6d;">&#x61;&#100;&#100;&#114;&#101;&#x73;&#115;&#x40;&#101;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#101;&#46;&#x63;&#x6f;&#x6d;</a>」链接。</p>
+&#109;">&#x61;&#x64;&#x64;&#x72;&#x65;&#115;&#115;&#64;&#101;&#120;&#x61;<br>&#109;&#x70;&#x6C;e&#x2E;&#99;&#111;&#109;</a><br>在浏览器里面，这段字串（其实是 <a href="mailto:address@example.com">address@example.com</a>）会变成一个可以点击的「<a href="mailto:&#97;&#100;&#x64;&#x72;&#x65;&#x73;&#x73;&#64;&#x65;&#x78;&#x61;&#x6d;&#x70;&#108;&#x65;&#x2e;&#99;&#x6f;&#109;">&#97;&#100;&#x64;&#x72;&#x65;&#x73;&#x73;&#64;&#x65;&#x78;&#x61;&#x6d;&#x70;&#108;&#x65;&#x2e;&#99;&#x6f;&#109;</a>」链接。</p>
 <p>（这种作法虽然可以糊弄不少的机器人，但并不能全部挡下来，不过总比什么都不做好些。不管怎样，公开你的信箱终究会引来广告信件的。）</p>
 <p>反斜杠</p>
 <p>Markdown 可以利用反斜杠来插入一些在语法中有其它意义的符号，例如：如果你想要用星号加在文字旁边的方式来做出强调效果（但不用 <em> 标签），你可以在星号的前面加上反斜杠：</p>
@@ -553,11 +549,11 @@ equivalent of <code>&amp;mdash;</code>.</p>
 
 <script>
 var a = new Donate({
-  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
   btnText: 'Donate', // 可选参数，打赏按钮文字
   el: document.getElementById('donation_div'),
-  wechatImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/WeChanQR.png',
-  alipayImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/AliPayQR.jpg'
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
 });
 </script>
       
@@ -569,7 +565,7 @@ var a = new Donate({
           </li>
           <li class="post-copyright-link">
           <strong>Post link:  </strong>
-          <a href="/2017/04/27/Tools/markdown语法/" target="_blank" title="markdown语法">http://lwenxu.coding.me/2017/04/27/Tools/markdown语法/</a>
+          <a href="/2017/04/27/Tools/markdown语法/" target="_blank" title="markdown语法">https://lwenxu.github.io/2017/04/27/Tools/markdown语法/</a>
           </li>
           <li class="post-copyright-license">
             <strong>Copyright Notice:   </strong>
@@ -656,7 +652,7 @@ var a = new Donate({
   <div class="container">
       	<div class="row">
 	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
-	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2021 昨夜凛雨 All Rights Reserved.</p>
 	      
 	      
     		<p class="busuanzi_uv">
@@ -695,8 +691,6 @@ var a = new Donate({
     <a href="/categories" class="mobile-nav-link">Categories</a>
   
     <a href="/tags" class="mobile-nav-link">Tags</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
   
 </nav> -->
     
@@ -822,7 +816,7 @@ var a = new Donate({
             昨夜凛雨
           </div>
           <div class="panel-body">
-            Copyright © 2020 lwen All Rights Reserved.
+            Copyright © 2021 lwen All Rights Reserved.
           </div>
         </div>
       </div>

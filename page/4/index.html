@@ -11,26 +11,24 @@
   
   <meta property="og:type" content="website">
 <meta property="og:title" content="昨夜凛雨">
-<meta property="og:url" content="http://lwenxu.coding.me/page/4/index.html">
+<meta property="og:url" content="https://lwenxu.github.io/page/4/index.html">
 <meta property="og:site_name" content="昨夜凛雨">
 <meta property="og:locale">
 <meta property="article:author" content="lwen">
 <meta property="article:tag" content="Java PHP Code">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="昨夜凛雨" type="application/atom+xml">
-  
 
   
 
-  <link rel="icon" href="/css/images/mylogo.jpg">
-  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
   
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
   <style type="text/css">
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
@@ -94,7 +92,7 @@
               <a class="brand" style="
                  margin-top: 0px;"  
                  >
-                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
               </a>
             
             
@@ -108,8 +106,6 @@
                   <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
                 
                   <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/about">About</a> </li>
                 
                   <li><div id="search-form-wrap">
 
@@ -166,7 +162,7 @@
         
           <section id="main" style="float:none;">
   
-    <article id="post-Others/数字图像处理"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Spring/Spring 源码分析(一)"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -174,7 +170,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/06/Others/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">数字图像处理</a>
+      <a class="article-title" href="/2019/03/15/Spring/Spring%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90(%E4%B8%80)/">Spring 源码分析(一)</a>
     </h1>
   
 
@@ -182,11 +178,13 @@
     
     <div class="article-meta">
       
-	<a href="/2018/05/06/Others/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="article-date">
-	  <time datetime="2018-05-06T02:15:13.000Z" itemprop="datePublished">2018-05-06</time>
+	<a href="/2019/03/15/Spring/Spring%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90(%E4%B8%80)/" class="article-date">
+	  <time datetime="2019-03-15T07:02:37.000Z" itemprop="datePublished">2019-03-15</time>
 	</a>
 
       
+    <a class="article-category-link" href="/categories/Spring-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">Spring 源码分析</a><a class="article-category-link" href="/categories/Spring-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/Spring/">Spring</a>
+
       
       
 
@@ -194,22 +192,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1.基本概念1. 图像的定义
-图像：一幅图像是一个东西的另一种表示，是其所表示物体信息的一个浓缩和高度概括。
-
-2. 图像分类1. 模拟图像：连续变化的函数2. 数字图像：离散的矩阵表示数字图像的定义:数字图像是指由被称为像素的小区域组成的二维矩阵。
-数字图像类型：
-二值图像：只有0、1 （黑、白）
-
-灰度图像：像素取值是 0-255 ，有中间过度。
-
-彩色（索引）图像：两个矩阵，一个就是灰度图像的矩阵，另外一个是颜色映像表矩阵对应使用。
-
-
-GRB彩色图像：每个像素由 RGB 组成。这是...
+          Spring 源码分析 (一)
         </p>
         <p class="article-more-link">
-          <a href="/2018/05/06/Others/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/#more">Read More</a>
+          <a href="/2019/03/15/Spring/Spring%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90(%E4%B8%80)/#more">Read More</a>
         </p>
       
     </div>
@@ -228,7 +214,7 @@ GRB彩色图像：每个像素由 RGB 组成。这是...
 
 
   
-    <article id="post-Linux/Docker 入门"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-FrontEnd/WebStrom 技巧"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -236,7 +222,7 @@ GRB彩色图像：每个像素由 RGB 组成。这是...
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/29/Linux/Docker%20%E5%85%A5%E9%97%A8/">Docker 入门</a>
+      <a class="article-title" href="/2019/01/21/FrontEnd/WebStrom%20%E6%8A%80%E5%B7%A7/">WebStrom 使用技巧</a>
     </h1>
   
 
@@ -244,12 +230,12 @@ GRB彩色图像：每个像素由 RGB 组成。这是...
     
     <div class="article-meta">
       
-	<a href="/2018/04/29/Linux/Docker%20%E5%85%A5%E9%97%A8/" class="article-date">
-	  <time datetime="2018-04-29T04:32:34.000Z" itemprop="datePublished">2018-04-29</time>
+	<a href="/2019/01/21/FrontEnd/WebStrom%20%E6%8A%80%E5%B7%A7/" class="article-date">
+	  <time datetime="2019-01-21T07:28:28.000Z" itemprop="datePublished">2019-01-21</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/Docker/">Docker</a>
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
 
       
       
@@ -258,14 +244,22 @@ GRB彩色图像：每个像素由 RGB 组成。这是...
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1. Docker 简介直接运行于操作系统内核上的虚拟化解决方案，他是一个操作系统级别的虚拟化也就是说容器只能运行在相同或者相似的内和操作系统之上的。所以我们只能在 docker 中运行 Linux 系统而不能运行 Windows 系统。他是依赖于 Linux 的内核特性：Namespace 和 Cgroup （Control Group）。
-
-
-1. VM vs Docker
-可以看到，在虚拟机上我们需要包含到细腻华技术和操作系统，但是我们在 Docker 中只需要依赖底层的操作系统，和...
+          1. React live template
+state    this.state
+sst       this.setState
+rpc    生成组件类
+rsfp      生成组件函数
+rrc        具有redux的组件类
+rpt        propTypes
+ren       render 方法
+ptsr   string required
+pts     string 类型
+pto  object 类型
+ptor    object required
+ptn/pt...
         </p>
         <p class="article-more-link">
-          <a href="/2018/04/29/Linux/Docker%20%E5%85%A5%E9%97%A8/#more">Read More</a>
+          <a href="/2019/01/21/FrontEnd/WebStrom%20%E6%8A%80%E5%B7%A7/#more">Read More</a>
         </p>
       
     </div>
@@ -284,7 +278,7 @@ GRB彩色图像：每个像素由 RGB 组成。这是...
 
 
   
-    <article id="post-SpringMVC/Spring踩坑记录"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-FrontEnd/React 实战"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -292,7 +286,7 @@ GRB彩色图像：每个像素由 RGB 组成。这是...
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/22/SpringMVC/Spring%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/">SpringMVC 踩坑记录</a>
+      <a class="article-title" href="/2019/01/17/FrontEnd/React%20%E5%AE%9E%E6%88%98/">React 实战</a>
     </h1>
   
 
@@ -300,12 +294,12 @@ GRB彩色图像：每个像素由 RGB 组成。这是...
     
     <div class="article-meta">
       
-	<a href="/2018/04/22/SpringMVC/Spring%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" class="article-date">
-	  <time datetime="2018-04-22T00:01:28.000Z" itemprop="datePublished">2018-04-22</time>
+	<a href="/2019/01/17/FrontEnd/React%20%E5%AE%9E%E6%88%98/" class="article-date">
+	  <time datetime="2019-01-17T03:20:28.000Z" itemprop="datePublished">2019-01-17</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/SpringMVC/">SpringMVC</a>
+    <a class="article-category-link" href="/categories/FrontEnd/">FrontEnd</a>
 
       
       
@@ -314,11 +308,11 @@ GRB彩色图像：每个像素由 RGB 组成。这是...
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1. 处理静态资源静态资源直接放在 webapp/web 下，而我们的模板一般是在 WEB-INF 下，但是 WEN-INF     下的东西一般不让访问的，模板之所以能访问到是因为有模板引擎的映射，但是我们的警惕资源应该是直接能访问的东西，直接放在 web 下类似于 jsp 直接访问，而不能放在 WEB-INF 下，并且我们要开启静态资源访问 &lt;mvc:default-servlet-handler/&gt;
-2. Thymeleaf 乱码问题一开始除了乱码想着直接在 web.xm...
+          1.目录
+2.依赖安装12345cnpm install antd-mobile -S //组件按需加载  第二个是用来做react脚手架的二次配置的，因为我们看不到Webpack的配置文件了 https://www.cnblogs.com/xiaohuochai/p/8491055.htmlcnpm install --save-dev babel-plugin-import react-app-rewired@2.0.2-next.0 //注意指定版本号否则不兼容cnpm instal...
         </p>
         <p class="article-more-link">
-          <a href="/2018/04/22/SpringMVC/Spring%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/#more">Read More</a>
+          <a href="/2019/01/17/FrontEnd/React%20%E5%AE%9E%E6%88%98/#more">Read More</a>
         </p>
       
     </div>
@@ -337,7 +331,7 @@ GRB彩色图像：每个像素由 RGB 组成。这是...
 
 
   
-    <article id="post-SpringMVC/Spring 整合"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-DataBase/MangoDB 入门"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -345,7 +339,7 @@ GRB彩色图像：每个像素由 RGB 组成。这是...
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/21/SpringMVC/Spring%20%E6%95%B4%E5%90%88/">SpringMVC 整合</a>
+      <a class="article-title" href="/2019/01/16/DataBase/MangoDB%20%E5%85%A5%E9%97%A8/">MangoDB 入门</a>
     </h1>
   
 
@@ -353,12 +347,12 @@ GRB彩色图像：每个像素由 RGB 组成。这是...
     
     <div class="article-meta">
       
-	<a href="/2018/04/21/SpringMVC/Spring%20%E6%95%B4%E5%90%88/" class="article-date">
-	  <time datetime="2018-04-21T12:01:28.000Z" itemprop="datePublished">2018-04-21</time>
+	<a href="/2019/01/16/DataBase/MangoDB%20%E5%85%A5%E9%97%A8/" class="article-date">
+	  <time datetime="2019-01-16T01:53:28.000Z" itemprop="datePublished">2019-01-16</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/SpringMVC/">SpringMVC</a>
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
 
       
       
@@ -367,12 +361,14 @@ GRB彩色图像：每个像素由 RGB 组成。这是...
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          今天一开始直接用了 Idea 来创建一个 SpringMVC+Spring+Mybatis+Thymeleaf 的项目，一开始还是挺顺利的，除了在 Thymeleaf 那个地方卡了一下，后面项目还是顺利跑起来了。
-接着想用 Maven 搭建，因为一开始用 Idea 生成的项目使用的手动导入 jar 这样非常费力，为了一劳永逸和简单就采用了 maven 来构建项目。最后发现自己陷入了一个大坑，好久没有跳上来。
-接着我就把用 Maven 搭建 SpringMVC + Spring + Myba...
+          1. 设置为windows启动项1mongod -dbpath &quot;C:\Program Files\MongoDB\Server\4.0\data&quot; -logpath &quot;C:\Program Files\MongoDB\Server\4.0\log\MongoDB.log&quot; -install -serviceName &quot;MongoDB&quot;
+
+2.基本概念
+数据库（database）:数据的仓库可以在仓库中存放集合
+集合（collec...
         </p>
         <p class="article-more-link">
-          <a href="/2018/04/21/SpringMVC/Spring%20%E6%95%B4%E5%90%88/#more">Read More</a>
+          <a href="/2019/01/16/DataBase/MangoDB%20%E5%85%A5%E9%97%A8/#more">Read More</a>
         </p>
       
     </div>
@@ -391,7 +387,7 @@ GRB彩色图像：每个像素由 RGB 组成。这是...
 
 
   
-    <article id="post-Tools/iTerm2 配置及使用"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-FrontEnd/块级元素居中方案"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -399,7 +395,7 @@ GRB彩色图像：每个像素由 RGB 组成。这是...
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/20/Tools/iTerm2%20%E9%85%8D%E7%BD%AE%E5%8F%8A%E4%BD%BF%E7%94%A8/">iTerm2 配置及使用技巧</a>
+      <a class="article-title" href="/2019/01/10/FrontEnd/%E5%9D%97%E7%BA%A7%E5%85%83%E7%B4%A0%E5%B1%85%E4%B8%AD%E6%96%B9%E6%A1%88/">块级元素居中方案</a>
     </h1>
   
 
@@ -407,12 +403,12 @@ GRB彩色图像：每个像素由 RGB 组成。这是...
     
     <div class="article-meta">
       
-	<a href="/2018/04/20/Tools/iTerm2%20%E9%85%8D%E7%BD%AE%E5%8F%8A%E4%BD%BF%E7%94%A8/" class="article-date">
-	  <time datetime="2018-04-20T13:09:40.000Z" itemprop="datePublished">2018-04-20</time>
+	<a href="/2019/01/10/FrontEnd/%E5%9D%97%E7%BA%A7%E5%85%83%E7%B4%A0%E5%B1%85%E4%B8%AD%E6%96%B9%E6%A1%88/" class="article-date">
+	  <time datetime="2019-01-10T14:01:28.000Z" itemprop="datePublished">2019-01-10</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a>
+    <a class="article-category-link" href="/categories/FrontEnd/">FrontEnd</a>
 
       
       
@@ -421,35 +417,16 @@ GRB彩色图像：每个像素由 RGB 组成。这是...
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1. 技巧：1. 选中双击选中，三击选中整行，选中即复制。即任何选中状态的字符串都被放到了系统剪切板中。
-2. command
-可以拖拽选中的字符串；
-点击 url：调用默认浏览器访问该网址；
-点击文件：调用默认程序打开文件
+          1. 方案一html:
+1&lt;div class&#x3D;&quot;main&quot;&gt;&lt;&#x2F;main&gt;
 
-3. 快捷键
-切换 tab：⌘+←, ⌘+→
-切换分屏：⌘+[/]
-新建 tab：⌘+t；
-切分屏幕：⌘+d 水平切分，⌘+Shift+d 垂直切分；
-智能查找，支持正则查找：⌘+f。
+css:
+12345678910.main&#123;  width:400px;  height:200px;  background:#eee;  position:absolute;  left:50%;  top:50%;  margin-left:-200px;  margin-top:-100px;&#125;
 
-
-
-
-命令
-说明
-
-
-
-command + t
-新建标签
-
-
-command ...
+利用定位，移动宽高的一...
         </p>
         <p class="article-more-link">
-          <a href="/2018/04/20/Tools/iTerm2%20%E9%85%8D%E7%BD%AE%E5%8F%8A%E4%BD%BF%E7%94%A8/#more">Read More</a>
+          <a href="/2019/01/10/FrontEnd/%E5%9D%97%E7%BA%A7%E5%85%83%E7%B4%A0%E5%B1%85%E4%B8%AD%E6%96%B9%E6%A1%88/#more">Read More</a>
         </p>
       
     </div>
@@ -468,7 +445,7 @@ command ...
 
 
   
-    <article id="post-SpringMVC/SpringMVC 基础"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-FrontEnd/webpack 入门"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -476,7 +453,7 @@ command ...
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/18/SpringMVC/SpringMVC%20%E5%9F%BA%E7%A1%80/">SpringMVC 基础</a>
+      <a class="article-title" href="/2019/01/10/FrontEnd/webpack%20%E5%85%A5%E9%97%A8/">Webpack 入门</a>
     </h1>
   
 
@@ -484,12 +461,12 @@ command ...
     
     <div class="article-meta">
       
-	<a href="/2018/04/18/SpringMVC/SpringMVC%20%E5%9F%BA%E7%A1%80/" class="article-date">
-	  <time datetime="2018-04-18T14:01:28.000Z" itemprop="datePublished">2018-04-18</time>
+	<a href="/2019/01/10/FrontEnd/webpack%20%E5%85%A5%E9%97%A8/" class="article-date">
+	  <time datetime="2019-01-10T07:20:28.000Z" itemprop="datePublished">2019-01-10</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/SpringMVC/">SpringMVC</a>
+    <a class="article-category-link" href="/categories/FrontEnd/">FrontEnd</a>
 
       
       
@@ -498,20 +475,18 @@ command ...
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1.SpringMVC 基础原理
-C     前端控制器 ——&gt; DispatcherServlet
-M    数据对象
-V      视图处理器ViewResvor
+          从 webpack v4.0.0 开始，可以不用引入一个配置文件。然而，webpack 仍然还是高度可配置的。在开始前你需要先理解四个核心概念：
 
-&lt;!—more–&gt;
-处理步骤：
-发起请求到前端控制器 DispatcherServlet 
-然后这个控制器会调用 HandlerMapping  查找对应的 Controller或者说 Handler 
-找到了对应的 Controller 就让 HandlerAdaptor 去执行 handler 
-执行...
+入口(entry)
+输出(output)
+loader
+插件(plugins)
+
+1.入口(entry)*入口起点(entry point)**指示 webpack 应该使用哪个模块，来作为构建其内部依赖图*的开始。进入入口起点后，webpack 会找出有哪些模块和库是入口起点（直接和间接）依赖的。
+123module.exports = &#...
         </p>
         <p class="article-more-link">
-          <a href="/2018/04/18/SpringMVC/SpringMVC%20%E5%9F%BA%E7%A1%80/#more">Read More</a>
+          <a href="/2019/01/10/FrontEnd/webpack%20%E5%85%A5%E9%97%A8/#more">Read More</a>
         </p>
       
     </div>
@@ -530,7 +505,7 @@ V      视图处理器ViewResvor
 
 
   
-    <article id="post-Netty/NioEventLoop 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-FrontEnd/JavaScript 模块化"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -538,7 +513,7 @@ V      视图处理器ViewResvor
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/16/Netty/NioEventLoop%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">NioEventLoop 源码分析</a>
+      <a class="article-title" href="/2019/01/10/FrontEnd/JavaScript%20%E6%A8%A1%E5%9D%97%E5%8C%96/">JavaScript 模块化</a>
     </h1>
   
 
@@ -546,12 +521,12 @@ V      视图处理器ViewResvor
     
     <div class="article-meta">
       
-	<a href="/2018/04/16/Netty/NioEventLoop%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
-	  <time datetime="2018-04-16T09:40:24.000Z" itemprop="datePublished">2018-04-16</time>
+	<a href="/2019/01/10/FrontEnd/JavaScript%20%E6%A8%A1%E5%9D%97%E5%8C%96/" class="article-date">
+	  <time datetime="2019-01-10T04:20:28.000Z" itemprop="datePublished">2019-01-10</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/Netty-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">Netty 源码分析</a>
+    <a class="article-category-link" href="/categories/FrontEnd/">FrontEnd</a>
 
       
       
@@ -560,11 +535,10 @@ V      视图处理器ViewResvor
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          NioEventLoop 源码分析1. SingleThreadEventExecutor 的 execute 方法NioEventLoop 的核心就在于它的 run() 他是在第一次添加任务的时候开始执行。那我们先看看第一次添加任务的地方，其实第一次添加任务的地方是在父类中的 execute() 方法。所以先去分析一下 SingleThreadEventExecutor 的execute() 方法。我把代码精简了贴出来，只看核心的部分。
-123456789101112public voi...
+          1. 模块化过程1. 全局函数123456789101112/** * 全局函数模式: 将不同的功能封装成不同的全局函数 * 问题: Global被污染了, 很容易引起命名冲突 *///数据let data = &#x27;atguigu.com&#x27;function foo() &#123;    console.log(&#x27;foo()&#x27;)&#125;function bar() &#123;    console.log(&#x27;bar()&#x27;)&#...
         </p>
         <p class="article-more-link">
-          <a href="/2018/04/16/Netty/NioEventLoop%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
+          <a href="/2019/01/10/FrontEnd/JavaScript%20%E6%A8%A1%E5%9D%97%E5%8C%96/#more">Read More</a>
         </p>
       
     </div>
@@ -583,7 +557,7 @@ V      视图处理器ViewResvor
 
 
   
-    <article id="post-SpringBoot/SpringBoot 笔记 ( 四 )：web 开发"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-FrontEnd/ECMAScript 6"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -591,7 +565,7 @@ V      视图处理器ViewResvor
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/14/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%9B%9B%20)%EF%BC%9Aweb%20%E5%BC%80%E5%8F%91/">SpringBoot 笔记 ( 四 )：web 开发</a>
+      <a class="article-title" href="/2019/01/10/FrontEnd/ECMAScript%206/">ECMAScript 从入门到精通</a>
     </h1>
   
 
@@ -599,12 +573,12 @@ V      视图处理器ViewResvor
     
     <div class="article-meta">
       
-	<a href="/2018/04/14/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%9B%9B%20)%EF%BC%9Aweb%20%E5%BC%80%E5%8F%91/" class="article-date">
-	  <time datetime="2018-04-14T02:01:28.000Z" itemprop="datePublished">2018-04-14</time>
+	<a href="/2019/01/10/FrontEnd/ECMAScript%206/" class="article-date">
+	  <time datetime="2019-01-10T00:01:28.000Z" itemprop="datePublished">2019-01-10</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+    <a class="article-category-link" href="/categories/FrontEnd/">FrontEnd</a>
 
       
       
@@ -613,10 +587,22 @@ V      视图处理器ViewResvor
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          SpringBoot 笔记 (四): web 开发1、SpringBoot对静态资源的映射规则123456@ConfigurationProperties(prefix = &quot;spring.resources&quot;, ignoreUnknownFields = false)public class ResourceProperties implements ResourceLoaderAware &#123;//静态资源的路径	private static final St...
+          1. es51. 严格模式1.理解:
+除了正常运行模式(混杂模式)，ES5添加了第二种运行模式：”严格模式”（strict mode）。
+
+顾名思义，这种模式使得Javascript在更严格的语法条件下运行
+2.目的/作用
+消除Javascript语法的一些不合理、不严谨之处，减少一些怪异行为
+消除代码运行的一些不安全之处，为代码的安全运行保驾护航
+为未来新版本的Javascript做好铺垫3.使用
+
+
+在全局或函数的第一条语句定义为: ‘use strict’;
+
+如果浏览器不支持, 只...
         </p>
         <p class="article-more-link">
-          <a href="/2018/04/14/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%9B%9B%20)%EF%BC%9Aweb%20%E5%BC%80%E5%8F%91/#more">Read More</a>
+          <a href="/2019/01/10/FrontEnd/ECMAScript%206/#more">Read More</a>
         </p>
       
     </div>
@@ -635,7 +621,7 @@ V      视图处理器ViewResvor
 
 
   
-    <article id="post-SpringBoot/SpringBoot 笔记 ( 三 )：日志系统"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-FrontEnd/Javascript 详解"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -643,7 +629,7 @@ V      视图处理器ViewResvor
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%89%20)%EF%BC%9A%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/">SpringBoot 笔记 ( 三 )：日志系统</a>
+      <a class="article-title" href="/2019/01/09/FrontEnd/Javascript%20%E8%AF%A6%E8%A7%A3/">JavaScript 从入门到精通</a>
     </h1>
   
 
@@ -651,12 +637,12 @@ V      视图处理器ViewResvor
     
     <div class="article-meta">
       
-	<a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%89%20)%EF%BC%9A%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="article-date">
-	  <time datetime="2018-04-13T14:01:28.000Z" itemprop="datePublished">2018-04-13</time>
+	<a href="/2019/01/09/FrontEnd/Javascript%20%E8%AF%A6%E8%A7%A3/" class="article-date">
+	  <time datetime="2019-01-09T03:01:28.000Z" itemprop="datePublished">2019-01-09</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+    <a class="article-category-link" href="/categories/FrontEnd/">FrontEnd</a>
 
       
       
@@ -665,12 +651,11 @@ V      视图处理器ViewResvor
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          SpringBoot 笔记 ( 三 )：日志系统1、日志框架日志框架就是防止我们再去像以前那样，一直进行System.out.println(“”)将关键数据打印在控制台。框架来记录系统的一些运行时信息，但是随着日志框架的增长，和接口的不一致，导致了使用上的差别很大，这里采用了一个类似于数据库驱动的模式，数据库驱动是 Java 提供的一个 API，然后真正的实现是需要各个数据库厂商去完成的，而 log 也开始采用这种面向接口编程的方法采用日志抽象层。
-
-市面上的日志框架JUL、JCL、Jb...
+          1. this​    解析器在调用函数每次都会向函数内部传递进一个隐含的参数,这个隐含的参数就是this，this指向的是一个对象， 这个对象我们称为函数执行的 上下文对象，根据函数的调用方式的不同，this会指向不同的对象，以方法的形式调用时，this就是调用方法的那个对象。当我们直接调用一个全局的函数的时候其实就是 window 对像上面的方法。
+1234567891011121314151617181920212223function fun()&#123;   console.l...
         </p>
         <p class="article-more-link">
-          <a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%89%20)%EF%BC%9A%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/#more">Read More</a>
+          <a href="/2019/01/09/FrontEnd/Javascript%20%E8%AF%A6%E8%A7%A3/#more">Read More</a>
         </p>
       
     </div>
@@ -689,7 +674,7 @@ V      视图处理器ViewResvor
 
 
   
-    <article id="post-SpringBoot/SpringBoot 笔记 ( 二 )：自定义配置"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-FrontEnd/CSS3 详解"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -697,7 +682,7 @@ V      视图处理器ViewResvor
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%8C%20)%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE/">SpringBoot笔记 ( 二 )：自定义配置</a>
+      <a class="article-title" href="/2019/01/08/FrontEnd/CSS3%20%E8%AF%A6%E8%A7%A3/">CSS3 从入门到精通</a>
     </h1>
   
 
@@ -705,12 +690,12 @@ V      视图处理器ViewResvor
     
     <div class="article-meta">
       
-	<a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%8C%20)%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE/" class="article-date">
-	  <time datetime="2018-04-13T14:01:28.000Z" itemprop="datePublished">2018-04-13</time>
+	<a href="/2019/01/08/FrontEnd/CSS3%20%E8%AF%A6%E8%A7%A3/" class="article-date">
+	  <time datetime="2019-01-08T13:01:28.000Z" itemprop="datePublished">2019-01-08</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+    <a class="article-category-link" href="/categories/FrontEnd/">FrontEnd</a>
 
       
       
@@ -719,17 +704,11 @@ V      视图处理器ViewResvor
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          SpringBoot 笔记 ( 二 )：自定义配置1. 配置文件SpringBoot使用一个全局的配置文件，配置文件名是固定的：
-
-application.properties
-application.yml
-
-&emsp;&emsp;  修改SpringBoot自动配置的默认值，因为在所有的自动配置类中他们都会去读取我们的配置文件，如果说有配置这些项目就按照我们配置的，没有则使用自动配置。
-
-&emsp;&emsp;  支持两种格式，我们主要说说后面一种，前面比较简单就是采用的点的方式定...
+          1. 选择器1. 一些注意的点1. love &amp; hate (lvht)​    这是什么意思呢？其实是我们在写 a 表的伪类的时候会有一些优先级的问题，如果说我们没有按照这个优先级写css 的话很可能会导致我们样式不生效或者说被覆盖的问题。具体来说就是 link , visited，hover，target 。
+2. nth-child(n)​    注意这个的 n 是从 1 开始的而不是 0 开始的，另外如果我们写了 #wrap p:nth-child(1) 的含义是指 id ...
         </p>
         <p class="article-more-link">
-          <a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%8C%20)%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE/#more">Read More</a>
+          <a href="/2019/01/08/FrontEnd/CSS3%20%E8%AF%A6%E8%A7%A3/#more">Read More</a>
         </p>
       
     </div>
@@ -752,7 +731,7 @@ application.yml
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -767,7 +746,7 @@ application.yml
   <div class="container">
       	<div class="row">
 	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
-	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2021 昨夜凛雨 All Rights Reserved.</p>
 	      
 	      
     		<p class="busuanzi_uv">
@@ -806,8 +785,6 @@ application.yml
     <a href="/categories" class="mobile-nav-link">Categories</a>
   
     <a href="/tags" class="mobile-nav-link">Tags</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
   
 </nav> -->
     
@@ -929,7 +906,7 @@ application.yml
             昨夜凛雨
           </div>
           <div class="panel-body">
-            Copyright © 2020 lwen All Rights Reserved.
+            Copyright © 2021 lwen All Rights Reserved.
           </div>
         </div>
       </div>

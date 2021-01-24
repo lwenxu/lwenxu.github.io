@@ -14,32 +14,30 @@
   <meta name="description" content="1.基本概念1. 图像的定义 图像：一幅图像是一个东西的另一种表示，是其所表示物体信息的一个浓缩和高度概括。  2. 图像分类1. 模拟图像：连续变化的函数2. 数字图像：离散的矩阵表示数字图像的定义:数字图像是指由被称为像素的小区域组成的二维矩阵。 数字图像类型： 二值图像：只有0、1 （黑、白）  灰度图像：像素取值是 0-255 ，有中间过度。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数字图像处理">
-<meta property="og:url" content="http://lwenxu.coding.me/2018/05/06/Others/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/index.html">
+<meta property="og:url" content="https://lwenxu.github.io/2018/05/06/Others/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/index.html">
 <meta property="og:site_name" content="昨夜凛雨">
 <meta property="og:description" content="1.基本概念1. 图像的定义 图像：一幅图像是一个东西的另一种表示，是其所表示物体信息的一个浓缩和高度概括。  2. 图像分类1. 模拟图像：连续变化的函数2. 数字图像：离散的矩阵表示数字图像的定义:数字图像是指由被称为像素的小区域组成的二维矩阵。 数字图像类型： 二值图像：只有0、1 （黑、白）  灰度图像：像素取值是 0-255 ，有中间过度。">
 <meta property="og:locale">
 <meta property="og:image" content="https://user-images.githubusercontent.com/22151420/39669253-315e3ef6-5119-11e8-9cae-8223ab4a63c1.png">
 <meta property="og:image" content="https://user-images.githubusercontent.com/22151420/39669280-3ca12336-511a-11e8-9823-af0265ccd48e.png">
 <meta property="article:published_time" content="2018-05-06T02:15:13.000Z">
-<meta property="article:modified_time" content="2018-12-19T12:36:42.000Z">
+<meta property="article:modified_time" content="2021-01-23T15:24:50.160Z">
 <meta property="article:author" content="lwen">
 <meta property="article:tag" content="数字图像">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://user-images.githubusercontent.com/22151420/39669253-315e3ef6-5119-11e8-9cae-8223ab4a63c1.png">
   
-    <link rel="alternate" href="/atom.xml" title="昨夜凛雨" type="application/atom+xml">
-  
 
   
 
-  <link rel="icon" href="/css/images/mylogo.jpg">
-  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
   
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
   <style type="text/css">
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
@@ -105,7 +103,7 @@
               <a class="brand" style="
                  margin-top: 0px;"  
                 href="#" data-toggle="modal" data-target="#myModal" >
-                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
               </a>
             
             
@@ -119,8 +117,6 @@
                   <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
                 
                   <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/about">About</a> </li>
                 
                   <li><div id="search-form-wrap">
 
@@ -508,11 +504,11 @@
 
 <script>
 var a = new Donate({
-  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
   btnText: 'Donate', // 可选参数，打赏按钮文字
   el: document.getElementById('donation_div'),
-  wechatImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/WeChanQR.png',
-  alipayImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/AliPayQR.jpg'
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
 });
 </script>
       
@@ -524,7 +520,7 @@ var a = new Donate({
           </li>
           <li class="post-copyright-link">
           <strong>Post link:  </strong>
-          <a href="/2018/05/06/Others/数字图像处理/" target="_blank" title="数字图像处理">http://lwenxu.coding.me/2018/05/06/Others/数字图像处理/</a>
+          <a href="/2018/05/06/Others/数字图像处理/" target="_blank" title="数字图像处理">https://lwenxu.github.io/2018/05/06/Others/数字图像处理/</a>
           </li>
           <li class="post-copyright-license">
             <strong>Copyright Notice:   </strong>
@@ -611,7 +607,7 @@ var a = new Donate({
   <div class="container">
       	<div class="row">
 	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
-	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2021 昨夜凛雨 All Rights Reserved.</p>
 	      
 	      
     		<p class="busuanzi_uv">
@@ -650,8 +646,6 @@ var a = new Donate({
     <a href="/categories" class="mobile-nav-link">Categories</a>
   
     <a href="/tags" class="mobile-nav-link">Tags</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
   
 </nav> -->
     
@@ -777,7 +771,7 @@ var a = new Donate({
             昨夜凛雨
           </div>
           <div class="panel-body">
-            Copyright © 2020 lwen All Rights Reserved.
+            Copyright © 2021 lwen All Rights Reserved.
           </div>
         </div>
       </div>

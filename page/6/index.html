@@ -11,26 +11,24 @@
   
   <meta property="og:type" content="website">
 <meta property="og:title" content="昨夜凛雨">
-<meta property="og:url" content="http://lwenxu.coding.me/page/6/index.html">
+<meta property="og:url" content="https://lwenxu.github.io/page/6/index.html">
 <meta property="og:site_name" content="昨夜凛雨">
 <meta property="og:locale">
 <meta property="article:author" content="lwen">
 <meta property="article:tag" content="Java PHP Code">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="昨夜凛雨" type="application/atom+xml">
-  
 
   
 
-  <link rel="icon" href="/css/images/mylogo.jpg">
-  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
   
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
   <style type="text/css">
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
@@ -94,7 +92,7 @@
               <a class="brand" style="
                  margin-top: 0px;"  
                  >
-                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
               </a>
             
             
@@ -108,8 +106,6 @@
                   <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
                 
                   <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/about">About</a> </li>
                 
                   <li><div id="search-form-wrap">
 
@@ -166,7 +162,7 @@
         
           <section id="main" style="float:none;">
   
-    <article id="post-Java SourceCode/Semaphore 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-DataBase/MyBatis笔记六：整合Spring"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -174,7 +170,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/03/31/Java%20SourceCode/Semaphore%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">Semaphore 源码分析</a>
+      <a class="article-title" href="/2018/06/06/DataBase/MyBatis%E7%AC%94%E8%AE%B0%E5%85%AD%EF%BC%9A%E6%95%B4%E5%90%88Spring/">MyBatis笔记六：整合Spring</a>
     </h1>
   
 
@@ -182,12 +178,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/03/31/Java%20SourceCode/Semaphore%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
-	  <time datetime="2018-03-31T13:35:02.000Z" itemprop="datePublished">2018-03-31</time>
+	<a href="/2018/06/06/DataBase/MyBatis%E7%AC%94%E8%AE%B0%E5%85%AD%EF%BC%9A%E6%95%B4%E5%90%88Spring/" class="article-date">
+	  <time datetime="2018-06-06T14:01:49.000Z" itemprop="datePublished">2018-06-06</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+    <a class="article-category-link" href="/categories/MyBatis/">MyBatis</a>
 
       
       
@@ -196,12 +192,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          Semaphore 源码分析
-1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
-1. Semephore 简单介绍&emsp;&emsp;  一般来说，在 Java 中比较常用的同步工具就是 Lock 和 Synchr...
+          MyBatis笔记六：整合Spring
         </p>
         <p class="article-more-link">
-          <a href="/2018/03/31/Java%20SourceCode/Semaphore%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
+          <a href="/2018/06/06/DataBase/MyBatis%E7%AC%94%E8%AE%B0%E5%85%AD%EF%BC%9A%E6%95%B4%E5%90%88Spring/#more">Read More</a>
         </p>
       
     </div>
@@ -220,7 +214,7 @@
 
 
   
-    <article id="post-Java SourceCode/ReentrantLock 与 AQS 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-DataBase/MyBatis笔记五：缓存"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -228,7 +222,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/03/29/Java%20SourceCode/ReentrantLock%20%E4%B8%8E%20AQS%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">ReentrantLock 与 AQS 源码分析</a>
+      <a class="article-title" href="/2018/06/05/DataBase/MyBatis%E7%AC%94%E8%AE%B0%E4%BA%94%EF%BC%9A%E7%BC%93%E5%AD%98/">MyBatis笔记五：缓存</a>
     </h1>
   
 
@@ -236,12 +230,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/03/29/Java%20SourceCode/ReentrantLock%20%E4%B8%8E%20AQS%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
-	  <time datetime="2018-03-29T14:55:02.000Z" itemprop="datePublished">2018-03-29</time>
+	<a href="/2018/06/05/DataBase/MyBatis%E7%AC%94%E8%AE%B0%E4%BA%94%EF%BC%9A%E7%BC%93%E5%AD%98/" class="article-date">
+	  <time datetime="2018-06-05T10:01:49.000Z" itemprop="datePublished">2018-06-05</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+    <a class="article-category-link" href="/categories/MyBatis/">MyBatis</a>
 
       
       
@@ -250,12 +244,16 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          ReentrantLock 与 AQS 源码分析
-1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
-1. 基本结构&emsp;&emsp;  重入锁 ReetrantLock，JDK 1.5新增的类，作用与synchr...
+          MyBatis笔记五：缓存Mybatis 的缓存是分为两级缓存的，一个是本地缓存，也就是默认的缓存，这一个缓存是默认开启的。这个缓存是 sqlSession 级别的缓存也就是一个数据库会话的缓存，这个缓存其实说白了就是 sqlSession 级别的一个 Map 。
+1.一级缓存一级缓存底层是一个 map 。虽然缓存默认开启的但是我们也会遇到缓存失效的情况：
+
+sqlSession 不同
+查询条件不同，导致返回的数据都不同
+在两次查询之间进行了插删改操作
+手动使用了 sqlSession.c...
         </p>
         <p class="article-more-link">
-          <a href="/2018/03/29/Java%20SourceCode/ReentrantLock%20%E4%B8%8E%20AQS%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
+          <a href="/2018/06/05/DataBase/MyBatis%E7%AC%94%E8%AE%B0%E4%BA%94%EF%BC%9A%E7%BC%93%E5%AD%98/#more">Read More</a>
         </p>
       
     </div>
@@ -274,7 +272,7 @@
 
 
   
-    <article id="post-Java SourceCode/synchronized 原理分析"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-DataBase/MyBatis笔记四：动态SQL"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -282,7 +280,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/03/29/Java%20SourceCode/synchronized%20%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">synchronized 原理分析</a>
+      <a class="article-title" href="/2018/06/02/DataBase/MyBatis%E7%AC%94%E8%AE%B0%E5%9B%9B%EF%BC%9A%E5%8A%A8%E6%80%81SQL/">MyBatis笔记四：动态SQL</a>
     </h1>
   
 
@@ -290,12 +288,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/03/29/Java%20SourceCode/synchronized%20%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/" class="article-date">
-	  <time datetime="2018-03-29T10:15:02.000Z" itemprop="datePublished">2018-03-29</time>
+	<a href="/2018/06/02/DataBase/MyBatis%E7%AC%94%E8%AE%B0%E5%9B%9B%EF%BC%9A%E5%8A%A8%E6%80%81SQL/" class="article-date">
+	  <time datetime="2018-06-02T14:01:49.000Z" itemprop="datePublished">2018-06-02</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+    <a class="article-category-link" href="/categories/MyBatis/">MyBatis</a>
 
       
       
@@ -304,12 +302,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          synchronized 原理分析
-1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
-1. synchronized 介绍&emsp;&emsp;  在并发程序中，这个关键字可能是出现频率最高的一个字段，他可以避免多线...
+          MyBatis笔记四：动态SQL什么是动态SQL？ 简单来说就是类似于OGNL 表达式的这种 SQL 标签的嵌套然后帮助我们生成SQL语句而避免另外我们的拼字符串的操作。
+1.if标签if 标签中的 test 属性就是用来测试条件的，然后里面的条件之间可以采用 and or来连接，当然我们也可以使用 &amp;&amp; 这种，但是注意我们只能使用它们的实体符号而不能直接使用 &amp;&amp; 这种。
+12345678910111213141516@Testpublic void Dy...
         </p>
         <p class="article-more-link">
-          <a href="/2018/03/29/Java%20SourceCode/synchronized%20%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/#more">Read More</a>
+          <a href="/2018/06/02/DataBase/MyBatis%E7%AC%94%E8%AE%B0%E5%9B%9B%EF%BC%9A%E5%8A%A8%E6%80%81SQL/#more">Read More</a>
         </p>
       
     </div>
@@ -328,7 +326,7 @@
 
 
   
-    <article id="post-Java SourceCode/ConcurrentHashMap 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-DataBase/MyBatis笔记三：SQL映射文件"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -336,7 +334,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/03/27/Java%20SourceCode/ConcurrentHashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">ConcurrentHashMap 源码分析</a>
+      <a class="article-title" href="/2018/05/31/DataBase/MyBatis%E7%AC%94%E8%AE%B0%E4%B8%89%EF%BC%9ASQL%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6/">MyBatis笔记三：SQL映射文件</a>
     </h1>
   
 
@@ -344,12 +342,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/03/27/Java%20SourceCode/ConcurrentHashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
-	  <time datetime="2018-03-27T08:15:02.000Z" itemprop="datePublished">2018-03-27</time>
+	<a href="/2018/05/31/DataBase/MyBatis%E7%AC%94%E8%AE%B0%E4%B8%89%EF%BC%9ASQL%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6/" class="article-date">
+	  <time datetime="2018-05-31T11:56:49.000Z" itemprop="datePublished">2018-05-31</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+    <a class="article-category-link" href="/categories/MyBatis/">MyBatis</a>
 
       
       
@@ -358,12 +356,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          ConcurrentHashMap 源码分析
-1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
-1. 前言&emsp;&emsp;  终于到这个类了，其实在前面很过很多次这个类，因为这个类代码量比较大，并且涉及到并发的...
+          MyBatis笔记三：SQL映射文件1.简单的CRUD1.绑定首先呢我们还是需要把我们的 Mapper 接口和我们的 mapper xml 进行绑定，绑定的方式就是采用 namespace 了。不具体多说了。
+2.接口接着就是写我们的 Mapper 接口了，写Mapper接口的时候有一些注意事项，就是我们的 插删改 操作是可以有返回值的，默认情况下这些都是返回我们影响的行数，但是这里我们可以返回 Integer , Long , Boolean 类型，前两个好理解，就是我们常见的那种行数。...
         </p>
         <p class="article-more-link">
-          <a href="/2018/03/27/Java%20SourceCode/ConcurrentHashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
+          <a href="/2018/05/31/DataBase/MyBatis%E7%AC%94%E8%AE%B0%E4%B8%89%EF%BC%9ASQL%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6/#more">Read More</a>
         </p>
       
     </div>
@@ -382,7 +379,7 @@
 
 
   
-    <article id="post-Java SourceCode/HashSet 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-DataBase/MyBatis笔记二：配置"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -390,7 +387,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/03/27/Java%20SourceCode/HashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">HashSet 源码分析</a>
+      <a class="article-title" href="/2018/05/30/DataBase/MyBatis%E7%AC%94%E8%AE%B0%E4%BA%8C%EF%BC%9A%E9%85%8D%E7%BD%AE/">MyBatis笔记二：配置</a>
     </h1>
   
 
@@ -398,12 +395,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/03/27/Java%20SourceCode/HashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
-	  <time datetime="2018-03-27T06:15:02.000Z" itemprop="datePublished">2018-03-27</time>
+	<a href="/2018/05/30/DataBase/MyBatis%E7%AC%94%E8%AE%B0%E4%BA%8C%EF%BC%9A%E9%85%8D%E7%BD%AE/" class="article-date">
+	  <time datetime="2018-05-30T13:02:49.000Z" itemprop="datePublished">2018-05-30</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+    <a class="article-category-link" href="/categories/MyBatis/">MyBatis</a>
 
       
       
@@ -412,13 +409,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          HashSet 源码分析
-1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
-1. 基本结构1. 继承这个类简直适合 HashMap 如出一辙，他们继承的类都极其相似。继承的是 AbstractSet 。
-2. 实现实现...
+          MyBatis笔记二：配置1.全局配置1.properites这个配置主要是引入我们的 properites 配置文件的：
+12345678910111213&lt;properties resource=&quot;db.properties&quot;/&gt;&lt;environments default=&quot;development&quot;&gt;    &lt;environment id=&quot;development&quot;&gt;        &lt;...
         </p>
         <p class="article-more-link">
-          <a href="/2018/03/27/Java%20SourceCode/HashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
+          <a href="/2018/05/30/DataBase/MyBatis%E7%AC%94%E8%AE%B0%E4%BA%8C%EF%BC%9A%E9%85%8D%E7%BD%AE/#more">Read More</a>
         </p>
       
     </div>
@@ -437,7 +432,7 @@
 
 
   
-    <article id="post-Java SourceCode/LinkedHashSet 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-DataBase/MyBatis笔记一：GettingStart"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -445,7 +440,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/03/27/Java%20SourceCode/LinkedHashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">LinkedHashSet 源码分析</a>
+      <a class="article-title" href="/2018/05/30/DataBase/MyBatis%E7%AC%94%E8%AE%B0%E4%B8%80%EF%BC%9AGettingStart/">MyBatis笔记一：GettingStart</a>
     </h1>
   
 
@@ -453,12 +448,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/03/27/Java%20SourceCode/LinkedHashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
-	  <time datetime="2018-03-27T05:15:02.000Z" itemprop="datePublished">2018-03-27</time>
+	<a href="/2018/05/30/DataBase/MyBatis%E7%AC%94%E8%AE%B0%E4%B8%80%EF%BC%9AGettingStart/" class="article-date">
+	  <time datetime="2018-05-30T10:56:49.000Z" itemprop="datePublished">2018-05-30</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+    <a class="article-category-link" href="/categories/MyBatis/">MyBatis</a>
 
       
       
@@ -467,12 +462,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          LinkedHashSet 源码分析
-1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
-1. 基本结构&emsp;&emsp;  如果你看了 HashSet 现在基本一分钟就能弄明白 LinkedHashSet 的底层...
+          MyBatis笔记一：GettingStart1.MyBatis优点
+我们的工具和各种框架的作用就是为了我们操作数据库简洁，对于一些数据库的工具能帮我们少写一些处理异常等等的代码，但是他们并不是自动化的，很多的操作还是需要我们自己进行，所以我们的框架就帮我们把中间黑色的部分封装起来了，减少我们的负担，但是SQL也是重中之重，我们需要把这些东西自己来控制就有 MyBatis 这个半自动框架，以及我们需要学习更多的关于 HQL 的内容。
+相对于Hibernate 他的优点就是可以进行SQL 的...
         </p>
         <p class="article-more-link">
-          <a href="/2018/03/27/Java%20SourceCode/LinkedHashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
+          <a href="/2018/05/30/DataBase/MyBatis%E7%AC%94%E8%AE%B0%E4%B8%80%EF%BC%9AGettingStart/#more">Read More</a>
         </p>
       
     </div>
@@ -491,7 +486,7 @@
 
 
   
-    <article id="post-Java SourceCode/LinkedHashMap 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-SpringCloud/SpringCloud：Eureka服务注册与发现"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -499,7 +494,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/03/26/Java%20SourceCode/LinkedHashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">LinkedHashMap 源码分析</a>
+      <a class="article-title" href="/2018/05/26/SpringCloud/SpringCloud%EF%BC%9AEureka%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/">SpringCloud：Eureka服务注册与发现</a>
     </h1>
   
 
@@ -507,12 +502,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/03/26/Java%20SourceCode/LinkedHashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
-	  <time datetime="2018-03-26T08:15:02.000Z" itemprop="datePublished">2018-03-26</time>
+	<a href="/2018/05/26/SpringCloud/SpringCloud%EF%BC%9AEureka%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/" class="article-date">
+	  <time datetime="2018-05-26T02:51:28.000Z" itemprop="datePublished">2018-05-26</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+    <a class="article-category-link" href="/categories/SpringCloud/">SpringCloud</a>
 
       
       
@@ -521,13 +516,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          LinkedHashMap 源码分析
-1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
-1. 基本结构1. 实现实现的接口是 Map 
-2. 继承&emsp;&emsp;  继承的是 HashMap 这个就比较熟悉了，...
+          SpringCloud：Eureka服务注册与发现Eureka 其实就是一个 服务注册与发现的中心，也就是相当于我们前面做的一些生产者的服务需要注册到我们的注册中心，那么我们的消费者就不用把代码写死，而是可以去服务中心订阅对应的服务，获取服务的最新地址，并且进行逻辑解耦。
+说的更简单一点它就相当于我们的 Dubbo 中的zookeeper 的功能就是用来服务发现的和注册的。他是一个CS架构的一个应用，也就是我们会有客户端和服务端，接下来就准备使用这个服务注册中心。
+
+那么现在我们就只需要在...
         </p>
         <p class="article-more-link">
-          <a href="/2018/03/26/Java%20SourceCode/LinkedHashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
+          <a href="/2018/05/26/SpringCloud/SpringCloud%EF%BC%9AEureka%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/#more">Read More</a>
         </p>
       
     </div>
@@ -546,7 +541,7 @@
 
 
   
-    <article id="post-Java SourceCode/HashMap 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-SpringCloud/SpringCloud：微服务"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -554,7 +549,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/03/26/Java%20SourceCode/HashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">HashMap 源码分析</a>
+      <a class="article-title" href="/2018/05/25/SpringCloud/SpringCloud%EF%BC%9A%E5%BE%AE%E6%9C%8D%E5%8A%A1/">SpringCloud：微服务</a>
     </h1>
   
 
@@ -562,12 +557,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/03/26/Java%20SourceCode/HashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
-	  <time datetime="2018-03-26T08:15:02.000Z" itemprop="datePublished">2018-03-26</time>
+	<a href="/2018/05/25/SpringCloud/SpringCloud%EF%BC%9A%E5%BE%AE%E6%9C%8D%E5%8A%A1/" class="article-date">
+	  <time datetime="2018-05-25T12:01:28.000Z" itemprop="datePublished">2018-05-25</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+    <a class="article-category-link" href="/categories/SpringCloud/">SpringCloud</a>
 
       
       
@@ -576,15 +571,18 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          HashMap 源码分析
-1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
-1.结构1. 继承&emsp;&emsp;该类继承自 AbstractMap 这个类似于 ArrayList
-2. 实现具体如下：
+          1.微服务微服务其实就是我们的以前的整个应用拆分的一个个小的应用服务，也就是我们的一个个模块。每一个微服务就是一个进程，运行在一个独立的进程之上，然后通过网络进行通讯互联。
+2.微服务架构微服务架构是一种架构模式，他是把传统的单体应用(All in one)，拆分成多个项目独立的微服务，然后每一个为服务都是一个独立进程，拥有自己的独立的数据库。然后各个微服务的整合形成整个的微服务架构。
+3.微服务的优缺点1.优点：
+每一个服务就是一个聚焦一个功能
+单个服务开发简单
+服务解耦
+小而精
 
-首先这个...
+2....
         </p>
         <p class="article-more-link">
-          <a href="/2018/03/26/Java%20SourceCode/HashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
+          <a href="/2018/05/25/SpringCloud/SpringCloud%EF%BC%9A%E5%BE%AE%E6%9C%8D%E5%8A%A1/#more">Read More</a>
         </p>
       
     </div>
@@ -603,7 +601,7 @@
 
 
   
-    <article id="post-Java SourceCode/LinkedList 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-SpringCloud/SpringCloud：SpringCloud基础"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -611,7 +609,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/03/26/Java%20SourceCode/LinkedList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">LinkedList 源码分析</a>
+      <a class="article-title" href="/2018/05/25/SpringCloud/SpringCloud%EF%BC%9ASpringCloud%E5%9F%BA%E7%A1%80/">SpringCloud：基础</a>
     </h1>
   
 
@@ -619,12 +617,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/03/26/Java%20SourceCode/LinkedList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
-	  <time datetime="2018-03-26T07:15:02.000Z" itemprop="datePublished">2018-03-26</time>
+	<a href="/2018/05/25/SpringCloud/SpringCloud%EF%BC%9ASpringCloud%E5%9F%BA%E7%A1%80/" class="article-date">
+	  <time datetime="2018-05-25T12:01:28.000Z" itemprop="datePublished">2018-05-25</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+    <a class="article-category-link" href="/categories/SpringCloud/">SpringCloud</a>
 
       
       
@@ -633,12 +631,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          LinkedList 源码分析
-1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
-1.结构1. 继承&emsp;&emsp;该类继承自 AbstractSequentialList 这个是由于他是一个顺序的列表，所以说...
+          SpringCloud：基础SpringCloud 是微服务架构的一个实现框架，说他是一个框架更不如说他是一个生态，他包含了很多个技术，将这些技术组合起来形成我们的微服务架构应用。
+
+1.SpringCloud vs Dubbo
+最大区别：SpringCloud抛弃了Dubbo的RPC通信，采用的是基于HTTP的REST方式。    严格来说，这两种方式各有优劣。虽然从一定程度上来说，后者牺牲了服务调用的性能，但也避免了上面提到的原生RPC带来的问题。而且REST相比RPC更为灵活，服务提...
         </p>
         <p class="article-more-link">
-          <a href="/2018/03/26/Java%20SourceCode/LinkedList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
+          <a href="/2018/05/25/SpringCloud/SpringCloud%EF%BC%9ASpringCloud%E5%9F%BA%E7%A1%80/#more">Read More</a>
         </p>
       
     </div>
@@ -657,7 +656,7 @@
 
 
   
-    <article id="post-Java SourceCode/ArrayList 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-SpringBoot/SpringBoot 笔记 ( 十 )：错误处理"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -665,7 +664,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/03/25/Java%20SourceCode/ArrayList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">ArrayList 源码分析</a>
+      <a class="article-title" href="/2018/05/24/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%8D%81%20)%EF%BC%9A%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">SpringBoot 笔记(十)：错误处理</a>
     </h1>
   
 
@@ -673,12 +672,12 @@
     
     <div class="article-meta">
       
-	<a href="/2018/03/25/Java%20SourceCode/ArrayList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
-	  <time datetime="2018-03-25T13:15:02.000Z" itemprop="datePublished">2018-03-25</time>
+	<a href="/2018/05/24/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%8D%81%20)%EF%BC%9A%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/" class="article-date">
+	  <time datetime="2018-05-24T02:01:28.000Z" itemprop="datePublished">2018-05-24</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
 
       
       
@@ -687,13 +686,16 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          ArrayList 源码分析
-1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
-1. 结构&emsp;&emsp;首先我们需要对 ArrayList 有一个大致的了解就从结构来看看吧.
-1. 继承&emsp;&emsp...
+          SpringBoot 笔记 ( 十 )：错误处理1）、SpringBoot默认的错误处理机制默认效果：
+​        1）、浏览器，返回一个默认的错误页面        2）、如果是其他客户端，默认响应一个json数据
+
+
+2）、自动配置原理​    具体就是在    ErrorMvcAutoConfiguration，错误处理的自动配置。
+  给容器中添加了以下组件
+1、ErrorPageCustomizer：规定错误页面  /error12@Value(&quot;$&#123;e...
         </p>
         <p class="article-more-link">
-          <a href="/2018/03/25/Java%20SourceCode/ArrayList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
+          <a href="/2018/05/24/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%8D%81%20)%EF%BC%9A%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/#more">Read More</a>
         </p>
       
     </div>
@@ -716,7 +718,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/5/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/7/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/5/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/7/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -731,7 +733,7 @@
   <div class="container">
       	<div class="row">
 	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
-	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2021 昨夜凛雨 All Rights Reserved.</p>
 	      
 	      
     		<p class="busuanzi_uv">
@@ -770,8 +772,6 @@
     <a href="/categories" class="mobile-nav-link">Categories</a>
   
     <a href="/tags" class="mobile-nav-link">Tags</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
   
 </nav> -->
     
@@ -893,7 +893,7 @@
             昨夜凛雨
           </div>
           <div class="panel-body">
-            Copyright © 2020 lwen All Rights Reserved.
+            Copyright © 2021 lwen All Rights Reserved.
           </div>
         </div>
       </div>

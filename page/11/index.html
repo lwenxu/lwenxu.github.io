@@ -11,26 +11,24 @@
   
   <meta property="og:type" content="website">
 <meta property="og:title" content="昨夜凛雨">
-<meta property="og:url" content="http://lwenxu.coding.me/page/11/index.html">
+<meta property="og:url" content="https://lwenxu.github.io/page/11/index.html">
 <meta property="og:site_name" content="昨夜凛雨">
 <meta property="og:locale">
 <meta property="article:author" content="lwen">
 <meta property="article:tag" content="Java PHP Code">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="昨夜凛雨" type="application/atom+xml">
-  
 
   
 
-  <link rel="icon" href="/css/images/mylogo.jpg">
-  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
   
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
   <style type="text/css">
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
@@ -94,7 +92,7 @@
               <a class="brand" style="
                  margin-top: 0px;"  
                  >
-                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
               </a>
             
             
@@ -108,8 +106,6 @@
                   <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
                 
                   <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/about">About</a> </li>
                 
                   <li><div id="search-form-wrap">
 
@@ -166,7 +162,7 @@
         
           <section id="main" style="float:none;">
   
-    <article id="post-Algorithm/归并排序"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Java SourceCode/HashSet 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -174,7 +170,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/09/05/Algorithm/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">归并排序</a>
+      <a class="article-title" href="/2018/03/27/Java%20SourceCode/HashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">HashSet 源码分析</a>
     </h1>
   
 
@@ -182,12 +178,12 @@
     
     <div class="article-meta">
       
-	<a href="/2017/09/05/Algorithm/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="article-date">
-	  <time datetime="2017-09-05T09:17:39.000Z" itemprop="datePublished">2017-09-05</time>
+	<a href="/2018/03/27/Java%20SourceCode/HashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
+	  <time datetime="2018-03-27T06:15:02.000Z" itemprop="datePublished">2018-03-27</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/LeetCode/">-LeetCode</a>
+    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
 
       
       
@@ -196,12 +192,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          归并排序是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。
-首先考虑下如何将将二个有序数列合并。这个非常简单，只要从比较二个数列的第一个数，谁小就先取谁，取了后就在对应数列中删除这个数。然后再进行比较，如果有数列为空，那直接将另一个数列的数据依次取出即可。
-1234567891011121314151617181920//将有序数组a[]和b[]合并到c[]中  void MemeryArray(int a[], int...
+          HashSet 源码分析
+1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
+1. 基本结构1. 继承这个类简直适合 HashMap 如出一辙，他们继承的类都极其相似。继承的是 AbstractSet 。
+2. 实现实现...
         </p>
         <p class="article-more-link">
-          <a href="/2017/09/05/Algorithm/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/#more">Read More</a>
+          <a href="/2018/03/27/Java%20SourceCode/HashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
         </p>
       
     </div>
@@ -220,7 +217,7 @@
 
 
   
-    <article id="post-Leet Code/LinkedListCycle"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Java SourceCode/LinkedHashSet 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -228,7 +225,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/09/04/Leet%20Code/LinkedListCycle/">LinkedListCycle</a>
+      <a class="article-title" href="/2018/03/27/Java%20SourceCode/LinkedHashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">LinkedHashSet 源码分析</a>
     </h1>
   
 
@@ -236,12 +233,12 @@
     
     <div class="article-meta">
       
-	<a href="/2017/09/04/Leet%20Code/LinkedListCycle/" class="article-date">
-	  <time datetime="2017-09-04T13:54:37.000Z" itemprop="datePublished">2017-09-04</time>
+	<a href="/2018/03/27/Java%20SourceCode/LinkedHashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
+	  <time datetime="2018-03-27T05:15:02.000Z" itemprop="datePublished">2018-03-27</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/LeetCode/">-LeetCode</a>
+    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
 
       
       
@@ -250,18 +247,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          
-Given a linked list, determine if it has a cycle in it.
-
-Follow up:
-Can you solve it without using extra space?
-
-
-分析 一开始使用了复杂度O(n^2)的方法，使用两个指针a, b。a从表头开始一步一步往前走，遇到null则说明没有环，返回false；a每走一步，b从头开始走，如果遇到b==a.next，则说明有环true，如果遇到b==a，则说明暂时没有环，继续循环。
-后来找...
+          LinkedHashSet 源码分析
+1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
+1. 基本结构&emsp;&emsp;  如果你看了 HashSet 现在基本一分钟就能弄明白 LinkedHashSet 的底层...
         </p>
         <p class="article-more-link">
-          <a href="/2017/09/04/Leet%20Code/LinkedListCycle/#more">Read More</a>
+          <a href="/2018/03/27/Java%20SourceCode/LinkedHashSet%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
         </p>
       
     </div>
@@ -280,7 +271,7 @@ Can you solve it without using extra space?
 
 
   
-    <article id="post-Leet Code/WordBreak"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Java SourceCode/LinkedHashMap 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -288,7 +279,7 @@ Can you solve it without using extra space?
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/09/04/Leet%20Code/WordBreak/">WordBreak</a>
+      <a class="article-title" href="/2018/03/26/Java%20SourceCode/LinkedHashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">LinkedHashMap 源码分析</a>
     </h1>
   
 
@@ -296,12 +287,12 @@ Can you solve it without using extra space?
     
     <div class="article-meta">
       
-	<a href="/2017/09/04/Leet%20Code/WordBreak/" class="article-date">
-	  <time datetime="2017-09-04T12:52:16.000Z" itemprop="datePublished">2017-09-04</time>
+	<a href="/2018/03/26/Java%20SourceCode/LinkedHashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
+	  <time datetime="2018-03-26T08:15:02.000Z" itemprop="datePublished">2018-03-26</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/LeetCode/">-LeetCode</a>
+    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
 
       
       
@@ -310,11 +301,13 @@ Can you solve it without using extra space?
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          
-Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, determine if s can be segmented into a space-separated sequence of one or more dictionary words. You may assume the dictionary does not contain duplicate w...
+          LinkedHashMap 源码分析
+1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
+1. 基本结构1. 实现实现的接口是 Map 
+2. 继承&emsp;&emsp;  继承的是 HashMap 这个就比较熟悉了，...
         </p>
         <p class="article-more-link">
-          <a href="/2017/09/04/Leet%20Code/WordBreak/#more">Read More</a>
+          <a href="/2018/03/26/Java%20SourceCode/LinkedHashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
         </p>
       
     </div>
@@ -333,7 +326,7 @@ Given a non-empty string s and a dictionary wordDict containing a list of non-em
 
 
   
-    <article id="post-Leet Code/BinaryTreeLevelOrderTraversal树的层序遍历"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Java SourceCode/HashMap 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -341,7 +334,7 @@ Given a non-empty string s and a dictionary wordDict containing a list of non-em
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/09/03/Leet%20Code/BinaryTreeLevelOrderTraversal%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86/">BinaryTreeLevelOrderTraversal树的层序遍历</a>
+      <a class="article-title" href="/2018/03/26/Java%20SourceCode/HashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">HashMap 源码分析</a>
     </h1>
   
 
@@ -349,12 +342,12 @@ Given a non-empty string s and a dictionary wordDict containing a list of non-em
     
     <div class="article-meta">
       
-	<a href="/2017/09/03/Leet%20Code/BinaryTreeLevelOrderTraversal%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86/" class="article-date">
-	  <time datetime="2017-09-03T02:57:46.000Z" itemprop="datePublished">2017-09-03</time>
+	<a href="/2018/03/26/Java%20SourceCode/HashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
+	  <time datetime="2018-03-26T08:15:02.000Z" itemprop="datePublished">2018-03-26</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/LeetCode/">-LeetCode</a>
+    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
 
       
       
@@ -363,20 +356,15 @@ Given a non-empty string s and a dictionary wordDict containing a list of non-em
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          
-Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
+          HashMap 源码分析
+1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
+1.结构1. 继承&emsp;&emsp;该类继承自 AbstractMap 这个类似于 ArrayList
+2. 实现具体如下：
 
-For example:
-Given binary tree [3,9,20,null,null,15,7],
-    3
-   / \
-  9  20
-    /  \
-   15   7
-return its level order traversa...
+首先这个...
         </p>
         <p class="article-more-link">
-          <a href="/2017/09/03/Leet%20Code/BinaryTreeLevelOrderTraversal%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86/#more">Read More</a>
+          <a href="/2018/03/26/Java%20SourceCode/HashMap%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
         </p>
       
     </div>
@@ -395,7 +383,7 @@ return its level order traversa...
 
 
   
-    <article id="post-Leet Code/SymmetricTree"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Java SourceCode/LinkedList 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -403,7 +391,7 @@ return its level order traversa...
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/09/03/Leet%20Code/SymmetricTree/">SymmetricTree</a>
+      <a class="article-title" href="/2018/03/26/Java%20SourceCode/LinkedList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">LinkedList 源码分析</a>
     </h1>
   
 
@@ -411,12 +399,12 @@ return its level order traversa...
     
     <div class="article-meta">
       
-	<a href="/2017/09/03/Leet%20Code/SymmetricTree/" class="article-date">
-	  <time datetime="2017-09-03T01:40:50.000Z" itemprop="datePublished">2017-09-03</time>
+	<a href="/2018/03/26/Java%20SourceCode/LinkedList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
+	  <time datetime="2018-03-26T07:15:02.000Z" itemprop="datePublished">2018-03-26</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/LeetCode/">-LeetCode</a>
+    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
 
       
       
@@ -425,23 +413,12 @@ return its level order traversa...
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          
-Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
-
-For example, this binary tree [1,2,2,3,4,4,3] is symmetric:
-
-1
-/ \
-2   2
-/ \ / \
-3  4 4  3
-But the following [1,2,2,null,3,null,3] is not:
-1
-/ \
-2   2...
+          LinkedList 源码分析
+1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
+1.结构1. 继承&emsp;&emsp;该类继承自 AbstractSequentialList 这个是由于他是一个顺序的列表，所以说...
         </p>
         <p class="article-more-link">
-          <a href="/2017/09/03/Leet%20Code/SymmetricTree/#more">Read More</a>
+          <a href="/2018/03/26/Java%20SourceCode/LinkedList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
         </p>
       
     </div>
@@ -460,7 +437,7 @@ But the following [1,2,2,null,3,null,3] is not:
 
 
   
-    <article id="post-Leet Code/ValidateBinarySearchTree"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Java SourceCode/ArrayList 源码分析"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -468,7 +445,7 @@ But the following [1,2,2,null,3,null,3] is not:
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/09/02/Leet%20Code/ValidateBinarySearchTree/">ValidateBinarySearchTree</a>
+      <a class="article-title" href="/2018/03/25/Java%20SourceCode/ArrayList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">ArrayList 源码分析</a>
     </h1>
   
 
@@ -476,11 +453,13 @@ But the following [1,2,2,null,3,null,3] is not:
     
     <div class="article-meta">
       
-	<a href="/2017/09/02/Leet%20Code/ValidateBinarySearchTree/" class="article-date">
-	  <time datetime="2017-09-02T03:16:10.000Z" itemprop="datePublished">2017-09-02</time>
+	<a href="/2018/03/25/Java%20SourceCode/ArrayList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
+	  <time datetime="2018-03-25T13:15:02.000Z" itemprop="datePublished">2018-03-25</time>
 	</a>
 
       
+    <a class="article-category-link" href="/categories/JDK-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">JDK 源码分析</a>
+
       
       
 
@@ -488,16 +467,13 @@ But the following [1,2,2,null,3,null,3] is not:
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          import org.junit.jupiter.api.Test;import org.omg.CORBA.INTERNAL;
-
-   Given a binary tree, determine if it is a valid binary search tree (BST).
-
-     Assume a BST is defined as follows:
-
-     The left subtree of a node contains only nodes with keys...
+          ArrayList 源码分析
+1. 在阅读源码时做了大量的注释，并且做了一些测试分析源码内的执行流程，由于博客篇幅有限，并且代码阅读起来没有 IDE 方便，所以在 github 上提供JDK1.8 的源码、详细的注释及测试用例。欢迎大家 star、fork ！2. 由于个人水平有限，对源码的分析理解可能存在偏差或不透彻的地方还请大家在评论区指出，谢谢！
+1. 结构&emsp;&emsp;首先我们需要对 ArrayList 有一个大致的了解就从结构来看看吧.
+1. 继承&emsp;&emsp...
         </p>
         <p class="article-more-link">
-          <a href="/2017/09/02/Leet%20Code/ValidateBinarySearchTree/#more">Read More</a>
+          <a href="/2018/03/25/Java%20SourceCode/ArrayList%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">Read More</a>
         </p>
       
     </div>
@@ -516,7 +492,7 @@ But the following [1,2,2,null,3,null,3] is not:
 
 
   
-    <article id="post-Leet Code/UniqueBinarySearchTreesII"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-NetWork/P2P 浅析"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -524,7 +500,7 @@ But the following [1,2,2,null,3,null,3] is not:
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/09/02/Leet%20Code/UniqueBinarySearchTreesII/">UniqueBinarySearchTreesII</a>
+      <a class="article-title" href="/2018/03/25/NetWork/P2P%20%E6%B5%85%E6%9E%90/">P2P 浅析</a>
     </h1>
   
 
@@ -532,12 +508,12 @@ But the following [1,2,2,null,3,null,3] is not:
     
     <div class="article-meta">
       
-	<a href="/2017/09/02/Leet%20Code/UniqueBinarySearchTreesII/" class="article-date">
-	  <time datetime="2017-09-02T02:25:20.000Z" itemprop="datePublished">2017-09-02</time>
+	<a href="/2018/03/25/NetWork/P2P%20%E6%B5%85%E6%9E%90/" class="article-date">
+	  <time datetime="2018-03-25T01:40:24.000Z" itemprop="datePublished">2018-03-25</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/LeetCode/">-LeetCode</a>
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">-计算机网络</a>
 
       
       
@@ -546,18 +522,12 @@ But the following [1,2,2,null,3,null,3] is not:
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          import org.junit.jupiter.api.Test;
-题目的描述如下
+          P2P 浅析&emsp;&emsp;  对等网络(P2P)技术,是在传统的客户机和服务器模式来说的一种方式。在C/S模式中，数据的分发采用专门的服务器，多个客户端都从此服务器获取数据。这种模式的优点是：数据的一致性容易控制，系统也容易管理。但是此种模式的缺点是：因为服务器的个数只有一个(即便有多个也非常有限)，系统容易出现单一失效点；单一服务器面对众多的客户端，由于CPU能力、内存大小、网络带宽的限制，可同时服务的客户端非常有限，可扩展性差。
 
- * Given n, how many structurally unique BST's (binary search trees) that store values 1...n?
-
-     For example,
-     Given n = 3, there are a total of 5 unique BST's.
-
-     1         3     3      2     ...
+&emsp;&emsp;  P2P技术正是为...
         </p>
         <p class="article-more-link">
-          <a href="/2017/09/02/Leet%20Code/UniqueBinarySearchTreesII/#more">Read More</a>
+          <a href="/2018/03/25/NetWork/P2P%20%E6%B5%85%E6%9E%90/#more">Read More</a>
         </p>
       
     </div>
@@ -576,7 +546,7 @@ But the following [1,2,2,null,3,null,3] is not:
 
 
   
-    <article id="post-Leet Code/卡塔兰数列[UniqueBinarySearchTrees]"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-NetWork/TCP 详解"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -584,7 +554,7 @@ But the following [1,2,2,null,3,null,3] is not:
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/09/01/Leet%20Code/%E5%8D%A1%E5%A1%94%E5%85%B0%E6%95%B0%E5%88%97%5BUniqueBinarySearchTrees%5D/">卡塔兰数列[UniqueBinarySearchTrees]</a>
+      <a class="article-title" href="/2018/03/25/NetWork/TCP%20%E8%AF%A6%E8%A7%A3/">TCP 总结</a>
     </h1>
   
 
@@ -592,12 +562,12 @@ But the following [1,2,2,null,3,null,3] is not:
     
     <div class="article-meta">
       
-	<a href="/2017/09/01/Leet%20Code/%E5%8D%A1%E5%A1%94%E5%85%B0%E6%95%B0%E5%88%97%5BUniqueBinarySearchTrees%5D/" class="article-date">
-	  <time datetime="2017-09-01T14:17:57.000Z" itemprop="datePublished">2017-09-01</time>
+	<a href="/2018/03/25/NetWork/TCP%20%E8%AF%A6%E8%A7%A3/" class="article-date">
+	  <time datetime="2018-03-25T01:40:24.000Z" itemprop="datePublished">2018-03-25</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/LeetCode/">-LeetCode</a>
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">-计算机网络</a>
 
       
       
@@ -606,16 +576,14 @@ But the following [1,2,2,null,3,null,3] is not:
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          Given n, how many structurally unique BST’s (binary search trees) that store values 1…n?
-For example,Given n = 3, there are a total of 5 unique BST’s.
+          TCP 总结
+计算机网络中比较中要的无非就是 TCP/IP 协议栈，以及应用层的 HTTP 和 HTTPS 。前几天一直炒的的比较火的就是 HTTP/2.0 了，但是其实 HTTP/2.0 早在2015年的时候就已经出来了，并且这个版本是基于 Google 公司的 SPDY 协议发布的，其实说白了就是用的 SPDY 做了一点修改。好了今天的主题是 TCP 就不过多的介绍 HTTP/2.0 了,以后会专门写一篇关于 HTTP/2.0 的文章，介绍一下他的新特性。
 
 
-   1         3     3      2      1
-    \       /     /      / \      \
-     3     2     1     ...
+1.引言&emsp;&e...
         </p>
         <p class="article-more-link">
-          <a href="/2017/09/01/Leet%20Code/%E5%8D%A1%E5%A1%94%E5%85%B0%E6%95%B0%E5%88%97%5BUniqueBinarySearchTrees%5D/#more">Read More</a>
+          <a href="/2018/03/25/NetWork/TCP%20%E8%AF%A6%E8%A7%A3/#more">Read More</a>
         </p>
       
     </div>
@@ -634,7 +602,7 @@ For example,Given n = 3, there are a total of 5 unique BST’s.
 
 
   
-    <article id="post-Linux/命令行常用参数"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Life/6月8号"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -642,7 +610,7 @@ For example,Given n = 3, there are a total of 5 unique BST’s.
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/09/01/Linux/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0/">命令行常用参数</a>
+      <a class="article-title" href="/2018/03/04/Life/6%E6%9C%888%E5%8F%B7/">6月8号</a>
     </h1>
   
 
@@ -650,12 +618,12 @@ For example,Given n = 3, there are a total of 5 unique BST’s.
     
     <div class="article-meta">
       
-	<a href="/2017/09/01/Linux/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0/" class="article-date">
-	  <time datetime="2017-09-01T13:43:10.000Z" itemprop="datePublished">2017-09-01</time>
+	<a href="/2018/03/04/Life/6%E6%9C%888%E5%8F%B7/" class="article-date">
+	  <time datetime="2018-03-04T13:36:04.000Z" itemprop="datePublished">2018-03-04</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/Linux/">-Linux</a>
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
 
       
       
@@ -664,10 +632,12 @@ For example,Given n = 3, there are a total of 5 unique BST’s.
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1.命令行中1.上一条命令的最后一个参数 ： !$2.上一条命令的第 n 个参数 ：  !:n3.上一条命令的名称 ： !#4.上一条命令的内容 ： !!5.上n条命令的内容 ： n!!2.shell 脚本中1.上一条命令的名称 ： $02.上一条命令的第 n 个参数 ：$n3.上一条命令的执行情况 ： 0 正常退出 非0不正常
+           
+
+无论事情怎么糟糕，将来多么不确定，当下多么痛苦，保持一颗让自己有好心情的❤。
         </p>
         <p class="article-more-link">
-          <a href="/2017/09/01/Linux/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0/#more">Read More</a>
+          <a href="/2018/03/04/Life/6%E6%9C%888%E5%8F%B7/#more">Read More</a>
         </p>
       
     </div>
@@ -686,7 +656,7 @@ For example,Given n = 3, there are a total of 5 unique BST’s.
 
 
   
-    <article id="post-Java Web/三大框架整合"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Life/今天是个转折点"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -694,7 +664,7 @@ For example,Given n = 3, there are a total of 5 unique BST’s.
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/23/Java%20Web/%E4%B8%89%E5%A4%A7%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/">三大框架整合</a>
+      <a class="article-title" href="/2018/03/04/Life/%E4%BB%8A%E5%A4%A9%E6%98%AF%E4%B8%AA%E8%BD%AC%E6%8A%98%E7%82%B9/">今天是个转折点</a>
     </h1>
   
 
@@ -702,12 +672,12 @@ For example,Given n = 3, there are a total of 5 unique BST’s.
     
     <div class="article-meta">
       
-	<a href="/2017/08/23/Java%20Web/%E4%B8%89%E5%A4%A7%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/" class="article-date">
-	  <time datetime="2017-08-23T11:45:42.000Z" itemprop="datePublished">2017-08-23</time>
+	<a href="/2018/03/04/Life/%E4%BB%8A%E5%A4%A9%E6%98%AF%E4%B8%AA%E8%BD%AC%E6%8A%98%E7%82%B9/" class="article-date">
+	  <time datetime="2018-03-04T13:36:04.000Z" itemprop="datePublished">2018-03-04</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JAVA/">-JAVA</a>
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
 
       
       
@@ -716,15 +686,12 @@ For example,Given n = 3, there are a total of 5 unique BST’s.
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1.整合思想
-web 层 -&gt; struts2
-service 层 -&gt; Spring
-dao 层 -&gt; Hibernate整合就是两两整合，struts 和 spring 整合，然后 spring 和 hibernate 整合。  
-struts 和 spring 整合就是 action 需要的 service 直接通过 spring 实例化并且注入到 action 中
-spring 和 hibernate 整合就是把 sessionFactory 放在 spring ...
+          今天是个转折点今天是一个转折点，人生的转折点。
+等待这天好久好久了，上高中到现在我好像没有任何改变，只是一个比较努力的傻子。慢慢的我的生活好像失去了那些本该有的颜色，开心，以及能够让我高兴半个月或者好久好久的事情了。
+只是每个周惯例的给爸爸妈妈打电话，我想跟他们多聊聊可是话到了嘴边又咽下去了，好像不知道什么时候起突然就变得这么懂事，乖巧，大家眼里的好孩子。可是啊，我一点也不开心，找不到开心的事，就连收到那么久以来梦寐以求的阿里 offer 的时候我也非常平静，只是高兴了那么一会会，也就一会...
         </p>
         <p class="article-more-link">
-          <a href="/2017/08/23/Java%20Web/%E4%B8%89%E5%A4%A7%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/#more">Read More</a>
+          <a href="/2018/03/04/Life/%E4%BB%8A%E5%A4%A9%E6%98%AF%E4%B8%AA%E8%BD%AC%E6%8A%98%E7%82%B9/#more">Read More</a>
         </p>
       
     </div>
@@ -747,7 +714,7 @@ spring 和 hibernate 整合就是把 sessionFactory 放在 spring ...
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/10/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/12/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/10/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/12/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -762,7 +729,7 @@ spring 和 hibernate 整合就是把 sessionFactory 放在 spring ...
   <div class="container">
       	<div class="row">
 	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
-	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2021 昨夜凛雨 All Rights Reserved.</p>
 	      
 	      
     		<p class="busuanzi_uv">
@@ -801,8 +768,6 @@ spring 和 hibernate 整合就是把 sessionFactory 放在 spring ...
     <a href="/categories" class="mobile-nav-link">Categories</a>
   
     <a href="/tags" class="mobile-nav-link">Tags</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
   
 </nav> -->
     
@@ -924,7 +889,7 @@ spring 和 hibernate 整合就是把 sessionFactory 放在 spring ...
             昨夜凛雨
           </div>
           <div class="panel-body">
-            Copyright © 2020 lwen All Rights Reserved.
+            Copyright © 2021 lwen All Rights Reserved.
           </div>
         </div>
       </div>

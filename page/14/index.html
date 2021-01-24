@@ -11,26 +11,24 @@
   
   <meta property="og:type" content="website">
 <meta property="og:title" content="昨夜凛雨">
-<meta property="og:url" content="http://lwenxu.coding.me/page/14/index.html">
+<meta property="og:url" content="https://lwenxu.github.io/page/14/index.html">
 <meta property="og:site_name" content="昨夜凛雨">
 <meta property="og:locale">
 <meta property="article:author" content="lwen">
 <meta property="article:tag" content="Java PHP Code">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="昨夜凛雨" type="application/atom+xml">
-  
 
   
 
-  <link rel="icon" href="/css/images/mylogo.jpg">
-  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
   
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
   <style type="text/css">
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
@@ -94,7 +92,7 @@
               <a class="brand" style="
                  margin-top: 0px;"  
                  >
-                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
               </a>
             
             
@@ -108,8 +106,6 @@
                   <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
                 
                   <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/about">About</a> </li>
                 
                   <li><div id="search-form-wrap">
 
@@ -166,7 +162,7 @@
         
           <section id="main" style="float:none;">
   
-    <article id="post-Java SE/JavaIO"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Algorithm/分治算法"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -174,7 +170,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/09/Java%20SE/JavaIO/">JavaIO</a>
+      <a class="article-title" href="/2017/10/10/Algorithm/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/">分治算法</a>
     </h1>
   
 
@@ -182,12 +178,12 @@
     
     <div class="article-meta">
       
-	<a href="/2017/08/09/Java%20SE/JavaIO/" class="article-date">
-	  <time datetime="2017-08-09T07:49:28.000Z" itemprop="datePublished">2017-08-09</time>
+	<a href="/2017/10/10/Algorithm/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/" class="article-date">
+	  <time datetime="2017-10-10T11:45:57.000Z" itemprop="datePublished">2017-10-10</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/Java/">-Java</a>
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1/">-算法设计</a>
 
       
       
@@ -196,16 +192,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1.在IO有两种数据传输格式一个是字符流还一个是字节流但是字符流就会涉及到编码的问题
-
-一开始美国使用的自己的编码表就是ASCII表
-中国的字符需要被识别也需要编码表于是就有了GB2312
-但是由于中国的子很多，还有少数名族等等后来又进行了优化扩容就出现了GBK
-最后国际标准组织制定了一个包含所有国家所有地区的码表就是Unicode
-之后对Unicode进行了优化也就是以前是所有的字符都是两个字节表示，但是现在就可以一个字节或者三个字节，具体看情况的UTF_8字符流一般都包含了编码表，也就...
+          ​    分治算法分为 “分” 和 “治” 两个部分，所谓的分就是寻找分割点，然后对问题划分成相同的子问题，但是问题的规模变小了，这些步骤其实就是使用递归来完成的。之后就是治的问题，也就是递归里面具体的内容。最后一步就是把所分的结果要合并成为一个完整的结果。
+​    一个例子就是求出逆序数对，这个就是分治法来计算，首席我们分就是中间划分，分别求左右的两边的逆序数对，然后还需要加上横跨中间的逆序数对即可完成。重点就是横跨中间的逆序数对，中间的如果直接暴力枚举就会出现 n 平方的，所以我们首...
         </p>
         <p class="article-more-link">
-          <a href="/2017/08/09/Java%20SE/JavaIO/#more">Read More</a>
+          <a href="/2017/10/10/Algorithm/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/#more">Read More</a>
         </p>
       
     </div>
@@ -224,7 +215,7 @@
 
 
   
-    <article id="post-Java SE/Java多线程"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Algorithm/贪心"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -232,7 +223,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/09/Java%20SE/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/">Java多线程</a>
+      <a class="article-title" href="/2017/10/09/Algorithm/%E8%B4%AA%E5%BF%83/">贪心</a>
     </h1>
   
 
@@ -240,12 +231,12 @@
     
     <div class="article-meta">
       
-	<a href="/2017/08/09/Java%20SE/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="article-date">
-	  <time datetime="2017-08-09T07:49:28.000Z" itemprop="datePublished">2017-08-09</time>
+	<a href="/2017/10/09/Algorithm/%E8%B4%AA%E5%BF%83/" class="article-date">
+	  <time datetime="2017-10-09T14:22:16.000Z" itemprop="datePublished">2017-10-09</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/Java/">-Java</a>
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1/">-算法设计</a>
 
       
       
@@ -254,16 +245,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1.复写run方法的目的在于，把要运行的代码放到run方法里面，也就是新的线程要跑什么内容这也就是第一种多线程的方法，其主要的步骤如下：
+          ​    贪心算法，这个算法就是大胆的猜测，然后小心求证！求证一般就是使用反证法进行证明。假如我们说这个顺序是对的，也就是始终选取大的，或者小的，我们就要证明一下我们的猜测正确性。这里的反正方式就是交换顺序发现不符合预期结果原来的结论就是对的。    
 
-继承Thread类
-复写run方法
-创建对象
-start  
-任何一个程序至少有一个线程就是主线程，主线程也是main方法的线程，这个线程是由jvm启动的，当我们自己创建新的线程的时候实际上是在主线程之外另开的新的线程和主线程并行工作12345678910111213141516171819class DemoRun extends Thread&#1...
         </p>
         <p class="article-more-link">
-          <a href="/2017/08/09/Java%20SE/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/#more">Read More</a>
+          <a href="/2017/10/09/Algorithm/%E8%B4%AA%E5%BF%83/#more">Read More</a>
         </p>
       
     </div>
@@ -282,7 +268,7 @@ start
 
 
   
-    <article id="post-Java SE/Java范型"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Algorithm/枚举"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -290,7 +276,7 @@ start
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/09/Java%20SE/Java%E8%8C%83%E5%9E%8B/">Java泛型</a>
+      <a class="article-title" href="/2017/10/09/Algorithm/%E6%9E%9A%E4%B8%BE/">枚举</a>
     </h1>
   
 
@@ -298,12 +284,12 @@ start
     
     <div class="article-meta">
       
-	<a href="/2017/08/09/Java%20SE/Java%E8%8C%83%E5%9E%8B/" class="article-date">
-	  <time datetime="2017-08-09T07:49:28.000Z" itemprop="datePublished">2017-08-09</time>
+	<a href="/2017/10/09/Algorithm/%E6%9E%9A%E4%B8%BE/" class="article-date">
+	  <time datetime="2017-10-09T07:14:24.000Z" itemprop="datePublished">2017-10-09</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/Java/">-Java</a>
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1/">-算法设计</a>
 
       
       
@@ -312,12 +298,12 @@ start
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1.java泛型及就是在jdk1.5之后出现的一个新的安全机制  我们发现在集合框架中我们可以放入任何的元素，然而这样做并没有任何意义，绝大多时候我们是默认我们  知道这个容器需要存放什么样的内容，但是用户的输入是不安全的如果他们输入了各种类型然后我们只对某些类型  进行了处理显然到时候运行时必然报错  所以为了解决这个问题，类似于数组的解决方式给集合限定了类型使用尖括号来限定，当然包括Iterator  他的好处就是安全
-
-2.comparable接口和comparator都可以使用泛型...
+          ​    枚举就是尝试所有的可能性，尤其是当我们在确定一个问题是不是的这一类问题中尤其有用，例如说给一堆数，让我我们判断他们是不是素数，或者素数的数量的时候，这里他们就是判断类问题我们就可以使用枚举。
+​    但是注意这里我们需要考虑的就是枚举的方式，也就是枚举的角度。这里有一个小的例子就是最长回文子串的问题。
+​    首先我们就是用一个最简单的方式就是枚举出所有的字串，然后在这些字串里面找回文串。这样我们首先需要进行枚举就需要 n 平方的复杂度，然后我们还需要 n 的时间去判断这个串...
         </p>
         <p class="article-more-link">
-          <a href="/2017/08/09/Java%20SE/Java%E8%8C%83%E5%9E%8B/#more">Read More</a>
+          <a href="/2017/10/09/Algorithm/%E6%9E%9A%E4%B8%BE/#more">Read More</a>
         </p>
       
     </div>
@@ -336,7 +322,7 @@ start
 
 
   
-    <article id="post-Java Web/JDBC"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Life/犒劳一下自己"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -344,7 +330,7 @@ start
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/09/Java%20Web/JDBC/">JDBC</a>
+      <a class="article-title" href="/2017/09/27/Life/%E7%8A%92%E5%8A%B3%E4%B8%80%E4%B8%8B%E8%87%AA%E5%B7%B1/">犒劳一下自己</a>
     </h1>
   
 
@@ -352,12 +338,12 @@ start
     
     <div class="article-meta">
       
-	<a href="/2017/08/09/Java%20Web/JDBC/" class="article-date">
-	  <time datetime="2017-08-09T07:49:28.000Z" itemprop="datePublished">2017-08-09</time>
+	<a href="/2017/09/27/Life/%E7%8A%92%E5%8A%B3%E4%B8%80%E4%B8%8B%E8%87%AA%E5%B7%B1/" class="article-date">
+	  <time datetime="2017-09-27T14:31:10.000Z" itemprop="datePublished">2017-09-27</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JavaWeb/">-JavaWeb</a>
+    <a class="article-category-link" href="/categories/%E6%9D%82%E6%96%87/">-杂文</a>
 
       
       
@@ -366,10 +352,12 @@ start
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1.普通的 JDBC 链接12345678910111213141516171819202122232425262728293031public class JdbcConnect &#123;    @Test   public void connect() throws ClassNotFoundException, SQLException &#123;        /**         * 准备四大参数：  driver  url  username  password    ...
+          ​    心情不好的时候，可能这时候真的已经很疲惫了。
+​    不要继续沮丧让自己的心情更糟糕，或许这个时候应该犒劳一下自己，让自己的心情放松，晴朗起来或许一切看起来回事那么情切舒服！
+
         </p>
         <p class="article-more-link">
-          <a href="/2017/08/09/Java%20Web/JDBC/#more">Read More</a>
+          <a href="/2017/09/27/Life/%E7%8A%92%E5%8A%B3%E4%B8%80%E4%B8%8B%E8%87%AA%E5%B7%B1/#more">Read More</a>
         </p>
       
     </div>
@@ -388,7 +376,7 @@ start
 
 
   
-    <article id="post-Java Web/JavaWeb总结"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Live/犒劳一下自己"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -396,7 +384,7 @@ start
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/09/Java%20Web/JavaWeb%E6%80%BB%E7%BB%93/">JavaWeb基础</a>
+      <a class="article-title" href="/2017/09/27/Live/%E7%8A%92%E5%8A%B3%E4%B8%80%E4%B8%8B%E8%87%AA%E5%B7%B1/">犒劳一下自己</a>
     </h1>
   
 
@@ -404,12 +392,12 @@ start
     
     <div class="article-meta">
       
-	<a href="/2017/08/09/Java%20Web/JavaWeb%E6%80%BB%E7%BB%93/" class="article-date">
-	  <time datetime="2017-08-09T07:49:28.000Z" itemprop="datePublished">2017-08-09</time>
+	<a href="/2017/09/27/Live/%E7%8A%92%E5%8A%B3%E4%B8%80%E4%B8%8B%E8%87%AA%E5%B7%B1/" class="article-date">
+	  <time datetime="2017-09-27T14:31:10.000Z" itemprop="datePublished">2017-09-27</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/JavaWeb/">-JavaWeb</a>
+    <a class="article-category-link" href="/categories/%E6%9D%82%E6%96%87/">-杂文</a>
 
       
       
@@ -418,19 +406,12 @@ start
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1. XML
-xml一般就用来存放少量的数据，或者是作为配置文件。
-xml的声明  必须放在首行的首列（也就是顶头写）
-有且仅有一个根标签，其他的都是他的子标签
-xml中的换行和空格都当做内容来解析，所以对于缩进来说一定要注意。
-xml中的内容区分大小写，不能以数字和下划线开始,不能以xml开始，里面不能包含空格和冒号
-一个元素可以有多个属性，名字自定义，属性不能冲突
-对于一些特殊字符需要转义，使用实体来表示，就和html里面的一样
-CDATA区就是里面的内容无需转义  
-对于xml的内容...
+          ​    心情不好的时候，可能这时候真的已经很疲惫了。
+​    不要继续沮丧让自己的心情更糟糕，或许这个时候应该犒劳一下自己，让自己的心情放松，晴朗起来或许一切看起来回事那么情切舒服！
+
         </p>
         <p class="article-more-link">
-          <a href="/2017/08/09/Java%20Web/JavaWeb%E6%80%BB%E7%BB%93/#more">Read More</a>
+          <a href="/2017/09/27/Live/%E7%8A%92%E5%8A%B3%E4%B8%80%E4%B8%8B%E8%87%AA%E5%B7%B1/#more">Read More</a>
         </p>
       
     </div>
@@ -449,7 +430,7 @@ CDATA区就是里面的内容无需转义
 
 
   
-    <article id="post-Java SE/Java集合框架Map"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Leet Code/HouseRobberIII"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -457,7 +438,7 @@ CDATA区就是里面的内容无需转义
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/09/Java%20SE/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6Map/">Java集合框架Map</a>
+      <a class="article-title" href="/2017/09/27/Leet%20Code/HouseRobberIII/">HouseRobberIII</a>
     </h1>
   
 
@@ -465,13 +446,61 @@ CDATA区就是里面的内容无需转义
     
     <div class="article-meta">
       
-	<a href="/2017/08/09/Java%20SE/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6Map/" class="article-date">
-	  <time datetime="2017-08-09T06:38:12.000Z" itemprop="datePublished">2017-08-09</time>
+	<a href="/2017/09/27/Leet%20Code/HouseRobberIII/" class="article-date">
+	  <time datetime="2017-09-27T14:12:07.000Z" itemprop="datePublished">2017-09-27</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/Java/">-Java</a>
+      
+      
 
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          The thief has found himself a new place for his thievery again. There is only one entrance to this area, called the “root.” Besides the root, each house has one and only one parent house. After a tour, the smart thief realized that “all houses in ...
+        </p>
+        <p class="article-more-link">
+          <a href="/2017/09/27/Leet%20Code/HouseRobberIII/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Leet Code/TargetSum"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/09/27/Leet%20Code/TargetSum/">Target Sum</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/09/27/Leet%20Code/TargetSum/" class="article-date">
+	  <time datetime="2017-09-27T13:32:05.000Z" itemprop="datePublished">2017-09-27</time>
+	</a>
+
+      
       
       
 
@@ -480,25 +509,11 @@ CDATA区就是里面的内容无需转义
       
         <p class="article-excerpt-content">
           
-map集合是一对一对的存放，而且要保证键名的唯一性。
-
-map的共性方法： 1.添加：
- put(K key,V value)
- putAll(K key,V value)
- 2.删除：
- clear()
- remove(Object key)
- &lt;!--more--&gt;
- 3.判断：
- isEmpty()
- constrainKey(object key)
- constrainValue(object value)
- 4.获取：
- get(Object key)
- size(...
+You are given a list of non-negative integers, a1, a2, …, an, and a target, S. Now you have 2 symbols + and -. For each integer, you should choose one from + and - as its new symbol.
+Find out how many ways to assign symbols to make sum of integer...
         </p>
         <p class="article-more-link">
-          <a href="/2017/08/09/Java%20SE/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6Map/#more">Read More</a>
+          <a href="/2017/09/27/Leet%20Code/TargetSum/#more">Read More</a>
         </p>
       
     </div>
@@ -517,7 +532,7 @@ map的共性方法： 1.添加：
 
 
   
-    <article id="post-Java SE/Java集合框架Collections"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Leet Code/QueueReconstructionbyHeight"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -525,7 +540,7 @@ map的共性方法： 1.添加：
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/09/Java%20SE/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6Collections/">Java集合框架Collections</a>
+      <a class="article-title" href="/2017/09/27/Leet%20Code/QueueReconstructionbyHeight/">QueueReconstructionbyHeight</a>
     </h1>
   
 
@@ -533,13 +548,11 @@ map的共性方法： 1.添加：
     
     <div class="article-meta">
       
-	<a href="/2017/08/09/Java%20SE/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6Collections/" class="article-date">
-	  <time datetime="2017-08-09T06:38:06.000Z" itemprop="datePublished">2017-08-09</time>
+	<a href="/2017/09/27/Leet%20Code/QueueReconstructionbyHeight/" class="article-date">
+	  <time datetime="2017-09-27T13:29:51.000Z" itemprop="datePublished">2017-09-27</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/Java/">-Java</a>
-
       
       
 
@@ -547,13 +560,11 @@ map的共性方法： 1.添加：
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1.基本介绍：
-集合就是存放对象的，他比数组好的一点就是他一开始不清楚自己长度 容器一般是分为很多种的，很多的容器在一起然后进过断的抽象和抽取就成了一个体系，我们称之为集合框架 我们看体系首先是看顶层的容器，他是底层的容器都有的特性，然后在逐步求精 最顶层的我们称之为collection 在util包中的
-
-在collection中分为两个比较常用的子接口分别是list和set。list是类似于数组的那种，也就是集合元素可重复，有序有脚标。set则为无序的，所以集合元素不可重复，不可脚标查...
+          
+Suppose you have a random list of people standing in a queue. Each person is described by a pair of integers (h, k), where h is the height of the person and k is the number of people in front of this person who have a height greater than or equal...
         </p>
         <p class="article-more-link">
-          <a href="/2017/08/09/Java%20SE/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6Collections/#more">Read More</a>
+          <a href="/2017/09/27/Leet%20Code/QueueReconstructionbyHeight/#more">Read More</a>
         </p>
       
     </div>
@@ -572,7 +583,7 @@ map的共性方法： 1.添加：
 
 
   
-    <article id="post-Java SE/Java之StringBuffer"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Leet Code/Dp经典问题LongestIncreasingSubsequence"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -580,7 +591,7 @@ map的共性方法： 1.添加：
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/09/Java%20SE/Java%E4%B9%8BStringBuffer/">Java之StringBuffer</a>
+      <a class="article-title" href="/2017/09/27/Leet%20Code/Dp%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98LongestIncreasingSubsequence/">Dp经典问题LongestIncreasingSubsequence</a>
     </h1>
   
 
@@ -588,13 +599,11 @@ map的共性方法： 1.添加：
     
     <div class="article-meta">
       
-	<a href="/2017/08/09/Java%20SE/Java%E4%B9%8BStringBuffer/" class="article-date">
-	  <time datetime="2017-08-09T06:33:06.000Z" itemprop="datePublished">2017-08-09</time>
+	<a href="/2017/09/27/Leet%20Code/Dp%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98LongestIncreasingSubsequence/" class="article-date">
+	  <time datetime="2017-09-27T13:26:51.000Z" itemprop="datePublished">2017-09-27</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/Java/">-Java</a>
-
       
       
 
@@ -602,22 +611,12 @@ map的共性方法： 1.添加：
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1.存储：
-append(data)  添加在最后
-insert(index,data)  在制定位置添加2.删除：
-delete(start,end)  删除某一段字符串
-deleteCharAt(index)  删除置顶字符
-3.获取：
-charAt(index)
-indexOf(data)
-lastIndexOf(data)
-length()
-subString(start,end)4.修改：
-replace(start,end,data)
-setCharAt(index,data)...
+          
+Given an unsorted array of integers, find the length of longest increasing subsequence.
+ For example, Given [10, 9, 2, 5, 3, 7, 101, 18], The longest increasing subsequence is [2, 3, 7, 101], therefore the length is 4. Note that there may be more...
         </p>
         <p class="article-more-link">
-          <a href="/2017/08/09/Java%20SE/Java%E4%B9%8BStringBuffer/#more">Read More</a>
+          <a href="/2017/09/27/Leet%20Code/Dp%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98LongestIncreasingSubsequence/#more">Read More</a>
         </p>
       
     </div>
@@ -636,7 +635,7 @@ setCharAt(index,data)...
 
 
   
-    <article id="post-Java SE/Java面向对象基础-二"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Life/烦躁"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -644,7 +643,7 @@ setCharAt(index,data)...
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/09/Java%20SE/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80-%E4%BA%8C/">Java面向对象基础(二)</a>
+      <a class="article-title" href="/2017/09/25/Life/%E7%83%A6%E8%BA%81/">烦躁</a>
     </h1>
   
 
@@ -652,13 +651,11 @@ setCharAt(index,data)...
     
     <div class="article-meta">
       
-	<a href="/2017/08/09/Java%20SE/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80-%E4%BA%8C/" class="article-date">
-	  <time datetime="2017-08-09T03:14:38.000Z" itemprop="datePublished">2017-08-09</time>
+	<a href="/2017/09/25/Life/%E7%83%A6%E8%BA%81/" class="article-date">
+	  <time datetime="2017-09-25T07:44:25.000Z" itemprop="datePublished">2017-09-25</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/Java/">-Java</a>
-
       
       
 
@@ -666,72 +663,12 @@ setCharAt(index,data)...
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1.构造器：
-构造函数在一个类没有写任何的构造函数的时候，系统会生成一个默认的空参数构造函数，这个构造函数的修饰符就是类的修饰符，当我们定义了一个构造函数，默认的构造函数就不存在了而不会出现重载
-构造函数是没有返回值的，他没有返回值不是指他就是void，因为void指的是函数的返回值为void类型，他是有返回值的。而没有返回值则是说明根本不用写，这两个有很大区别。
-没有return语句
-函数的名字只能和类名完全一样
-构造函数是可以用私用的，但是当所有的构造函数的修饰符都是私有的话对象就无法...
+          ​    下午两点过一点，从宿舍走出来，外面还是淅淅沥沥下着小雨。心里不是很舒服，一直不喜欢下雨，阴冷的天气，总是让人觉得不适，什么都不适合，不适合上课不适合看书，就想让人躺在床上。躺在床上就不经意间会回忆到以前，想到种种。
+​    算了不管了，还是去实验室一个人清净一会，这里就我一个人。拉上窗帘根本看不到外面在下雨，就好像一个晴天的夜晚。
+​    打开电脑准备看看 Coursera 上面的算法，可是静不下心来，真的静不下心来！我尽力让自己平静，关掉了窗口，算了！刷题吧，连续点开了三道...
         </p>
         <p class="article-more-link">
-          <a href="/2017/08/09/Java%20SE/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80-%E4%BA%8C/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-Java SE/ConcurrentHashMap"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/09/Java%20SE/ConcurrentHashMap/">ConcurrentHashMap</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2017/08/09/Java%20SE/ConcurrentHashMap/" class="article-date">
-	  <time datetime="2017-08-09T02:27:50.000Z" itemprop="datePublished">2017-08-09</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/Java/">-Java</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-ConcurrentHashMap值得注意的点
-不能使用 null 做为键或者是值 他和 HashTable 一样的
-​
-
-
-        </p>
-        <p class="article-more-link">
-          <a href="/2017/08/09/Java%20SE/ConcurrentHashMap/#more">Read More</a>
+          <a href="/2017/09/25/Life/%E7%83%A6%E8%BA%81/#more">Read More</a>
         </p>
       
     </div>
@@ -754,7 +691,7 @@ ConcurrentHashMap值得注意的点
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/13/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/15/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/13/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/15/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -769,7 +706,7 @@ ConcurrentHashMap值得注意的点
   <div class="container">
       	<div class="row">
 	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
-	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2021 昨夜凛雨 All Rights Reserved.</p>
 	      
 	      
     		<p class="busuanzi_uv">
@@ -808,8 +745,6 @@ ConcurrentHashMap值得注意的点
     <a href="/categories" class="mobile-nav-link">Categories</a>
   
     <a href="/tags" class="mobile-nav-link">Tags</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
   
 </nav> -->
     
@@ -931,7 +866,7 @@ ConcurrentHashMap值得注意的点
             昨夜凛雨
           </div>
           <div class="panel-body">
-            Copyright © 2020 lwen All Rights Reserved.
+            Copyright © 2021 lwen All Rights Reserved.
           </div>
         </div>
       </div>

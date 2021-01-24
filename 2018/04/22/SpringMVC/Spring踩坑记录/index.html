@@ -14,29 +14,27 @@
   <meta name="description" content="1. 处理静态资源静态资源直接放在 webapp&#x2F;web 下，而我们的模板一般是在 WEB-INF 下，但是 WEN-INF     下的东西一般不让访问的，模板之所以能访问到是因为有模板引擎的映射，但是我们的警惕资源应该是直接能访问的东西，直接放在 web 下类似于 jsp 直接访问，而不能放在 WEB-INF 下，并且我们要开启静态资源访问 &lt;mvc:default-servlet-ha">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringMVC 踩坑记录">
-<meta property="og:url" content="http://lwenxu.coding.me/2018/04/22/SpringMVC/Spring%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:url" content="https://lwenxu.github.io/2018/04/22/SpringMVC/Spring%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="昨夜凛雨">
 <meta property="og:description" content="1. 处理静态资源静态资源直接放在 webapp&#x2F;web 下，而我们的模板一般是在 WEB-INF 下，但是 WEN-INF     下的东西一般不让访问的，模板之所以能访问到是因为有模板引擎的映射，但是我们的警惕资源应该是直接能访问的东西，直接放在 web 下类似于 jsp 直接访问，而不能放在 WEB-INF 下，并且我们要开启静态资源访问 &lt;mvc:default-servlet-ha">
 <meta property="og:locale">
 <meta property="article:published_time" content="2018-04-22T00:01:28.000Z">
-<meta property="article:modified_time" content="2018-12-19T12:36:42.000Z">
+<meta property="article:modified_time" content="2021-01-23T15:24:50.194Z">
 <meta property="article:author" content="lwen">
 <meta property="article:tag" content="SpringMVC">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="昨夜凛雨" type="application/atom+xml">
-  
 
   
 
-  <link rel="icon" href="/css/images/mylogo.jpg">
-  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
   
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
   <style type="text/css">
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
@@ -102,7 +100,7 @@
               <a class="brand" style="
                  margin-top: 0px;"  
                 href="#" data-toggle="modal" data-target="#myModal" >
-                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
               </a>
             
             
@@ -116,8 +114,6 @@
                   <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
                 
                   <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/about">About</a> </li>
                 
                   <li><div id="search-form-wrap">
 
@@ -221,11 +217,11 @@
 
 <script>
 var a = new Donate({
-  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
   btnText: 'Donate', // 可选参数，打赏按钮文字
   el: document.getElementById('donation_div'),
-  wechatImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/WeChanQR.png',
-  alipayImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/AliPayQR.jpg'
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
 });
 </script>
       
@@ -237,7 +233,7 @@ var a = new Donate({
           </li>
           <li class="post-copyright-link">
           <strong>Post link:  </strong>
-          <a href="/2018/04/22/SpringMVC/Spring踩坑记录/" target="_blank" title="SpringMVC 踩坑记录">http://lwenxu.coding.me/2018/04/22/SpringMVC/Spring踩坑记录/</a>
+          <a href="/2018/04/22/SpringMVC/Spring踩坑记录/" target="_blank" title="SpringMVC 踩坑记录">https://lwenxu.github.io/2018/04/22/SpringMVC/Spring踩坑记录/</a>
           </li>
           <li class="post-copyright-license">
             <strong>Copyright Notice:   </strong>
@@ -324,7 +320,7 @@ var a = new Donate({
   <div class="container">
       	<div class="row">
 	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
-	      <p id="copyRightEn">Copyright &copy; 2015 - 2020 昨夜凛雨 All Rights Reserved.</p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2021 昨夜凛雨 All Rights Reserved.</p>
 	      
 	      
     		<p class="busuanzi_uv">
@@ -363,8 +359,6 @@ var a = new Donate({
     <a href="/categories" class="mobile-nav-link">Categories</a>
   
     <a href="/tags" class="mobile-nav-link">Tags</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
   
 </nav> -->
     
@@ -490,7 +484,7 @@ var a = new Donate({
             昨夜凛雨
           </div>
           <div class="panel-body">
-            Copyright © 2020 lwen All Rights Reserved.
+            Copyright © 2021 lwen All Rights Reserved.
           </div>
         </div>
       </div>

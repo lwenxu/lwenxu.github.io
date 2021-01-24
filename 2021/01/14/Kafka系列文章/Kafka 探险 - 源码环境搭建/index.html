@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>kafka 探险 - 源码环境搭建 | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Kafka 探险" />
+  
+  
+  
+  
+  <meta name="description" content="Kafka 探险 - 源码环境搭建 这个 Kafka 的专题，我会从系统整体架构，设计到代码落地。和大家一起杠源码，学技巧，涨知识。希望大家持续关注一起见证成长！我相信：技术的道路，十年如一日！十年磨一剑！  **** 前言在阅读源码之前，首先要做的就是搭建一套源码调试环境，这是最基本的一步，不要觉得麻烦或者简单就不去做，也许你会像我一样搭源码的过程中得到一些教训和经验。同时在后面阅读源码的过程中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kafka 探险 - 源码环境搭建">
+<meta property="og:url" content="https://lwenxu.github.io/2021/01/14/Kafka%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/Kafka%20%E6%8E%A2%E9%99%A9%20-%20%E6%BA%90%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="Kafka 探险 - 源码环境搭建 这个 Kafka 的专题，我会从系统整体架构，设计到代码落地。和大家一起杠源码，学技巧，涨知识。希望大家持续关注一起见证成长！我相信：技术的道路，十年如一日！十年磨一剑！  **** 前言在阅读源码之前，首先要做的就是搭建一套源码调试环境，这是最基本的一步，不要觉得麻烦或者简单就不去做，也许你会像我一样搭源码的过程中得到一些教训和经验。同时在后面阅读源码的过程中">
+<meta property="og:locale">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/171275/1610295908149-3d876882-2f6c-4e16-acfe-402b957d4660.png#align=left&display=inline&height=423&margin=%5Bobject%20Object%5D&name=image.png&originHeight=846&originWidth=3026&size=470703&status=done&style=none&width=1513">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/171275/1610296138821-fff657cf-7d63-4a49-8730-56489f5b38d5.png#align=left&display=inline&height=539&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1456&originWidth=2324&size=836993&status=done&style=none&width=860">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/171275/1610296394234-61bc8d50-cd52-4c92-9f59-c7cf8141b0ce.png#align=left&display=inline&height=323&margin=%5Bobject%20Object%5D&name=image.png&originHeight=646&originWidth=3486&size=739288&status=done&style=none&width=1743">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/171275/1610296724147-b6075fae-0c69-4293-a46c-86ae8af2a7fe.png#align=left&display=inline&height=616&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1232&originWidth=920&size=354544&status=done&style=none&width=460">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/171275/1610383541230-9bf79e7f-8ea9-414b-ba1b-ffa27573b721.png#align=left&display=inline&height=682&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1364&originWidth=2142&size=674967&status=done&style=none&width=1071">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/171275/1610297238930-cad4aec6-ae09-439e-a8f4-9a3ecc2dbf30.png#align=left&display=inline&height=364&margin=%5Bobject%20Object%5D&name=image.png&originHeight=728&originWidth=3662&size=1228401&status=done&style=none&width=1831">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/171275/1610885167175-17d6d533-5b46-496f-9f25-8b1d6da3921c.png#align=left&display=inline&height=623&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1246&originWidth=1406&size=454735&status=done&style=none&width=703">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/171275/1610885340427-2fb68d6f-3280-4733-8e58-2322de105227.png#align=left&display=inline&height=623&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1246&originWidth=1702&size=504033&status=done&style=none&width=851">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/171275/1610885430723-f3324af0-23e5-4371-b71f-ce5ce921329a.png#align=left&display=inline&height=350&margin=%5Bobject%20Object%5D&name=image.png&originHeight=700&originWidth=2022&size=435325&status=done&style=none&width=1011">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/171275/1610383610463-3abb66b5-9aee-4181-8ca5-2eb77ce68fb7.png#align=left&display=inline&height=465&margin=%5Bobject%20Object%5D&name=image.png&originHeight=930&originWidth=2752&size=1154182&status=done&style=none&width=1376">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/171275/1610289331606-52e03a47-f431-4b20-8b57-6a4cc0f70345.png#align=left&display=inline&height=430&margin=%5Bobject%20Object%5D&name=image.png&originHeight=430&originWidth=430&size=69429&status=done&style=none&width=430">
+<meta property="article:published_time" content="2021-01-14T09:20:28.000Z">
+<meta property="article:modified_time" content="2021-01-23T16:34:03.565Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="Kafka 探险">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2021/png/171275/1610295908149-3d876882-2f6c-4e16-acfe-402b957d4660.png#align=left&display=inline&height=423&margin=%5Bobject%20Object%5D&name=image.png&originHeight=846&originWidth=3026&size=470703&status=done&style=none&width=1513">
+  
+
+  
+
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
+  
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Kafka系列文章/Kafka 探险 - 源码环境搭建" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Kafka 探险 - 源码环境搭建
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2021/01/14/Kafka%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/Kafka%20%E6%8E%A2%E9%99%A9%20-%20%E6%BA%90%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="article-date">
+	  <time datetime="2021-01-14T09:20:28.000Z" itemprop="datePublished">2021-01-14</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Kafka-%E6%8E%A2%E9%99%A9/">Kafka 探险</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Kafka-探险-源码环境搭建"><a href="#Kafka-探险-源码环境搭建" class="headerlink" title="Kafka 探险 - 源码环境搭建"></a>Kafka 探险 - 源码环境搭建</h1><blockquote>
+<p>这个 Kafka 的专题，我会从系统整体架构，设计到代码落地。和大家一起杠源码，学技巧，涨知识。希望大家持续关注一起见证成长！<br><strong>我相信：技术的道路，十年如一日！十年磨一剑！</strong></p>
+</blockquote>
+<p>**<br>**</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在阅读源码之前，首先要做的就是搭建一套源码调试环境，这是最基本的一步，不要觉得麻烦或者简单就不去做，也许你会像我一样搭源码的过程中得到一些教训和经验。同时在后面阅读源码的过程中，很多看不懂的地方 debug 一下也许就明朗了。</p>
+<p>记录了搭建 Kafka 源码环境的简单过程，为大家提供一个步骤参考，同时记录搭建环境中可能会遇到的问题及解决方案。</p>
+<p>这个环境搭建过程也会提到一个非常实用，并且很多人都不知道的源码 debug 技巧，对阅读源码和 debug 系统很有帮助哦！</p>
+<h2 id="源码下载"><a href="#源码下载" class="headerlink" title="源码下载"></a>源码下载</h2><p>笔者下载的 Kafka 版本是 0.11.0.1 ，源码下载地址是 ：<a target="_blank" rel="noopener" href="https://kafka.apache.org/downloads">https://kafka.apache.org/downloads</a><br>下载时选择，源码下载：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/171275/1610295908149-3d876882-2f6c-4e16-acfe-402b957d4660.png#align=left&display=inline&height=423&margin=%5Bobject%20Object%5D&name=image.png&originHeight=846&originWidth=3026&size=470703&status=done&style=none&width=1513" alt="image.png"></p>
+<h2 id="解压工程-amp-安装插件"><a href="#解压工程-amp-安装插件" class="headerlink" title="解压工程&amp;安装插件"></a>解压工程&amp;安装插件</h2><p>解压下载好的源码包，直接使用 Idea 打开项目即可。另外由于 Kafka 代码是 Scala 写的，所以需要安装一个 Scala 插件。</p>
+<p>到 Idea 的插件市场下载 Scala 插件，这个插件不仅仅有语法提示而且可以帮你下载 Scala SDK，切换 SDK 非常方便，必装！</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/171275/1610296138821-fff657cf-7d63-4a49-8730-56489f5b38d5.png#align=left&display=inline&height=539&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1456&originWidth=2324&size=836993&status=done&style=none&width=860" alt="image.png"></p>
+<h2 id="仓库初始化"><a href="#仓库初始化" class="headerlink" title="仓库初始化"></a>仓库初始化</h2><p>养成一个好习惯，对于这种直接下载的源码包，先用 git 进行初始化，后续有什么改动也能够进行回溯，防止直接把源码改瓢了，之前做的注释也很难再拷贝出来。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add . &amp;&amp; git commit -m <span class="string">&#x27;init&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="构建项目"><a href="#构建项目" class="headerlink" title="构建项目"></a>构建项目</h2><p>修改项目根目录下的 build.gradle ，将所有的 <code>mavenCentral()</code> 替换成  <code> maven&#123; url &#39;http://maven.aliyun.com/nexus/content/groups/public/&#39;&#125;</code> 加快 gradle 导入包的速度。<br>完事以后开始进行 Gradle 构建</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/171275/1610296394234-61bc8d50-cd52-4c92-9f59-c7cf8141b0ce.png#align=left&display=inline&height=323&margin=%5Bobject%20Object%5D&name=image.png&originHeight=646&originWidth=3486&size=739288&status=done&style=none&width=1743" alt="image.png"> <br>构建完成后，所有的 Kafka 些模块会被自动导入，如下图是导入完成时的工程模块结构</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/171275/1610296724147-b6075fae-0c69-4293-a46c-86ae8af2a7fe.png#align=left&display=inline&height=616&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1232&originWidth=920&size=354544&status=done&style=none&width=460" alt="image.png"></p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>找到 kafka.Kafka 这个类，然后运行 Main 方法，添加启动参数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vmOptions -&gt;  -Dkafka.logs.dir=/Users/lwen/logs/kafka   <span class="comment"># 这个目录需要修改一下，是 kafka 消息文件目录</span></span><br><span class="line"></span><br><span class="line">program arguments -&gt;  config/server.properties  <span class="comment"># kafka 的配置文件路径</span></span><br></pre></td></tr></table></figure>
+
+
+<p>下图展示配置完毕时的参数</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/171275/1610383541230-9bf79e7f-8ea9-414b-ba1b-ffa27573b721.png#align=left&display=inline&height=682&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1364&originWidth=2142&size=674967&status=done&style=none&width=1071" alt="image.png"></p>
+<p>我遇到了很多编译警告⚠️，不过只要还能继续编译就不用 care。<br>令人悲伤的是程序启动不起来，main 方法直接退出了，没有任何的提示。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/171275/1610297238930-cad4aec6-ae09-439e-a8f4-9a3ecc2dbf30.png#align=left&display=inline&height=364&margin=%5Bobject%20Object%5D&name=image.png&originHeight=728&originWidth=3662&size=1228401&status=done&style=none&width=1831" alt="image.png"></p>
+<h2 id="排查问题"><a href="#排查问题" class="headerlink" title="排查问题"></a>排查问题</h2><p>遇到上面那个问题后，找不到任何的日志看出是因为什么导致的，当时看网上的教程是把 log4j 配置文件拷贝到 kafka 目录，日志就能生效，但是我尝试过了也不 OK。</p>
+<p>所以我就开始 debug，找出为什么这个地方会出现 exit with 1 ，这里介绍一个调试源码的技巧：我们看到代码是遇到了异常才退出的，但是我们没有异常堆栈和错误提示，可以肯定的是程序肯定遇到异常了。</p>
+<p>所以我们在 Idea 中，断点所有会发生异常的位置具体操作：</p>
+<p>cmd+shift+f8 打开断点窗口</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/171275/1610885167175-17d6d533-5b46-496f-9f25-8b1d6da3921c.png#align=left&display=inline&height=623&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1246&originWidth=1406&size=454735&status=done&style=none&width=703" alt="image.png"></p>
+<p>勾选上 Any Exception ，并在 Catch Class Filter 中去掉 ClassNotFoundException 因为在程序运行的时候会有双亲委派的类加载过程，肯定会触发 ClassNotFoundException 。这样配置以后，程序抛出任何非 ClassNotFoundException 的位置都会停下来</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/171275/1610885340427-2fb68d6f-3280-4733-8e58-2322de105227.png#align=left&display=inline&height=623&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1246&originWidth=1702&size=504033&status=done&style=none&width=851" alt="image.png"></p>
+<p>以 debug 的方式启动程序，最后我发现程序在  initZk() 的地方异常了，那就很清晰了，zk 配置问题</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/171275/1610885430723-f3324af0-23e5-4371-b71f-ce5ce921329a.png#align=left&display=inline&height=350&margin=%5Bobject%20Object%5D&name=image.png&originHeight=700&originWidth=2022&size=435325&status=done&style=none&width=1011" alt="image.png"></p>
+<p>这个有点坑！主要是因为没有开启日志，所以一行日志没有直接抛出异常结束进程了，后来我也找到打印日志的方法，按照我上面的启动参数配置就可以。</p>
+<p>所以原因是没有启动 zk，那么下一步就是安装 zk。</p>
+<h2 id="安装-ZK"><a href="#安装-ZK" class="headerlink" title="安装 ZK"></a>安装 ZK</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install  zookeeper</span><br></pre></td></tr></table></figure>
+<p> 安装完了以后启动 zk ，我采用的是 后台运行的方式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew services start zookeeper</span><br></pre></td></tr></table></figure>
+<p>      当然也可以直接前台启动，看到日志输出:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zkServer start</span><br></pre></td></tr></table></figure>
+<h2 id="再次启动"><a href="#再次启动" class="headerlink" title="再次启动"></a>再次启动</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/171275/1610383610463-3abb66b5-9aee-4181-8ca5-2eb77ce68fb7.png#align=left&display=inline&height=465&margin=%5Bobject%20Object%5D&name=image.png&originHeight=930&originWidth=2752&size=1154182&status=done&style=none&width=1376" alt="image.png"></p>
+<h2 id="唠叨"><a href="#唠叨" class="headerlink" title="唠叨"></a>唠叨</h2><p>本来以为搭建源码挺简单的，但是还是自己把自己坑了一把。日志没配，zk 没配。不过好在这个过程中，就算没有任何日志和堆栈也能分析到问题的原因，也是调试的一个小技巧，相当实用。</p>
+<p>下篇文章要开始分析 Producer 的架构啦，首先我们会尝试自己实现一个 Producer ，然后再和官方的对比，看看优秀的代码在设计中更关注的点以及是如何实现的。</p>
+<p>另外：大家也可以关注下我的微信公众号哦~ 技术分享和个人思考都会第一时间同步！</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/171275/1610289331606-52e03a47-f431-4b20-8b57-6a4cc0f70345.png#align=left&display=inline&height=430&margin=%5Bobject%20Object%5D&name=image.png&originHeight=430&originWidth=430&size=69429&status=done&style=none&width=430" alt="image.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2021/01/14/Kafka系列文章/Kafka 探险 - 源码环境搭建/" target="_blank" title="Kafka 探险 - 源码环境搭建">https://lwenxu.github.io/2021/01/14/Kafka系列文章/Kafka 探险 - 源码环境搭建/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/01/10/DB/Mybatis%20%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE%E5%90%AB%E4%B9%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Mybatis 常用标签</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kafka-%E6%8E%A2%E9%99%A9-%E6%BA%90%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">Kafka 探险 - 源码环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90%E7%A0%81%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.2.</span> <span class="nav-text">源码下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B%E5%B7%A5%E7%A8%8B-amp-%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">解压工程&amp;安装插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%93%E5%BA%93%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.4.</span> <span class="nav-text">仓库初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.5.</span> <span class="nav-text">构建项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8"><span class="nav-number">1.6.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E6%9F%A5%E9%97%AE%E9%A2%98"><span class="nav-number">1.7.</span> <span class="nav-text">排查问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-ZK"><span class="nav-number">1.8.</span> <span class="nav-text">安装 ZK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%8D%E6%AC%A1%E5%90%AF%E5%8A%A8"><span class="nav-number">1.9.</span> <span class="nav-text">再次启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%94%A0%E5%8F%A8"><span class="nav-number">1.10.</span> <span class="nav-text">唠叨</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2021 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2021 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>
