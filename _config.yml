@@ -78,9 +78,9 @@ theme: hiker
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy: 
-  - type: git
-    repository: https://github.com/lwenxu/lwenxu.github.io.git
-    branch: master
+  # - type: git
+  #   repository: https://github.com/lwenxu/lwenxu.github.io.git
+  #   branch: master
   - type: cos-cdn
     cloud: aliyun
     bucket: lwen-blog-static
