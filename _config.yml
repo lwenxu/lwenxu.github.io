@@ -87,6 +87,9 @@ deploy:
     region: oss-cn-beijing
     secretId: LTAI4Fh5VYH4tHXTsQyntUWQ
     secretKey: e5900bPPXQ660et0UiNamKYqUuruUS
+    cdnEnable: true
+    deleteExtraFiles: true
+    updatePosts: true
 
 # 对 css 和 js 资源的 cdn 加速配置
 #jsdelivr_cdn:
