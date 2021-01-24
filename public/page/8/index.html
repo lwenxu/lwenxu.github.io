@@ -162,187 +162,6 @@
         
           <section id="main" style="float:none;">
   
-    <article id="post-SpringBoot/SpringBoot 笔记 ( 七 )：搜索"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/21/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%83%20)%EF%BC%9A%E6%90%9C%E7%B4%A2/">SpringBoot 笔记(七):搜索</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2018/05/21/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%83%20)%EF%BC%9A%E6%90%9C%E7%B4%A2/" class="article-date">
-	  <time datetime="2018-05-21T06:01:28.000Z" itemprop="datePublished">2018-05-21</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          SpringBoot 笔记 (七):搜索这里我们的搜索就是用 ElasticSearch 这个工具，这个其实是在 Lauce 的基础上构建的一个搜索引擎。
-1. ES入门1.docker安装12docker pull registry.docker-cn.com/library/elasticsearchdocker run -e ES_JAVA_OPTS=&quot;-Xms256m -Xmx256m&quot; -d -p 9200:9200 -p 9300:9300 --name E...
-        </p>
-        <p class="article-more-link">
-          <a href="/2018/05/21/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%83%20)%EF%BC%9A%E6%90%9C%E7%B4%A2/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-SpringBoot/SpringBoot 笔记 ( 六 )：消息"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AD%20)%EF%BC%9A%E6%B6%88%E6%81%AF/">SpringBoot 笔记 ( 六)：消息</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AD%20)%EF%BC%9A%E6%B6%88%E6%81%AF/" class="article-date">
-	  <time datetime="2018-05-20T07:01:28.000Z" itemprop="datePublished">2018-05-20</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          SpringBoot 笔记 (六): 消息1.基本概念1.应用场景
-
-
-
-2.重要概念
-消息代理（broker）：消息队列服务器
-目的地：消息消费者
-
-1.消息队列的两种目的地：
-队列：点对点的通讯，这种就是消息生产者把消息发送到消息队列中，然后消息接受者去获取消息，获取后这个消息就被移除，消息的接受者可以有多个也就是可以有多个消费者，但是注意一个消息只能被其中的一个消费者消费。
-主题：发布订阅通讯，广播形式。所有的接受者都可以收到消息。
-
-2.JMS这是一个基于JVM的消息代理的规范，但...
-        </p>
-        <p class="article-more-link">
-          <a href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%85%AD%20)%EF%BC%9A%E6%B6%88%E6%81%AF/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-SpringBoot/SpringBoot 笔记 ( 五)：缓存"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%94)%EF%BC%9A%E7%BC%93%E5%AD%98/">SpringBoot 笔记 ( 五 )：缓存</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%94)%EF%BC%9A%E7%BC%93%E5%AD%98/" class="article-date">
-	  <time datetime="2018-05-20T02:01:28.000Z" itemprop="datePublished">2018-05-20</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          SpringBoot 笔记 (五): 缓存1.JSR107介绍1.核心概念JSR107这个规范有五个核心概念分别是：
-
-CacheProvider  它用来管理缓存的Manager也就是用来创建，删除，管理，配置CacheManager 的
-CacheManager 是用来管理各个缓存，创建，删除，管理，配置Cache的
-Cache 是各个具体的缓存组件
-Entry 是缓存中具体的一个缓存项
-Expire 缓存的过期时间
-
-
-
-2.导入包
-javax.cache.cache-api
-jav...
-        </p>
-        <p class="article-more-link">
-          <a href="/2018/05/20/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%94)%EF%BC%9A%E7%BC%93%E5%AD%98/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
     <article id="post-Spark/Kafka入门"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
@@ -738,6 +557,190 @@ GRB彩色图像：每个像素由 RGB 组成。这是...
         </p>
         <p class="article-more-link">
           <a href="/2018/04/29/Linux/Docker%20%E5%85%A5%E9%97%A8/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-SpringMVC/Spring踩坑记录"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/22/SpringMVC/Spring%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/">SpringMVC 踩坑记录</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/22/SpringMVC/Spring%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" class="article-date">
+	  <time datetime="2018-04-22T00:01:28.000Z" itemprop="datePublished">2018-04-22</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/SpringMVC/">SpringMVC</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          1. 处理静态资源静态资源直接放在 webapp/web 下，而我们的模板一般是在 WEB-INF 下，但是 WEN-INF     下的东西一般不让访问的，模板之所以能访问到是因为有模板引擎的映射，但是我们的警惕资源应该是直接能访问的东西，直接放在 web 下类似于 jsp 直接访问，而不能放在 WEB-INF 下，并且我们要开启静态资源访问 &lt;mvc:default-servlet-handler/&gt;
+2. Thymeleaf 乱码问题一开始除了乱码想着直接在 web.xm...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/04/22/SpringMVC/Spring%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-SpringMVC/Spring 整合"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/21/SpringMVC/Spring%20%E6%95%B4%E5%90%88/">SpringMVC 整合</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/21/SpringMVC/Spring%20%E6%95%B4%E5%90%88/" class="article-date">
+	  <time datetime="2018-04-21T12:01:28.000Z" itemprop="datePublished">2018-04-21</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/SpringMVC/">SpringMVC</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          今天一开始直接用了 Idea 来创建一个 SpringMVC+Spring+Mybatis+Thymeleaf 的项目，一开始还是挺顺利的，除了在 Thymeleaf 那个地方卡了一下，后面项目还是顺利跑起来了。
+接着想用 Maven 搭建，因为一开始用 Idea 生成的项目使用的手动导入 jar 这样非常费力，为了一劳永逸和简单就采用了 maven 来构建项目。最后发现自己陷入了一个大坑，好久没有跳上来。
+接着我就把用 Maven 搭建 SpringMVC + Spring + Myba...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/04/21/SpringMVC/Spring%20%E6%95%B4%E5%90%88/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Tools/iTerm2 配置及使用"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/20/Tools/iTerm2%20%E9%85%8D%E7%BD%AE%E5%8F%8A%E4%BD%BF%E7%94%A8/">iTerm2 配置及使用技巧</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/20/Tools/iTerm2%20%E9%85%8D%E7%BD%AE%E5%8F%8A%E4%BD%BF%E7%94%A8/" class="article-date">
+	  <time datetime="2018-04-20T13:09:40.000Z" itemprop="datePublished">2018-04-20</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          1. 技巧：1. 选中双击选中，三击选中整行，选中即复制。即任何选中状态的字符串都被放到了系统剪切板中。
+2. command
+可以拖拽选中的字符串；
+点击 url：调用默认浏览器访问该网址；
+点击文件：调用默认程序打开文件
+
+3. 快捷键
+切换 tab：⌘+←, ⌘+→
+切换分屏：⌘+[/]
+新建 tab：⌘+t；
+切分屏幕：⌘+d 水平切分，⌘+Shift+d 垂直切分；
+智能查找，支持正则查找：⌘+f。
+
+
+
+
+命令
+说明
+
+
+
+command + t
+新建标签
+
+
+command ...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/04/20/Tools/iTerm2%20%E9%85%8D%E7%BD%AE%E5%8F%8A%E4%BD%BF%E7%94%A8/#more">Read More</a>
         </p>
       
     </div>

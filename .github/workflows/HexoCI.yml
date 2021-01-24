@@ -27,17 +27,19 @@ jobs:
           git config --global user.email "1405766743@qq.com"
           git config --global user.name "lwen"
           npm install hexo-cli -g
+          npm install hexo-deployer-cos-cdn --save
           npm install
           hexo g
+          hexo d
           mkdir -p /home/runner/work/lwenxu.github.io/lwenxu.github.io/public
           echo "--------------------------- work dir content ---------------------------"
           ls -l /home/runner/work/lwenxu.github.io/lwenxu.github.io/
           echo "--------------------------- work dir content ---------------------------"
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@3.7.1
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: master # The branch the action should deploy to.
-          FOLDER: ./public # The folder the action should deploy.
-          CLEAN: true # Automatically remove deleted files from the deploy branch
+      # - name: Deploy 🚀
+      #   uses: JamesIves/github-pages-deploy-action@3.7.1
+      #   with:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     BRANCH: master # The branch the action should deploy to.
+      #     FOLDER: ./public # The folder the action should deploy.
+      #     CLEAN: true # Automatically remove deleted files from the deploy branch
 

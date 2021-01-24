@@ -162,173 +162,6 @@
         
           <section id="main" style="float:none;">
   
-    <article id="post-DesignPattern/设计模式-装饰者模式"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/06/04/DesignPattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/">设计模式 - 装饰者模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/06/04/DesignPattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/" class="article-date">
-	  <time datetime="2019-06-04T10:30:28.000Z" itemprop="datePublished">2019-06-04</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          装饰者模式
-本文转载自 屈定’s Blog
-
-装饰者模式实际上是一直提倡的组合代替继承的实践方式,个人认为要理解装饰者模式首先需要理解为什么需要组合代替继承,继承又是为什么让人深恶痛绝.
-为什么建议使用组合代替继承?面向对象的特性有继承与封装,但两者却又有一点矛盾,继承意味子类依赖了父类中的实现,一旦父类中改变实现则会对子类造成影响,这是打破了封装性的一种表现.而组合就是巧用封装性来实现继承功能的代码复用.举一个Effective Java中的案例,当前需求是为HashSet提供一个计数,...
-        </p>
-        <p class="article-more-link">
-          <a href="/2019/06/04/DesignPattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-DesignPattern/设计模式-责任链模式"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/06/04/DesignPattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/">设计模式 - 责任链模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/06/04/DesignPattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/" class="article-date">
-	  <time datetime="2019-06-04T10:00:28.000Z" itemprop="datePublished">2019-06-04</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          责任链模式
-本文转载自屈定’s Blog
-
-标准责任链模式责任链模式: 客户端发出的请求,客户端本身并不知道被哪一个对象处理,而直接扔给对象链,该请求在对象链中共享,由对象本身决定是否处理. 当请求被处理后该链终止.本质目的是把客户端请求与接收者解耦,但是解耦的太彻底了,只能让接收者一个个来看看是不是自己该处理的请求.标准的责任链模式一个请求只被一个对象处理,一旦处理成功后则链终止,请求不再被继续传递.标准的责任链模式并不是很通用,这种一对一模式大多场景可以用策略模式来代替,只有在客户端并...
-        </p>
-        <p class="article-more-link">
-          <a href="/2019/06/04/DesignPattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-DesignPattern/设计模式-模板方法模式"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/06/04/DesignPattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/">设计模式 - 模板方法模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/06/04/DesignPattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" class="article-date">
-	  <time datetime="2019-06-04T09:20:28.000Z" itemprop="datePublished">2019-06-04</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          设计模式–模板方法模式的思考
-本文转载自屈定’s Blog
-
-模板方法同样也是一种很实用的方法,目的是提高代码复用,并且统一大体的算法流程,比如一个一台电脑主机,定义好放置CPU,硬盘,内存等空位后,就形成了一个骨架,那么这个就是模板,具体的CPU,内存,硬盘是什么牌子型号则不需要考虑,这些是具体到业务中的实现类所负责的事情.
-模板方法模式模板方法模式可以说是抽象类的一种特性,可以定义抽象(abstract)方法与常规方法,抽象方法延迟到子类中实现.因此标准的模板方法一般是一个抽象类+具体...
-        </p>
-        <p class="article-more-link">
-          <a href="/2019/06/04/DesignPattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
     <article id="post-DesignPattern/设计模式-策略设计模式"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
@@ -713,6 +546,172 @@ Filter过滤器，里面传递一个函数，这个函数的返回结果如果�
         </p>
         <p class="article-more-link">
           <a href="/2019/05/11/Java%20SE/Java%20%E6%96%B0%E7%89%B9%E6%80%A7%20-%20Stream/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Java SE/Java 新特性 - Time"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/05/10/Java%20SE/Java%20%E6%96%B0%E7%89%B9%E6%80%A7%20-%20Time/">Java 新特性之 Time</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/05/10/Java%20SE/Java%20%E6%96%B0%E7%89%B9%E6%80%A7%20-%20Time/" class="article-date">
+	  <time datetime="2019-05-10T02:49:28.000Z" itemprop="datePublished">2019-05-10</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Java/">-Java</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          日期类 LocalDate能够简单的获取当天的日期，并且可以方便的对日期进行加减。
+他是通过静态方法或者 from/of 等方法创建对象的。
+这个类不存储时区，所以他没有时区的概念，如果需要时区的话需要使用 ZonedDateTime
+这个类只能进行日期的相关操作，没有具体的时间。
+下面介绍常用的几个方法
+atTime生成一个带有时间的日期，返回结果是 LocalDateTime 所以很明显这个就是带有时间的日期类。
+12LocalDateTime time = LocalDate.now...
+        </p>
+        <p class="article-more-link">
+          <a href="/2019/05/10/Java%20SE/Java%20%E6%96%B0%E7%89%B9%E6%80%A7%20-%20Time/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Life/扬帆起航"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/04/14/Life/%E6%89%AC%E5%B8%86%E8%B5%B7%E8%88%AA/">扬帆起航</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/04/14/Life/%E6%89%AC%E5%B8%86%E8%B5%B7%E8%88%AA/" class="article-date">
+	  <time datetime="2019-04-14T01:33:55.000Z" itemprop="datePublished">2019-04-14</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F/">生活感悟</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          扬帆起航其实很早就想写这篇文章，只是一直不知道从何说起。或者说，没能腾出一片完整的时间，给自己的大学生活写一个完整的回忆录。其实细细想来，这段时光更像是平静的水面，偶然也有湍急之处泛着白色的浪花。
+开始​    和大多数人一样，以萌新的身份来到大学，看着即将成为自己学长学姐的那群人，一时不知道从哪里开始了解这个陌生而又神秘的校园。好，美好的大学生活就先从图书馆开始。良好的习惯是成功一半，也得要先熟悉熟悉自己以后学习的地方。
+​    摸索了挺久，才找到了计算机学科的阅览室。怎么说呢，被一大...
+        </p>
+        <p class="article-more-link">
+          <a href="/2019/04/14/Life/%E6%89%AC%E5%B8%86%E8%B5%B7%E8%88%AA/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Live/扬帆起航"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/04/14/Live/%E6%89%AC%E5%B8%86%E8%B5%B7%E8%88%AA/">扬帆起航</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/04/14/Live/%E6%89%AC%E5%B8%86%E8%B5%B7%E8%88%AA/" class="article-date">
+	  <time datetime="2019-04-14T01:33:55.000Z" itemprop="datePublished">2019-04-14</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F/">生活感悟</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          扬帆起航其实很早就想写这篇文章，只是一直不知道从何说起。或者说，没能腾出一片完整的时间，给自己的大学生活写一个完整的回忆录。其实细细想来，这段时光更像是平静的水面，偶然也有湍急之处泛着白色的浪花。
+开始​    和大多数人一样，以萌新的身份来到大学，看着即将成为自己学长学姐的那群人，一时不知道从哪里开始了解这个陌生而又神秘的校园。好，美好的大学生活就先从图书馆开始。良好的习惯是成功一半，也得要先熟悉熟悉自己以后学习的地方。
+​    摸索了挺久，才找到了计算机学科的阅览室。怎么说呢，被一大...
+        </p>
+        <p class="article-more-link">
+          <a href="/2019/04/14/Live/%E6%89%AC%E5%B8%86%E8%B5%B7%E8%88%AA/#more">Read More</a>
         </p>
       
     </div>

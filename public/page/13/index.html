@@ -162,186 +162,6 @@
         
           <section id="main" style="float:none;">
   
-    <article id="post-JVM/Java-虚拟机对象布局及创建过程"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/12/10/JVM/Java-%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E5%8F%8A%E5%88%9B%E5%BB%BA%E8%BF%87%E7%A8%8B/">Java 虚拟机对象布局及创建过程</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2017/12/10/JVM/Java-%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E5%8F%8A%E5%88%9B%E5%BB%BA%E8%BF%87%E7%A8%8B/" class="article-date">
-	  <time datetime="2017-12-10T13:38:50.000Z" itemprop="datePublished">2017-12-10</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/Java-%E8%99%9A%E6%8B%9F%E6%9C%BA/">-Java -虚拟机</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          一. 对象创建过程一、类加载​    这个阶段其实主要做的就是类的加载验证，以及类的准备等等一系列的工作。为后面的类的初始化和解析做铺垫。
-
-
-二、类解析​    这个阶段主要对上面已经加载入内存的类进行词法语法的解析，形成语法树等操作。
-三、类初始化​    类初始化执行的就是 &lt;clinit&gt; 方法，以及在类中的各种常量的初始化（放入常量池中的常量）。
-四、分配内存​    虚拟机对所需要创建的对象分配内存，在类的解析的时候其实已经知道实例变量需要的堆空间了。此时只需要调用...
-        </p>
-        <p class="article-more-link">
-          <a href="/2017/12/10/JVM/Java-%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E5%8F%8A%E5%88%9B%E5%BB%BA%E8%BF%87%E7%A8%8B/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-JVM/Java-虚拟机运行时数据区"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/12/10/JVM/Java-%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/">Java 虚拟机运行时数据区</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2017/12/10/JVM/Java-%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/" class="article-date">
-	  <time datetime="2017-12-10T12:14:43.000Z" itemprop="datePublished">2017-12-10</time>
-	</a>
-
-      
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          运行时数据区：Java 虚拟机的运行时数据区按照大的可以分为线程独立使用的数据区，和所有线程共享的数据区。
-一.线程独立使用数据区1.程序计数器
-程序计数器其实就是 jvm 里面的pc，他指向的都是字节码的偏移量，也就是下一条要执行的字节码
-当然这是 jvm 在执行 java 方法的时候，当程序在执行 navtive 方法的时候这时候起作用的其实是我们物理机上的 pc 此时 jvm 的 pc 是空值（undefine）
-并且这个地方也是所有的 jvm 内存区完全不会抛出 OutOfMema...
-        </p>
-        <p class="article-more-link">
-          <a href="/2017/12/10/JVM/Java-%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-Life/今日总结20180304.md"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/12/06/Life/%E4%BB%8A%E6%97%A5%E6%80%BB%E7%BB%9320180304.md/">今日总结20180304</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2017/12/06/Life/%E4%BB%8A%E6%97%A5%E6%80%BB%E7%BB%9320180304.md/" class="article-date">
-	  <time datetime="2017-12-06T13:36:04.000Z" itemprop="datePublished">2017-12-06</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">-生活</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          
-八大排序算法
-优先队列
-红黑树
-并查集
-左式堆
-栈的应用：逆波兰表达式计算、中缀表达式转后缀表达式
-队列应用：杨辉三角、
-最大子序列的和：分治、贪心
-递归的四大原则：
-基准情型：所有的递归都有一个基准，或者说是递归停止的界限，他是无序计算就能够得到的
-不断推进：向着基准方向不断的推进，也就是递归的过程。
-设计法则：我们假定递归的每一个环节都能运行，也就是我们无需考虑递归甚至调试追踪递归内部的情形
-合成效益：不要进行重复的计算.
-
-
-内部类的作用，静态内部类的特点。
-二叉树表示表达式，先序...
-        </p>
-        <p class="article-more-link">
-          <a href="/2017/12/06/Life/%E4%BB%8A%E6%97%A5%E6%80%BB%E7%BB%9320180304.md/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
     <article id="post-Life/博客迁移到-coding-了"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
@@ -719,6 +539,164 @@
         </p>
         <p class="article-more-link">
           <a href="/2017/10/11/Leet%20Code/DP%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95Medium/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Leet Code/DP刷题记录Easy"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/10/11/Leet%20Code/DP%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95Easy/">DP 刷题记录 Easy</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/10/11/Leet%20Code/DP%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95Easy/" class="article-date">
+	  <time datetime="2017-10-11T13:28:29.000Z" itemprop="datePublished">2017-10-11</time>
+	</a>
+
+      
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          
+ House robber
+
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152package Classify.DP;import org.junit.jupiter.api.Test;public class HouseRobber &#123;    /**     * 解法一：思路就是一个二维的动态规划问题，然后0代表不偷当前的房子，1就是偷...
+        </p>
+        <p class="article-more-link">
+          <a href="/2017/10/11/Leet%20Code/DP%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95Easy/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="dp-Leet Code/刷题记录"  class="article article-type-dp" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/10/11/Leet%20Code/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">刷题记录</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/10/11/Leet%20Code/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="article-date">
+	  <time datetime="2017-10-11T13:26:52.000Z" itemprop="datePublished">2017-10-11</time>
+	</a>
+
+      
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          
+        </p>
+        <p class="article-more-link">
+          <a href="/2017/10/11/Leet%20Code/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Algorithm/动态规划"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/10/10/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/10/10/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="article-date">
+	  <time datetime="2017-10-10T12:00:49.000Z" itemprop="datePublished">2017-10-10</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1/">-算法设计</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          ​    动态规划一般来说和分治有点类似都是让他们去处理相同的子问题，但是在动态规划里面你会遇到更多的相同子问题。然后我们就会导致很多的重复计算，所以一般我们可以使用递归来完成一个动态规划要完成的任务，但是这样一般会重复计算很多东西，所以动态规划一般就增加了一些矩阵来存放上一次计算的结果。
+
+
+​    例如斐波那契数列，这个如果我们直接使用地柜计算的话，我们会很多重复计算。然后当我们要使用一个阵列计算的时候我们在每一次计算之前我们都需要进行一次判断看看我们目前的结果是不是已经被计算了，如...
+        </p>
+        <p class="article-more-link">
+          <a href="/2017/10/10/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/#more">Read More</a>
         </p>
       
     </div>

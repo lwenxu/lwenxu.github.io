@@ -162,173 +162,6 @@
         
           <section id="main" style="float:none;">
   
-    <article id="post-Java Web/Struts2笔记-一"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/22/Java%20Web/Struts2%E7%AC%94%E8%AE%B0-%E4%B8%80/">Struts2笔记(一)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2017/08/22/Java%20Web/Struts2%E7%AC%94%E8%AE%B0-%E4%B8%80/" class="article-date">
-	  <time datetime="2017-08-22T10:52:06.000Z" itemprop="datePublished">2017-08-22</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/JAVA/">-JAVA</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          1.创建Action创建action需要继承ActionSupport类，然后就会有一些常量以及一些方法。struts2的action默认执行的方法就是execute()方法
-123456789package demo01;import com.opensymphony.xwork2.ActionSupport;public class Hello extends ActionSupport&#123;    public String execute()&#123;        ret...
-        </p>
-        <p class="article-more-link">
-          <a href="/2017/08/22/Java%20Web/Struts2%E7%AC%94%E8%AE%B0-%E4%B8%80/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-Java Web/Hibernate笔记-三"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/21/Java%20Web/Hibernate%E7%AC%94%E8%AE%B0-%E4%B8%89/">Hibernate笔记(三)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2017/08/21/Java%20Web/Hibernate%E7%AC%94%E8%AE%B0-%E4%B8%89/" class="article-date">
-	  <time datetime="2017-08-21T08:01:03.000Z" itemprop="datePublished">2017-08-21</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/JAVA/">-JAVA</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          1.对象导航查询两个相关的对象
-2.OID查询用id查出对象
-3.hql查询Query对象
-1.hql
-查询所有   from entity
-条件查询   from entity where name=?     setParameter(index,arg)  设置参数值
-模糊查询   from entity where name  like ?；  
-排序      from entity order by name desc
-分页      setFirstResult()开始位置 ...
-        </p>
-        <p class="article-more-link">
-          <a href="/2017/08/21/Java%20Web/Hibernate%E7%AC%94%E8%AE%B0-%E4%B8%89/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-Java Web/Hibernate笔记-二"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/21/Java%20Web/Hibernate%E7%AC%94%E8%AE%B0-%E4%BA%8C/">Hibernate笔记(二)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2017/08/21/Java%20Web/Hibernate%E7%AC%94%E8%AE%B0-%E4%BA%8C/" class="article-date">
-	  <time datetime="2017-08-21T08:00:58.000Z" itemprop="datePublished">2017-08-21</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/JAVA/">-JAVA</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          1.一对多的关系映射对于一的一方：
-
-1234567891011121314151617181920212223242526272829303132333435package domain;import java.util.HashSet;import java.util.Set;public class Customer &#123;    private int cid;    private String name;    //表示多个联系人    private Set&lt;Pe...
-        </p>
-        <p class="article-more-link">
-          <a href="/2017/08/21/Java%20Web/Hibernate%E7%AC%94%E8%AE%B0-%E4%BA%8C/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
     <article id="post-Java Web/Hibernate笔记-一"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
@@ -704,6 +537,176 @@ jpa 实体规范的包2.写一个实体类实体类必须要有一个唯一的id
         </p>
         <p class="article-more-link">
           <a href="/2017/08/19/Java%20SE/%E5%86%85%E9%83%A8%E7%B1%BB%E7%9A%84%E4%BD%9C%E7%94%A8/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Java SE/JavaIO"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/08/09/Java%20SE/JavaIO/">JavaIO</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/08/09/Java%20SE/JavaIO/" class="article-date">
+	  <time datetime="2017-08-09T07:49:28.000Z" itemprop="datePublished">2017-08-09</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Java/">-Java</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          1.在IO有两种数据传输格式一个是字符流还一个是字节流但是字符流就会涉及到编码的问题
+
+一开始美国使用的自己的编码表就是ASCII表
+中国的字符需要被识别也需要编码表于是就有了GB2312
+但是由于中国的子很多，还有少数名族等等后来又进行了优化扩容就出现了GBK
+最后国际标准组织制定了一个包含所有国家所有地区的码表就是Unicode
+之后对Unicode进行了优化也就是以前是所有的字符都是两个字节表示，但是现在就可以一个字节或者三个字节，具体看情况的UTF_8字符流一般都包含了编码表，也就...
+        </p>
+        <p class="article-more-link">
+          <a href="/2017/08/09/Java%20SE/JavaIO/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Java SE/Java多线程"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/08/09/Java%20SE/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/">Java多线程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/08/09/Java%20SE/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="article-date">
+	  <time datetime="2017-08-09T07:49:28.000Z" itemprop="datePublished">2017-08-09</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Java/">-Java</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          1.复写run方法的目的在于，把要运行的代码放到run方法里面，也就是新的线程要跑什么内容这也就是第一种多线程的方法，其主要的步骤如下：
+
+继承Thread类
+复写run方法
+创建对象
+start  
+任何一个程序至少有一个线程就是主线程，主线程也是main方法的线程，这个线程是由jvm启动的，当我们自己创建新的线程的时候实际上是在主线程之外另开的新的线程和主线程并行工作12345678910111213141516171819class DemoRun extends Thread&#1...
+        </p>
+        <p class="article-more-link">
+          <a href="/2017/08/09/Java%20SE/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Java SE/Java范型"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/08/09/Java%20SE/Java%E8%8C%83%E5%9E%8B/">Java泛型</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/08/09/Java%20SE/Java%E8%8C%83%E5%9E%8B/" class="article-date">
+	  <time datetime="2017-08-09T07:49:28.000Z" itemprop="datePublished">2017-08-09</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Java/">-Java</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          1.java泛型及就是在jdk1.5之后出现的一个新的安全机制  我们发现在集合框架中我们可以放入任何的元素，然而这样做并没有任何意义，绝大多时候我们是默认我们  知道这个容器需要存放什么样的内容，但是用户的输入是不安全的如果他们输入了各种类型然后我们只对某些类型  进行了处理显然到时候运行时必然报错  所以为了解决这个问题，类似于数组的解决方式给集合限定了类型使用尖括号来限定，当然包括Iterator  他的好处就是安全
+
+2.comparable接口和comparator都可以使用泛型...
+        </p>
+        <p class="article-more-link">
+          <a href="/2017/08/09/Java%20SE/Java%E8%8C%83%E5%9E%8B/#more">Read More</a>
         </p>
       
     </div>

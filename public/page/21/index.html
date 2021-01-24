@@ -162,182 +162,6 @@
         
           <section id="main" style="float:none;">
   
-    <article id="post-DataBase/数据库Exists关键字举例"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/05/12/DataBase/%E6%95%B0%E6%8D%AE%E5%BA%93Exists%E5%85%B3%E9%94%AE%E5%AD%97%E4%B8%BE%E4%BE%8B/">数据库Exists关键字举例</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2017/05/12/DataBase/%E6%95%B0%E6%8D%AE%E5%BA%93Exists%E5%85%B3%E9%94%AE%E5%AD%97%E4%B8%BE%E4%BE%8B/" class="article-date">
-	  <time datetime="2017-05-11T23:30:00.000Z" itemprop="datePublished">2017-05-12</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">-数据库</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          一.问题描述：
-查询所有未选择03号课程的学生的姓名规定使用存在量词
-
-
-student表：
-grade表：
-二.思路：既然是存在量词那么也就是Exists和Not Exists两个存在两次来做判断条件。那么就可以想：
-1.选出所有学生然后除去那些选了03号课程的同学2.直接选出那些没有选择03号课程的同学三.开始写Sql：1.尝试首先按照第一种思路就是先连接student和grade（或者不连接）然后除掉grade中有03课程记录的学生，那么我们会写出以下Sql:
-1234567SELE...
-        </p>
-        <p class="article-more-link">
-          <a href="/2017/05/12/DataBase/%E6%95%B0%E6%8D%AE%E5%BA%93Exists%E5%85%B3%E9%94%AE%E5%AD%97%E4%B8%BE%E4%BE%8B/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-PHP/Mac配置PHP7环境"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/05/07/PHP/Mac%E9%85%8D%E7%BD%AEPHP7%E7%8E%AF%E5%A2%83/">Mac配置PHP7环境</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2017/05/07/PHP/Mac%E9%85%8D%E7%BD%AEPHP7%E7%8E%AF%E5%A2%83/" class="article-date">
-	  <time datetime="2017-05-07T13:40:24.000Z" itemprop="datePublished">2017-05-07</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/Mac/">-Mac</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          
-在Mac下面本来就安装有Apache2和PHP5.5.3这里为了配置更新的环境就稍微折腾了一下，主要配置的就是MySQL和PHP，Apache就使用自带的就行。
-
-配置MySQL：MySQL在MySQL的官网上直接下载dmg包之后安转就行了。这里Mac版本的MySQL下载地址是
-
-https://dev.mysql.com/downloads/file/?id=461365
-
-下载之后在安装完成以后注意他会提示有一个默认的密码，一定要给记下来，一会改密码用的上。再安装完成了，打开偏好设置...
-        </p>
-        <p class="article-more-link">
-          <a href="/2017/05/07/PHP/Mac%E9%85%8D%E7%BD%AEPHP7%E7%8E%AF%E5%A2%83/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-PHP/关于PHP的回调函数"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/05/07/PHP/%E5%85%B3%E4%BA%8EPHP%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">关于PHP的回调函数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2017/05/07/PHP/%E5%85%B3%E4%BA%8EPHP%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" class="article-date">
-	  <time datetime="2017-05-07T11:49:31.000Z" itemprop="datePublished">2017-05-07</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/PHP/">-PHP</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          
-
-普通函数的定义及调用与js相似,这个定义方式无需返回值,哪怕是有返回值在声明的时候也无需添加
-再后来的PHP版本中是添加了一向很有用的功能就是可在函数定义之前进行调用
-
-123456789101112echo add(1,2);echo &quot;&lt;&#x2F;br&gt;&quot;;function add($a,$b)&#123;    return $a+$b;&#125;function sub($a,$b)&#123;    return $a-$b;&#125;e...
-        </p>
-        <p class="article-more-link">
-          <a href="/2017/05/07/PHP/%E5%85%B3%E4%BA%8EPHP%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
     <article id="post-Python/Mac安装包版本的Python"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
@@ -741,6 +565,179 @@ gmerge-conflicts1在使用 Git 进行合并和 rebase 的时候可以用 alt-m d
         </p>
         <p class="article-more-link">
           <a href="/2017/05/05/Tools/Atom%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Linux/Linux常用技巧"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/05/04/Linux/Linux%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/">Linux常用技巧</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/05/04/Linux/Linux%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/" class="article-date">
+	  <time datetime="2017-05-04T13:08:52.000Z" itemprop="datePublished">2017-05-04</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Linux/">-Linux</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          使用ls显示一个文件的绝路径：1ls file |sed &quot;s:^:`pwd`/:&quot;
+
+创建一个程序的启动器：使用Desktop Entery的格式，首先需要进入相应目录建立文件，在文件中写入程序相关信息：
+12cd &#x2F;usr&#x2F;share&#x2F;applications&#x2F;sudo vim application.desktop
+开始写入文件信息,格式如下：
+1234567[Desktop Entery]Version=1.0Name=A...
+        </p>
+        <p class="article-more-link">
+          <a href="/2017/05/04/Linux/Linux%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Linux/Linux下安装shadowsocks"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/05/04/Linux/Linux%E4%B8%8B%E5%AE%89%E8%A3%85shadowsocks/">Linux下安装shadowsocks</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/05/04/Linux/Linux%E4%B8%8B%E5%AE%89%E8%A3%85shadowsocks/" class="article-date">
+	  <time datetime="2017-05-04T12:04:20.000Z" itemprop="datePublished">2017-05-04</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Linux/">-Linux</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          
+Fedora/Red Hat Enterprise Linux使用dnf安装:
+123sudo dnf copr enable librehat/shadowsockssudo dnf updatesudo dnf install shadowsocks-qt5
+如果你要使用copr repo可能还需要安装下面这个插件：
+
+1sudo dnf install dnf-plugins-core
+当然你的Linux版本不是特别高的话可能用的不是dnf，这时候用yum就行：
+12sudo yu...
+        </p>
+        <p class="article-more-link">
+          <a href="/2017/05/04/Linux/Linux%E4%B8%8B%E5%AE%89%E8%A3%85shadowsocks/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Linux/Linux下安装Node-js"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/05/04/Linux/Linux%E4%B8%8B%E5%AE%89%E8%A3%85Node-js/">Linux下安装Node.js</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/05/04/Linux/Linux%E4%B8%8B%E5%AE%89%E8%A3%85Node-js/" class="article-date">
+	  <time datetime="2017-05-04T09:51:37.000Z" itemprop="datePublished">2017-05-04</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Linux/">-Linux</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          
+手动二进制包的安装方法一般来说我们在Node的官网上是找不到Linux的Deb包，或者是Rpm包的，他针对Windows和mac都有二进制的安装包，但是Linux只有一个tar.xz这个包下载下来虽然也是一个二进制的包，类似于Windows中的绿色软件，也非常好配置，仅仅使用
+1tar -xvf package.tar.xz
+即可完成解压，然后使用软连接，把node与npm文件链接到*/usr/local/bin*下面
+
+12ln -s /opt/nodejs/bin/node /usr...
+        </p>
+        <p class="article-more-link">
+          <a href="/2017/05/04/Linux/Linux%E4%B8%8B%E5%AE%89%E8%A3%85Node-js/#more">Read More</a>
         </p>
       
     </div>

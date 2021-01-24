@@ -78,9 +78,15 @@ theme: hiker
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy: 
-    type: git
+  - type: git
     repository: https://github.com/lwenxu/lwenxu.github.io.git
     branch: master
+  - type: cos-cdn
+    cloud: aliyun
+    bucket: lwen-blog-static
+    region: oss-cn-beijing
+    secretId: LTAI4Fh5VYH4tHXTsQyntUWQ
+    secretKey: e5900bPPXQ660et0UiNamKYqUuruUS
 
 # 对 css 和 js 资源的 cdn 加速配置
 #jsdelivr_cdn:
