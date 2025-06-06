@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>用函数写 bean 你见过么 | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Spring" />
+  
+  
+  
+  
+  <meta name="description" content="​    函数是很多编程语言中的一等公民，并且在近些年提的很火的 函数式变成 以及 Serverless 都是通过函数来表达，每个函数提供一个单一功能的服务。他们相互作用，相互引用组装出复杂的功能。当云计算重构整个 IT 产业的同时， 也赋予了企业崭新的增长机遇。正如集装箱的出现加速了贸易全球化进程，以容器为代表的云原生技术作为云计算的服务新界面加速云计算也推动着软件架构向云原生演进。在当下处处都">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用函数写 Bean 你见过么">
+<meta property="og:url" content="https://lwenxu.github.io/2021/07/10/Spring/%E7%94%A8%E5%87%BD%E6%95%B0%E5%86%99%20Spring%20%E9%A1%B9%E7%9B%AE%E4%BD%A0%E8%A7%81%E8%BF%87%E4%B9%88%20--SpringFu/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="​    函数是很多编程语言中的一等公民，并且在近些年提的很火的 函数式变成 以及 Serverless 都是通过函数来表达，每个函数提供一个单一功能的服务。他们相互作用，相互引用组装出复杂的功能。当云计算重构整个 IT 产业的同时， 也赋予了企业崭新的增长机遇。正如集装箱的出现加速了贸易全球化进程，以容器为代表的云原生技术作为云计算的服务新界面加速云计算也推动着软件架构向云原生演进。在当下处处都">
+<meta property="og:locale">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/cloud-native-architecutre-mindnode-20210710150004646.jpg">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/image-20210710152019688.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/image-20210710153046306.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/image-20210710160236238.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/image-20210710161001751.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/image-20210710175442941.png">
+<meta property="article:published_time" content="2021-07-10T15:02:37.000Z">
+<meta property="article:modified_time" content="2025-06-06T02:37:33.814Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="Spring">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/cloud-native-architecutre-mindnode-20210710150004646.jpg">
+  
+
+  
+
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
+  
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Spring/用函数写 Spring 项目你见过么 --SpringFu" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      用函数写 Bean 你见过么
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2021/07/10/Spring/%E7%94%A8%E5%87%BD%E6%95%B0%E5%86%99%20Spring%20%E9%A1%B9%E7%9B%AE%E4%BD%A0%E8%A7%81%E8%BF%87%E4%B9%88%20--SpringFu/" class="article-date">
+	  <time datetime="2021-07-10T15:02:37.000Z" itemprop="datePublished">2021-07-10</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Spring-Fu/">Spring Fu</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​    函数是很多编程语言中的一等公民，并且在近些年提的很火的 <code>函数式变成</code> 以及 <code>Serverless</code> 都是通过函数来表达，每个函数提供一个单一功能的服务。他们相互作用，相互引用组装出复杂的功能。当云计算重构整个 IT 产业的同时， 也赋予了企业崭新的增长机遇。正如集装箱的出现加速了贸易全球化进程，以容器为代表的云原生技术作为云计算的服务新界面加速云计算也推动着软件架构向云原生演进。在当下处处都在呼吁 <code>云原生</code> 和 <code>反应式架构</code>的大背景下， Java 以及他的好搭档 Spring 又在做出怎么样的改变去紧跟这个新浪潮呢 ？</p>
+<center> <img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/cloud-native-architecutre-mindnode-20210710150004646.jpg" alt="Cloud native思维导图" style="zoom: 33%;" /></center>
+  <center> [云原生概念导图] </center>
+
+
+
+<p>​    这里我们就要请出我们的主角 <code>SpringFu</code> , 据官方声称使用 SpringFu 搭建 SpringBoot 应用比普通自动配置的 SpringMVC 项目要快上 40% ，并且得益于很少使用反射特性能够非常好的适应 <code>GraalVM native</code> 同时还有内存占用量低等等优势。</p>
+<h2 id="GayHub"><a href="#GayHub" class="headerlink" title="GayHub"></a>GayHub</h2><p>​        其实 SpringFu 项目分为  <a target="_blank" rel="noopener" href="https://github.com/spring-projects-experimental/spring-fu/tree/main/jafu">JaFu</a> (Java DSL) and <a target="_blank" rel="noopener" href="https://github.com/spring-projects-experimental/spring-fu/tree/main/kofu">KoFu</a> (Kotlin DSL) ，也就是他既做了 Java 版本也做了 Kotlin 版本，作者也考虑了极为先进的卡特琳了，虽然这个语言我学过几天后再也没使用过，在平时的工作中我使用 Groovy 的频率都比 Kotlin 高。</p>
+<img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/image-20210710152019688.png" alt="image-20210710152019688" style="zoom: 50%;" />
+
+
+
+<p>先创建一个简单的 SpringBoot 工程，可以使用 <a target="_blank" rel="noopener" href="https://start.spring.io/">https://start.spring.io/</a>  这个 Spring 官方的脚手架搭建工具，当然如果你是跟我一样的 Idea 的重度用户也可以使用 Idea 的 <code>SpringInitializr</code> </p>
+<img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/image-20210710153046306.png" alt="image-20210710153046306" style="zoom:50%;" />
+
+
+
+<h2 id="加载依赖的小插曲"><a href="#加载依赖的小插曲" class="headerlink" title="加载依赖的小插曲"></a>加载依赖的小插曲</h2><p>再到主 POM 里加下下面这这段朴实无华的代码：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.fu<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-fu-jafu<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.4.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>但是当你更新 Maven 依赖的时候发现这个包并不会被拉下来，然后我果断换掉了 阿里云  的 Maven 镜像源，变成了 <a target="_blank" rel="noopener" href="http://maven.net.cn/content/groups/public/">http://maven.net.cn/content/groups/public/</a> 然后赤裸裸的 Error 又把我打入地狱，什么玩意中央仓库都没有这个包？于是我拿着这个 artifactId 去 <a target="_blank" rel="noopener" href="https://mvnrepository.com/">https://mvnrepository.com/</a> 全网 Maven 仓库查询了下，然后我注意到他有这么个 Tag ，呵 ！！！给我来这套</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/image-20210710160236238.png" alt="image-20210710160236238"></p>
+<p>于是乎我经历了第三次变更 Maven 镜像源，我也懒得配置 mirrorOf 了，直接把这个镜像源提到第一个按照优先级先到这个镜像仓库取拉包，这次果然没有问题了。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span>  </span><br><span class="line">    <span class="comment">&lt;!-- mirror | Specifies a repository mirror site to use instead of a given   </span></span><br><span class="line"><span class="comment">              repository. The repository that | this mirror serves has an ID that matches   </span></span><br><span class="line"><span class="comment">              the mirrorOf element of this mirror. IDs are used | for inheritance and direct   </span></span><br><span class="line"><span class="comment">              lookup purposes, and must be unique across the set of mirrors. | --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-sp<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus sp<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">url</span>&gt;</span>https://repo.spring.io/milestone/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-163<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus 163<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://mirrors.163.com/maven/repository/maven-public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-aliyun<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus aliyun<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirror</span>&gt;</span>  </span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>net-cn<span class="tag">&lt;/<span class="name">id</span>&gt;</span>  </span><br><span class="line">      <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span>  </span><br><span class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus net<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </span><br><span class="line">      <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.net.cn/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span>  </span><br></pre></td></tr></table></figure>
+
+
+
+<p>​    因为我勾选了 SpringData ，所以我必须配置一个数据源，这里我就用本地的 MySQL 当做测试数据源，让项目先跑起来。</p>
+<img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/image-20210710161001751.png" alt="image-20210710161001751" style="zoom: 50%;" />
+
+<p>​    不出意外，MacBook Pro 运行这种小程序就是快！</p>
+<h2 id="改造主程序"><a href="#改造主程序" class="headerlink" title="改造主程序"></a>改造主程序</h2><p>​    我们都清楚，SpringBoot 的加载是通过主类来完成的，想让 SpringFu 来作为整个项目的启动器我们就需要对 <code>SpringfuDemoApplication </code> 做做改造了。注意如下代码请不要抄官方文档，你不可能跑起来的，因为他们的 demo 使用了一个 protected 的方法，如果你不是通过源码依赖是不可能调用到这个方法的，所以这里我换了一个写法，加载完 ioc 容器后在外部手动 enable 。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> JafuApplication app = webApplication(ioc -&gt;</span><br><span class="line">            ioc.beans(beanDefinition -&gt;</span><br><span class="line">                    beanDefinition.bean(SampleHandler.class).bean(SampleService.class)</span><br><span class="line">            ).enable(webMvc(dsl -&gt;</span><br><span class="line">                    dsl.port(dsl.profiles().contains(<span class="string">&quot;test&quot;</span>) ? <span class="number">8181</span> : <span class="number">8080</span>)</span><br><span class="line">                            .router(router -&gt; &#123;</span><br><span class="line">                                SampleHandler handler = dsl.ref(SampleHandler.class);</span><br><span class="line">                                router.GET(<span class="string">&quot;/sayHello&quot;</span>, handler::hello);</span><br><span class="line">                            &#125;)</span><br><span class="line">                            .converters(c -&gt;</span><br><span class="line">                                    c.string().jackson()</span><br><span class="line">                            )</span><br><span class="line">            ))</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        app.run(args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>其中依赖了 <code>SampleHandler</code> 这个处理器 代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SampleHandler</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> ServerResponse <span class="title">hello</span><span class="params">(ServerRequest request)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> ok().body(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    启动后访问，大功告成。</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/image-20210710175442941.png" alt="image-20210710175442941"></p>
+<h2 id="新旧比较"><a href="#新旧比较" class="headerlink" title="新旧比较"></a>新旧比较</h2><h3 id="加载-bean"><a href="#加载-bean" class="headerlink" title="加载 bean"></a>加载 bean</h3><p>在传统的 Spring 加载 Bean 一般是通过 xml 或者 JavaConfig 的方式，这里演示下相对比较简单的 JavaConfig 声明 Bean 的方式。通过一个 <code>@Configuration</code>  注解告诉 Spring 他是一个配置类，其中的每个 <code>@Bean</code> 声明的方法都是容器中的一个 Bean</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">user</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> User();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Student <span class="title">student</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Student();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>而在 SpringFu 中使用就变得简单起来了，通过 <code>ConfigurationDsl</code> 的 beans 方法注册 bean，方法接受了一个 <code>Lambda</code> 表达式来加载 bean 。所以说在 SpringMVC 或者 SpringBoot 中需要使用 <code>@Component</code> 的地方最终都会使用 <code>ConfigurationDsl#beans</code> 来代替</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ioc.beans(beanDefinition -&gt;</span><br><span class="line">              beanDefinition.bean(SampleHandler.class)</span><br><span class="line">              .bean(SampleService.class)</span><br><span class="line">              .bean(Sample.class)</span><br><span class="line">         )</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Web-路由"><a href="#Web-路由" class="headerlink" title="Web 路由"></a>Web 路由</h3><p>在 SpringMVC 中是通过 <code>@RequestMapping(&quot;/api/demo&quot;)</code> 这个注解来表名当前哪个路径会路由到当前类或者方法，而在 SpringFu 中则有专门的 DSL 来描述这个映射关系，比如我们上面用到的 <code>WebMvcServerDsl</code> 并且他定义了一系列的方法来配置 web 相关信息，比如用到的 <code>port</code> 和 <code>router</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/hello&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/echo&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">echo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在 SpringFu 中我们把 Controller 叫做 Handler , 路由配置方式也与之前有些差异：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">webMvcDsl.router(router -&gt; &#123;</span><br><span class="line">      SampleHandler handler = dsl.ref(SampleHandler.class);</span><br><span class="line">      router.GET(<span class="string">&quot;/sayHello&quot;</span>, handler::hello);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>整体来看，从 SpringMVC 到 SpringFu 改动的不仅仅是表达方式，而是一种编程思维，通过 <code>DSL</code> 抽象组件再通过 <code>Function</code> 的组合以及注册完成框架配置和业务展开。其实 SpringFu 的定位并不是替代 SpringMVC 而是在云原生以及在<code>Serverless</code>等以函数为主体的轻应用场景中发挥巨大作用。</p>
+<p>本篇主要介绍 SpringFu 项目搭建，体验了一把总体感觉还是不错的除了有不少坑之外，下篇会看看关于 SpringFu 所用到的设计思想以及类关系简单的源码分析。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2021/07/10/Spring/用函数写 Spring 项目你见过么 --SpringFu/" target="_blank" title="用函数写 Bean 你见过么">https://lwenxu.github.io/2021/07/10/Spring/用函数写 Spring 项目你见过么 --SpringFu/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/11/Spring/SpringFu%20%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          SpringFu 启动流程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/06/27/Tomcat/%E6%8F%AD%E7%A7%98%20Tomcat%EF%BC%88%E4%B8%80%EF%BC%89%20-%20%E5%90%AF%E5%8A%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">揭秘 Tomcat - 启动</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#GayHub"><span class="nav-number">1.</span> <span class="nav-text">GayHub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E4%BE%9D%E8%B5%96%E7%9A%84%E5%B0%8F%E6%8F%92%E6%9B%B2"><span class="nav-number">2.</span> <span class="nav-text">加载依赖的小插曲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%B9%E9%80%A0%E4%B8%BB%E7%A8%8B%E5%BA%8F"><span class="nav-number">3.</span> <span class="nav-text">改造主程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E6%97%A7%E6%AF%94%E8%BE%83"><span class="nav-number">4.</span> <span class="nav-text">新旧比较</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD-bean"><span class="nav-number">4.1.</span> <span class="nav-text">加载 bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web-%E8%B7%AF%E7%94%B1"><span class="nav-number">4.2.</span> <span class="nav-text">Web 路由</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2025 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2025 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

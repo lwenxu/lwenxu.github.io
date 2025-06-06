@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>springboot 启动加速 | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Spring" />
+  
+  
+  
+  
+  <meta name="description" content="前言在 2021 年这个小学作文中的未来年份，没有想象中的汽车满天飞，也没有实现机器人满地跑。但牛逼的是我们都有一个共识： 知乎达到了人均 “谢邀~ 人在美国刚下飞机”的生活水平，虎扑的人均收入也在 30W+ ，还有就是程序员都人均精通 SpringBoot ，哪怕和算法聊技术一言不合就满嘴 SpringCould 分布式、微服务，然而实际操作可能是 分步试 、伪服务 … 你一个小小系统开这么多应">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot 启动加速">
+<meta property="og:url" content="https://lwenxu.github.io/2021/05/27/SpringBoot/Spring%20%E5%90%AF%E5%8A%A8%E5%8A%A0%E9%80%9F%E5%BC%82%E6%AD%A5%20Bean/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="前言在 2021 年这个小学作文中的未来年份，没有想象中的汽车满天飞，也没有实现机器人满地跑。但牛逼的是我们都有一个共识： 知乎达到了人均 “谢邀~ 人在美国刚下飞机”的生活水平，虎扑的人均收入也在 30W+ ，还有就是程序员都人均精通 SpringBoot ，哪怕和算法聊技术一言不合就满嘴 SpringCould 分布式、微服务，然而实际操作可能是 分步试 、伪服务 … 你一个小小系统开这么多应">
+<meta property="og:locale">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1618727885214-dd6dfd2d-7c9f-4e06-9b68-f7ea14e1d360-20210627195044309.jpeg">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1619414062442-1cb5a1cc-3702-4fa8-937d-0dd75fb37ecc-20210627195048353.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1619265336642-31eb298f-f2d5-4025-b431-64262d48f1b7-20210627195051841.jpeg">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1619266023651-dc9b9630-a24a-4847-9bbe-3278ca3203c5-20210627195055164.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1619267993440-bc8b9a0d-0a58-443c-8bec-93f209ebbc46-20210627195101201.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1619267872243-88f9a69e-f3ea-446e-aca7-151469cd7a7e-20210627195104385.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1619270159828-93a6a66e-2d1b-4095-9b36-b2d9a34f6c9a-20210627195107701.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1619270390154-8e7ca014-acab-4e52-a16a-df28fd77ae02-20210627195111231.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1619270486905-7201f393-7ac0-4935-bb8c-f44115429fb1-20210627195114682.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1619270568290-278de048-c70a-4406-a7a6-5c1f37a4e85b-20210627195118350.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1619270528731-9322ec40-94ed-4225-b74b-fcf9d6975189-20210627195120945.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1610289331606-52e03a47-f431-4b20-8b57-6a4cc0f70345-20210627195142247.png">
+<meta property="article:published_time" content="2021-05-27T22:39:26.000Z">
+<meta property="article:modified_time" content="2025-06-06T02:37:33.814Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="Spring">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1618727885214-dd6dfd2d-7c9f-4e06-9b68-f7ea14e1d360-20210627195044309.jpeg">
+  
+
+  
+
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
+  
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-SpringBoot/Spring 启动加速异步 Bean" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      SpringBoot 启动加速
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2021/05/27/SpringBoot/Spring%20%E5%90%AF%E5%8A%A8%E5%8A%A0%E9%80%9F%E5%BC%82%E6%AD%A5%20Bean/" class="article-date">
+	  <time datetime="2021-05-27T22:39:26.000Z" itemprop="datePublished">2021-05-27</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在 2021 年这个小学作文中的未来年份，没有想象中的汽车满天飞，也没有实现机器人满地跑。但牛逼的是我们都有一个共识： 知乎达到了人均 “谢邀~ 人在美国刚下飞机”的生活水平，虎扑的人均收入也在 30W+ ，还有就是程序员都人均精通 SpringBoot ，哪怕和算法聊技术一言不合就满嘴 SpringCould 分布式、微服务，然而实际操作可能是 <strong>分步试</strong> 、<strong>伪服务</strong> … 你一个小小系统开这么多应用启动不难受？(不难受因为可以装 13)   SpringBoot 这启动速度也确实令人捉急，每个应用 5 分钟改个小功能，编码五分钟部署俩小时。 so 如何更加优雅快速的  启动 SpringBoot 应用 (满足装 13 的欲望) 呢？</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1618727885214-dd6dfd2d-7c9f-4e06-9b68-f7ea14e1d360-20210627195044309.jpeg" alt="IMG_3485.jpg"></p>
+<p>其实我们都比较清楚大部分的启动时间是由于 Spring 需要加载各种 Bean 导致启动速度下降的，那么对于那些不是特别重要的 Bean 我们是不是可以让他再起一个线程做 Bean 初始化，不阻塞主线程启动，这样启动速度不就起来了么，说干就干！</p>
+<p>那你肯定会问，我们咋判断一个 Bean 加载时间长短，找出那些 <code>拉跨的Bean</code> 呢？内心一阵嘲讽，嘴角泛出一阵冷笑后 不慌不忙的道来：“这对于精通 Spring 框架的我来说不是小菜一碟么 ”。我掐指一算，就知道是哪几个 Bean 拉跨。</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1619414062442-1cb5a1cc-3702-4fa8-937d-0dd75fb37ecc-20210627195048353.png" alt="image.png"></p>
+<h3 id="统计-Bean-初始化时间"><a href="#统计-Bean-初始化时间" class="headerlink" title="统计 Bean 初始化时间"></a>统计 Bean 初始化时间</h3><p>简单做法就是通过 BeanPostProcessor ，祭出这个神器就能干倒一半的 LSP，很多使用 Spring 的 LSP 其实都不太知道这个玩意，那他到底是个什么玩意呢？简单来讲就是 Spring 初始化 Bean 的钩子函数。 Bean 是否加载，加载的是哪个 Bean 以及修改 Bean 的相关属性都可以通过这个钩子函数搞定。这就是一个活生生的 Spring 后门，学会了他 Spring 框架任你摆布。</p>
+<p>后面我会专门开一篇文章去讲解 BeanPostProcessor  如何帮你加载 Bean，以及如何利用这个后门搞事情。</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1619265336642-31eb298f-f2d5-4025-b431-64262d48f1b7-20210627195051841.jpeg" alt="unnamed.jpg"></p>
+<p>所以我们现在讲讲如何用 BeanPostProcessor  统计 Bean 的初始化时间。不多 BB 直接上代码：</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1619266023651-dc9b9630-a24a-4847-9bbe-3278ca3203c5-20210627195055164.png" alt="image.png"></p>
+<p>我们编写了 BeanInitCostTimeBeanPostProcessor 继承了 BeanPostProcessor   实现了 postProcessBeforeInitialization 和 postProcessAfterInitialization 分别代表了 Bean 初始化之前和之后，简单记录了 Bean 初始化开始时间，然后用结束时间减去开始时间就得到了具体的初始化时间。</p>
+<p>我专门在 Spring 容器中放了一个加载时间很长的测试 Bean ，代码如下</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1619267993440-bc8b9a0d-0a58-443c-8bec-93f209ebbc46-20210627195101201.png" alt="image.png"></p>
+<p>效果如下：</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1619267872243-88f9a69e-f3ea-446e-aca7-151469cd7a7e-20210627195104385.png" alt="image.png"></p>
+<h3 id="异步-Bean-实操"><a href="#异步-Bean-实操" class="headerlink" title="异步 Bean 实操"></a>异步 Bean 实操</h3><p>异步 Bean 异步 Bean ，首先这个 Bean 需要是个异步的，那如何将一个 Bean 包装成异步的呢？首先异步 Bean 肯定需要继承原来的 Bean 需要保证是同一种类型的，然后重写他的 init 方法。代码操作如下：</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1619270159828-93a6a66e-2d1b-4095-9b36-b2d9a34f6c9a-20210627195107701.png" alt="image.png"></p>
+<p>但是这么写并不是很优雅，假如我们还需要在初始化 Bean 的时候做一些其他操作，直接继承是不方便的。所以必须祭出 Spring 中的另外一个组件了，工厂 Bean，学名 FactoryBean 这个要和另外一个叫做 BeanFactory 的大佬区分开。 工厂 Bean 顾名思义就是这个玩意也是一个 Bean 只是他的主要职责是作为工厂，通常用于生成特定类型的 Bean ，那么我们就有一个骚操作了，让这个工厂生产的 Bean 就是它自己，而且中间还能定义很多额外的逻辑，不多 BB 上代码</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1619270390154-8e7ca014-acab-4e52-a16a-df28fd77ae02-20210627195111231.png" alt="image.png"></p>
+<p>然后通过异步 Bean 去加载我们看看前后的差别</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1619270486905-7201f393-7ac0-4935-bb8c-f44115429fb1-20210627195114682.png" alt="image.png"></p>
+<p>优化之前：</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1619270568290-278de048-c70a-4406-a7a6-5c1f37a4e85b-20210627195118350.png" alt="image.png"></p>
+<p>优化之后：</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1619270528731-9322ec40-94ed-4225-b74b-fcf9d6975189-20210627195120945.png" alt="image.png"></p>
+<p>可以看到优化后 1.4s 应用就启动完成了，而且耗时的 Bean 可以让他慢慢加载，在应用启动完成后这个 Bean 才完全被加载。</p>
+<h3 id="唠叨"><a href="#唠叨" class="headerlink" title="唠叨"></a>唠叨</h3><p>最近有点忙成狗，从四月就断更到现在了，今天抽个周末的时候终于写完了。</p>
+<p>不过最近看了好几本书，也准备抽点时间写写读后感了，非常推荐大家看看 《零秒思考》 ，同时写点个人的小思考： 一旦适应了用语言表达脑海中的意向和感觉，渐渐地就不会为如何表达自己的心情和想法而苦恼，流畅清晰的表达能够更快的与对方沟通让对方心领神会。表达不善往往便会产生一种想也是白想的放弃心理，由此甚至连思考本身也放弃了，不思考人就不会成长，不经历思考解决手头的事情人就会失去干劲变得无聊。</p>
+<p>另外：大家也可以关注下我的微信公众号哦~ 技术分享和个人思考都会第一时间同步！</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1610289331606-52e03a47-f431-4b20-8b57-6a4cc0f70345-20210627195142247.png" alt="image.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2021/05/27/SpringBoot/Spring 启动加速异步 Bean/" target="_blank" title="SpringBoot 启动加速">https://lwenxu.github.io/2021/05/27/SpringBoot/Spring 启动加速异步 Bean/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/06/27/Tomcat/%E6%8F%AD%E7%A7%98%20Tomcat%EF%BC%88%E4%B8%80%EF%BC%89%20-%20%E5%90%AF%E5%8A%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          揭秘 Tomcat - 启动
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/01/14/Kafka%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/Kafka%20%E6%8E%A2%E9%99%A9%20-%20%E6%BA%90%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Kafka 探险 - 源码环境搭建</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%9F%E8%AE%A1-Bean-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%97%B6%E9%97%B4"><span class="nav-number">2.</span> <span class="nav-text">统计 Bean 初始化时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5-Bean-%E5%AE%9E%E6%93%8D"><span class="nav-number">3.</span> <span class="nav-text">异步 Bean 实操</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%94%A0%E5%8F%A8"><span class="nav-number">4.</span> <span class="nav-text">唠叨</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2025 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2025 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>揭秘 tomcat - 启动 | 昨夜凛雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="源码分析" />
+  
+  
+  
+  
+  <meta name="description" content="前言tomcat 对于每一个 Java 工程师都是一个既熟悉又神秘的黑盒，什么 web 容器，什么三大组件，什么web.xml ….. 这些令人迷惑的问题都会在 《揭秘 Tomcat》系列文章中掰扯的清清楚楚。   从启动说起启动 tomcat 非常简单 ， .&#x2F;startup.sh 一行命令，起飞 ~ 打开这个 shell 脚本我们发现最终启动了一个 Java 的 main 方法，也就是整个to">
+<meta property="og:type" content="article">
+<meta property="og:title" content="揭秘 Tomcat - 启动">
+<meta property="og:url" content="https://lwenxu.github.io/2021/06/27/Tomcat/%E6%8F%AD%E7%A7%98%20Tomcat%EF%BC%88%E4%B8%80%EF%BC%89%20-%20%E5%90%AF%E5%8A%A8/index.html">
+<meta property="og:site_name" content="昨夜凛雨">
+<meta property="og:description" content="前言tomcat 对于每一个 Java 工程师都是一个既熟悉又神秘的黑盒，什么 web 容器，什么三大组件，什么web.xml ….. 这些令人迷惑的问题都会在 《揭秘 Tomcat》系列文章中掰扯的清清楚楚。   从启动说起启动 tomcat 非常简单 ， .&#x2F;startup.sh 一行命令，起飞 ~ 打开这个 shell 脚本我们发现最终启动了一个 Java 的 main 方法，也就是整个to">
+<meta property="og:locale">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1590165360512-927ede67-214d-460c-a928-90bdca6bbd88-20210627194357458.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1590165821369-01da8b92-bedb-495b-a856-d02aa16fbba6-20210627194354707.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/image-20210627194240506.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1593849559785-0bc2e39b-fed7-4e30-8f27-9003362b99af-20210627194253547.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1593523834557-c7ea4c3e-9bf6-408c-9b5a-d73d5c68cfd3-20210627194258231.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1593524986228-d3bcd9f8-38c9-4b4f-aa4b-e18bc54071df-20210627194303384.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1593528839395-d21d5374-f77b-4877-8c8f-4d14cef4a3e0-20210627194310073.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1593527238438-3eb5e324-8c86-43fb-bc26-52ff6ca1fa1d-20210627194314428.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1593856082499-5d86fe50-e9f4-423f-b0ae-c64d44d28a23-20210627194322188.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1593855896060-60bdadcb-0ab5-4055-8933-7e80ac35dcab-20210627194328259.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1593870761232-b3ae56f5-a65b-4b9a-8fc1-42c4d57cdf00-20210627194333667.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1593871002514-5b7fb7ad-59bb-44d9-942e-deb6f1ee275d-20210627194337111.png">
+<meta property="og:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1610289331606-52e03a47-f431-4b20-8b57-6a4cc0f70345.png">
+<meta property="article:published_time" content="2021-06-27T14:39:26.000Z">
+<meta property="article:modified_time" content="2025-06-06T02:37:33.818Z">
+<meta property="article:author" content="lwen">
+<meta property="article:tag" content="源码分析">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1590165360512-927ede67-214d-460c-a928-90bdca6bbd88-20210627194357458.png">
+  
+
+  
+
+  <link rel="icon" href="/css/images/logo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/logo.jpg">
+  
+    <!--<link href="//ajax.font.im/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
+  
+  <!--<link href="https://ajax.font.im/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">-->
+  <!--<link href="https://ajax.font.im/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">-->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/logo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Tomcat/揭秘 Tomcat（一） - 启动" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      揭秘 Tomcat - 启动
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2021/06/27/Tomcat/%E6%8F%AD%E7%A7%98%20Tomcat%EF%BC%88%E4%B8%80%EF%BC%89%20-%20%E5%90%AF%E5%8A%A8/" class="article-date">
+	  <time datetime="2021-06-27T14:39:26.000Z" itemprop="datePublished">2021-06-27</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Tomcat/">Tomcat</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>tomcat 对于每一个 Java 工程师都是一个既熟悉又神秘的黑盒，什么 web 容器，什么三大组件，什么web.xml ….. 这些令人迷惑的问题都会在 《揭秘 Tomcat》系列文章中掰扯的清清楚楚。</p>
+<p> <img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1590165360512-927ede67-214d-460c-a928-90bdca6bbd88-20210627194357458.png" alt="image.png"></p>
+<h2 id="从启动说起"><a href="#从启动说起" class="headerlink" title="从启动说起"></a>从启动说起</h2><p>启动 tomcat 非常简单 ， <code>./startup.sh</code> 一行命令，起飞 ~ 打开这个 shell 脚本我们发现最终启动了一个 Java 的 main 方法，也就是整个tomcat 的入口  <code>org.apache.catalina.startup.Boostrap</code> 瞅一眼简化后的代码 ~</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1590165821369-01da8b92-bedb-495b-a856-d02aa16fbba6-20210627194354707.png" alt="image.png"></p>
+<p>简要的做一下分析启动参数，main 方法可以传入 startd、stopd、start、stop，startd 作为参数。其中 start 和 startd 区别就是将 await 设置为 true ，即程序是需要后台运行，还是在前台等待用户操作。</p>
+<p>启动主要做了以下三件事情:</p>
+<ol>
+<li><ol>
+<li>实例化 Boostrap ，并初始化</li>
+<li>调用 load 方法</li>
+<li>调用 start 方法</li>
+</ol>
+</li>
+</ol>
+<p>接下来就从以上三个步骤，来揭秘 tomcat 启动流程。</p>
+<h2 id="初始化启动器【init】"><a href="#初始化启动器【init】" class="headerlink" title="初始化启动器【init】"></a>初始化启动器【init】</h2><p>直接上代码看起来会比较蛋疼，我们先整理下思路，调用 <code>Boostrap#init</code> 方法主要完成三件事：</p>
+<ol>
+<li>初始化类加载器：初始化 Tomcat 核心加载器：<code>commonLoader</code>、<code>catalinaLoader</code>、<code>sharedLoader</code> ，后续会详细介绍这三个类加载器的作用以及使用场景。</li>
+</ol>
+<ol>
+<li>设置主线程 classLoader 为catalinaLoader，安全管理的 classLoad 为catalineLoader。</li>
+</ol>
+<ol>
+<li>通过反射生成Catalina对象，设置 Catalina 父加载器为 sharedLoader </li>
+</ol>
+<p>初始化的核心代码如下：</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/image-20210627194240506.png" alt="image-20210627194240506"></p>
+<p>总结下来就是初始化了类加载器，即关键的一行就是 initClassLoaders()，它加载了/conf/catalina.properties 中的 common.loader、shared.loader、server.loader 对应的jar包和 properties 等文件，最后初始化了Catalina类，这个类将是加载我们 web 的 classloader。所以我们的自定义的文件或者 jar 包 都可以通过配置common.loader来加载 ，比如公共配置文件，日志文件等等。</p>
+<p>看看 initClassLoaders() 方法代码，我们发现这几个类加载器默认情况下都是指向的 commonLoader，从源码可以看到，tomcat commonLoader 的父加载器为null，违背了java自己的类加载机制。那么问题来了 tomcat 为什么要定义自己的 classLoader ？</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1593849559785-0bc2e39b-fed7-4e30-8f27-9003362b99af-20210627194253547.png" alt="image.png"></p>
+<p>​    我们知道 Java 默认是遵循双亲委派模型的，听起来高大上的名词，用一句话来解释就是所有类加载器优先使用父加载器进行类的加载。</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1593523834557-c7ea4c3e-9bf6-408c-9b5a-d73d5c68cfd3-20210627194258231.png" alt="image.png"></p>
+<p>Java 体系中默认的类加载器遵循上图的父子关系，也就是说大部分的类都是最顶层的 BootStrap 这个类加载器进行加载的。这样做的好处就是保证 JDK 中的基础类不会被改写，另外防止一个类被不同的类加载器重复加载多次。</p>
+<p>但是为什么 tomcat 没有使用默认的类加载机制，而是自己另起一套呢？看下下面几个场景：</p>
+<ul>
+<li><ul>
+<li>tomcat 中可以部署多个项目，但是这多个项目可能依赖同一个类库的不同版本假如都使用 bootstrap 去加载那么就会出现类冲突谁知道要加载哪个版本； -&gt; 衍生出 WebAppClassLoader</li>
+<li>tomcat 内部依赖的 jar 和类库如果不和应用程序隔离的话应用程序中的类可以轻易覆盖 tomcat 中的核心类库造成安全问题； -&gt; 衍生出 catalinaLoader</li>
+<li>应用程序和tomcat 都需要的类库大家可以共用的就不需要重复加载；-&gt; 衍生出 Shared ClassLoader</li>
+</ul>
+</li>
+</ul>
+<p>简单看下 tomcat 的类加载体系：</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1593524986228-d3bcd9f8-38c9-4b4f-aa4b-e18bc54071df-20210627194303384.png" alt="image.png"></p>
+<p>他们的功能从名字就能看出来时干嘛的，简单列举下功能：</p>
+<ul>
+<li><ul>
+<li>commonLoader：Tomcat最基本的类加载器，加载路径中的class可以被Tomcat容器本身以及各个Webapp访问；</li>
+<li>catalinaLoader：Tomcat容器私有的类加载器，加载路径中的class对于Webapp不可见；</li>
+<li>sharedLoader：各个Webapp共享的类加载器，加载路径中的class对于所有Webapp可见，但是对于Tomcat容器不可见；</li>
+<li>WebappClassLoader：各个Webapp私有的类加载器，加载路径中的class只对当前Webapp可见；</li>
+</ul>
+</li>
+</ul>
+<h2 id="加载容器组件-【load】"><a href="#加载容器组件-【load】" class="headerlink" title="加载容器组件 【load】"></a>加载容器组件 【load】</h2><p>紧接着调用了 Bootstrap 的 load 方法，看下简化后的代码：</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1593528839395-d21d5374-f77b-4877-8c8f-4d14cef4a3e0-20210627194310073.png" alt="image.png"></p>
+<p>直接调用到了 Catalina#load 方法</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1593527238438-3eb5e324-8c86-43fb-bc26-52ff6ca1fa1d-20210627194314428.png" alt="image.png"></p>
+<p> 简单介绍下上面代码的作用，configFile() 方法返回了 server.xml 文件, Digester 解析该文件，得到容器的配置，并创建容器组件和容器。这个地方的解析 xml 生成一系列的对象的逻辑很牛逼，也很复杂后面会专门有一篇文章来解析这部分逻辑！</p>
+<p>依次创建的组件为 ：StandardServer、 StandardService、StandardEngine、StandardHost。然后拿到 StandardServer 实例调用 init() 方法初始化 Tomcat 容器的一系列组件。一些容器初始化的时候，都会调用其子容器的 init() 方法，初始化它的子容器，相当于每个容器都在初始化自身相关设置的同时，将子容器初始化。所以着重看下 init 方法</p>
+<p>init 方法并不是 Server 类中的，而是他从 Lifecycle 接口的子类中继承的。就拿 StandardServer 举例， 他继承了 LifecycleMBeanBase ，可以看到他的初始化逻辑(下图的 init 方法) 并没有直接写出来，而是通过一个抽象方法让子类实现，而在本类中实现通用的逻辑，比如状态机的设定，异常处理。这就是大名鼎鼎的 <code>模板设计模式</code> ，读 tomcat 还能学学设计模式，血赚有没有<del>~</del></p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1593856082499-5d86fe50-e9f4-423f-b0ae-c64d44d28a23-20210627194322188.png" alt="image.png"></p>
+<p>而这个类里面的模板占位符 <code>initInternal</code> 被 20 多个类进行了覆盖，都是我们的 tomcat 组件</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1593855896060-60bdadcb-0ab5-4055-8933-7e80ac35dcab-20210627194328259.png" alt="image.png"></p>
+<p>同理  destroy -&gt; destroyInternal ，start -&gt; startInternal ，stop -&gt; stopInternal 都是使用了相同的手法。</p>
+<h2 id="启动容器-【start】"><a href="#启动容器-【start】" class="headerlink" title="启动容器 【start】"></a>启动容器 【start】</h2><p>最后一步就是 start ，调用后就能成功看到  <code>Server startup in 1222 ms </code> 这样一行标志性的日志了</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1593870761232-b3ae56f5-a65b-4b9a-8fc1-42c4d57cdf00-20210627194333667.png" alt="image.png"></p>
+<p>同样的，他还是调用了 <code>org.apache.catalina.startup.Catalina#start</code> 代码判断异常的逻辑较多，可以简化为下面的形式</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1593871002514-5b7fb7ad-59bb-44d9-942e-deb6f1ee275d-20210627194337111.png" alt="image.png"></p>
+<p>如果没有初始化 server 那么重新初始化一下，这是一个好习惯，做一个兜底防止程序马上就挂了；之后调用了 server 组件的 start 方法，前面我们知道 server 组件初始化会调用内部的 initInternal ，start 也是同理的会调用内部的 start 他们都是生命周期接口中的方法。主要的事情就是启动子组件；</p>
+<p>接着就注册了一个钩子函数，这是 jdk 中自带的线程停止后会执行另外一个线程帮他清理数据；</p>
+<p>最后就是调用 await () 进行 web 端口的监听，启动后台线程池接受 http 请求，这样整个 tomcat 就启动完毕了，在 await 过程中方法是不会返回的所以 stop 不会被执行，而程序接收到 stop 的命令后会返回执行 stop 方法清理数据</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这里和大家主要从宏观的角度了解 tomcat 的启动流程，主要分为 init，load，start 三部分，而且很多中间件都是这三个部分组成的，不论是后面会讲到的 spring 还是 dubbo 大致流程都是如此，对我们后期看其他中间件源码会有一个大致的思路。</p>
+<p>而且对于整个启动过程可以总结为三句话：</p>
+<ul>
+<li><p>初始化 toncat 类加载器系统</p>
+</li>
+<li><p>解析 server.xml 初始化 tomcat 系统组件</p>
+</li>
+<li><p>tomcat 组件启动，钩子注册，端口监听</p>
+</li>
+</ul>
+<ol>
+<li><ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<p>后续的文章会对这三部分进行详细的解读，里面使用的设计模式 ， 优秀的写法， 良好的风格我都会和大家一起探讨进步。关注我，在技术的道路上十年如一日的进步 ！</p>
+<p>另外：大家也可以关注下我的微信公众号哦~ 技术分享和个人思考都会第一时间同步！</p>
+<p><img src="https://lwen-pic.oss-cn-beijing.aliyuncs.com/1610289331606-52e03a47-f431-4b20-8b57-6a4cc0f70345.png" alt="image.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: ' 要一波饭 > _ < ', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'http://images.heniankj.com/mm_facetoface_collect_qrcode_1552621569520.png',
+  alipayImage: 'http://images.heniankj.com/1552621553244.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>lwen</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2021/06/27/Tomcat/揭秘 Tomcat（一） - 启动/" target="_blank" title="揭秘 Tomcat - 启动">https://lwenxu.github.io/2021/06/27/Tomcat/揭秘 Tomcat（一） - 启动/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/10/Spring/%E7%94%A8%E5%87%BD%E6%95%B0%E5%86%99%20Spring%20%E9%A1%B9%E7%9B%AE%E4%BD%A0%E8%A7%81%E8%BF%87%E4%B9%88%20--SpringFu/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          用函数写 Bean 你见过么
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/05/27/SpringBoot/Spring%20%E5%90%AF%E5%8A%A8%E5%8A%A0%E9%80%9F%E5%BC%82%E6%AD%A5%20Bean/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">SpringBoot 启动加速</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E5%90%AF%E5%8A%A8%E8%AF%B4%E8%B5%B7"><span class="nav-number">2.</span> <span class="nav-text">从启动说起</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%90%AF%E5%8A%A8%E5%99%A8%E3%80%90init%E3%80%91"><span class="nav-number">3.</span> <span class="nav-text">初始化启动器【init】</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E5%AE%B9%E5%99%A8%E7%BB%84%E4%BB%B6-%E3%80%90load%E3%80%91"><span class="nav-number">4.</span> <span class="nav-text">加载容器组件 【load】</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8-%E3%80%90start%E3%80%91"><span class="nav-number">5.</span> <span class="nav-text">启动容器 【start】</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2015 - 2025 昨夜凛雨 All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+  
+<script src="/js/home.js"></script>
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            昨夜凛雨
+          </div>
+          <div class="panel-body">
+            Copyright © 2025 lwen All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>
