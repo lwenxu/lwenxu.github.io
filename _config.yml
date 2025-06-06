@@ -77,10 +77,17 @@ pagination_dir: page
 theme: hiker
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
-deploy: 
+# deploy:
   # - type: git
   #   repository: https://github.com/lwenxu/lwenxu.github.io.git
   #   branch: master
+
+deploy:
+  type: aliyun
+  bucket: lwen-blog-static
+  region: oss-cn-beijing
+  accessKeyId:
+  accessKeySecret:
 
 # 对 css 和 js 资源的 cdn 加速配置
 #jsdelivr_cdn:
