@@ -99,7 +99,7 @@ public ArrayList(Collection<? extends E> c) {
     }
  
 ```
- 
+
 &emsp;&emsp;  但是注意一点这里有一个 jdk 的 bug 也就是一个 Object 类型的数组不一定能够存放 Object类型的对象，有可能抛异常，主要是因为 Object 类型的数组可能指向的是他的子类的数组，存 Object 类型的东西会报错。 为了测试这个 bug 写了几行代码测试一下。这个测试是通不过的，就是存在上面的原因。
 
 &emsp;&emsp;  一个典型的例子就是 我们创建一个 string 类型的 list 然后调用 toArray 方法发现返回的是一个 string[] 这时候自然就不能随便存放元素了。
@@ -249,7 +249,7 @@ public boolean remove(Object o) {
             elementData[i] = null;
         size = 0;
     }
-``` 
+```
 
 ### 7. addAll(Collection e)
 &emsp;&emsp;  这个没啥好说的就是，采用转数组然后 copy
@@ -406,5 +406,4 @@ public void sort(Comparator<? super E> c) {
 3. 遍历的接口不一样。他还是有 `iterator` 的但是他以前的遍历的方法是 `Enumeration` 接口，通过 `elements` 获取 `Enumeration` 然后使用 `hasMoreElements` 和 `nextElement` 获取元素。
 
 4. 缺少一些函数式编程的方法。
-
 

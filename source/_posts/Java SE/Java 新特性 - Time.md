@@ -143,7 +143,7 @@ public class LocalDateTime1 {
 
 
 
-## LocalTime
+## 本地时间 LocalTime
 
 这个类是上面的LocaDateTime中的 Time 部分，也就是只具有时间没有日期。
 
@@ -189,7 +189,7 @@ public class LocalDate1 {
 
 
 
-## Clock
+## 时钟 Clock
 
 这个类可以获取当前的时间戳
 
