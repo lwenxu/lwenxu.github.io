@@ -9,12 +9,12 @@
     "server": "hexo server"
   },
   "hexo": {
-    "version": "5.2.0"
+    "version": "5.4.2"
   },
   "dependencies": {
     "hexo": "^5.0.0",
     "hexo-cdn-jsdelivr": "0.0.9",
-    "hexo-deployer-aliyun": "^0.4.0",
+    "hexo-deployer-ali-oss": "^1.0.0",
     "hexo-deployer-cos-cdn": "^1.7.1",
     "hexo-deployer-git": "^2.1.0",
     "hexo-generator-archive": "^1.0.0",

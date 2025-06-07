@@ -6,3 +6,7 @@ node_modules/
 .deploy*/
 github-deploy-key
 github-deploy-key.pub
+public/
+_config.yml
+.idea/
+.github/
