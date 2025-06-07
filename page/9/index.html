@@ -64,9 +64,9 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Spark/SparkStreming" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Spark/Scala 入门" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/05/08/Spark/SparkStreming/" class="article-date">
+    <a href="/2018/05/08/Spark/Scala%20%E5%85%A5%E9%97%A8/" class="article-date">
   <time datetime="2018-05-08T14:01:28.000Z" itemprop="datePublished">2018-05-08</time>
 </a>
     
@@ -82,7 +82,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/08/Spark/SparkStreming/">SparkStreaming 入门</a>
+      <a class="article-title" href="/2018/05/08/Spark/Scala%20%E5%85%A5%E9%97%A8/">Scala 入门</a>
     </h1>
   
 
@@ -90,17 +90,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-基本原理"><a href="#1-基本原理" class="headerlink" title="1. 基本原理"></a>1. 基本原理</h1><p>其实在 SparkStreaming 中和之前的Core不同的就是他会把任务分成批次的进行处理，也就是我们需要设置间隔多久计算一次。</p>
-<p>我们从网络，文件系统，Kafka 等等数据源产生的地方获取数据，然后SparkStreaming放到内存中，接着进行对数据进行计算，获取结果。
-        
-          <p class="article-more-link">
-            <a href="/2018/05/08/Spark/SparkStreming/#more">Read More</a>
-          </p>
-        
+        <h1 id="1-基本语法"><a href="#1-基本语法" class="headerlink" title="1. 基本语法"></a>1. 基本语法</h1><h3 id="1-变量-var"><a href="#1-变量-var" class="headerlink" title="1. 变量 var"></a>1. 变量 var</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name:string=<span class="string">&quot;hello&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> name=<span class="string">&quot;hello&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> num=<span class="number">3.0</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-常量-val"><a href="#2-常量-val" class="headerlink" title="2. 常量 val"></a>2. 常量 val</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> name=<span class="string">&quot;string&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-这里是没有-操作和-–-操作的"><a href="#3-这里是没有-操作和-–-操作的" class="headerlink" title="3. 这里是没有 ++ 操作和 – 操作的"></a>3. 这里是没有 ++ 操作和 – 操作的</h3><h3 id="4-函数调用"><a href="#4-函数调用" class="headerlink" title="4. 函数调用"></a>4. 函数调用</h3><p>不用使用对象来调用，导入包以后直接调用即可</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scala.math._</span><br><span class="line">sqrt(<span class="number">2</span>);</span><br><span class="line">pow(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">min(<span class="number">1</span>,<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-apply"><a href="#5-apply" class="headerlink" title="5.apply()"></a>5.apply()</h3><p>默认调用了object的apply函数</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;hello&quot;</span>&lt;<span class="number">6</span>&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-if-else"><a href="#6-if-else" class="headerlink" title="6.if-else"></a>6.if-else</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2018/05/08/Spark/SparkStreming/" data-id="cmblmb69y00e1l6ofa4c1f29d" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2018/05/08/Spark/Scala%20%E5%85%A5%E9%97%A8/" data-id="cmblmd4zn00dzl1q02nw8a7j2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spark/" rel="tag">Spark</a></li></ul>
@@ -150,7 +154,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2018/05/06/Others/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" data-id="cmblmb6cc00r3l6of0shoacwj" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2018/05/06/Others/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" data-id="cmblmd52b00r3l1q03o01hwbx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/" rel="tag">数字图像</a></li></ul>
@@ -197,7 +201,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2018/04/29/Linux/Docker%20%E5%85%A5%E9%97%A8/" data-id="cmblmb68y00atl6ofhysk1ix7" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2018/04/29/Linux/Docker%20%E5%85%A5%E9%97%A8/" data-id="cmblmd4yu00atl1q0hsx8533l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li></ul>
@@ -241,7 +245,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2018/04/22/SpringMVC/Spring%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" data-id="cmblmb6ag00ful6ofaxujhnri" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2018/04/22/SpringMVC/Spring%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" data-id="cmblmd50700ful1q05ogo6o0k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringMVC/" rel="tag">SpringMVC</a></li></ul>
@@ -316,7 +320,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2018/04/21/SpringMVC/Spring%20%E6%95%B4%E5%90%88/" data-id="cmblmb6af00frl6of90w216h8" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2018/04/21/SpringMVC/Spring%20%E6%95%B4%E5%90%88/" data-id="cmblmd50500frl1q01nsmffvq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringMVC/" rel="tag">SpringMVC</a></li></ul>
@@ -461,7 +465,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2018/04/20/Tools/iTerm2%20%E9%85%8D%E7%BD%AE%E5%8F%8A%E4%BD%BF%E7%94%A8/" data-id="cmblmb6an00gkl6of3see5efb" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2018/04/20/Tools/iTerm2%20%E9%85%8D%E7%BD%AE%E5%8F%8A%E4%BD%BF%E7%94%A8/" data-id="cmblmd50e00gll1q023mx59bu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" rel="tag">开发工具</a></li></ul>
@@ -647,7 +651,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2018/04/18/SpringMVC/SpringMVC%20%E5%9F%BA%E7%A1%80/" data-id="cmblmb6ci00rtl6of6u1dd6q7" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2018/04/18/SpringMVC/SpringMVC%20%E5%9F%BA%E7%A1%80/" data-id="cmblmd52g00rtl1q05c5i46do" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringMVC/" rel="tag">SpringMVC</a></li></ul>
@@ -707,7 +711,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2018/04/16/Netty/NioEventLoop%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" data-id="cmblmb69j00cvl6off1911zxp" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2018/04/16/Netty/NioEventLoop%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" data-id="cmblmd4zd00cvl1q0asikancz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -752,7 +756,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2018/04/14/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%9B%9B%20)%EF%BC%9Aweb%20%E5%BC%80%E5%8F%91/" data-id="cmblmb6cl00s6l6ofez92heif" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2018/04/14/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E5%9B%9B%20)%EF%BC%9Aweb%20%E5%BC%80%E5%8F%91/" data-id="cmblmd52j00s7l1q08dpxe08t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li></ul>
@@ -764,9 +768,9 @@
 
 
   
-    <article id="post-SpringBoot/SpringBoot 笔记 ( 三 )：日志系统" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-SpringBoot/SpringBoot 笔记 ( 二 )：自定义配置" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%89%20)%EF%BC%9A%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="article-date">
+    <a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%8C%20)%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE/" class="article-date">
   <time datetime="2018-04-13T22:01:28.000Z" itemprop="datePublished">2018-04-13</time>
 </a>
     
@@ -782,7 +786,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%89%20)%EF%BC%9A%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/">SpringBoot 笔记 ( 三 )：日志系统</a>
+      <a class="article-title" href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%8C%20)%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE/">SpringBoot笔记 ( 二 )：自定义配置</a>
     </h1>
   
 
@@ -790,16 +794,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="SpringBoot-笔记-三-：日志系统"><a href="#SpringBoot-笔记-三-：日志系统" class="headerlink" title="SpringBoot 笔记 ( 三 )：日志系统"></a>SpringBoot 笔记 ( 三 )：日志系统</h1><h2 id="1、日志框架"><a href="#1、日志框架" class="headerlink" title="1、日志框架"></a>1、日志框架</h2><p>日志框架就是防止我们再去像以前那样，一直进行System.out.println(“”)将关键数据打印在控制台。框架来记录系统的一些运行时信息，但是随着日志框架的增长，和接口的不一致，导致了使用上的差别很大，这里采用了一个类似于数据库驱动的模式，数据库驱动是 Java 提供的一个 API，然后真正的实现是需要各个数据库厂商去完成的，而 log 也开始采用这种面向接口编程的方法采用日志抽象层。</p>
+        <h1 id="SpringBoot-笔记-二-：自定义配置"><a href="#SpringBoot-笔记-二-：自定义配置" class="headerlink" title="SpringBoot 笔记 ( 二 )：自定义配置"></a>SpringBoot 笔记 ( 二 )：自定义配置</h1><h3 id="1-配置文件"><a href="#1-配置文件" class="headerlink" title="1. 配置文件"></a>1. 配置文件</h3><p>SpringBoot使用一个全局的配置文件，配置文件名是固定的：</p>
+<ul>
+<li>application.properties</li>
+<li>application.yml</li>
+</ul>
+<p>&emsp;&emsp;  修改SpringBoot自动配置的默认值，因为在所有的自动配置类中他们都会去读取我们的配置文件，如果说有配置这些项目就按照我们配置的，没有则使用自动配置。</p>
         
           <p class="article-more-link">
-            <a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%89%20)%EF%BC%9A%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/#more">Read More</a>
+            <a href="/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%8C%20)%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%B8%89%20)%EF%BC%9A%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" data-id="cmblmb6a800eyl6of1xlu495o" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2018/04/13/SpringBoot/SpringBoot%20%E7%AC%94%E8%AE%B0%20(%20%E4%BA%8C%20)%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE/" data-id="cmblmd4zz00f4l1q01juj0kwe" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li></ul>
